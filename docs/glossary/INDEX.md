@@ -4,7 +4,7 @@
 Jede Zeile verlinkt zum vollständigen Eintrag.
 
 **Stand:** 2026-04-22, Terminology-Sprint 1
-**FEST-Einträge:** 80
+**FEST-Einträge:** 90
 **DRAFT-Einträge:** 0
 **DEPRECATED-Einträge:** 0
 
@@ -27,6 +27,8 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Abschlussbuchung → Eröffnungsbuchung / Abschlussbuchung | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#14-eröffnungsbuchung--abschlussbuchung) |
 | ALV → Arbeitslosenversicherung (ALV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#8-arbeitslosenversicherung-alv) |
 | Anfangsbestand → Saldenvortrag | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#15-saldenvortrag) |
+| Anhang | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#4-anhang) |
+| ARAP → Rechnungsabgrenzungsposten (RAP) (§ 250 HGB) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#10-rechnungsabgrenzungsposten-rap--250-hgb) |
 | Arbeitslosenversicherung (ALV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#8-arbeitslosenversicherung-alv) |
 | AV → Arbeitslosenversicherung (ALV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#8-arbeitslosenversicherung-alv) |
 
@@ -41,6 +43,9 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Belegnummer | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#18-belegnummer) |
 | Berichtigungsrechnung → Rechnungsberichtigung / Stornorechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#5-rechnungsberichtigung--stornorechnung) |
 | Betriebsprüfung | ✅ | [01-grundlagen.md](./01-grundlagen.md#7-betriebsprüfung) |
+| Bilanz | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#2-bilanz) |
+| Bilanzabschluss → Jahresabschluss | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#1-jahresabschluss) |
+| Bilanz-Anhang → Anhang | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#4-anhang) |
 | Bruttoarbeitsentgelt → Bruttolohn | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#1-bruttolohn) |
 | Bruttogehalt → Bruttolohn | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#1-bruttolohn) |
 | Bruttolohn | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#1-bruttolohn) |
@@ -74,6 +79,8 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | ELSTER — Elektronische Steuererklärung | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#11-elster--elektronische-steuererklärung) |
 | EN 16931 | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#8-en-16931) |
 | Entgeltabrechnung → Lohnabrechnung / Entgeltabrechnung | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#20-lohnabrechnung--entgeltabrechnung) |
+| Erfolgsrechnung → Gewinn- und Verlustrechnung (GuV) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#3-gewinn--und-verlustrechnung-guv) |
+| Ergebnisrechnung → Gewinn- und Verlustrechnung (GuV) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#3-gewinn--und-verlustrechnung-guv) |
 | ERiC — ELSTER Rich Client | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#12-eric--elster-rich-client) |
 | Eröffnungsbilanz / Schlussbilanz | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#13-eröffnungsbilanz--schlussbilanz) |
 | Eröffnungsbuchung / Abschlussbuchung | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#14-eröffnungsbuchung--abschlussbuchung) |
@@ -95,6 +102,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Geschäftsvorfall | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#19-geschäftsvorfall) |
 | Gewerbesteuer (GewSt) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#19-gewerbesteuer-gewst) |
 | Gewerbesteuergesetz → Gewerbesteuer (GewSt) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#19-gewerbesteuer-gewst) |
+| Gewinn- und Verlustrechnung (GuV) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#3-gewinn--und-verlustrechnung-guv) |
 | GewSt → Gewerbesteuer (GewSt) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#19-gewerbesteuer-gewst) |
 | GewStG → Gewerbesteuer (GewSt) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#19-gewerbesteuer-gewst) |
 | GKV → Krankenversicherung (KV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#6-krankenversicherung-kv) |
@@ -103,15 +111,19 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Grundbuch → Journal | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#10-journal-grundbuch) |
 | GRV → Rentenversicherung (RV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#7-rentenversicherung-rv) |
 | Gutschrift (§ 14 Abs. 2 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#4-gutschrift--14-abs-2-ustg) |
+| GuV → Gewinn- und Verlustrechnung (GuV) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#3-gewinn--und-verlustrechnung-guv) |
 
 ## H
 
 | Begriff | Status | Datei |
 |---|---|---|
+| Handelsbilanz | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#7-handelsbilanz) |
 | Handelsgesetzbuch (HGB) | ✅ | [01-grundlagen.md](./01-grundlagen.md#3-handelsgesetzbuch-hgb) |
 | Hauptbuch | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#11-hauptbuch) |
+| HB → Handelsbilanz | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#7-handelsbilanz) |
 | Hebesatz → Gewerbesteuer (GewSt) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#19-gewerbesteuer-gewst) |
 | HGB → Handelsgesetzbuch | ✅ | [01-grundlagen.md](./01-grundlagen.md#3-handelsgesetzbuch-hgb) |
+| HGB-Bilanz → Handelsbilanz | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#7-handelsbilanz) |
 | HGB-Taxonomie → Kern-Taxonomie | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#17-kern-taxonomie) |
 | Hybride E-Rechnung → ZUGFeRD | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#10-zugferd) |
 
@@ -120,7 +132,9 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Begriff | Status | Datei |
 |---|---|---|
 | JAEG → Jahresarbeitsentgeltgrenze (JAEG) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#14-jahresarbeitsentgeltgrenze-jaeg) |
+| Jahresabschluss | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#1-jahresabschluss) |
 | Jahresarbeitsentgeltgrenze (JAEG) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#14-jahresarbeitsentgeltgrenze-jaeg) |
+| Jahresbilanz → Bilanz | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#2-bilanz) |
 | Journal (Grundbuch) | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#10-journal-grundbuch) |
 
 ## K
@@ -152,6 +166,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 
 | Begriff | Status | Datei |
 |---|---|---|
+| Lagebericht | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#5-lagebericht) |
 | Lohnabrechnung / Entgeltabrechnung | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#20-lohnabrechnung--entgeltabrechnung) |
 | Lohnsteuer (LSt) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#2-lohnsteuer-lst) |
 | Lohnsteuer-Anmeldung (LStA) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#20-lohnsteuer-anmeldung-lsta) |
@@ -162,7 +177,11 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 
 | Begriff | Status | Datei |
 |---|---|---|
+| Management Report → Lagebericht | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#5-lagebericht) |
 | Mandant | ✅ | [01-grundlagen.md](./01-grundlagen.md#4-mandant) |
+| Maßgeblichkeit der Handelsbilanz → Maßgeblichkeitsprinzip | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#6-maßgeblichkeitsprinzip--5-abs-1-estg) |
+| Maßgeblichkeitsgrundsatz → Maßgeblichkeitsprinzip | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#6-maßgeblichkeitsprinzip--5-abs-1-estg) |
+| Maßgeblichkeitsprinzip (§ 5 Abs. 1 EStG) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#6-maßgeblichkeitsprinzip--5-abs-1-estg) |
 | Mehrwertsteuer → Umsatzsteuer | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#2-umsatzsteuer-ust) |
 | MeinELSTER → ELSTER | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#11-elster--elektronische-steuererklärung) |
 | Midijob / Übergangsbereich | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#16-midijob--übergangsbereich) |
@@ -186,13 +205,16 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Pflegeversicherung (PV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#9-pflegeversicherung-pv) |
 | Pflichtangaben einer Rechnung (§ 14 Abs. 4 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#2-pflichtangaben-einer-rechnung--14-abs-4-ustg) |
 | Pflichtbestandteile → Pflichtangaben einer Rechnung (§ 14 Abs. 4 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#2-pflichtangaben-einer-rechnung--14-abs-4-ustg) |
+| PRAP → Rechnungsabgrenzungsposten (RAP) (§ 250 HGB) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#10-rechnungsabgrenzungsposten-rap--250-hgb) |
 | PV → Pflegeversicherung (PV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#9-pflegeversicherung-pv) |
 
 ## R
 
 | Begriff | Status | Datei |
 |---|---|---|
+| RAP → Rechnungsabgrenzungsposten (RAP) (§ 250 HGB) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#10-rechnungsabgrenzungsposten-rap--250-hgb) |
 | Rechnung (§ 14 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#1-rechnung--14-ustg) |
+| Rechnungsabgrenzungsposten (RAP) (§ 250 HGB) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#10-rechnungsabgrenzungsposten-rap--250-hgb) |
 | Rechnungsberichtigung / Stornorechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#5-rechnungsberichtigung--stornorechnung) |
 | Rechnungsbestandteile → Pflichtangaben einer Rechnung (§ 14 Abs. 4 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#2-pflichtangaben-einer-rechnung--14-abs-4-ustg) |
 | Rechnungskorrektur → Rechnungsberichtigung / Stornorechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#5-rechnungsberichtigung--stornorechnung) |
@@ -200,6 +222,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Rentenversicherung (RV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#7-rentenversicherung-rv) |
 | Rentenversicherungsnummer → Versicherungsnummer (VSNR) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#19-versicherungsnummer-vsnr) |
 | Reverse-Charge-Verfahren (§ 13b UStG) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#10-reverse-charge-verfahren-§-13b-ustg) |
+| Rückstellungen (§ 249 HGB) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#9-rückstellungen--249-hgb) |
 | RV → Rentenversicherung (RV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#7-rentenversicherung-rv) |
 | RV-Nummer → Versicherungsnummer (VSNR) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#19-versicherungsnummer-vsnr) |
 
@@ -210,6 +233,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Sachkonto → Konto | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#3-konto-sachkonto) |
 | Saldenvortrag | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#15-saldenvortrag) |
 | Saldo | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#12-saldo) |
+| SB → Steuerbilanz | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#8-steuerbilanz) |
 | Schlussbilanz → Eröffnungsbilanz / Schlussbilanz | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#13-eröffnungsbilanz--schlussbilanz) |
 | Self-Billing → Gutschrift (§ 14 Abs. 2 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#4-gutschrift--14-abs-2-ustg) |
 | SKR03 | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#5-skr03) |
@@ -222,13 +246,21 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | SPV → Pflegeversicherung (PV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#9-pflegeversicherung-pv) |
 | Steueranmeldung / Steuererklärung (Gegenüberstellung) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#13-steueranmeldung--steuererklärung-gegenüberstellung) |
 | Steuerberater (StB) | ✅ | [01-grundlagen.md](./01-grundlagen.md#6-steuerberater-stb) |
+| Steuerbilanz | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#8-steuerbilanz) |
 | Steuererklärung → Steueranmeldung / Steuererklärung | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#13-steueranmeldung--steuererklärung-gegenüberstellung) |
+| Steuerliche Bilanz → Steuerbilanz | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#8-steuerbilanz) |
 | Steuernummer | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#14-steuernummer) |
 | Steuerschuldnerschaft des Leistungsempfängers → Reverse-Charge | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#10-reverse-charge-verfahren-§-13b-ustg) |
 | StB → Steuerberater | ✅ | [01-grundlagen.md](./01-grundlagen.md#6-steuerberater-stb) |
 | Stornorechnung → Rechnungsberichtigung / Stornorechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#5-rechnungsberichtigung--stornorechnung) |
 | SV → Sozialversicherung (SV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#5-sozialversicherung-sv) |
 | SV-Nummer → Versicherungsnummer (VSNR) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#19-versicherungsnummer-vsnr) |
+
+## T
+
+| Begriff | Status | Datei |
+|---|---|---|
+| Transitorische Posten → Rechnungsabgrenzungsposten (RAP) (§ 250 HGB) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#10-rechnungsabgrenzungsposten-rap--250-hgb) |
 
 ## U
 
@@ -238,6 +270,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | U2 → Umlageverfahren (U1, U2, U3) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#18-umlageverfahren-u1-u2-u3) |
 | U3 → Umlageverfahren (U1, U2, U3) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#18-umlageverfahren-u1-u2-u3) |
 | Übergangsbereich → Midijob / Übergangsbereich | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#16-midijob--übergangsbereich) |
+| Umgekehrte Maßgeblichkeit → Maßgeblichkeitsprinzip | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#6-maßgeblichkeitsprinzip--5-abs-1-estg) |
 | Umlagen → Umlageverfahren (U1, U2, U3) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#18-umlageverfahren-u1-u2-u3) |
 | Umlageverfahren (U1, U2, U3) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#18-umlageverfahren-u1-u2-u3) |
 | Umsatzsteuer (USt) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#2-umsatzsteuer-ust) |
@@ -295,7 +328,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | 02-buchhaltung.md | 20 | ✅ alle FEST |
 | 03-lohn-sv.md | 20 | ✅ alle FEST (Batch 1 Lohnabrechnung-Komponenten + Batch 2 ELStAM/DEÜV/Grenzwerte/Sonderfälle/Output) |
 | 04-steuer-meldungen.md | 20 | ✅ alle FEST (Batch 1 USt-Kern + Batch 2 ELSTER/E-Bilanz/Ertragsteuern) |
-| 05-jahresabschluss.md | 0 | geplant |
+| 05-jahresabschluss.md | 10 | ✅ alle FEST (Batch 1 JA-Kern: Bilanz, GuV, Anhang, Lagebericht, HB/SB, Maßgeblichkeit, Rückstellungen, RAP) |
 | 06-belege-rechnung.md | 10 | ✅ alle FEST (Batch 1 Rechnung/Pflichtangaben/Gutschrift/E-Rechnung/XRechnung/ZUGFeRD) |
 | 07-anlagen-inventur.md | 0 | geplant |
 | 08-technik-architektur.md | 0 | geplant |
@@ -315,3 +348,4 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | 2026-04-22 | Terminology-Sprint 1 | FEST-Batch 1 für `03-lohn-sv.md` (Lohnabrechnung-Komponenten) | 10 |
 | 2026-04-22 | Terminology-Sprint 1 | FEST-Batch 2 für `03-lohn-sv.md` (ELStAM, DEÜV, BBG/JAEG, Mini-/Midijob, Pauschsteuer, Umlagen, VSNR, Lohnabrechnung) | 10 |
 | 2026-04-22 | Terminology-Sprint 1 | FEST-Batch 1 für `06-belege-rechnung.md` (Rechnung, Pflichtangaben, Kleinbetrag, Gutschrift, Stornorechnung, E-Rechnung, Wachstumschancengesetz, EN 16931, XRechnung, ZUGFeRD) | 10 |
+| 2026-04-22 | Terminology-Sprint 1 | FEST-Batch 1 für `05-jahresabschluss.md` (Jahresabschluss, Bilanz, GuV, Anhang, Lagebericht, Maßgeblichkeitsprinzip, Handelsbilanz, Steuerbilanz, Rückstellungen, RAP) | 10 |

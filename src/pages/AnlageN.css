@@ -1,0 +1,88 @@
+.anlage__section {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.anlage__section h2 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.anlage__sub {
+  margin: 14px 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-strong);
+}
+
+.anlage__calc {
+  margin: 0;
+  padding: 10px 12px;
+  background: var(--ivory-100);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.anlage__calc strong {
+  color: var(--navy);
+}
+
+.anlage__summary {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.anlage__summary h2 {
+  margin: 0 0 6px;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.anlage__summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.anlage__summary-row.is-total {
+  border-top: 2px solid var(--navy);
+  border-bottom: none;
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+.anlage__summary-row.is-total span,
+.anlage__summary-row.is-total strong {
+  color: var(--navy);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.anlage__svrechner {
+  border-color: var(--gold-200);
+  background: #fdfbf6;
+}
+
+.anlage__sv-result {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-strong);
+}

@@ -1,0 +1,124 @@
+.ecombo {
+  position: relative;
+  width: 100%;
+}
+
+.ecombo__input-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ecombo__input-row input {
+  width: 100%;
+  padding: 10px 56px 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.ecombo__input-row input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18);
+}
+
+.ecombo__clear,
+.ecombo__toggle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--muted);
+  border-radius: var(--radius-sm);
+}
+
+.ecombo__clear {
+  right: 28px;
+}
+
+.ecombo__toggle {
+  right: 4px;
+}
+
+.ecombo__clear:hover,
+.ecombo__toggle:hover {
+  color: var(--navy);
+  background: var(--ivory-100);
+}
+
+.ecombo__clear:disabled,
+.ecombo__toggle:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ecombo__list {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.ecombo__option,
+.ecombo__create {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: var(--ink);
+}
+
+.ecombo__option:hover,
+.ecombo__option.is-active,
+.ecombo__create:hover,
+.ecombo__create.is-active {
+  background: var(--ivory-100);
+}
+
+.ecombo__option-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ecombo__option-hint {
+  color: var(--muted);
+  font-size: 0.76rem;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.ecombo__check {
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+.ecombo__create {
+  color: var(--navy);
+  font-weight: 600;
+  border-top: 1px solid var(--border);
+}
+
+.ecombo__create svg {
+  color: var(--gold);
+}

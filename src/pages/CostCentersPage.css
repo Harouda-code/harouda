@@ -1,0 +1,105 @@
+.kst {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kst__form {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kst__form header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kst__form h2 {
+  margin: 0;
+  font-size: 1.02rem;
+  color: var(--navy);
+}
+
+.kst__form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.kst__list {
+  padding: 0;
+  overflow-x: auto;
+}
+
+.kst__list table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.kst__list th,
+.kst__list td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.kst__list th {
+  background: var(--ivory-100);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.kst__list tr.is-inactive td {
+  opacity: 0.55;
+}
+
+.kst__empty {
+  padding: 20px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.kst__badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--ivory-100);
+  color: var(--muted);
+}
+
+.kst__badge.is-active {
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--success);
+}
+
+.kst__actions {
+  display: flex;
+  gap: 4px;
+}
+
+.kst__actions button {
+  padding: 4px 6px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.kst__actions button:hover:not(:disabled) {
+  border-color: var(--gold);
+  background: var(--ivory-100);
+}
+
+.kst__actions button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

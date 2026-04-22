@@ -1,0 +1,128 @@
+.plausi__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.plausi__item {
+  padding: 14px 16px;
+  border-left: 3px solid var(--ivory-200);
+}
+
+.plausi__item.is-ok {
+  border-left-color: var(--success);
+  background: rgba(5, 150, 105, 0.03);
+}
+
+.plausi__item.is-info {
+  border-left-color: var(--info);
+  background: rgba(37, 99, 235, 0.03);
+}
+
+.plausi__item.is-warn {
+  border-left-color: var(--warning);
+  background: rgba(217, 119, 6, 0.04);
+}
+
+.plausi__item.is-error {
+  border-left-color: var(--danger);
+  background: rgba(220, 38, 38, 0.04);
+}
+
+.plausi__head {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+}
+
+.plausi__icon {
+  display: grid;
+  place-items: center;
+}
+
+.plausi__item.is-ok .plausi__icon {
+  color: var(--success);
+}
+.plausi__item.is-info .plausi__icon {
+  color: var(--info);
+}
+.plausi__item.is-warn .plausi__icon {
+  color: var(--warning);
+}
+.plausi__item.is-error .plausi__icon {
+  color: var(--danger);
+}
+
+.plausi__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.plausi__body strong {
+  color: var(--navy);
+  font-size: 0.95rem;
+}
+
+.plausi__sev {
+  display: inline-block;
+  width: max-content;
+  padding: 1px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.plausi__sev.is-ok {
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--success);
+}
+
+.plausi__sev.is-info {
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--info);
+}
+
+.plausi__sev.is-warn {
+  background: rgba(217, 119, 6, 0.15);
+  color: var(--warning);
+}
+
+.plausi__sev.is-error {
+  background: rgba(220, 38, 38, 0.14);
+  color: var(--danger);
+}
+
+.plausi__body p {
+  margin: 2px 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.plausi__detail summary {
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.plausi__detail ul {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 8px 12px;
+  background: var(--ivory-100);
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  max-height: 220px;
+  overflow: auto;
+}
+
+.plausi__detail li {
+  padding: 2px 0;
+}

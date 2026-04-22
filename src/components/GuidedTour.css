@@ -1,0 +1,120 @@
+.tour__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 58, 138, 0.65);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  z-index: 100;
+  padding: 24px;
+}
+
+.tour {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: min(640px, 100%);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--gold-200);
+}
+
+.tour__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 10px;
+}
+
+.tour__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--gold-700);
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tour__close {
+  display: grid;
+  place-items: center;
+  padding: 6px;
+  color: var(--muted);
+  border-radius: 50%;
+}
+
+.tour__close:hover {
+  background: var(--ivory-100);
+  color: var(--navy);
+}
+
+.tour__progress {
+  height: 3px;
+  background: var(--ivory-100);
+  margin: 0 20px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.tour__progress span {
+  display: block;
+  height: 100%;
+  background: var(--gold);
+  transition: width 300ms ease-out;
+}
+
+.tour__body {
+  padding: 18px 24px 8px;
+  overflow-y: auto;
+}
+
+.tour__body h2 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+  color: var(--navy);
+}
+
+.tour__body p {
+  margin: 0 0 14px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.tour__body ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tour__body li {
+  padding: 8px 12px;
+  background: var(--ivory-100);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.tour__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px 16px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+
+.tour__nav {
+  display: inline-flex;
+  gap: 8px;
+}

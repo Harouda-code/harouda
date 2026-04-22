@@ -1,0 +1,154 @@
+.tax {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.tax__head {
+  padding: 0 6px;
+}
+
+.tax__lead {
+  margin: 0;
+  max-width: 720px;
+  color: var(--ink-soft);
+}
+
+.tax__grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.tax__card {
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tax__card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.tax__card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tax__icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--ivory-100);
+  color: var(--navy);
+}
+
+.tax__tag {
+  background: var(--navy);
+  color: var(--gold-200);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tax__tag--muted {
+  background: var(--ivory-200);
+  color: var(--muted);
+}
+
+.tax__tags {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tax__mode {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--ivory-100);
+  color: var(--ink-soft);
+}
+
+.tax__mode--auto {
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--success);
+}
+
+.tax__mode--auto-partial {
+  background: rgba(217, 119, 6, 0.15);
+  color: var(--warning);
+}
+
+.tax__mode--calculator {
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--info);
+}
+
+.tax__mode--input {
+  background: rgba(245, 158, 11, 0.18);
+  color: var(--gold-700);
+}
+
+.tax__desc {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.tax__bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.tax__bullets li {
+  padding-left: 18px;
+  position: relative;
+}
+
+.tax__bullets li::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  color: var(--gold);
+}
+
+.tax__card .btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.tax__card--soon {
+  opacity: 0.75;
+}
+
+.tax__soon-pill {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--ivory-100);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: auto;
+}

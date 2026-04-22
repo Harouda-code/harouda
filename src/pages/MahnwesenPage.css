@@ -1,0 +1,181 @@
+.mahn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mahn__head h1 {
+  margin: 8px 0 4px;
+  font-size: clamp(1.5rem, 2vw + 0.6rem, 2rem);
+}
+
+.mahn__head p {
+  margin: 0;
+  color: var(--ink-soft);
+  max-width: 760px;
+}
+
+.mahn__head p strong {
+  color: var(--navy);
+}
+
+.mahn__warning {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  background: rgba(217, 119, 6, 0.1);
+  border-left: 3px solid var(--warning);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.mahn__warning svg {
+  color: var(--warning);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.mahn__warning a {
+  color: var(--gold-700);
+  font-weight: 600;
+}
+
+.mahn__info-note {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 10px 14px;
+  background: rgba(37, 99, 235, 0.07);
+  border-left: 3px solid var(--info);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.mahn__info-note svg {
+  color: var(--info);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.mahn__section {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mahn__section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mahn__section-head h2 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.mahn__count {
+  background: var(--ivory-100);
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.mahn__empty {
+  margin: 0;
+  padding: 18px 4px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.mahn__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.mahn__table th,
+.mahn__table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.mahn__table th {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.mahn__table th.is-num,
+.mahn__table td.is-num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.mahn__overdue {
+  display: inline-block;
+  padding: 2px 10px;
+  background: rgba(220, 38, 38, 0.12);
+  color: var(--danger);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.mahn__stage {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mahn__stage.is-stage1 {
+  background: rgba(37, 99, 235, 0.14);
+  color: var(--info);
+}
+
+.mahn__stage.is-stage2 {
+  background: rgba(217, 119, 6, 0.16);
+  color: var(--warning);
+}
+
+.mahn__stage.is-stage3 {
+  background: rgba(220, 38, 38, 0.14);
+  color: var(--danger);
+}
+
+.mahn__row-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.mahn__row-actions button {
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  color: var(--ink-soft);
+}
+
+.mahn__row-actions button:hover {
+  background: var(--ivory-100);
+  color: var(--navy);
+}

@@ -1,0 +1,6 @@
+KreditorNr;Name;Rechtsform;Strasse;PLZ;Ort;UstIdNr;Leistungsart
+70001;Lieferant Alpha;GmbH;Bahnhofstraße 1;49074;Osnabrück;DE222000001;Bürobedarf
+70002;Lieferant Beta;KG;Industriestraße 8;49565;Bramsche;DE222000002;Waren 19 Prozent
+70003;Lieferant Gamma;AG;Rathausplatz 2;48429;Rheine;DE222000003;Waren 7 Prozent
+70004;Lieferant Delta;e.K.;Werkstattweg 5;49477;Ibbenbüren;DE222000004;Kfz-Service
+70005;Lieferant Epsilon;GbR;Mühlenstraße 3;49324;Melle;DE222000005;Reinigung Nebenkosten

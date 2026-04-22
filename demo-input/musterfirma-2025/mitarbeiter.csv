@@ -1,0 +1,4 @@
+PersNr;Nachname;Vorname;Position;Beschaeftigung;BruttoMonat_EUR;Eintritt;Steuerklasse;Kinderfreibetrag;Krankenkasse;Sozialversicherungspflichtig
+1001;Kühn;Jana;Geschäftsführerin;Vollzeit 40h;6500.00;2020-03-01;III;1.0;Fiktiv-BKK;ja
+1002;Schulz;Tim;Sachbearbeiter;Vollzeit 40h;3200.00;2022-04-01;I;0.0;Fiktiv-BKK;ja
+1003;Fischer;Anna;Teilzeit-Assistenz;Teilzeit 20h;1800.00;2024-09-01;IV;0.5;Fiktiv-AOK;ja

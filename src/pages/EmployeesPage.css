@@ -1,0 +1,144 @@
+.empl {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.empl__summary {
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.empl__summary > div {
+  padding: 10px 12px;
+  background: var(--ivory-100);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.empl__summary dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.empl__summary dd {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--navy);
+}
+
+.empl__form {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empl__form header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.empl__form h2 {
+  margin: 0;
+  font-size: 1.02rem;
+  color: var(--navy);
+}
+
+.empl__form-actions {
+  justify-self: flex-end;
+  margin-top: 8px;
+}
+
+.empl__list {
+  padding: 0;
+  overflow-x: auto;
+}
+
+.empl__list table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.empl__list th,
+.empl__list td {
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.empl__list th {
+  background: var(--ivory-100);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.empl__list td.is-num,
+.empl__list th.is-num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.empl__list tr.is-inactive td {
+  opacity: 0.5;
+}
+
+.empl__badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--ivory-100);
+  color: var(--muted);
+}
+
+.empl__badge.is-active {
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--success);
+}
+
+.empl__actions {
+  display: flex;
+  gap: 4px;
+}
+
+.empl__actions button {
+  padding: 4px 6px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.empl__actions button:hover:not(:disabled) {
+  background: var(--ivory-100);
+  border-color: var(--gold);
+}
+
+.empl__actions button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.empl__empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+}

@@ -1,0 +1,124 @@
+.datev-export {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.datev-export__form,
+.datev-export__preview,
+.datev-export__report,
+.datev-export__actions,
+.datev-export__ok {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.datev-export__form h2,
+.datev-export__preview h2,
+.datev-export__report h2 {
+  margin: 0;
+  font-size: 1.02rem;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.datev-export__kv {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.datev-export__kv > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  background: var(--ivory-100);
+  border-radius: var(--radius);
+}
+
+.datev-export__kv dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.datev-export__kv dd {
+  margin: 0;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.datev-export__ok {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+  color: var(--success);
+  font-weight: 600;
+}
+
+.datev-export__preview-wrap {
+  overflow-x: auto;
+}
+
+.datev-export__preview table,
+.datev-export__issues {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.datev-export__preview th,
+.datev-export__preview td,
+.datev-export__issues th,
+.datev-export__issues td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.datev-export__preview th,
+.datev-export__issues th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 700;
+  background: var(--ivory-100);
+}
+
+.datev-export__preview .is-num,
+.datev-export__preview .is-num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.datev-export__preview-more {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.datev-export__issues tr.is-error td {
+  background: rgba(220, 38, 38, 0.06);
+}
+
+.datev-export__issues tr.is-warn td {
+  background: rgba(245, 158, 11, 0.06);
+}
+
+.datev-export__hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}

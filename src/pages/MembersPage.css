@@ -1,0 +1,187 @@
+.members__roles {
+  padding: 18px 22px;
+}
+
+.members__roles h2 {
+  margin: 0 0 12px;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.members__roles-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.members__role {
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: var(--ivory-100);
+  border-left: 3px solid var(--border-strong);
+}
+
+.members__role--owner { border-left-color: var(--gold); }
+.members__role--admin { border-left-color: var(--info); }
+.members__role--member { border-left-color: var(--success); }
+.members__role--readonly { border-left-color: var(--muted); }
+
+.members__role-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.members__role strong {
+  display: block;
+  color: var(--navy);
+  font-size: 0.92rem;
+  margin-bottom: 2px;
+}
+
+.members__role p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.members__invite {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.members__invite header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.members__invite h2 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.members__invite-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.members__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.members__table th,
+.members__table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.members__table th {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.members__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.members__user {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.members__avatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--gold-200);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.members__user strong {
+  display: block;
+  color: var(--navy);
+}
+
+.members__user small {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.members__role-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.members__role-pill.is-owner {
+  background: rgba(245, 158, 11, 0.18);
+  color: var(--gold-700);
+}
+
+.members__role-pill.is-admin {
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--info);
+}
+
+.members__role-pill.is-member {
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--success);
+}
+
+.members__role-pill.is-readonly {
+  background: var(--ivory-100);
+  color: var(--muted);
+}
+
+.members__actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.members__actions select {
+  padding: 5px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  background: var(--surface);
+}
+
+.members__self {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--muted);
+}

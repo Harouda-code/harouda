@@ -1,0 +1,54 @@
+datum;beleg_nr;soll_konto;haben_konto;betrag;beschreibung;ust_satz;kostenstelle;kostentraeger;skonto_pct;skonto_tage
+02.01.2025;EB-001;0440;9000;20000,00;Eröffnungsbilanz BGA;0;;;;
+02.01.2025;EB-002;1200;9000;70000,00;Eröffnungsbilanz Bank;0;;;;
+02.01.2025;EB-003;1000;9000;5000,00;Eröffnungsbilanz Kasse;0;;;;
+02.01.2025;EB-004;1400;9000;5000,00;Eröffnungsbilanz Forderungen L+L;0;;;;
+02.01.2025;EB-005;9000;2300;50000,00;Eröffnungsbilanz Gezeichnetes Kapital;0;;;;
+02.01.2025;EB-006;9000;0860;40000,00;Eröffnungsbilanz Gewinnvortrag;0;;;;
+02.01.2025;EB-007;9000;1600;8000,00;Eröffnungsbilanz Verbindlichkeiten L+L;0;;;;
+02.01.2025;EB-008;9000;1770;2000,00;Eröffnungsbilanz USt-Zahllast Vorperiode;0;;;;
+05.01.2025;MI-Q1;4210;1200;2500,00;Miete Geschäftsräume Q1 2025;0;KST-VERW;;;
+15.01.2025;AR-2025-001;1400;8400;20000,00;Ausgangsrechnung Gauss GmbH;19;KST-VERTRIEB;;2;14
+20.01.2025;ER-2025-001;3400;1600;7000,00;Wareneingang Lieferant Beta KG;19;KST-EINKAUF;;;
+31.01.2025;UStVA-2024-12;1770;1200;2000,00;Zahlung UStVA-Zahllast Dezember 2024;0;;;;
+10.02.2025;KA-001;1000;1200;500,00;Kasse-Aufstockung Bank an Kasse;0;;;;
+17.02.2025;AR-2025-002;1400;8400;20000,00;Ausgangsrechnung Riemann OHG;19;KST-VERTRIEB;PROJ-KUNDE-MUELLER;3;10
+12.03.2025;BE-2025-003;1200;8400;20000,00;Bankeingang Fourier AG Direktzahlung;19;KST-VERTRIEB;PROJ-2025-WEB;;
+15.03.2025;TK-001;4530;1200;900,00;Kfz-Kosten Tanken Lieferant Delta;19;KST-VERTRIEB;;;
+25.03.2025;ER-2025-002;3400;1600;7000,00;Wareneingang Lieferant Beta KG;19;KST-EINKAUF;;;
+31.03.2025;LG-Q1;4120;1200;15000,00;Gehälter Q1 2025 Sammelbuchung;0;KST-VERW;;;
+05.04.2025;MI-Q2;4210;1200;2500,00;Miete Geschäftsräume Q2 2025;0;KST-VERW;;;
+12.04.2025;BB-001;4930;1600;400,00;Bürobedarf Lieferant Alpha GmbH;19;KST-VERW;;;
+05.05.2025;AR-2025-101;1400;8300;5000,00;Ausgangsrechnung Leibniz GbR 7 Prozent;7;KST-VERTRIEB;PROJ-2025-WEB;;
+22.06.2025;AR-2025-004;1400;8400;20000,00;Ausgangsrechnung Euler e.K.;19;KST-VERTRIEB;PROJ-KUNDE-MUELLER;;
+30.06.2025;LG-Q2;4120;1200;15000,00;Gehälter Q2 2025 Sammelbuchung;0;KST-VERW;;;
+05.07.2025;MI-Q3;4210;1200;2500,00;Miete Geschäftsräume Q3 2025;0;KST-VERW;;;
+15.07.2025;ER-2025-003;3400;1600;7000,00;Wareneingang Lieferant Beta KG;19;KST-EINKAUF;;2;14
+15.07.2025;KA-002;4930;1000;200,00;Bürobedarf Barkauf aus Kasse;19;KST-VERW;;;
+20.07.2025;TK-002;4530;1200;900,00;Kfz-Kosten Wartung Lieferant Delta;19;KST-VERTRIEB;;;
+18.09.2025;BE-2025-005;1200;8400;20000,00;Bankeingang Gauss GmbH Direktzahlung;19;KST-VERTRIEB;;;
+30.09.2025;LG-Q3;4120;1200;15000,00;Gehälter Q3 2025 Sammelbuchung;0;KST-VERW;;;
+05.10.2025;MI-Q4;4210;1200;2500,00;Miete Geschäftsräume Q4 2025;0;KST-VERW;;;
+10.10.2025;ER-2025-004;3400;1200;7000,00;Wareneingang Direktzahlung Beta KG;19;KST-EINKAUF;;;
+03.11.2025;BB-002;4930;1200;400,00;Bürobedarf Direktzahlung Lieferant Alpha;19;KST-VERW;;;
+10.11.2025;AR-2025-006;1400;8400;20000,00;Ausgangsrechnung Riemann OHG;19;KST-VERTRIEB;PROJ-KUNDE-MUELLER;;
+28.11.2025;TK-003;4530;1200;900,00;Kfz-Kosten TÜV Lieferant Delta;19;KST-VERTRIEB;;;
+05.12.2025;BE-2025-102;1200;8300;5000,00;Bankeingang Leibniz GbR 7 Prozent;7;KST-VERTRIEB;PROJ-2025-WEB;;
+15.12.2025;BK-2025-007;1000;8400;20000,00;Kassenverkauf Fourier AG;19;KST-VERTRIEB;PROJ-2025-WEB;;
+22.12.2025;ER-2025-005;3400;1600;7000,00;Wareneingang Lieferant Beta KG;19;KST-EINKAUF;;;
+28.12.2025;KA-003;1200;1000;300,00;Kasseneinzahlung Kasse an Bank;0;;;;
+31.12.2025;AfA-2025;4830;0440;4000,00;Abschreibung BGA linear 5 Jahre;0;;;;
+31.12.2025;LG-Q4;4120;1200;15000,00;Gehälter Q4 2025 Sammelbuchung;0;KST-VERW;;;
+15.04.2025;AR-2025-008;1400;8400;3000,00;Rechnung Test-GmbH OPOS-Szenario bezahlt;19;KST-VERTRIEB;;;
+20.08.2025;AR-2025-008;1200;1400;3000,00;Zahlungseingang zu AR-2025-008 (vollständig);0;;;;
+12.06.2025;AR-2025-009;1400;8400;5000,00;Rechnung OPOS-Szenario teilbezahlt;19;KST-VERTRIEB;PROJ-KUNDE-MUELLER;;
+15.09.2025;AR-2025-009;1200;1400;2000,00;Teilzahlung 40 Prozent zu AR-2025-009;0;;;;
+10.07.2025;AR-2025-010;1400;8400;1500,00;Rechnung OPOS-Szenario lange überfällig;19;KST-VERTRIEB;;;
+05.08.2025;ER-2025-006;3400;1600;800,00;Eingangsrechnung Beta KG bezahlt im Oktober;19;KST-EINKAUF;;;
+15.10.2025;ER-2025-006;1600;1200;800,00;Zahlungsausgang zu ER-2025-006;0;;;;
+15.03.2025;RC-2025-001;3100;1600;2500,00;RC EU-B2B-Dienstleistung Softwarelizenz IE § 13b Abs. 1 UStG;19;KST-VERW;;;
+12.05.2025;RC-2025-002;3120;1600;8000,00;RC Bauleistung Rohbau § 13b Abs. 2 Nr. 2 UStG;19;KST-VERW;;;
+20.07.2025;RC-2025-003;3130;1600;1200,00;RC Gebäudereinigung § 13b Abs. 2 Nr. 3 UStG;19;KST-VERW;;;
+15.06.2025;IG-2025-001;1400;8125;15000,00;IG-Lieferung an EU-Kunde FR SARL Kz 41 § 4 Nr. 1b UStG;0;KST-VERTRIEB;;;
+22.09.2025;IG-2025-002;3425;1600;7500,00;IG-Erwerb aus EU CZ Bemessungsgrundlage Kz 89;19;KST-EINKAUF;;;
+

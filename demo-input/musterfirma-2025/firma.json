@@ -1,0 +1,56 @@
+{
+  "_hinweis": "Alle Angaben sind fiktiv. IBAN, USt-IdNr., Steuernummer und BIC sind bewusst NICHT prüfsummenvalid, damit die Daten nicht versehentlich als echte Stammdaten missverstanden werden.",
+
+  "firma": {
+    "name": "Kühn Musterfirma GmbH",
+    "rechtsform": "GmbH",
+    "gezeichnetesKapital": 50000.00,
+    "gruendungsdatum": "2020-03-01",
+    "handelsregister": "HRB 12345 (fiktiv)",
+    "sitz": {
+      "strasse": "Klosterstraße 12",
+      "plz": "49074",
+      "ort": "Osnabrück",
+      "land": "DE"
+    },
+    "steuernummer": "66/123/45678",
+    "ustIdNr": "DE999888777",
+    "finanzamt": "Finanzamt Osnabrück-Stadt",
+    "geschaeftsfuehrer": "Jana Kühn"
+  },
+
+  "geschaeftsjahr": {
+    "von": "2025-01-01",
+    "bis": "2025-12-31"
+  },
+
+  "kontenrahmen": "SKR03",
+
+  "kleinunternehmerregelung": false,
+  "voranmeldungszeitraum_ust": "monatlich",
+
+  "bank": {
+    "bezeichnung": "Fiktiv-Bank Osnabrück",
+    "iban": "DE00 0000 0000 0000 0000 99",
+    "bic": "TESTDEXXXXX",
+    "kontoinhaber": "Kühn Musterfirma GmbH"
+  },
+
+  "eroeffnungsbilanz_2025_01_01": {
+    "_methode": "SKR03, Vortrag über Konto 9000 (Eröffnungsbilanzkonto)",
+    "aktiva": {
+      "0440_bga": 20000.00,
+      "1200_bank": 70000.00,
+      "1000_kasse": 5000.00,
+      "1400_forderungen_aus_lul": 5000.00
+    },
+    "passiva": {
+      "0800_gezeichnetes_kapital": 50000.00,
+      "0860_gewinnvortrag_vor_verwendung": 40000.00,
+      "1600_verbindlichkeiten_aus_lul": 8000.00,
+      "1770_umsatzsteuer_zahllast_vorperiode": 2000.00
+    },
+    "aktiva_summe": 100000.00,
+    "passiva_summe": 100000.00
+  }
+}

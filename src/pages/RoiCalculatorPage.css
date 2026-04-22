@@ -1,0 +1,158 @@
+.roi {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.roi__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 860px) {
+  .roi__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.roi__inputs,
+.roi__results {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.roi__inputs h2,
+.roi__results h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--navy);
+}
+
+.roi__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.roi__field-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.roi__field-head label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.roi__field-head strong {
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+  font-size: 1rem;
+}
+
+.roi__field input[type="range"] {
+  width: 100%;
+  accent-color: var(--gold);
+}
+
+.roi__field-range {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.roi__results {
+  background: linear-gradient(
+    135deg,
+    var(--navy) 0%,
+    color-mix(in srgb, var(--navy) 80%, black) 100%
+  );
+  color: var(--on-navy);
+}
+
+.roi__results h2 {
+  color: var(--gold);
+}
+
+.roi__result-big {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.roi__result-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.84rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.roi__result-value {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.roi__result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.roi__result-grid > div {
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
+}
+
+.roi__result-grid dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+}
+
+.roi__result-grid dd {
+  margin: 2px 0 0;
+  color: var(--on-navy);
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.roi__cta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.roi__cta .btn-outline {
+  color: var(--gold);
+  border-color: rgba(252, 211, 77, 0.4);
+}
+
+.roi__cta .btn-outline:hover {
+  background: rgba(252, 211, 77, 0.1);
+  border-color: var(--gold);
+}
+
+.roi__assumptions ul {
+  margin: 6px 0 0;
+  padding-left: 20px;
+  line-height: 1.5;
+}

@@ -1,0 +1,122 @@
+.sysstatus {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sysstatus__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .sysstatus__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.sysstatus__card {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-left: 4px solid var(--border);
+}
+
+.sysstatus__card.is-ok {
+  border-left-color: var(--success);
+}
+
+.sysstatus__card.is-bad {
+  border-left-color: var(--danger);
+}
+
+.sysstatus__card.is-loading {
+  border-left-color: var(--gold);
+}
+
+.sysstatus__card-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.sysstatus__card-main {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+
+.sysstatus__card-sub {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.sysstatus__context,
+.sysstatus__ops {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sysstatus__context h2,
+.sysstatus__ops h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+.sysstatus__context dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+@media (min-width: 720px) {
+  .sysstatus__context dl {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.sysstatus__context > dl > div {
+  padding: 8px 12px;
+  background: var(--ivory-100);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sysstatus__context dt {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.sysstatus__context dd {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.sysstatus__ops ul {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}

@@ -1,0 +1,96 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: staging
+      url: ${{ vars.STAGING_URL }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Type + tests
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: |
+          npx tsc --noEmit
+          npx vitest run
+
+      - name: Build (staging)
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+          VITE_SUPABASE_URL: ${{ secrets.STAGING_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.STAGING_SUPABASE_ANON_KEY }}
+          VITE_SENTRY_DSN: ${{ secrets.STAGING_SENTRY_DSN }}
+          VITE_APP_VERSION: ${{ github.sha }}
+        run: npm run build
+
+      - name: Apply Supabase migrations (staging)
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Push migrations
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.STAGING_SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_PROJECT_REF: ${{ secrets.STAGING_SUPABASE_PROJECT_REF }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.STAGING_SUPABASE_DB_PASSWORD }}
+        run: |
+          supabase link --project-ref "$SUPABASE_PROJECT_REF"
+          supabase db push --password "$SUPABASE_DB_PASSWORD"
+
+      - name: Deploy frontend
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: dist
+          deploy-message: "Staging deploy ${{ github.sha }}"
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+          alias: staging
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.STAGING_NETLIFY_SITE_ID }}
+
+      - name: Staging smoke test
+        run: |
+          STAGING_URL="${{ vars.STAGING_URL }}"
+          if [ -z "$STAGING_URL" ]; then
+            echo "STAGING_URL not configured — skipping smoke test"
+            exit 0
+          fi
+          for i in 1 2 3 4 5; do
+            if curl -sSf -o /dev/null "$STAGING_URL"; then
+              echo "Staging up (attempt $i)"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying…"
+            sleep 5
+          done
+          echo "::error::Staging smoke test failed after 5 attempts"
+          exit 1
+
+      - name: Notify Slack (optional)
+        if: ${{ always() && secrets.SLACK_WEBHOOK_URL != '' }}
+        run: |
+          STATUS="${{ job.status }}"
+          curl -X POST -H 'Content-type: application/json' \
+            --data "{\"text\":\"Staging deploy ${STATUS}: ${{ github.sha }} — ${{ vars.STAGING_URL }}\"}" \
+            "${{ secrets.SLACK_WEBHOOK_URL }}"

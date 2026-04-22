@@ -1,0 +1,257 @@
+.cashflow {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cashflow__controls {
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  align-items: end;
+}
+
+@media (min-width: 720px) {
+  .cashflow__controls {
+    grid-template-columns: 1fr 180px 240px;
+  }
+}
+
+.cashflow__checkbox > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.cashflow__kpis {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .cashflow__kpis {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.cashflow__kpi {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cashflow__kpi-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.cashflow__kpi-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--navy);
+}
+
+.cashflow__kpi-sub {
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+
+.cashflow__chart-wrap {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cashflow__chart-wrap h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+.cashflow__chart {
+  width: 100%;
+  height: 280px;
+  display: block;
+}
+
+.cashflow__warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(220, 38, 38, 0.08);
+  border-left: 3px solid var(--danger);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-size: 0.88rem;
+}
+
+.cashflow__warning svg {
+  color: var(--danger);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cashflow__events {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.cashflow__events h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+.cashflow__events-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.cashflow__events-table th,
+.cashflow__events-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.cashflow__events-table th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.cashflow__events-table th.is-num,
+.cashflow__events-table td.is-num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.cashflow__note {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.cashflow__src {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.cashflow__src--receivable {
+  background: rgba(22, 163, 74, 0.12);
+  color: var(--success);
+}
+
+.cashflow__src--payable {
+  background: rgba(220, 38, 38, 0.12);
+  color: var(--danger);
+}
+
+.cashflow__src--deadline {
+  background: rgba(245, 158, 11, 0.16);
+  color: var(--gold-700);
+}
+
+.cashflow__methodology {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cashflow__methodology h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+.cashflow__methodology ul {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.cashflow__deadlines {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cashflow__deadlines h2 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--navy);
+}
+
+.cashflow__deadline-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.cashflow__deadline-row input {
+  padding: 8px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 0.9rem;
+}
+
+.cashflow__deadline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cashflow__deadline-list li {
+  display: grid;
+  grid-template-columns: 110px 1fr 120px auto;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 10px;
+  background: var(--ivory-100);
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.cashflow__empty,
+.cashflow__empty-note {
+  padding: 18px 22px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

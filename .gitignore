@@ -1,0 +1,48 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Test + Build caches
+coverage
+.vitest-cache
+*.tsbuildinfo
+
+# Supabase CLI workspaces (local only)
+supabase/.branches
+supabase/.temp
+
+# Windows
+Thumbs.db
+
+# Generated from vite.config.ts (build artefacts, don't commit)
+vite.config.d.ts
+vite.config.js
+
+# Claude Code workspace config (workspace-local, personal)
+.claude/
+
+# env — only the example template is committed
+.env
+.env.*
+!.env.example
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

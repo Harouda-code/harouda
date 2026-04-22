@@ -1,0 +1,136 @@
+.zugferd {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.zugferd__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.zugferd__head h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw + 0.6rem, 2rem);
+}
+
+.zugferd__head p {
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+  max-width: 680px;
+}
+
+.zugferd__empty {
+  padding: 48px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.zugferd__section {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.zugferd__section h2,
+.zugferd__section h3 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.zugferd__section h2 {
+  font-size: 1.1rem;
+}
+
+.zugferd__section h3 {
+  font-size: 0.95rem;
+}
+
+.zugferd__kv {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin: 0;
+}
+
+.zugferd__kv > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zugferd__kv dt {
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.zugferd__kv dd {
+  margin: 0;
+  color: var(--ink);
+}
+
+.zugferd__parties {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.zugferd__parties p {
+  margin: 4px 0;
+  color: var(--ink);
+}
+
+.zugferd__addr {
+  color: var(--ink-soft) !important;
+  font-size: 0.88rem;
+}
+
+.zugferd__lines {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.zugferd__lines th,
+.zugferd__lines td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.zugferd__lines th {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.zugferd__lines th.is-num,
+.zugferd__lines td.is-num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.zugferd__lines tfoot td {
+  background: var(--ivory-100);
+  border-bottom: none;
+}
+
+.zugferd__total td {
+  border-top: 2px solid var(--navy);
+  background: var(--ivory-100);
+  font-weight: 700;
+}

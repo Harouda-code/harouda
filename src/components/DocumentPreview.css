@@ -1,0 +1,140 @@
+.docprev__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 58, 138, 0.6);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: center;
+  z-index: 50;
+  padding: 24px;
+}
+
+.docprev {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: min(960px, 100%);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.docprev__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.docprev__title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.docprev__title strong {
+  font-size: 1rem;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.docprev__title span {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.docprev__body {
+  position: relative;
+  flex: 1;
+  min-height: 380px;
+  max-height: 70vh;
+  display: grid;
+  place-items: center;
+  background: var(--ivory-100);
+}
+
+.docprev__viewer {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  overflow: auto;
+}
+
+.docprev__viewer img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.docprev__empty {
+  color: var(--muted);
+  text-align: center;
+}
+
+.docprev__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  color: var(--navy);
+}
+
+.docprev__nav.is-prev {
+  left: 12px;
+}
+
+.docprev__nav.is-next {
+  right: 12px;
+}
+
+.docprev__foot {
+  padding: 12px 18px 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.docprev__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.docprev__link.is-linked {
+  color: var(--navy);
+}
+
+.docprev__ocr summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.docprev__ocr pre {
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  background: var(--ivory-100);
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  white-space: pre-wrap;
+  max-height: 180px;
+  overflow: auto;
+}

@@ -1,0 +1,166 @@
+.journal {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.journal__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 14px 16px;
+}
+
+.journal__form {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.journal__form-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.journal__form-head h2 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.journal__form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.journal__tablewrap {
+  overflow-x: auto;
+}
+
+.journal__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.journal__table th,
+.journal__table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.journal__table th {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.journal__table th.is-num,
+.journal__table td.is-num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.journal__table tbody tr:hover {
+  background: var(--ivory-100);
+}
+
+.journal__table tbody tr.is-editing {
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.journal__cell-sub {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.journal__cell-muted {
+  color: var(--muted);
+}
+
+.journal__row-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.journal__row-actions button {
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  color: var(--ink-soft);
+}
+
+.journal__row-actions button:hover {
+  background: var(--ivory-100);
+  color: var(--navy);
+}
+
+.journal__empty {
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+
+.journal__suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.78rem;
+}
+
+.journal__suggestions-lbl {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.journal__suggest-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: var(--ivory-100);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--ink);
+}
+
+.journal__suggest-chip code {
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.journal__suggest-chip button {
+  padding: 1px 6px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.journal__suggest-chip button:hover {
+  background: var(--gold);
+  color: var(--navy-900);
+  border-color: var(--gold);
+}

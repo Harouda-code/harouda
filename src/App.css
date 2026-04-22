@@ -1,0 +1,26 @@
+/* Application-level styles. Most styles live in index.css (design system)
+   or in per-page CSS files. This file holds cross-cutting helpers used
+   by multiple pages. */
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.is-num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.login__spinner {
+  animation: hr-spin 0.9s linear infinite;
+}
+
+@keyframes hr-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

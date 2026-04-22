@@ -1,0 +1,185 @@
+.bankimport {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.bankimport__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bankimport__head h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw + 0.6rem, 2rem);
+}
+
+.bankimport__head p {
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+}
+
+.bankimport__empty {
+  padding: 48px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.bankimport__hint {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+  max-width: 560px;
+  padding: 10px 14px;
+  background: rgba(37, 99, 235, 0.08);
+  border-left: 3px solid var(--info);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.bankimport__hint svg {
+  flex-shrink: 0;
+  color: var(--info);
+  margin-top: 3px;
+}
+
+.bankimport__stmt {
+  padding: 18px 20px;
+}
+
+.bankimport__stmt h2 {
+  margin: 0 0 6px;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.bankimport__stmt-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.bankimport__stats {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 14px;
+  min-width: 320px;
+}
+
+.bankimport__stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bankimport__stats dt {
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.bankimport__stats dd {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--navy);
+}
+
+.bankimport__actions {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.bankimport__tablewrap {
+  overflow-x: auto;
+}
+
+.bankimport__table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.bankimport__table th,
+.bankimport__table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.bankimport__table th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.bankimport__table th.is-num,
+.bankimport__table td.is-num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.bankimport__table input,
+.bankimport__table select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: 0.82rem;
+}
+
+.bankimport__table input:focus,
+.bankimport__table select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.bankimport__table tr.is-posted {
+  background: rgba(5, 150, 105, 0.05);
+}
+
+.bankimport__table tr.is-skipped {
+  opacity: 0.55;
+}
+
+.bankimport__typ {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.bankimport__typ.is-in {
+  background: rgba(5, 150, 105, 0.1);
+  color: var(--success);
+}
+
+.bankimport__typ.is-out {
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--danger);
+}

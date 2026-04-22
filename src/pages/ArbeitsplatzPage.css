@@ -1,0 +1,438 @@
+/*
+ * Arbeitsplatz — Fullscreen-Post-Login-Einstieg.
+ *
+ * Die Route ist parallel zur AppShell registriert (kein Shell-Sidebar,
+ * keine Topbar). Darum rechnen wir auf echte 100vh ohne calc().
+ *
+ * Desktop ≥ 1024 px: feste 20/50/30-Grid-Aufteilung.
+ * Unter 1024 px behalten wir das 3-Column-Modell per horizontal-scroll
+ * bei fixen Mindestbreiten — Mobile-Optimierung ist nicht Sprint-Ziel,
+ * aber die Kanzlei soll auf schmaleren Displays kein Overlap sehen.
+ *
+ * Alle Farben/Radien über Design-Tokens aus `index.css` (--navy, --gold,
+ * --ivory-*, --ink*, --surface, --border, --radius*, --danger). Fallback-
+ * Werte sind exakt die Token-Werte aus `:root` — so bleiben die Styles
+ * auch dann korrekt, wenn eine Seite die Page-CSS außerhalb der App
+ * lädt (z. B. Storybook, Testumgebung).
+ */
+
+.arbeitsplatz {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--bg, #f8fafc);
+  color: var(--ink, #1e293b);
+}
+
+.arbeitsplatz__grid {
+  display: grid;
+  grid-template-columns: 20% 50% 30%;
+  height: 100%;
+  width: 100%;
+}
+
+.arbeitsplatz__col {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px 22px;
+  box-sizing: border-box;
+  border-right: 1px solid var(--border, #e2e8f0);
+  background: var(--surface, #ffffff);
+}
+
+.arbeitsplatz__col:last-child {
+  border-right: none;
+}
+
+.arbeitsplatz__col--left {
+  background: var(--surface-muted, #f1f5f9);
+}
+
+.arbeitsplatz__col--center {
+  background: var(--surface, #ffffff);
+}
+
+.arbeitsplatz__col--right {
+  background: var(--surface, #ffffff);
+}
+
+.arbeitsplatz__col h2 {
+  margin: 0 0 12px 0;
+  font-family: var(--font-heading, inherit);
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+  color: var(--ink, #1e293b);
+}
+
+.arbeitsplatz__col p {
+  margin: 0;
+  color: var(--ink-soft, #334155);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+/* --- Kanzlei-Nav (linke Spalte) ----------------------------------------- */
+
+.arbeitsplatz__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.arbeitsplatz__nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm, 6px);
+  color: var(--ink, #1e293b);
+  text-decoration: none;
+  font-size: 0.92rem;
+  line-height: 1.2;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.arbeitsplatz__nav-link:hover {
+  background: var(--ivory-100, #f1f5f9);
+  color: var(--ink, #1e293b);
+}
+
+.arbeitsplatz__nav-link:focus-visible {
+  outline: 2px solid var(--gold, #f59e0b);
+  outline-offset: 2px;
+  background: var(--ivory-100, #f1f5f9);
+}
+
+.arbeitsplatz__nav-link--active,
+.arbeitsplatz__nav-link--active:hover {
+  background: var(--navy, #1e3a8a);
+  color: var(--on-navy, #dbeafe);
+}
+
+.arbeitsplatz__nav-link svg {
+  flex-shrink: 0;
+}
+
+/* --- Mittlere Spalte: Header + Suche + Tabelle ------------------------- */
+
+.arbeitsplatz__col-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 14px 0;
+}
+
+.arbeitsplatz__col-header h2 {
+  margin: 0;
+}
+
+.arbeitsplatz__add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--border, #e2e8f0);
+  background: var(--surface, #ffffff);
+  color: var(--ink, #1e293b);
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+  padding: 0;
+}
+
+.arbeitsplatz__add-btn:hover {
+  background: var(--ivory-100, #f1f5f9);
+  border-color: var(--navy, #1e3a8a);
+}
+
+.arbeitsplatz__add-btn:focus-visible {
+  outline: 2px solid var(--gold, #f59e0b);
+  outline-offset: 2px;
+}
+
+.arbeitsplatz__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--surface, #ffffff);
+  color: var(--ink-soft, #334155);
+}
+
+.arbeitsplatz__search:focus-within {
+  border-color: var(--navy, #1e3a8a);
+  box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.12);
+}
+
+.arbeitsplatz__search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: var(--ink, #1e293b);
+}
+
+.arbeitsplatz__search-input::placeholder {
+  color: var(--muted, #64748b);
+}
+
+.arbeitsplatz__state {
+  margin: 0;
+  padding: 16px 4px;
+  color: var(--ink-soft, #334155);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.arbeitsplatz__state--error {
+  color: var(--danger, #dc2626);
+}
+
+.arbeitsplatz__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  table-layout: fixed;
+}
+
+.arbeitsplatz__table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--surface-muted, #f1f5f9);
+  text-align: left;
+  padding: 8px 10px;
+  font-weight: 600;
+  color: var(--ink, #1e293b);
+  border-bottom: 1px solid var(--border, #e2e8f0);
+}
+
+.arbeitsplatz__table tbody td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border, #e2e8f0);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arbeitsplatz__table-row {
+  cursor: pointer;
+  transition: background-color 100ms ease;
+}
+
+.arbeitsplatz__table-row:hover {
+  background: var(--ivory-100, #f1f5f9);
+}
+
+.arbeitsplatz__table-row:focus-visible {
+  outline: 2px solid var(--gold, #f59e0b);
+  outline-offset: -2px;
+  background: var(--ivory-100, #f1f5f9);
+}
+
+.arbeitsplatz__table-row--active,
+.arbeitsplatz__table-row--active:hover {
+  background: var(--navy, #1e3a8a);
+  color: var(--on-navy, #dbeafe);
+}
+
+/* --- Rechte Spalte: Empty-State + Programme-Launcher ------------------ */
+
+.arbeitsplatz__launcher-empty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted, #64748b);
+  text-align: center;
+  padding: 24px;
+}
+
+.arbeitsplatz__launcher-empty p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft, #334155);
+  max-width: 22ch;
+}
+
+.arbeitsplatz__launcher {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.arbeitsplatz__mandant-card {
+  padding: 14px 16px;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius, 10px);
+  background: var(--surface-muted, #f1f5f9);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.arbeitsplatz__mandant-card-nr {
+  font-size: 0.78rem;
+  color: var(--ink-soft, #334155);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.arbeitsplatz__mandant-card-name {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--ink, #1e293b);
+  line-height: 1.3;
+}
+
+/* --- Programme-Baum (rechte Spalte, Active-State) --------------------- */
+
+.arbeitsplatz__tree {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.arbeitsplatz__tree-module {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.arbeitsplatz__tree-module-header {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  border-radius: var(--radius-sm, 6px);
+  transition: background-color 120ms ease;
+}
+
+.arbeitsplatz__tree-module-header:hover {
+  background: var(--ivory-100, #f1f5f9);
+}
+
+.arbeitsplatz__tree-module-label {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm, 6px);
+  color: var(--ink, #1e293b);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.2;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.arbeitsplatz__tree-module-label:hover {
+  background: var(--ivory-100, #f1f5f9);
+}
+
+.arbeitsplatz__tree-module-label:focus-visible {
+  outline: 2px solid var(--gold, #f59e0b);
+  outline-offset: 2px;
+}
+
+.arbeitsplatz__tree-module-label svg {
+  flex-shrink: 0;
+  color: var(--ink-soft, #334155);
+}
+
+.arbeitsplatz__tree-chevron-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  min-height: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft, #334155);
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.arbeitsplatz__tree-chevron-btn:hover {
+  background: var(--ivory-100, #f1f5f9);
+  color: var(--ink, #1e293b);
+}
+
+.arbeitsplatz__tree-chevron-btn:focus-visible {
+  outline: 2px solid var(--gold, #f59e0b);
+  outline-offset: 2px;
+}
+
+.arbeitsplatz__tree-sublist {
+  /* Einrückungs-Muster spiegelt AppShell `.shell__nav-sub` (margin-left
+     18px + padding-left 8px) wider → Sub-Links fluchten visuell mit dem
+     Modul-Header-Text (Modul-Icon 16px + gap 10px + padding 12px ≈ 38px
+     vom Tree-Rand → Sub-Text bei 18+8+16 = 42px = 4px tiefer als Modul-
+     Text = sichtbare Hierarchie). */
+  list-style: none;
+  margin: 2px 0 6px 18px;
+  padding: 0 0 0 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  /* Dezente vertikale Hierarchie-Linie am Einzugs-Rand. */
+  border-left: 1px solid var(--border, #e2e8f0);
+}
+
+.arbeitsplatz__tree-sub-link {
+  display: block;
+  padding: 6px 10px 6px 16px;
+  border-radius: var(--radius-sm, 6px);
+  color: var(--ink-soft, #334155);
+  text-decoration: none;
+  font-size: 0.88rem;
+  line-height: 1.3;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.arbeitsplatz__tree-sub-link:hover {
+  background: var(--ivory-100, #f1f5f9);
+  color: var(--ink, #1e293b);
+}
+
+.arbeitsplatz__tree-sub-link:focus-visible {
+  outline: 2px solid var(--gold, #f59e0b);
+  outline-offset: 2px;
+  background: var(--ivory-100, #f1f5f9);
+  color: var(--ink, #1e293b);
+}
+
+/*
+ * Unter 1024 px: Grid behält 3 Spalten, Container scrollt horizontal.
+ * Fixe Mindestbreiten garantieren, dass kein Spalten-Überlapp entsteht.
+ * Summe 240 + 520 + 320 = 1080 px > 1024 px → immer horizontaler Scroll
+ * am Container, nicht an der Seite.
+ */
+@media (max-width: 1024px) {
+  .arbeitsplatz {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .arbeitsplatz__grid {
+    grid-template-columns: 240px 520px 320px;
+    width: max-content;
+    min-width: 100%;
+  }
+}

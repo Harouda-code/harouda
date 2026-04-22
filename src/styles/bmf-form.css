@@ -1,0 +1,244 @@
+/* BMF-style form aesthetic.
+   Reusable wrapper that mimics the visual structure of German tax forms:
+   thin gray borders, gray section bands, left Kennzahl-column, monospace
+   right-aligned amounts. NOT an official Vordruck (§ 150 AO) — the stamp
+   makes that explicit on every rendering. */
+.bmf-form {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #c3c8d1;
+  border-radius: var(--radius);
+  padding: 24px 20px 18px;
+  margin-top: 16px;
+  max-width: 880px;
+}
+
+.bmf-form__stamp {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  padding: 3px 8px;
+  border: 1.2px solid #c76b3f;
+  color: #c76b3f;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: #fff;
+  user-select: none;
+}
+
+.bmf-form__title {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #15233d;
+  margin: 0 0 2px;
+}
+
+.bmf-form__subtitle {
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+
+.bmf-form__section {
+  margin-top: 12px;
+  border: 1px solid #c3c8d1;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bmf-form__section-head {
+  background: #eef1f6;
+  padding: 5px 10px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #15233d;
+  border-bottom: 1px solid #c3c8d1;
+  letter-spacing: 0.01em;
+}
+
+.bmf-form__section-head-total {
+  float: right;
+  font-family: var(--font-mono);
+  color: #15233d;
+}
+
+.bmf-form__section-desc {
+  padding: 6px 10px;
+  background: #f7f9fc;
+  border-bottom: 1px solid #dee2ea;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+.bmf-form__row {
+  display: grid;
+  grid-template-columns: 48px 1fr 160px;
+  align-items: stretch;
+  border-bottom: 1px solid #dee2ea;
+  min-height: 30px;
+}
+
+.bmf-form__row:last-child {
+  border-bottom: none;
+}
+
+.bmf-form__kz-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f8fd;
+  border-right: 1px solid #dee2ea;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #15233d;
+  letter-spacing: 0.04em;
+}
+
+.bmf-form__kz-cell--empty {
+  background: #fafbfd;
+}
+
+.bmf-form__label {
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 0.86rem;
+  color: var(--ink);
+}
+
+.bmf-form__label-hint {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.bmf-form__amount {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 4px 10px;
+  border-left: 1px solid #dee2ea;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.bmf-form__amount-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: right;
+  padding: 4px 0;
+  outline: none;
+}
+
+.bmf-form__amount-input:focus {
+  background: #fff9ee;
+  box-shadow: inset 0 0 0 1.5px #c9a84a;
+}
+
+.bmf-form__row--unsupported .bmf-form__label,
+.bmf-form__row--unsupported .bmf-form__kz-cell,
+.bmf-form__row--unsupported .bmf-form__amount {
+  color: #8a8f99;
+  font-weight: 500;
+}
+
+.bmf-form__row--subtotal {
+  background: #f7f9fc;
+}
+
+.bmf-form__row--subtotal .bmf-form__label,
+.bmf-form__row--subtotal .bmf-form__amount {
+  font-style: italic;
+}
+
+.bmf-form__result {
+  display: grid;
+  grid-template-columns: 48px 1fr 200px;
+  align-items: center;
+  margin-top: 12px;
+  background: #15233d;
+  color: #fff;
+  border-radius: 3px;
+  padding: 12px 0;
+}
+
+.bmf-form__result--erstattung,
+.bmf-form__result--gewinn {
+  background: #1f7a4d;
+}
+
+.bmf-form__result--verlust {
+  background: #8a2c2c;
+}
+
+.bmf-form__result-kz {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-align: center;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.bmf-form__result-label {
+  padding: 0 14px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+.bmf-form__result-amount {
+  padding: 0 14px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.18rem;
+  text-align: right;
+}
+
+.bmf-form__signatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 28px;
+  padding-top: 4px;
+}
+
+.bmf-form__signature {
+  border-top: 1px solid #6a6f7a;
+  padding-top: 4px;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.bmf-form__footnotes {
+  margin-top: 18px;
+  padding-top: 10px;
+  border-top: 1px solid #dee2ea;
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.bmf-form__footnotes p {
+  margin: 0 0 4px;
+}
+
+.bmf-form__footnotes strong {
+  color: #15233d;
+}

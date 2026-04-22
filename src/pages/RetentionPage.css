@@ -1,0 +1,80 @@
+.retention {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.retention__head h1 {
+  margin: 8px 0 4px;
+  font-size: clamp(1.5rem, 2vw + 0.6rem, 2rem);
+}
+
+.retention__head p {
+  margin: 0;
+  color: var(--ink-soft);
+  max-width: 720px;
+}
+
+.retention__rules {
+  padding: 16px 20px;
+}
+
+.retention__rules h2 {
+  margin: 0 0 10px;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.retention__group {
+  padding: 14px 16px;
+  border-left: 3px solid var(--ivory-200);
+}
+
+.retention__group > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.retention__group > header h2 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.retention__count {
+  background: var(--ivory-100);
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+.retention__group.is-expired {
+  border-left-color: var(--danger);
+  background: rgba(220, 38, 38, 0.04);
+}
+
+.retention__group.is-red {
+  border-left-color: var(--danger);
+  background: rgba(220, 38, 38, 0.02);
+}
+
+.retention__group.is-amber {
+  border-left-color: var(--warning);
+}
+
+.retention__group.is-yellow {
+  border-left-color: var(--gold);
+}
+
+.retention__group.is-ok {
+  border-left-color: var(--success);
+}

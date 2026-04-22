@@ -1,0 +1,267 @@
+.earchiv {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.earchiv__badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.earchiv__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: var(--ivory-100);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.76rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.earchiv__badge.is-ok {
+  background: rgba(5, 150, 105, 0.1);
+  border-color: rgba(5, 150, 105, 0.4);
+  color: var(--success);
+}
+
+.earchiv__toolbar {
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.earchiv__empty {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+}
+
+.earchiv__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.earchiv__table th,
+.earchiv__table td {
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.earchiv__table th {
+  background: var(--ivory-100);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.earchiv__table td.is-num,
+.earchiv__table th.is-num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.earchiv__file {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.earchiv__muted {
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.earchiv__fmt {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: var(--ivory-100);
+  color: var(--ink-soft);
+}
+
+.earchiv__fmt.is-cii {
+  background: rgba(30, 58, 138, 0.12);
+  color: var(--navy);
+}
+
+.earchiv__fmt.is-ubl {
+  background: rgba(245, 158, 11, 0.16);
+  color: var(--gold-700);
+}
+
+.earchiv__fmt.is-xrechnung {
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--success);
+}
+
+.earchiv__retention {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.82rem;
+}
+
+.earchiv__retention.is-far {
+  color: var(--ink);
+}
+
+.earchiv__retention.is-mid {
+  color: var(--ink);
+}
+
+.earchiv__retention.is-soon {
+  color: var(--gold-700);
+}
+
+.earchiv__retention.is-expired {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.earchiv__sha {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.earchiv__sha code {
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.earchiv__actions {
+  display: flex;
+  gap: 4px;
+}
+
+/* Modal */
+.earchiv__modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 80;
+  padding: 20px;
+}
+
+.earchiv__modal {
+  width: min(1200px, 100%);
+  height: min(85vh, 900px);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.earchiv__modal-head {
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.earchiv__modal-head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--navy);
+}
+
+.earchiv__modal-head p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.earchiv__modal-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.earchiv__modal-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  overflow: hidden;
+  min-height: 0;
+}
+
+@media (min-width: 900px) {
+  .earchiv__modal-body {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.earchiv__preview-pdf,
+.earchiv__preview-xml {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.earchiv__preview-pdf h3,
+.earchiv__preview-xml h3 {
+  margin: 0;
+  padding: 10px 16px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  background: var(--ivory-100);
+  border-bottom: 1px solid var(--border);
+}
+
+.earchiv__preview-xml {
+  border-left: 1px solid var(--border);
+}
+
+.earchiv__preview-xml pre {
+  margin: 0;
+  padding: 12px 16px;
+  overflow: auto;
+  font-size: 0.78rem;
+  font-family: var(--font-mono, monospace);
+  color: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-word;
+  flex: 1;
+}
+
+.earchiv__no-pdf {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+}

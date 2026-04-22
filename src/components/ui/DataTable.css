@@ -1,0 +1,129 @@
+.dt {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dt__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.dt__search {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  flex: 1;
+  min-width: 220px;
+  color: var(--muted);
+}
+
+.dt__search input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.dt__count {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.dt__count strong {
+  color: var(--navy);
+}
+
+.dt__empty {
+  margin: 0;
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+  background: var(--ivory-100);
+  border-radius: var(--radius);
+}
+
+.dt__scroll {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.dt__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: var(--surface);
+}
+
+.dt__th {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 700;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.dt__th.is-num {
+  text-align: right;
+}
+
+.dt__th.is-sortable {
+  cursor: pointer;
+}
+
+.dt__th.is-sortable:hover {
+  color: var(--navy);
+}
+
+.dt__th-label {
+  display: inline-block;
+}
+
+.dt__sort-icon {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-left: 6px;
+  color: var(--muted);
+  transition: color var(--duration) var(--ease);
+}
+
+.dt__th.is-sortable:hover .dt__sort-icon {
+  color: var(--navy);
+}
+
+.dt__table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink);
+  vertical-align: top;
+}
+
+.dt__table td.is-num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.dt__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dt__table tbody tr:hover {
+  background: var(--ivory-100);
+}

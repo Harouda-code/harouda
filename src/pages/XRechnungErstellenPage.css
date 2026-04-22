@@ -1,0 +1,170 @@
+.xrechnung-new {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.xrechnung-new__section {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.xrechnung-new__section h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--navy);
+}
+
+.xrechnung-new__parties {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+@media (min-width: 960px) {
+  .xrechnung-new__parties {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.xrechnung-new__lines-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.xrechnung-new__lines {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.xrechnung-new__lines th,
+.xrechnung-new__lines td {
+  padding: 6px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.xrechnung-new__lines th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.xrechnung-new__lines th.is-num,
+.xrechnung-new__lines td.is-num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.xrechnung-new__cell {
+  width: 100%;
+  padding: 6px 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  color: var(--ink);
+}
+
+.xrechnung-new__cell:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+.xrechnung-new__cell.is-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.xrechnung-new__bottom {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+@media (min-width: 960px) {
+  .xrechnung-new__bottom {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.xrechnung-new__summary {
+  background: var(--ivory-100);
+}
+
+.xrechnung-new__summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.xrechnung-new__summary-list > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.xrechnung-new__summary-list dt {
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+}
+
+.xrechnung-new__summary-list dd {
+  margin: 0;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.xrechnung-new__total {
+  border-top: 2px solid var(--navy) !important;
+  border-bottom: none !important;
+  padding-top: 10px !important;
+  margin-top: 4px;
+}
+
+.xrechnung-new__total dt,
+.xrechnung-new__total dd {
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+.xrechnung-new__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 10px;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+}
+
+.xrechnung-new__note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--gold-700);
+}

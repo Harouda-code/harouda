@@ -1,0 +1,109 @@
+.vergleich {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.vergleich__hinweis {
+  background: var(--ivory-100);
+}
+
+.vergleich__hinweis ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: var(--ink);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.vergleich__section {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vergleich__section h2 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--navy);
+}
+
+.vergleich__table-wrap {
+  overflow-x: auto;
+}
+
+.vergleich__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.vergleich__table th,
+.vergleich__table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.vergleich__table th {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.vergleich__merkmal {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.vergleich__cell {
+  font-size: 0.88rem;
+}
+
+.vergleich__state {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.vergleich__cell.is-yes .vergleich__state {
+  color: var(--success);
+}
+
+.vergleich__cell.is-no .vergleich__state {
+  color: var(--danger);
+}
+
+.vergleich__cell.is-partial .vergleich__state {
+  color: var(--gold-700);
+}
+
+.vergleich__cell.is-unknown .vergleich__state {
+  color: var(--muted);
+}
+
+.vergleich__note {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.vergleich__limits {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}

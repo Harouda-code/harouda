@@ -1,0 +1,64 @@
+.euer__section {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.euer__section > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.euer__section > header h2 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.euer__table tbody tr {
+  cursor: pointer;
+}
+
+.euer__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  background: transparent;
+  color: var(--navy);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.euer__detail td {
+  padding: 0 !important;
+  background: var(--ivory-100);
+}
+
+.euer__sources {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.euer__sources td {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.euer__sources tr:last-child td {
+  border-bottom: none;
+}
+
+.euer__sources td.is-num {
+  text-align: right;
+  white-space: nowrap;
+}

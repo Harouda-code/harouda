@@ -1,0 +1,17 @@
+.ro-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(100, 116, 139, 0.1);
+  border-left: 3px solid var(--muted);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.ro-banner svg {
+  color: var(--muted);
+  flex-shrink: 0;
+}

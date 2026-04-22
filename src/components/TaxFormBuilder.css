@@ -1,0 +1,84 @@
+.taxform {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.taxform__section {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.taxform__section > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.taxform__section > header h2 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.taxform__section > header p {
+  margin: 4px 0 0;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.taxform__section > header strong {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+.anlage-v__totals {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  margin: 8px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-strong);
+}
+
+.anlage-v__totals > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-end;
+  min-width: 140px;
+}
+
+.anlage-v__totals dt {
+  font-size: 0.76rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.anlage-v__totals dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.anlage-v__totals .is-total dt {
+  color: var(--navy);
+}
+
+.anlage-v__totals .is-total dd {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--navy);
+  font-weight: 700;
+}

@@ -1,0 +1,91 @@
+.rcpt {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rcpt__kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.rcpt__kpi {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rcpt__kpi-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.rcpt__kpi-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.rcpt__list {
+  padding: 0;
+  overflow-x: auto;
+}
+
+.rcpt__list table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.rcpt__list th,
+.rcpt__list td {
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.rcpt__list th {
+  background: var(--ivory-100);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.rcpt__list tr.is-overdue td:first-child {
+  border-left: 3px solid var(--danger);
+}
+
+.rcpt__muted {
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin-top: 2px;
+}
+
+.rcpt__badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.rcpt__actions {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.rcpt__empty {
+  padding: 20px;
+  text-align: center;
+  color: var(--muted);
+}

@@ -1,0 +1,6 @@
+Code;Name;Beschreibung;Aktiv
+KST-VERW;Verwaltung;Geschäftsleitung, Buchhaltung, Empfang;ja
+KST-VERTRIEB;Vertrieb;Außendienst und Kundenbetreuung;ja
+KST-EINKAUF;Einkauf;Beschaffung und Lieferantenmanagement;ja
+KST-PROD;Produktion;Fertigung und Warenausgang;ja
+KST-IT;IT-Services;Rechenzentrum, Lizenzen, Support;ja

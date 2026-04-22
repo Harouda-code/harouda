@@ -1,0 +1,6 @@
+DebitorNr;Name;Rechtsform;Strasse;PLZ;Ort;UstIdNr;Zahlungsziel_Tage
+10001;Beispielhandel Gauss;GmbH;Weserstraße 5;28195;Bremen;DE111000001;30
+10002;Testwerk Riemann;OHG;Lindenallee 42;30159;Hannover;DE111000002;14
+10003;Musterbau Fourier;AG;Hafenweg 18;48155;Münster;DE111000003;30
+10004;Demo Einzelhandel Euler;e.K.;Marktplatz 3;26871;Papenburg;DE111000004;7
+10005;Probe Dienstleistung Leibniz;GbR;Schulstraße 9;49808;Lingen;DE111000005;14

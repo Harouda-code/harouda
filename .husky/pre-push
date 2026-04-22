@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# Block the push if TypeScript or tests fail. Uses --bail so the first failing
+# test exits fast. Skip with `git push --no-verify` only if the user explicitly
+# has a reason (e.g. hotfix with known broken test that's queued for follow-up).
+NODE_OPTIONS="--max-old-space-size=4096" npx tsc --noEmit
+NODE_OPTIONS="--max-old-space-size=4096" npx vitest run --bail=1 --no-coverage

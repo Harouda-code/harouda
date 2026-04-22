@@ -1,0 +1,68 @@
+.skeleton {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    var(--ivory-100) 0%,
+    var(--ivory-200) 50%,
+    var(--ivory-100) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton--line {
+  display: block;
+  height: 12px;
+  min-height: 12px;
+}
+
+.skeleton--block {
+  display: block;
+  height: 100px;
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+.skeleton--circle {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.skeleton-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.skeleton-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 0;
+  width: 100%;
+}
+
+.skeleton-table__row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: var(--ivory-100);
+  }
+}

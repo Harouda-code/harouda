@@ -4,7 +4,7 @@
 Jede Zeile verlinkt zum vollständigen Eintrag.
 
 **Stand:** 2026-04-22, Terminology-Sprint 1
-**FEST-Einträge:** 70
+**FEST-Einträge:** 80
 **DRAFT-Einträge:** 0
 **DEPRECATED-Einträge:** 0
 
@@ -23,6 +23,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Begriff | Status | Datei |
 |---|---|---|
 | Abgabenordnung (AO) | ✅ | [01-grundlagen.md](./01-grundlagen.md#2-abgabenordnung-ao) |
+| Abrechnung durch den Leistungsempfänger → Gutschrift (§ 14 Abs. 2 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#4-gutschrift--14-abs-2-ustg) |
 | Abschlussbuchung → Eröffnungsbuchung / Abschlussbuchung | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#14-eröffnungsbuchung--abschlussbuchung) |
 | ALV → Arbeitslosenversicherung (ALV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#8-arbeitslosenversicherung-alv) |
 | Anfangsbestand → Saldenvortrag | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#15-saldenvortrag) |
@@ -33,10 +34,12 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 
 | Begriff | Status | Datei |
 |---|---|---|
+| B2B-Rechnungspflicht → Wachstumschancengesetz | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#7-wachstumschancengesetz--b2b-rechnungspflicht-ab-2025) |
 | BBG → Beitragsbemessungsgrenze (BBG) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#13-beitragsbemessungsgrenze-bbg) |
 | Beitragsbemessungsgrenze (BBG) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#13-beitragsbemessungsgrenze-bbg) |
 | Beleg | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#17-beleg) |
 | Belegnummer | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#18-belegnummer) |
+| Berichtigungsrechnung → Rechnungsberichtigung / Stornorechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#5-rechnungsberichtigung--stornorechnung) |
 | Betriebsprüfung | ✅ | [01-grundlagen.md](./01-grundlagen.md#7-betriebsprüfung) |
 | Bruttoarbeitsentgelt → Bruttolohn | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#1-bruttolohn) |
 | Bruttogehalt → Bruttolohn | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#1-bruttolohn) |
@@ -54,6 +57,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Debitor / Kreditor | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#9-debitor--kreditor) |
 | DEÜV → DEÜV-Meldeverfahren | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#12-deüv-meldeverfahren) |
 | DEÜV-Meldeverfahren | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#12-deüv-meldeverfahren) |
+| DIN EN 16931 → EN 16931 | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#8-en-16931) |
 | Doppelte Buchführung | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#1-doppelte-buchführung) |
 | DSGVO | ✅ | [01-grundlagen.md](./01-grundlagen.md#9-dsgvo) |
 
@@ -62,14 +66,24 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Begriff | Status | Datei |
 |---|---|---|
 | E-Bilanz | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#15-e-bilanz) |
+| E-Rechnung (Elektronische Rechnung) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#6-e-rechnung-elektronische-rechnung) |
 | Elektronische Lohnsteuer-Abzugsmerkmale → ELStAM | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#11-elstam--elektronische-lohnsteuer-abzugsmerkmale) |
+| Elektronische Rechnung → E-Rechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#6-e-rechnung-elektronische-rechnung) |
 | Elektronische Steuererklärung → ELSTER | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#11-elster--elektronische-steuererklärung) |
 | ELStAM — Elektronische Lohnsteuer-Abzugsmerkmale | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#11-elstam--elektronische-lohnsteuer-abzugsmerkmale) |
 | ELSTER — Elektronische Steuererklärung | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#11-elster--elektronische-steuererklärung) |
+| EN 16931 | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#8-en-16931) |
 | Entgeltabrechnung → Lohnabrechnung / Entgeltabrechnung | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#20-lohnabrechnung--entgeltabrechnung) |
 | ERiC — ELSTER Rich Client | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#12-eric--elster-rich-client) |
 | Eröffnungsbilanz / Schlussbilanz | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#13-eröffnungsbilanz--schlussbilanz) |
 | Eröffnungsbuchung / Abschlussbuchung | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#14-eröffnungsbuchung--abschlussbuchung) |
+| Europäische Rechnungsnorm → EN 16931 | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#8-en-16931) |
+
+## F
+
+| Begriff | Status | Datei |
+|---|---|---|
+| Faktura → Rechnung (§ 14 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#1-rechnung--14-ustg) |
 
 ## G
 
@@ -88,6 +102,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | GoBD | ✅ | [01-grundlagen.md](./01-grundlagen.md#1-gobd) |
 | Grundbuch → Journal | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#10-journal-grundbuch) |
 | GRV → Rentenversicherung (RV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#7-rentenversicherung-rv) |
+| Gutschrift (§ 14 Abs. 2 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#4-gutschrift--14-abs-2-ustg) |
 
 ## H
 
@@ -98,6 +113,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Hebesatz → Gewerbesteuer (GewSt) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#19-gewerbesteuer-gewst) |
 | HGB → Handelsgesetzbuch | ✅ | [01-grundlagen.md](./01-grundlagen.md#3-handelsgesetzbuch-hgb) |
 | HGB-Taxonomie → Kern-Taxonomie | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#17-kern-taxonomie) |
+| Hybride E-Rechnung → ZUGFeRD | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#10-zugferd) |
 
 ## J
 
@@ -112,10 +128,12 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Begriff | Status | Datei |
 |---|---|---|
 | Kanzlei | ✅ | [01-grundlagen.md](./01-grundlagen.md#5-kanzlei) |
+| Kern-Datenmodell → EN 16931 | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#8-en-16931) |
 | Kern-Taxonomie | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#17-kern-taxonomie) |
 | Kerntaxonomie → Kern-Taxonomie | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#17-kern-taxonomie) |
 | Kirchensteuer (KiSt) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#3-kirchensteuer-kist) |
 | KiSt → Kirchensteuer (KiSt) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#3-kirchensteuer-kist) |
+| Kleinbetragsrechnung (§ 33 UStDV) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#3-kleinbetragsrechnung--33-ustdv) |
 | Kleinunternehmer (§ 19 UStG) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#9-kleinunternehmer-§-19-ustg) |
 | Konto (Sachkonto) | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#3-konto-sachkonto) |
 | Kontenklasse → Kontenrahmen-Klasse | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#16-kontenrahmen-klasse) |
@@ -123,6 +141,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Kontenrahmen-Klasse | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#16-kontenrahmen-klasse) |
 | Körperschaftsteuer (KSt) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#18-körperschaftsteuer-kst) |
 | Körperschaftsteuergesetz → Körperschaftsteuer (KSt) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#18-körperschaftsteuer-kst) |
+| Korrekturrechnung → Rechnungsberichtigung / Stornorechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#5-rechnungsberichtigung--stornorechnung) |
 | Krankenversicherung (KV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#6-krankenversicherung-kv) |
 | Kreditor → Debitor / Kreditor | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#9-debitor--kreditor) |
 | KSt → Körperschaftsteuer (KSt) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#18-körperschaftsteuer-kst) |
@@ -165,12 +184,19 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Pauschalversteuerung → Pauschsteuer (§§ 40–40b EStG) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#17-pauschsteuer--40--40b-estg) |
 | Pauschsteuer (§§ 40–40b EStG) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#17-pauschsteuer--40--40b-estg) |
 | Pflegeversicherung (PV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#9-pflegeversicherung-pv) |
+| Pflichtangaben einer Rechnung (§ 14 Abs. 4 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#2-pflichtangaben-einer-rechnung--14-abs-4-ustg) |
+| Pflichtbestandteile → Pflichtangaben einer Rechnung (§ 14 Abs. 4 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#2-pflichtangaben-einer-rechnung--14-abs-4-ustg) |
 | PV → Pflegeversicherung (PV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#9-pflegeversicherung-pv) |
 
 ## R
 
 | Begriff | Status | Datei |
 |---|---|---|
+| Rechnung (§ 14 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#1-rechnung--14-ustg) |
+| Rechnungsberichtigung / Stornorechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#5-rechnungsberichtigung--stornorechnung) |
+| Rechnungsbestandteile → Pflichtangaben einer Rechnung (§ 14 Abs. 4 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#2-pflichtangaben-einer-rechnung--14-abs-4-ustg) |
+| Rechnungskorrektur → Rechnungsberichtigung / Stornorechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#5-rechnungsberichtigung--stornorechnung) |
+| Rechnungspflichtangaben → Pflichtangaben einer Rechnung (§ 14 Abs. 4 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#2-pflichtangaben-einer-rechnung--14-abs-4-ustg) |
 | Rentenversicherung (RV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#7-rentenversicherung-rv) |
 | Rentenversicherungsnummer → Versicherungsnummer (VSNR) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#19-versicherungsnummer-vsnr) |
 | Reverse-Charge-Verfahren (§ 13b UStG) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#10-reverse-charge-verfahren-§-13b-ustg) |
@@ -185,6 +211,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Saldenvortrag | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#15-saldenvortrag) |
 | Saldo | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#12-saldo) |
 | Schlussbilanz → Eröffnungsbilanz / Schlussbilanz | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#13-eröffnungsbilanz--schlussbilanz) |
+| Self-Billing → Gutschrift (§ 14 Abs. 2 UStG) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#4-gutschrift--14-abs-2-ustg) |
 | SKR03 | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#5-skr03) |
 | SKR04 | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#6-skr04) |
 | Soli → Solidaritätszuschlag (SolZ) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#4-solidaritätszuschlag-solz) |
@@ -199,6 +226,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Steuernummer | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#14-steuernummer) |
 | Steuerschuldnerschaft des Leistungsempfängers → Reverse-Charge | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#10-reverse-charge-verfahren-§-13b-ustg) |
 | StB → Steuerberater | ✅ | [01-grundlagen.md](./01-grundlagen.md#6-steuerberater-stb) |
+| Stornorechnung → Rechnungsberichtigung / Stornorechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#5-rechnungsberichtigung--stornorechnung) |
 | SV → Sozialversicherung (SV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#5-sozialversicherung-sv) |
 | SV-Nummer → Versicherungsnummer (VSNR) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#19-versicherungsnummer-vsnr) |
 
@@ -238,19 +266,23 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 
 | Begriff | Status | Datei |
 |---|---|---|
+| Wachstumschancengesetz — B2B-Rechnungspflicht ab 2025 | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#7-wachstumschancengesetz--b2b-rechnungspflicht-ab-2025) |
 | Wirtschaftsjahr / Geschäftsjahr | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#20-wirtschaftsjahr--geschäftsjahr) |
+| WtChancenG → Wachstumschancengesetz | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#7-wachstumschancengesetz--b2b-rechnungspflicht-ab-2025) |
 
 ## X
 
 | Begriff | Status | Datei |
 |---|---|---|
 | XBRL | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#16-xbrl) |
+| XRechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#9-xrechnung) |
 
 ## Z
 
 | Begriff | Status | Datei |
 |---|---|---|
 | ZM — Zusammenfassende Meldung | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#8-zm-zusammenfassende-meldung) |
+| ZUGFeRD | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#10-zugferd) |
 | Zusammenfassende Meldung → ZM | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#8-zm-zusammenfassende-meldung) |
 
 ---
@@ -264,7 +296,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | 03-lohn-sv.md | 20 | ✅ alle FEST (Batch 1 Lohnabrechnung-Komponenten + Batch 2 ELStAM/DEÜV/Grenzwerte/Sonderfälle/Output) |
 | 04-steuer-meldungen.md | 20 | ✅ alle FEST (Batch 1 USt-Kern + Batch 2 ELSTER/E-Bilanz/Ertragsteuern) |
 | 05-jahresabschluss.md | 0 | geplant |
-| 06-belege-rechnung.md | 0 | geplant |
+| 06-belege-rechnung.md | 10 | ✅ alle FEST (Batch 1 Rechnung/Pflichtangaben/Gutschrift/E-Rechnung/XRechnung/ZUGFeRD) |
 | 07-anlagen-inventur.md | 0 | geplant |
 | 08-technik-architektur.md | 0 | geplant |
 | 09-dsgvo-compliance.md | 0 | geplant |
@@ -282,3 +314,4 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | 2026-04-22 | Terminology-Sprint 1 | FEST-Batch 2 für `04-steuer-meldungen.md` (ELSTER + E-Bilanz + Ertragsteuern) | 10 |
 | 2026-04-22 | Terminology-Sprint 1 | FEST-Batch 1 für `03-lohn-sv.md` (Lohnabrechnung-Komponenten) | 10 |
 | 2026-04-22 | Terminology-Sprint 1 | FEST-Batch 2 für `03-lohn-sv.md` (ELStAM, DEÜV, BBG/JAEG, Mini-/Midijob, Pauschsteuer, Umlagen, VSNR, Lohnabrechnung) | 10 |
+| 2026-04-22 | Terminology-Sprint 1 | FEST-Batch 1 für `06-belege-rechnung.md` (Rechnung, Pflichtangaben, Kleinbetrag, Gutschrift, Stornorechnung, E-Rechnung, Wachstumschancengesetz, EN 16931, XRechnung, ZUGFeRD) | 10 |

@@ -743,7 +743,7 @@ Die **deutsche CIUS** (Core Invoice Usage Specification) der europäischen Norm 
 |---|---|
 | **Deutsch (primär)** | ZUGFeRD |
 | **Synonyme (DE)** | „Zentraler User Guide des Forums elektronische Rechnung Deutschland" (Langform, wenig verwendet), hybride E-Rechnung (funktionale Beschreibung) |
-| **Arabisch** | الصيغة الهجينة الألمانية للفاتورة الإلكترونية (ZUGFeRD: ملف PDF/A-3 يحتوي بداخله على XML مُهيكَل وفق EN 16931 بتركيبة CII؛ يجمع بين قابلية القراءة البشرية والمعالجة الآلية في ملف واحد؛ تديره FeRD بالتعاون مع FNFE-MPE الفرنسي الذي يصدر الصيغة المكافئة Factur-X؛ يحتوي على سبعة مستويات — Profile — لا تُعتبر منها فاتورة إلكترونية قانونية وفق § 14 UStG الجديد إلا من مستوى Profil EN 16931 فما فوق) |
+| **Arabisch** | الصيغة الهجينة الألمانية للفاتورة الإلكترونية (ZUGFeRD: ملف PDF/A-3 يحتوي بداخله على XML مُهيكَل وفق EN 16931 بتركيبة CII؛ يجمع بين قابلية القراءة البشرية والمعالجة الآلية في ملف واحد؛ تديره FeRD بالتعاون مع FNFE-MPE الفرنسي الذي يصدر الصيغة المكافئة Factur-X المتطابقة بنيوياً مع ZUGFeRD 2.x؛ يحتوي على سبعة مستويات — Profile — لا تُعتبر منها فاتورة إلكترونية قانونية وفق § 14 UStG الجديد إلا من مستوى Profil EN 16931 فما فوق — وهو المسمّى الرسمي في ZUGFeRD 2.x، والمعروف تاريخياً بـ «COMFORT» في ZUGFeRD 1.0) |
 | **Englisch (Code-Kontext)** | `zugferd`, `hybridInvoice` |
 | **Kategorie** | Technisches Format / Hybrid-Format |
 | **Status** | FEST |

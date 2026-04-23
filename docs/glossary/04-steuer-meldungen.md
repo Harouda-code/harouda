@@ -461,7 +461,7 @@ Monatliche oder quartalsweise Steueranmeldung, mit der Unternehmer dem Finanzamt
 |---|---|
 | **Deutsch (primär)** | Zusammenfassende Meldung |
 | **Synonyme (DE)** | ZM (Abkürzung, im Code und Text bevorzugt) |
-| **Arabisch** | الإقرار التجميعي للتوريدات داخل الاتحاد الأوروبي (تقرير يُقدَّم إلى BZSt — وليس إلى مصلحة الضرائب المحلية — يسرد كل التوريدات والخدمات التي قدَّمتها الشركة إلى عملاء في دول أوروبية أخرى، مع ذكر رقم USt-IdNr لكل عميل والمبلغ الصافي) |
+| **Arabisch** | الإقرار التجميعي للتوريدات داخل الاتحاد الأوروبي (تقرير يُقدَّم إلى BZSt — وليس إلى مصلحة الضرائب المحلية — يسرد كل التوريدات والخدمات التي قدَّمتها الشركة إلى عملاء في دول أوروبية أخرى، مع ذكر رقم USt-IdNr لكل عميل والمبلغ الصافي؛ يُتيح للسلطات الأوروبية المطابقة المتقاطعة ومكافحة التهرب الضريبي) |
 | **Englisch (Code-Kontext)** | `ZM` / `ZusammenfassendeMeldung`; konzeptuell EC Sales List / Recapitulative Statement |
 | **Kategorie** | Rechtsbegriff / Steueranmeldung |
 | **Status** | FEST |

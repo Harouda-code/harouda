@@ -34,7 +34,7 @@ Eröffnungs- / Schlussbilanz, Wirtschaftsjahr) und
 |---|---|
 | **Deutsch (primär)** | Jahresabschluss |
 | **Synonyme (DE)** | JA (interne Abkürzung, nicht amtlich), Bilanzabschluss (umgangssprachlich und unscharf — Bilanz ist nur ein Teil des JA) |
-| **Arabisch** | الحسابات الختامية السنوية (التقرير المحاسبي السنوي المُلزِم قانوناً لكل تاجر بموجب §§ 242 ff. HGB ولكل مُكلَّف بالدفاتر المنتظمة بموجب § 140 AO؛ يتكون لزاماً من Bilanz و Gewinn- und Verlustrechnung، ويُضاف إليه عند الشركات الرأسمالية KapG كلٌّ من Anhang و — عند الشركات المتوسطة والكبيرة — Lagebericht؛ يُعرَض بتاريخ قطع Bilanzstichtag — عادةً 31.12 — ويجب إيداعه لدى Unternehmensregister خلال 12 شهراً وفق § 325 HGB، ويخضع في نفس الوقت لمبدأ الازدواجية بين Handelsbilanz و Steuerbilanz مرتبطَين بـ Maßgeblichkeitsprinzip) |
+| **Arabisch** | الحسابات الختامية السنوية (التقرير المحاسبي السنوي الإلزامي لكل ملزم بمسك الدفاتر — §§ 242 ff. HGB للتجار و § 140 AO للمكلَّفين ضريبياً؛ يتكون من Bilanz و Gewinn- und Verlustrechnung، ويُضاف Anhang للشركات الرأسمالية KapG و Lagebericht للشركات المتوسطة والكبيرة؛ يُعدّ بتاريخ Bilanzstichtag — عادةً 31.12 — ويُودَع لدى Unternehmensregister خلال 12 شهراً وفق § 325 HGB؛ يخضع لثنائية Handelsbilanz/Steuerbilanz المحكومة بـ Maßgeblichkeitsprinzip) |
 | **Englisch (Code-Kontext)** | `annualFinancialStatement`, `yearEndClosing` |
 | **Kategorie** | Rechtsbegriff / Dokumenten-Set |
 | **Status** | FEST |
@@ -390,7 +390,7 @@ Schriftlicher Ergänzungs- und Erläuterungsteil des Jahresabschlusses, der **Bi
 |---|---|
 | **Deutsch (primär)** | Lagebericht |
 | **Synonyme (DE)** | Management Report (englisch, IFRS-Kontext), Geschäftsbericht (weiter gefasst — umfasst typischerweise JA + Anhang + Lagebericht + freiwillige Inhalte) |
-| **Arabisch** | تقرير الوضع الإداري السنوي (وثيقة مكمّلة للحسابات الختامية لكنها ليست جزءاً منها قانونياً وفق § 242 HGB؛ تُعِدّها الشركات الرأسمالية المتوسطة والكبيرة فقط وفق § 264 Abs. 1 HGB مع § 267 HGB؛ تتناول سرداً مفصلاً لمسار الأعمال وموقف المنشأة وتضم تقرير الفرص والمخاطر ونظرة مستقبلية — Prognosebericht — ومنذ CSR-RUG عام 2017 أصبح لبعض المنشآت الكبيرة جداً الإفصاح غير المالي Nichtfinanzielle Erklärung إلزامياً؛ يُقدَّم مع الحسابات الختامية للتدقيق Prüfung ويُنشَر مع الحسابات في Unternehmensregister) |
+| **Arabisch** | تقرير الوضع الإداري السنوي (وثيقة مكمّلة للحسابات الختامية لا جزء منها وفق § 242 HGB؛ إلزامي للشركات الرأسمالية KapG المتوسطة والكبيرة وفق § 264 Abs. 1 HGB مع § 267 HGB؛ يغطي مسار الأعمال وموقف المنشأة وتقرير الفرص والمخاطر ونظرة مستقبلية Prognosebericht؛ ومنذ CSR-RUG 2017 يُلزَم كبار المنشآت بالإفصاح غير المالي Nichtfinanzielle Erklärung؛ يُقدَّم للتدقيق Prüfung ويُنشَر في Unternehmensregister) |
 | **Englisch (Code-Kontext)** | `managementReport`, `lagebericht` (Fachbegriff unübersetzt) |
 | **Kategorie** | Rechtsbegriff / Begleit-Dokument |
 | **Status** | FEST |
@@ -468,7 +468,7 @@ Erzählender Bericht über **Verlauf und Lage** des Geschäftsjahres, der den Ja
 |---|---|
 | **Deutsch (primär)** | Maßgeblichkeitsprinzip |
 | **Synonyme (DE)** | Maßgeblichkeit der Handelsbilanz für die Steuerbilanz, Maßgeblichkeitsgrundsatz, (aufgehoben:) umgekehrte Maßgeblichkeit |
-| **Arabisch** | مبدأ مرجعية الميزانية التجارية للميزانية الضريبية (المبدأ الجوهري المُنظِّم للعلاقة بين Handelsbilanz و Steuerbilanz في ألمانيا وفق § 5 Abs. 1 EStG؛ يُقرر أن الأصل هو اعتماد الأصول والمطلوبات كما وردت في الميزانية التجارية HGB كأساس لتحديد الربح الخاضع للضريبة، ما لم يُوجب النص الضريبي غير ذلك أو يسمح بممارسة خيار ضريبي مستقل؛ ألغى قانون BilMoG عام 2009 ما كان يُعرف بـ umgekehrte Maßgeblichkeit الذي كان يُجبر التاجر على عكس الخيارات الضريبية في ميزانيته التجارية، فأصبحت الخيارات الضريبية قابلة للممارسة بشكل مستقل) |
+| **Arabisch** | مبدأ مرجعية الميزانية التجارية للميزانية الضريبية (المبدأ المُنظِّم للعلاقة بين Handelsbilanz و Steuerbilanz وفق § 5 Abs. 1 EStG؛ تُعتمد أصول ومطلوبات الميزانية التجارية أساساً للربح الضريبي، ما لم يُوجب النص الضريبي غير ذلك أو يُجَز خيار ضريبي مستقل؛ ألغى BilMoG 2009 ما كان يُعرف بـ umgekehrte Maßgeblichkeit — إجبار عكس الخيارات الضريبية في الميزانية التجارية — فأصبحت الخيارات الضريبية قابلة للممارسة مستقلةً) |
 | **Englisch (Code-Kontext)** | `authoritativenessPrinciple`, `hb_to_sb_linkage` (Code-Kontext) — kein gängiger englischer Fachterminus |
 | **Kategorie** | Rechtsbegriff / Prinzip |
 | **Status** | FEST |
@@ -644,7 +644,7 @@ Bilanz nach den Regeln des **Handelsgesetzbuchs** (§§ 238 ff. HGB), aufgestell
 |---|---|
 | **Deutsch (primär)** | Steuerbilanz |
 | **Synonyme (DE)** | SB (Abkürzung, bevorzugt im Code), steuerliche Bilanz, Steuerliche Gewinnermittlung i. S. v. § 4 Abs. 1 EStG (funktional) |
-| **Arabisch** | الميزانية الضريبية الألمانية (الميزانية التي تُحدَّد على أساسها القاعدة الضريبية لضرائب الدخل EStG والشركات KStG والتجارة البلدية GewStG؛ تبدأ من Handelsbilanz وفق Maßgeblichkeitsprinzip § 5 Abs. 1 EStG ثم تنحرف عنها فقط بالقدر الذي تفرضه الأحكام الضريبية الإلزامية — كحظر Drohverlustrückstellungen وفق § 5 Abs. 4a EStG — أو تجيزه الخيارات الضريبية المستقلة؛ تُنقَل إلكترونياً إلى مصلحة الضرائب عبر E-Bilanz وفق § 5b EStG مع طريقة إعداد إما كميزانية ضريبية مستقلة أو كتسوية Überleitungsrechnung للميزانية التجارية وفق § 60 Abs. 2 EStDV) |
+| **Arabisch** | الميزانية الضريبية الألمانية (الميزانية التي تُحدَّد على أساسها القاعدة الضريبية لـ EStG و KStG و GewStG؛ تُشتَق من Handelsbilanz وفق Maßgeblichkeitsprinzip § 5 Abs. 1 EStG، وتنحرف فقط بقدر ما تفرضه الأحكام الضريبية الإلزامية — كحظر Drohverlustrückstellungen وفق § 5 Abs. 4a EStG — أو تجيزه الخيارات الضريبية المستقلة؛ تُرسَل إلكترونياً كـ E-Bilanz وفق § 5b EStG، إما كميزانية مستقلة أو كـ Überleitungsrechnung للميزانية التجارية وفق § 60 Abs. 2 EStDV) |
 | **Englisch (Code-Kontext)** | `taxBalance`, `steuerbilanz` (Fachterminus unübersetzt) |
 | **Kategorie** | Rechtsbegriff / Bilanz-Ausprägung |
 | **Status** | FEST |
@@ -736,7 +736,7 @@ Bilanz zur Ermittlung des **steuerlichen Gewinns** als Bemessungsgrundlage für 
 |---|---|
 | **Deutsch (primär)** | Rückstellungen |
 | **Synonyme (DE)** | (keine deutschen Synonyme; Abgrenzung zu „Rücklagen" und „Verbindlichkeiten" kritisch) |
-| **Arabisch** | مخصصات الالتزامات غير المؤكدة (بنود سلبية في الميزانية تُشكِّل التزامات محتملة أو مؤكدة الوجود لكن غير مُحدَّدة القيمة أو التوقيت، وفق § 249 HGB؛ إلزامية التكوين وفق § 252 Abs. 1 Nr. 4 HGB احتراماً لمبدأ الحيطة Vorsichtsprinzip؛ تشمل مخصصات الالتزامات غير المؤكدة Verbindlichkeitsrückstellungen ومخصصات الخسائر المتوقعة من العقود المعلقة Drohverlustrückstellungen وبعض مخصصات الإنفاق Aufwandsrückstellungen المحدودة قانونياً؛ تقع نقطة الاحتكاك الأكبر بين Handelsbilanz و Steuerbilanz هنا — إذ يحظر § 5 Abs. 4a EStG مخصصات الخسائر المتوقعة ضريبياً ويُحدد § 6a EStG قواعد خاصة لمخصصات المعاشات) |
+| **Arabisch** | مخصصات الالتزامات غير المؤكدة (بنود سلبية لالتزامات محتملة أو مؤكدة الوجود لكن غير محددة القيمة أو التوقيت، وفق § 249 HGB؛ إلزامية التكوين احتراماً لمبدأ الحيطة Vorsichtsprinzip وفق § 252 Abs. 1 Nr. 4 HGB؛ ثلاثة أنواع: Verbindlichkeitsrückstellungen للالتزامات تجاه الغير، و Drohverlustrückstellungen للخسائر من العقود المعلقة، و Aufwandsrückstellungen المحدودة قانونياً؛ نقطة احتكاك رئيسية مع Steuerbilanz: يحظر § 5 Abs. 4a EStG Drohverluste ضريبياً، ويُحدد § 6a EStG قواعد المعاشات) |
 | **Englisch (Code-Kontext)** | `provisions`, `accruals` (Anglizismus, unscharf; IFRS: *provisions*) |
 | **Kategorie** | Rechtsbegriff / Bilanz-Passivposten |
 | **Status** | FEST |
@@ -832,7 +832,7 @@ Passivposten der Bilanz für Verpflichtungen, die **dem Grunde nach bestehen** o
 |---|---|
 | **Deutsch (primär)** | Rechnungsabgrenzungsposten |
 | **Synonyme (DE)** | RAP (Abkürzung, bevorzugt im Code und UI), transitorische Posten (bilanzierungstechnischer Ausdruck), Abgrenzungsposten (verkürzt) |
-| **Arabisch** | بنود التسوية الزمنية بين الفترات (البنود المحاسبية الإلزامية وفق § 250 HGB التي تضمن إسناد الإيرادات والمصروفات إلى الفترة الصحيحة من الناحية الاقتصادية لا من ناحية تدفق النقد؛ الرائد هنا هو مبدأ Periodenabgrenzung؛ تنقسم إلى نوعين: ARAP — Aktive Rechnungsabgrenzungsposten، وهي مصروفات دُفِعت قبل القطع لكنها تخصّ فترة بعد القطع، وتظهر في جانب الأصول وفق § 250 Abs. 1 HGB؛ و PRAP — Passive Rechnungsabgrenzungsposten، وهي إيرادات قُبِضت قبل القطع لكنها تخصّ فترة بعد القطع، وتظهر في جانب الخصوم وفق § 250 Abs. 2 HGB) |
+| **Arabisch** | بنود التسوية الزمنية بين الفترات (بنود محاسبية إلزامية وفق § 250 HGB تضمن إسناد الإيرادات والمصروفات إلى الفترة الاقتصادية الصحيحة — لا إلى فترة تدفق النقد — تطبيقاً لمبدأ Periodenabgrenzung؛ نوعان، كلاهما ما دُفع/قُبض قبل القطع لكن يخصّ فترة لاحقة: ARAP — Aktive Rechnungsabgrenzungsposten — مصروفات في جانب الأصول وفق § 250 Abs. 1 HGB؛ PRAP — Passive Rechnungsabgrenzungsposten — إيرادات في جانب الخصوم وفق § 250 Abs. 2 HGB) |
 | **Englisch (Code-Kontext)** | `accruals`, `deferrals`, `prepaidExpenses` (ARAP) / `deferredIncome` (PRAP) |
 | **Kategorie** | Rechtsbegriff / Bilanz-Abgrenzungsposten |
 | **Status** | FEST |

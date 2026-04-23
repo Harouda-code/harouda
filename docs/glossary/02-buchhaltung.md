@@ -443,7 +443,7 @@ Die Integrität des Stapels ist durch Header-Prüfsumme und strikte Spalten-Reih
 |---|---|
 | **Deutsch (primär)** | Debitor / Kreditor |
 | **Synonyme (DE)** | Kunde / Lieferant (umgangssprachlich); Forderungen aus L&L / Verbindlichkeiten aus L&L (als Sachkonto-Seite) |
-| **Arabisch** | المدين / الدائن كأطراف تجارية (الحسابات الشخصية التي تمثل علاقات الشركة مع العملاء الذين يدينون لها [Debitor] أو الموردين الذين تدين لهم [Kreditor]؛ هذه حسابات شخصية تختلف عن حساب "المدين/الدائن" كجانبي القيد) |
+| **Arabisch** | المدين / الدائن كأطراف تجارية (حسابات شخصية: العملاء المدينون [Debitor] والموردون الدائنون [Kreditor]؛ تختلف عن "المدين/الدائن" كجانبي القيد) |
 | **Englisch (Code-Kontext)** | `business_partner` mit `type: 'debitor' \| 'kreditor'` |
 | **Kategorie** | Fachbegriff / Datenobjekt (Personenkonto) |
 | **Status** | FEST |
@@ -539,7 +539,7 @@ Die **chronologisch** geordnete Aufzeichnung aller Buchungssätze eines Unterneh
 |---|---|
 | **Deutsch (primär)** | Hauptbuch |
 | **Synonyme (DE)** | Sachkontenbuch, Ledger (international, nicht im deutschen Code) |
-| **Arabisch** | دفتر الأستاذ العام (السجل المحاسبي الذي تُرحَّل إليه القيود من دفتر اليومية، مُرتّبةً لا بحسب تاريخ القيد بل بحسب كل حساب على حدة، لمعرفة رصيد كل حساب في لحظة معينة) |
+| **Arabisch** | دفتر الأستاذ العام (السجل الذي تُرحَّل إليه القيود من دفتر اليومية، مُرتّبةً بحسب كل حساب على حدة لعرض رصيده في أي وقت) |
 | **Englisch (Code-Kontext)** | im Projekt nicht als eigene Tabelle; implizit über `journal_entry_lines` + `accounts` via View/Query abgebildet |
 | **Kategorie** | Fachbegriff / Daten-Sicht |
 | **Status** | FEST |
@@ -632,7 +632,7 @@ Saldo = Σ Soll-Bewegungen − Σ Haben-Bewegungen
 |---|---|
 | **Deutsch (primär)** | Eröffnungsbilanz / Schlussbilanz |
 | **Synonyme (DE)** | EB / SB (Abkürzungen im Kontext); "Schlussbilanz" auch "Abschlussbilanz" genannt |
-| **Arabisch** | الميزانية الافتتاحية / الميزانية الختامية (الميزانية الافتتاحية هي صورة الأصول والخصوم في أول يوم من السنة المالية؛ الميزانية الختامية هي الصورة في آخر يوم منها، وتصبح هي نفسها الميزانية الافتتاحية للسنة التالية بموجب مبدأ "وحدة الميزانية" — Bilanzidentität) |
+| **Arabisch** | الميزانية الافتتاحية / الختامية (صورة الأصول والخصوم في أول/آخر يوم من السنة المالية؛ الختامية تصبح افتتاحية السنة التالية بموجب مبدأ "وحدة الميزانية" — Bilanzidentität) |
 | **Englisch (Code-Kontext)** | im Code primär über `fiscal_years`-Tabelle + Bilanz-Builder abgedeckt |
 | **Kategorie** | Fachbegriff / Abschlussdokument |
 | **Status** | FEST |
@@ -680,7 +680,7 @@ Saldo = Σ Soll-Bewegungen − Σ Haben-Bewegungen
 |---|---|
 | **Deutsch (primär)** | Eröffnungsbuchung / Abschlussbuchung |
 | **Synonyme (DE)** | EB-Buchung / SB-Buchung; Abschlussbuchung auch „Vortragsbuchung" oder „Umbuchung auf Schlussbilanzkonto" |
-| **Arabisch** | قيود الافتتاح / قيود الإقفال (قيود خاصة لا تعكس عمليات تجارية حقيقية، بل تنقل الأرصدة تقنياً: قيود الإقفال تُرحِّل أرصدة الحسابات إلى حساب "الميزانية الختامية" في نهاية السنة؛ وقيود الافتتاح تعيد فتح هذه الأرصدة في بداية السنة التالية انطلاقاً من حساب "الميزانية الافتتاحية") |
+| **Arabisch** | قيود الافتتاح / الإقفال (قيود تقنية لا تعكس عمليات تجارية حقيقية، بل تنقل الأرصدة بين السنوات: الإقفال يُرحِّلها إلى الميزانية الختامية، والافتتاح يستعيدها من الميزانية الافتتاحية) |
 | **Englisch (Code-Kontext)** | nicht direkt abgebildet; als spezielle `JournalEntry`-Varianten mit Markierung |
 | **Kategorie** | Fachbegriff / Buchungstyp |
 | **Status** | FEST |
@@ -728,7 +728,7 @@ Diese Buchungen sind **keine Geschäftsvorfälle im eigentlichen Sinn**, sondern
 |---|---|
 | **Deutsch (primär)** | Saldenvortrag |
 | **Synonyme (DE)** | Anfangsbestand (bei einzelnem Konto), Eröffnungsbestand |
-| **Arabisch** | ترحيل الأرصدة (النقل الآلي للأرصدة الختامية لكل الحسابات الميزانية من نهاية السنة المالية إلى بدايتها في السنة التالية، دون إنشاء قيود محاسبية صريحة لكل حساب؛ هو البديل العملي المختصر لقيود الافتتاح/الإقفال الكاملة) |
+| **Arabisch** | ترحيل الأرصدة (النقل الآلي لأرصدة حسابات الميزانية إلى السنة التالية دون إنشاء قيود صريحة؛ بديل عملي مختصر لقيود الافتتاح/الإقفال) |
 | **Englisch (Code-Kontext)** | `balance carryforward` (konzeptuell); keine direkte Code-Entsprechung im Projekt |
 | **Kategorie** | Fachbegriff / Buchungstechnik |
 | **Status** | FEST |

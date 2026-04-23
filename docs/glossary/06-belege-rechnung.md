@@ -495,7 +495,7 @@ Nach der **neuen Legaldefinition in § 14 Abs. 1 Satz 3 UStG** (eingeführt durc
 |---|---|
 | **Deutsch (primär)** | Wachstumschancengesetz (offizielle Langform: „Gesetz zur Stärkung von Wachstumschancen, Investitionen und Innovation sowie Steuervereinfachung und Steuerfairness") |
 | **Synonyme (DE)** | WtChancenG (Abkürzung), E-Rechnungspflicht (verkürzt auf den für dieses Glossar relevanten Aspekt), B2B-Rechnungspflicht |
-| **Arabisch** | قانون فرص النمو الألماني (القانون الفيدرالي المؤرخ 27.03.2024، المنشور في Bundesgesetzblatt 2024 الجزء الأول، العدد 108؛ الأثر الأهم بالنسبة لبرنامج الفوترة: فرض الفاتورة الإلكترونية المُهيكَلة — E-Rechnung وفق EN 16931 — كأمر إلزامي في جميع المعاملات بين الشركات داخل ألمانيا B2B اعتباراً من 1.1.2025، مع فترات انتقالية للإرسال تمتد حتى 31.12.2027، بينما تسري إلزامية الاستقبال بدون أي فترة انتقالية) |
+| **Arabisch** | قانون فرص النمو الألماني (القانون الفيدرالي المؤرخ 27.03.2024، المنشور في Bundesgesetzblatt 2024 الجزء الأول، العدد 108؛ يفرض الفاتورة الإلكترونية المُهيكَلة — E-Rechnung وفق EN 16931 — في جميع معاملات B2B داخل ألمانيا اعتباراً من 1.1.2025، مع فترات انتقالية للإرسال حتى 31.12.2027، بينما تسري إلزامية الاستقبال بدون فترة انتقالية) |
 | **Englisch (Code-Kontext)** | — (Eigenname, im Code als Kommentar `// WtChancenG § ...` referenziert) |
 | **Kategorie** | Gesetz / Einführungstatbestand |
 | **Status** | FEST |
@@ -575,7 +575,7 @@ Bundesgesetz vom **27.03.2024** (BGBl. 2024 I Nr. 108), das u. a. §§ 14, 14a U
 |---|---|
 | **Deutsch (primär)** | EN 16931 (europäische Norm), vollständige deutsche Titel: DIN EN 16931-1 „Elektronische Rechnungsstellung — Teil 1: Semantisches Datenmodell der Kernelemente einer elektronischen Rechnung" |
 | **Synonyme (DE)** | Europäische Rechnungsnorm, Kern-Datenmodell für E-Rechnungen |
-| **Arabisch** | المعيار الأوروبي الموحّد للفاتورة الإلكترونية (مجموعة المعايير EN 16931 التي أصدرتها CEN — اللجنة الأوروبية للتقييس — سنة 2017 بتفويض من Mandate 2014/55/EU؛ تُعرِّف «نموذج البيانات الدلالي الجوهري» Semantisches Datenmodell لعناصر الفاتورة الإلكترونية — حوالي 160 عنصراً يُعرَف كلٌّ منها برمزَي Business Term — BT — وBusiness Group — BG؛ لا تفرض صيغة XML بعينها بل تقبل تركيبتَين: UBL 2.1 و UN/CEFACT CII D16B؛ كل تنسيق وطني — XRechnung الألماني، Factur-X الفرنسي، إلخ — يُشتَق منها كـ CIUS أي Core Invoice Usage Specification) |
+| **Arabisch** | المعيار الأوروبي الموحّد للفاتورة الإلكترونية (مجموعة المعايير EN 16931 أصدرتها CEN — اللجنة الأوروبية للتقييس — سنة 2017 بتفويض من Mandate 2014/55/EU؛ تُعرِّف نموذج البيانات الدلالي الجوهري Semantisches Datenmodell لعناصر الفاتورة — حوالي 160 عنصراً برمزَي Business Term BT و Business Group BG؛ لا تفرض صيغة XML بعينها بل تقبل تركيبتَين: UBL 2.1 و UN/CEFACT CII D16B؛ كل تنسيق وطني كـ XRechnung و Factur-X يُشتَق منها كـ CIUS Core Invoice Usage Specification) |
 | **Englisch (Code-Kontext)** | `EN16931`, `semanticDataModel` |
 | **Kategorie** | Technische Norm / EU-Standard |
 | **Status** | FEST |
@@ -743,7 +743,7 @@ Die **deutsche CIUS** (Core Invoice Usage Specification) der europäischen Norm 
 |---|---|
 | **Deutsch (primär)** | ZUGFeRD |
 | **Synonyme (DE)** | „Zentraler User Guide des Forums elektronische Rechnung Deutschland" (Langform, wenig verwendet), hybride E-Rechnung (funktionale Beschreibung) |
-| **Arabisch** | الصيغة الهجينة الألمانية للفاتورة الإلكترونية (ZUGFeRD: ملف PDF/A-3 ظاهر للإنسان يحتوي بداخله على ملف XML مُهيكَل وفق EN 16931 باستخدام تركيبة CII؛ هذا المزج «هجين» Hybrid يجمع بين قابلية القراءة البشرية — PDF — والمعالجة الآلية — XML — في ملف واحد؛ تديره FeRD — Forum elektronische Rechnung Deutschland — بالتعاون مع الشريك الفرنسي FNFE-MPE الذي يصدر الصيغة المكافئة Factur-X المتوافقة بنيوياً مع ZUGFeRD منذ الإصدار 2.0؛ يحتوي على سبعة مستويات — Profile — متدرجة في الاكتمال، ولا تُعتبر فاتورة إلكترونية قانونية وفق § 14 UStG الجديد إلا من مستوى Profil EN 16931 — وهو المسمّى الرسمي في ZUGFeRD 2.x، والمعروف تاريخياً بـ «COMFORT» في إصدار ZUGFeRD 1.0 فقط — فما فوق) |
+| **Arabisch** | الصيغة الهجينة الألمانية للفاتورة الإلكترونية (ZUGFeRD: ملف PDF/A-3 يحتوي بداخله على XML مُهيكَل وفق EN 16931 بتركيبة CII؛ يجمع بين قابلية القراءة البشرية والمعالجة الآلية في ملف واحد؛ تديره FeRD بالتعاون مع FNFE-MPE الفرنسي الذي يصدر الصيغة المكافئة Factur-X؛ يحتوي على سبعة مستويات — Profile — لا تُعتبر منها فاتورة إلكترونية قانونية وفق § 14 UStG الجديد إلا من مستوى Profil EN 16931 فما فوق) |
 | **Englisch (Code-Kontext)** | `zugferd`, `hybridInvoice` |
 | **Kategorie** | Technisches Format / Hybrid-Format |
 | **Status** | FEST |

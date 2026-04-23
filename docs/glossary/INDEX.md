@@ -8,6 +8,10 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 **DRAFT-Einträge:** 1 🟡 (Crypto-Shredding in `09-dsgvo-compliance.md` — Release-Blocker bis juristische Freigabe)
 **DEPRECATED-Einträge:** 0
 
+> **Modul-Metadaten**
+> **Modul:** INDEX · **Einträge:** 119 FEST + 1 DRAFT · **Stand:** 2026-04-23
+> **Zweck:** alphabetischer Gesamt-Index für alle Begriffe der Module 01–09 · **Ziel-Dateien:** [01](./01-grundlagen.md), [02](./02-buchhaltung.md), [03](./03-lohn-sv.md), [04](./04-steuer-meldungen.md), [05](./05-jahresabschluss.md), [06](./06-belege-rechnung.md), [07](./07-anlagen-inventur.md), [08](./08-technik-architektur.md), [09](./09-dsgvo-compliance.md)
+
 ---
 
 ## Legende
@@ -503,3 +507,9 @@ Nach Sprint-1-Abschluss verbleibt **ein** DRAFT-Eintrag aus bewusster Entscheidu
 | 2026-04-22 | Terminology-Sprint 1 | **DRAFT-Batch 1 für `09-dsgvo-compliance.md`** initial erstellt | 10 |
 | 2026-04-22 | Terminology-Sprint 1 | **Fachreview 09** — vier Korrekturen (Crypto-Shredding Art. 18-Reframing, DSFA-Status, TOM BYOK+§ 64 BDSG, § 203 Abs. 4 Erforderlichkeit) | — |
 | 2026-04-22 | **Sprint 1 Schließung** | 9 Einträge aus 09 auf FEST gehoben (#1, #2, #3, #4, #5, #7, #8, #9, #10); #6 Crypto-Shredding bleibt DRAFT als Release-Blocker bis juristische Freigabe — **Milestone 119 FEST + 1 DRAFT** 🎉 | +9 |
+
+---
+
+> **Modul-Footer**
+> **Zurück zu:** [01 · Grundlagen](./01-grundlagen.md) · **Letztes Modul:** [09 · DSGVO & Compliance](./09-dsgvo-compliance.md)
+> **Terminology-Sprint 1 · INDEX · Stand 2026-04-23**

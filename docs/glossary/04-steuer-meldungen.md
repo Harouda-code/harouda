@@ -13,6 +13,10 @@ und die Lohnsteuer-Anmeldung (LStA).
 Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (HGB, AO, GoBD) und
 [02-buchhaltung.md](./02-buchhaltung.md) (Konten, Buchungssatz, Journal).
 
+> **Modul-Metadaten**
+> **Modul:** 04 · Steuer-Meldungen · **Einträge:** 20 FEST · **Stand:** 2026-04-23
+> **Baut auf:** [01-grundlagen.md](./01-grundlagen.md), [02-buchhaltung.md](./02-buchhaltung.md) · **Spätere Module:** 05, 06, 07 referenzieren dieses
+
 ---
 
 ## Inhaltsverzeichnis
@@ -52,10 +56,10 @@ Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (HGB, AO, GoBD) und
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Bundesgesetz, das die Umsatzsteuer (Mehrwertsteuer) auf Warenlieferungen und Dienstleistungen im Inland und den innergemeinschaftlichen Handel in der EU regelt. Umsatzsteuer ist eine **indirekte Steuer** — der Unternehmer zieht sie vom Endkunden ein und führt sie ans Finanzamt ab (nach Abzug der von ihm selbst gezahlten Vorsteuer).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - UStG vom 26.11.1979 (BGBl. I S. 1953), geltende Fassung jährlich aktualisiert
 - Nationale Umsetzung der **EU-Mehrwertsteuer-Systemrichtlinie 2006/112/EG**
 - UStAE (Umsatzsteuer-Anwendungserlass) — Verwaltungsauffassung (bindet die Finanzverwaltung)
@@ -110,7 +114,7 @@ Bundesgesetz, das die Umsatzsteuer (Mehrwertsteuer) auf Warenlieferungen und Die
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Indirekte Verbrauchssteuer auf Warenlieferungen und Dienstleistungen, die ein Unternehmer im Rahmen seiner Tätigkeit erbringt. Technisch wird sie auf den Nettopreis aufgeschlagen und vom Kunden gezahlt, aber der Unternehmer schuldet sie dem Finanzamt (minus der von ihm geleisteten [Vorsteuer](#3-vorsteuer)). Wirtschaftlich belastet sie damit den Endverbraucher.
 
 **Steuersätze in Deutschland (Stand 2026):**
@@ -122,7 +126,7 @@ Indirekte Verbrauchssteuer auf Warenlieferungen und Dienstleistungen, die ein Un
 | Nullsatz | **0 %** | Photovoltaik-Anlagen bis 30 kWp (§ 12 Abs. 3 UStG) |
 | Steuerbefreit | — | Ausfuhrlieferungen, ig Lieferungen, Heilbehandlungen, Bildung etc. (§ 4 UStG) |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 1 UStG — Steuerbarkeit
 - § 12 UStG — Steuersätze
 - § 13 UStG — Entstehung der Steuer
@@ -166,7 +170,7 @@ Indirekte Verbrauchssteuer auf Warenlieferungen und Dienstleistungen, die ein Un
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die Umsatzsteuer, die ein Unternehmer selbst beim Einkauf von Waren und Dienstleistungen an seine Lieferanten zahlt. Unter bestimmten Voraussetzungen darf er diese **vom Finanzamt zurückfordern**, indem er sie von der von ihm selbst geschuldeten USt abzieht. Dieser Mechanismus heißt **Vorsteuerabzug** und ist der Kern des Mehrwertsteuersystems.
 
 **Netto-Zahllast-Formel:**
@@ -180,7 +184,7 @@ USt-Zahllast = Σ Umsatzsteuer (aus Ausgangsumsätzen)
 - Ordnungsgemäße Rechnung mit allen Pflichtangaben nach § 14 UStG
 - Keine Ausschlussgründe nach § 15 Abs. 2 UStG (z. B. bei steuerfreien Ausgangsumsätzen)
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 15 UStG — Vorsteuerabzug
 - § 14 UStG — Pflichtangaben der Rechnung (Voraussetzung)
 - § 15a UStG — Vorsteuer-Berichtigung bei Nutzungsänderung
@@ -223,7 +227,7 @@ USt-Zahllast = Σ Umsatzsteuer (aus Ausgangsumsätzen)
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Eindeutiger Identifier für umsatzsteuerpflichtige Unternehmen innerhalb der Europäischen Union. Wird benötigt für innergemeinschaftliche Lieferungen/Leistungen (B2B-EU) und für die Bestätigungsverfahren beim [BZSt](#5-bzst-bundeszentralamt-für-steuern) bzw. über [VIES](#6-vies-vat-information-exchange-system). In Deutschland auf Antrag vom BZSt vergeben (§ 27a UStG).
 
 **Format:**
@@ -236,7 +240,7 @@ NL123456789B01 (Niederlande: 9 Ziffern + B + 2 Ziffern)
 ... (EU-weit unterschiedliche Formate)
 ```
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 27a UStG — Erteilung der USt-IdNr durch BZSt
 - § 18a UStG — Verwendung in der [ZM](#8-zm-zusammenfassende-meldung)
 - § 18e UStG — **Bestätigungsverfahren**: einfache und qualifizierte Bestätigung (Pflicht zur Prüfung!)
@@ -285,7 +289,7 @@ Die USt-IdNr des Geschäftspartners **muss** bei jedem neuen B2B-EU-Geschäft un
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Bundesoberbehörde im Geschäftsbereich des Bundesministeriums der Finanzen mit Sitz in Bonn. Zuständig für zentrale, bundesweite Steuerverwaltungsaufgaben, die nicht einzelnen Finanzämtern zugeordnet sind — insbesondere USt-IdNr-Vergabe, **qualifizierte Bestätigung** von USt-IdNrn nach § 18e UStG, Zusammenfassende Meldung (ZM), Kapitalertragsteuer, Familienkasse etc.
 
 **Für harouda-app relevante Services:**
@@ -296,7 +300,7 @@ Bundesoberbehörde im Geschäftsbereich des Bundesministeriums der Finanzen mit 
 | BOP (BZSt-Online-Portal) | `https://www.elster.de/bportal/` | ZM-Übermittlung |
 | Formularserver | `https://www.formulare-bfinv.de/` | Formular-Downloads |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 5 Finanzverwaltungsgesetz (FVG) — Zuständigkeiten
 - § 27a UStG — Vergabe der USt-IdNr durch BZSt
 - § 18e UStG — Bestätigungsverfahren
@@ -355,14 +359,14 @@ Bundesoberbehörde im Geschäftsbereich des Bundesministeriums der Finanzen mit 
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 System der EU-Kommission (DG TAXUD), über das jede Person EU-weit die **Gültigkeit** einer USt-IdNr aus einem anderen EU-Mitgliedsstaat prüfen kann. Liefert nur **einfache Bestätigung** (gültig / ungültig) — keine Namens-/Adressverifikation wie beim deutschen BZSt. VIES ist kein zentrales System, sondern ein Zugriffs-Layer, der Anfragen an die nationalen Steuerverwaltungen weiterleitet.
 
 **Zugriff:**
 - Web-UI: https://ec.europa.eu/taxation_customs/vies/
 - SOAP-Webservice: `https://ec.europa.eu/taxation_customs/vies/services/checkVatService`
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - Art. 17 Verordnung (EU) 904/2010 (EU-Amtshilfe-Verordnung)
 - § 18e UStG — in Deutschland als eine anerkannte Bestätigungsquelle neben BZSt
 
@@ -403,7 +407,7 @@ System der EU-Kommission (DG TAXUD), über das jede Person EU-weit die **Gültig
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Monatliche oder quartalsweise Steueranmeldung, mit der Unternehmer dem Finanzamt die im Voranmeldungszeitraum entstandene Umsatzsteuer melden und abführen (bzw. einen Erstattungsanspruch geltend machen). Muss **elektronisch** über ELSTER übermittelt werden. Grundlage für die spätere **Umsatzsteuer-Jahreserklärung**.
 
 **Voranmeldungs-Rhythmus:**
@@ -417,7 +421,7 @@ Monatliche oder quartalsweise Steueranmeldung, mit der Unternehmer dem Finanzamt
 
 **Abgabefrist:** Der **10. Tag** nach Ende des Voranmeldungszeitraums (§ 18 Abs. 1 UStG). Mit Dauerfristverlängerung + 1 Monat (§ 46 UStDV, bei Sondervorauszahlung).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 18 Abs. 1, 2 UStG — Voranmeldungs-Pflicht und Rhythmus
 - § 18 Abs. 2a UStG — quartalsweise Abgabe
 - §§ 46–48 UStDV — Dauerfristverlängerung
@@ -429,7 +433,7 @@ Monatliche oder quartalsweise Steueranmeldung, mit der Unternehmer dem Finanzamt
 - [Umsatzsteuer](#2-umsatzsteuer-ust) / [Vorsteuer](#3-vorsteuer) — die saldierten Positionen
 - [ZM](#8-zm-zusammenfassende-meldung) — ergänzende Meldung bei EU-Umsätzen
 - [ELSTER](#11-elster--elektronische-steuererklärung) — Übermittlungs-Infrastruktur
-- [Festschreibung](./08-technik-architektur.md) — nach UStVA-Abgabe wird die Periode üblicherweise festgeschrieben
+- Festschreibung — nach UStVA-Abgabe wird die Periode üblicherweise festgeschrieben
 
 **Verwendung im Code:**
 - Builder: `src/domain/ustva/UStVaBuilder.ts` (bzw. entsprechender Service in `src/domain/ustva/`)
@@ -463,7 +467,7 @@ Monatliche oder quartalsweise Steueranmeldung, mit der Unternehmer dem Finanzamt
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Zusätzliche, zu [UStVA](#7-ustva-umsatzsteuer-voranmeldung) parallele Meldung an das [BZSt](#5-bzst-bundeszentralamt-für-steuern), in der **alle innergemeinschaftlichen Umsätze** (Warenlieferungen, sonstige Leistungen im Reverse-Charge-Verfahren, dreieckiges Geschäft) mit USt-IdNr des EU-Empfängers und Umsatzwert aufgelistet werden. Dient der EU-weiten Betrugsbekämpfung — die Mitgliedsstaaten gleichen die ZM-Daten untereinander ab.
 
 **Meldungsrhythmus:**
@@ -476,7 +480,7 @@ Zusätzliche, zu [UStVA](#7-ustva-umsatzsteuer-voranmeldung) parallele Meldung a
 
 **Abgabefrist:** 25. Tag nach Ende des Meldungszeitraums (§ 18a Abs. 1 UStG) — strenger als UStVA-Frist.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 18a UStG — Pflicht zur Abgabe
 - § 4 Nr. 1 lit. b UStG i. V. m. § 6a UStG — Steuerbefreiung ig Lieferungen (Voraussetzung: korrekte ZM)
 - § 17c UStDV — Buchnachweispflicht
@@ -524,7 +528,7 @@ Unvollständige oder falsche ZM → **Aberkennung der Steuerfreiheit** der ig Li
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Unternehmer, deren Umsatz im Vorjahr eine gesetzliche Schwelle nicht überschritten hat und im laufenden Jahr voraussichtlich nicht überschreiten wird. Sie werden nach § 19 UStG **wie Nicht-Unternehmer** behandelt: Sie dürfen in Rechnungen keine USt ausweisen und haben keinen Vorsteuerabzug. Damit entfällt die UStVA-Pflicht (nur Jahreserklärung bleibt).
 
 **Historische Schwellenwerte (wichtig für Altperioden-Bearbeitung):**
@@ -540,7 +544,7 @@ Die Schwellen wurden zum 01.01.2025 signifikant angehoben. Außerdem wurde die S
 
 **Hinweis für Altjahre:** Bei Mandanten, für die harouda-app noch Wirtschaftsjahre vor 2025 bearbeitet, gelten die **alten Schwellenwerte** — der Steuerberater muss je nach Jahr den zutreffenden Wert prüfen. harouda-app zeigt die Schwellenwerte nicht automatisch abhängig vom Wirtschaftsjahr (TECH-DEBT-Kandidat).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 19 UStG — Kleinunternehmer-Regelung (aktuelle Fassung)
 - § 19 Abs. 2 UStG — **Verzichtsoption** (Opt-in in die Regelbesteuerung, Bindung 5 Jahre)
 - Art. 38 Wachstumschancengesetz vom 27.03.2024 — Anhebung der Schwellen
@@ -586,7 +590,7 @@ Die Schwellen wurden zum 01.01.2025 signifikant angehoben. Außerdem wurde die S
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Ausnahme vom Regelfall „Leistender ist Steuerschuldner": Bei bestimmten Umsätzen schuldet der **Leistungsempfänger** die Umsatzsteuer (§ 13b UStG). Der Leistende stellt die Rechnung **netto, ohne USt-Ausweis**, aber mit explizitem Hinweis auf das Reverse-Charge-Verfahren. Der Empfänger bucht auf seiner Seite die USt (Haben 1770) und die identische Vorsteuer (Soll 1571) — netto-neutral, aber aufwandsseitig dokumentiert.
 
 **Wichtigste Anwendungsfälle (§ 13b Abs. 1–5 UStG):**
@@ -603,7 +607,7 @@ Ausnahme vom Regelfall „Leistender ist Steuerschuldner": Bei bestimmten Umsät
 
 **Rechtsfolge:** Der Empfänger muss die USt in seiner [UStVA](#7-ustva-umsatzsteuer-voranmeldung) anmelden (Kennziffern 46/47/52/84 etc. je nach Fall) und im gleichen Zug als [Vorsteuer](#3-vorsteuer) geltend machen (Kz. 67).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 13b UStG — Leistungsempfänger als Steuerschuldner
 - § 14a Abs. 5 UStG — Pflichthinweis in Rechnung: „Steuerschuldnerschaft des Leistungsempfängers"
 - UStAE Abschn. 13b — Anwendungsdetails
@@ -648,10 +652,10 @@ Ausnahme vom Regelfall „Leistender ist Steuerschuldner": Bei bestimmten Umsät
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die zentrale, von den 16 Landesfinanzbehörden gemeinsam (unter Federführung des Bayerischen Landesamts für Steuern) betriebene Plattform für die elektronische Übermittlung von Steuerdaten zwischen Steuerpflichtigen und Finanzverwaltung. Seit 2005 verpflichtender Übermittlungsweg für die meisten laufenden Steuermeldungen; seit 2013/2015 auch für E-Bilanz und Körperschaftsteuererklärungen.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 87a AO — elektronische Kommunikation mit Finanzbehörden
 - § 87b AO — Datenübermittlung im Besteuerungsverfahren
 - § 18 Abs. 1 Satz 1 UStG — elektronische Pflicht UStVA
@@ -693,10 +697,10 @@ Die zentrale, von den 16 Landesfinanzbehörden gemeinsam (unter Federführung de
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die offizielle, vom Bayerischen Landesamt für Steuern bereitgestellte Programmbibliothek zur Validierung, Verschlüsselung und Übermittlung von Steuerdaten an ELSTER. Jede Drittsoftware, die direkt an ELSTER sendet (d. h. ohne Umweg über das Web-Portal MeinELSTER), MUSS ERiC einsetzen — eine eigene Re-Implementierung des Übermittlungsprotokolls ist nicht zulässig und wird bei Zertifizierungsprüfung durch die Landesfinanzbehörde abgelehnt.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - Keine direkte gesetzliche Norm; implizit über § 87a AO + ELSTER-Nutzungsbedingungen erzwungen
 - ERiC-Entwicklerhandbuch (jährlich mehrfach aktualisiert)
 - ELSTER-Herstellerverpflichtungen für als "ELSTER-zertifiziert" beworbene Software
@@ -734,7 +738,7 @@ Die offizielle, vom Bayerischen Landesamt für Steuern bereitgestellte Programmb
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 
 **Steueranmeldung** (§§ 167, 168 AO) — der Steuerpflichtige **berechnet die Steuer selbst** und meldet sie dem Finanzamt. Die Anmeldung steht einer Steuerfestsetzung **unter Vorbehalt der Nachprüfung** gleich, sobald sie beim Finanzamt eingeht; ein Bescheid ergeht nur, wenn das Finanzamt abweicht oder bei Erstattungen die Zustimmung erteilt.
 
@@ -747,7 +751,7 @@ Die offizielle, vom Bayerischen Landesamt für Steuern bereitgestellte Programmb
 **Prozess-Konsequenz für harouda-app:**
 Anmeldungen erzeugen **sofort** eine Zahlungspflicht zum 10. des Folgemonats (§ 18 Abs. 1 UStG, § 41a Abs. 1 EStG). Erklärungen erzeugen erst bei Bescheid-Eingang eine Fälligkeit. Das Modul `payments` MUSS diese Unterscheidung kennen — falsche Zuordnung führt zu GoBD-relevanten Dokumentations-Lücken und potenziellen Säumniszuschlägen des Mandanten.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 149 AO — Abgabepflicht von Steuererklärungen
 - § 150 AO — Form und Inhalt der Steuererklärungen
 - § 155 AO — Steuerfestsetzung durch Bescheid
@@ -790,14 +794,14 @@ Anmeldungen erzeugen **sofort** eine Zahlungspflicht zum 10. des Folgemonats (§
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die vom örtlich zuständigen Finanzamt vergebene Ordnungsnummer eines Steuerpflichtigen. Primärer Ordnungsschlüssel im Besteuerungsverfahren für [KSt](#18-körperschaftsteuer-kst), [GewSt](#19-gewerbesteuer-gewst), ESt, LSt und allgemeine Aktenführung. **Pro Finanzamt eindeutig, aber nicht deutschlandweit eindeutig** — beim Wechsel des Wohn- oder Betriebssitzes in den Bezirk eines anderen Finanzamts wird eine neue Nummer vergeben, die alte bleibt historisch zugeordnet.
 
 **Format:**
 - 10- oder 11-stellig, bundesland-spezifisch strukturiert (z. B. Bayern: `nnn/nnnn/nnnn` = Bezirk / Unterscheidungsnummer / Prüfziffer)
 - **Vereinheitlichtes ELSTER-Format** für elektronische Übermittlung: 13 Ziffern ohne Trennzeichen, Bundesland-Präfix + intern aufgefüllte Steuernummer
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 139a AO — Identifikationsmerkmale (definiert TIN-Rahmen; Steuernummer als Altsystem bis Wirtschafts-IdNr flächendeckend eingeführt ist)
 - § 8 AO — Wohnsitz-Begriff (bestimmt örtliche Zuständigkeit)
 - § 20 AO — Zuständigkeit bei Körperschaften
@@ -840,7 +844,7 @@ Die vom örtlich zuständigen Finanzamt vergebene Ordnungsnummer eines Steuerpfl
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Pflicht zur elektronischen Übermittlung der Bilanz und der Gewinn- und Verlustrechnung (sowie bestimmter Zusatzinformationen) an das Finanzamt in einem standardisierten XBRL-Datensatz. Ersetzt seit dem Wirtschaftsjahr 2013 die papierbasierte Bilanz als Anhang zur Steuererklärung. Gilt für alle bilanzierenden Steuerpflichtigen (Kaufleute nach § 238 HGB, Körperschaften, Personengesellschaften mit Bilanzierung).
 
 **Umfang:**
@@ -849,7 +853,7 @@ Pflicht zur elektronischen Übermittlung der Bilanz und der Gewinn- und Verlustr
 - Steuerliche Gewinnermittlung (Überleitungsrechnung von Handels- zu Steuerbilanz)
 - Kontennachweise (nicht obligat, nur auf Anforderung)
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 5b EStG** — elektronische Bilanzübermittlung (Kernvorschrift)
 - BMF-Schreiben vom 28.09.2011 zur Erstanwendung; zuletzt BMF vom 02.07.2024 zur aktuellen Taxonomie
 - Jährliche Veröffentlichung der Kern-Taxonomie-Version durch das BMF
@@ -858,7 +862,7 @@ Pflicht zur elektronischen Übermittlung der Bilanz und der Gewinn- und Verlustr
 - [XBRL](#16-xbrl) — technisches Übermittlungsformat
 - [Kern-Taxonomie](#17-kern-taxonomie) — jährlich aktualisiertes Schema
 - [HGB §§ 266, 275, 285](./01-grundlagen.md#3-handelsgesetzbuch-hgb) — Gliederungsvorgaben, die die Taxonomie umsetzt
-- [Jahresabschluss](./05-jahresabschluss.md) — Oberbegriff (geplanter Eintrag)
+- [Jahresabschluss](./05-jahresabschluss.md#1-jahresabschluss) — Oberbegriff
 - [ELSTER](#11-elster--elektronische-steuererklärung) — Übermittlungsweg
 - **Härtefallregelung** § 5b Abs. 2 EStG — Ausnahme auf Antrag (wirtschaftliche/persönliche Unzumutbarkeit)
 
@@ -892,7 +896,7 @@ Pflicht zur elektronischen Übermittlung der Bilanz und der Gewinn- und Verlustr
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Internationaler, XML-basierter Standard zur strukturierten Übermittlung von Geschäftsdaten. Jeder Datenwert (z. B. "Umsatzerlöse 1.250.000 €") wird nicht als Freitext, sondern als semantisch getaggter `fact` mit Verweis auf ein Taxonomie-Konzept übertragen. Dadurch kann die Finanzverwaltung Inhalte maschinell vergleichen, prüfen und aggregieren. Entwickelt und gepflegt vom XBRL International Inc. (Non-Profit-Konsortium).
 
 **Kernkomponenten:**
@@ -901,7 +905,7 @@ Internationaler, XML-basierter Standard zur strukturierten Übermittlung von Ges
 - **Linkbases** — definieren Beziehungen zwischen Konzepten (Label, Berechnung, Präsentation, Definition)
 - **Extensions** — Verlängerungen der Kern-Taxonomie (Branchentaxonomien: Banken, Versicherungen, Wohnungswirtschaft)
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - Keine eigene deutsche Rechtsnorm für XBRL als Standard
 - Über § 5b EStG + jährliches BMF-Schreiben faktisch als Pflichtformat gesetzt
 - XBRL-Spezifikation ist offener Standard des XBRL International Inc.
@@ -941,7 +945,7 @@ Internationaler, XML-basierter Standard zur strukturierten Übermittlung von Ges
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die offizielle, vom BMF jährlich (bzw. bei Bedarf häufiger) veröffentlichte XBRL-Taxonomie für die E-Bilanz-Übermittlung in Deutschland. Definiert alle Konzepte, Gliederungshierarchien und Pflichtangaben, die eine elektronisch übermittelte Bilanz/GuV erfüllen muss. Versioniert als `Kerntaxonomie 6.x`; jede Version ist für ein bestimmtes Wirtschaftsjahr (oder einen Satz von Wirtschaftsjahren) verbindlich. Die Veröffentlichung einer neuen Version erfolgt in der Regel Mitte des Jahres vor ihrer Verbindlichkeit.
 
 **Versionshistorie (projektrelevant):**
@@ -956,7 +960,7 @@ Die offizielle, vom BMF jährlich (bzw. bei Bedarf häufiger) veröffentlichte X
 
 *Stichtage und Übergangsfristen sind dem jeweiligen BMF-Schreiben zu entnehmen.*
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 5b Abs. 1 Satz 1 EStG — Pflicht-Datensatz "nach amtlich vorgeschriebenem Datensatz"
 - Jährliches BMF-Schreiben zur Veröffentlichung der Taxonomie-Version (zuletzt BMF vom 02.07.2024 zur Taxonomie 6.9)
 - Bundessteuerblatt-Publikation der XBRL-Schema-Dateien
@@ -996,7 +1000,7 @@ Die offizielle, vom BMF jährlich (bzw. bei Bedarf häufiger) veröffentlichte X
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Bundessteuer auf das Einkommen juristischer Personen (Körperschaften) nach dem Körperschaftsteuergesetz (KStG). Regelsteuersatz: **15 %** auf das zu versteuernde Einkommen (§ 23 Abs. 1 KStG), zuzüglich **5,5 % Solidaritätszuschlag** auf die KSt (effektive Belastung ca. 15,825 %). Betroffen sind insbesondere GmbH, UG, AG, KGaA, eG, SE sowie nicht-steuerbefreite Vereine und Stiftungen.
 
 **Ablauf:**
@@ -1004,7 +1008,7 @@ Bundessteuer auf das Einkommen juristischer Personen (Körperschaften) nach dem 
 - **Vorauszahlungen** vierteljährlich (10.03. / 10.06. / 10.09. / 10.12.) auf Grundlage der letzten Festsetzung (§ 31 KStG i. V. m. § 37 EStG)
 - **Besteuerungszeitraum:** Kalenderjahr (§ 7 Abs. 3 KStG), abweichendes Wirtschaftsjahr nach § 7 Abs. 4 KStG möglich
 
-**Rechtsgrundlage (KStG als Rahmen in diesem Eintrag integriert):**
+### Rechtsgrundlage (KStG als Rahmen in diesem Eintrag integriert)
 
 Körperschaftsteuergesetz (KStG) vom 31.08.1976, geltende Fassung:
 - § 1 KStG — unbeschränkte Steuerpflicht
@@ -1053,7 +1057,7 @@ Körperschaftsteuergesetz (KStG) vom 31.08.1976, geltende Fassung:
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Kommunale Sachsteuer auf den **Gewerbeertrag** jedes im Inland betriebenen gewerblichen Unternehmens, erhoben durch die Gemeinde, in der sich eine Betriebsstätte befindet. **Freiberuflich Tätige** i. S. v. § 18 EStG sind **nicht** gewerbesteuerpflichtig — zentrale Abgrenzung bei gemischten Tätigkeiten (Abfärbewirkung § 15 Abs. 3 EStG).
 
 **Berechnung (Kernformel):**
@@ -1071,7 +1075,7 @@ Gewerbeertrag                    (§ 7 GewStG, nach Hinzurechnungen/Kürzungen �
 - Bandbreite in Deutschland: 200 % (einige "Steueroasen-Gemeinden") bis ca. 580 % (München, Frankfurt a. M., Oberhausen)
 - **Mehrere Betriebsstätten** → Zerlegung des Messbetrags nach Lohnsummen (§§ 28 ff. GewStG); jede Gemeinde erhebt mit eigenem Hebesatz auf ihren Zerlegungsanteil
 
-**Rechtsgrundlage (GewStG als Rahmen in diesen Eintrag integriert):**
+### Rechtsgrundlage (GewStG als Rahmen in diesen Eintrag integriert)
 
 Gewerbesteuergesetz (GewStG) vom 15.10.2002, geltende Fassung:
 - § 2 GewStG — Gegenstand (jeder inländische Gewerbebetrieb)
@@ -1120,7 +1124,7 @@ Gewerbesteuergesetz (GewStG) vom 15.10.2002, geltende Fassung:
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Regelmäßig wiederkehrende **Steueranmeldung** (§ 167 AO) des Arbeitgebers über die einbehaltene Lohnsteuer (LSt), Kirchensteuer (KiSt) und den Solidaritätszuschlag (SolZ) seiner Arbeitnehmer. Der Arbeitgeber berechnet die Beträge selbst auf Grundlage der ELStAM-Daten, meldet sie elektronisch über ELSTER und überweist sie im gleichen Schritt an das Betriebsstätten-Finanzamt.
 
 **Anmeldungszeitraum (§ 41a Abs. 2 EStG):**
@@ -1133,7 +1137,7 @@ Regelmäßig wiederkehrende **Steueranmeldung** (§ 167 AO) des Arbeitgebers üb
 
 **Fälligkeit:** jeweils am **10. des Folgemonats** (bzw. 10. des Monats nach Quartalsende / 10. Januar für jährliche Anmeldung). Anmeldung und Zahlung laufen synchron.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 41a Abs. 1 EStG — elektronische Pflicht-Anmeldung
 - § 41a Abs. 2 EStG — Anmeldungszeitraum (Grenzwerte)
 - § 38 EStG — Lohnsteuer als Quellensteuer (Arbeitgeberhaftung)
@@ -1164,3 +1168,9 @@ Regelmäßig wiederkehrende **Steueranmeldung** (§ 167 AO) des Arbeitgebers üb
 - **Nullmeldung:** solange Mitarbeiter bestehen, ist auch bei 0 € LSt eine Anmeldung abzugeben. Vollständige Abmeldung setzt formelle Einstellung der Lohnzahlung voraus.
 - **Mehrere Betriebsstätten:** separate LStA je zuständigem Betriebsstätten-Finanzamt → mehrere ELSTER-Übertragungen pro Periode; das `lsta`-Modul muss Multi-FA-Fähigkeit nativ unterstützen.
 - **Wechsel des Anmeldungszeitraums:** erfolgt zum Jahreswechsel automatisch auf Basis des Vorjahres-Volumens. Die Logik MUSS zum Jahreswechsel prüfen und eine Benutzerwarnung auslösen, wenn sich der Rhythmus ändert.
+
+---
+
+> **Modul-Footer**
+> **Nächstes Modul:** [05 · Jahresabschluss](./05-jahresabschluss.md) · **Übersicht:** [INDEX.md](./INDEX.md)
+> **Terminology-Sprint 1 · Modul 04 · Stand 2026-04-23**

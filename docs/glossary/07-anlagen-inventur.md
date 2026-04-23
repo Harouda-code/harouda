@@ -8,6 +8,10 @@ Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (HGB, AO, GoBD),
 [05-jahresabschluss.md](./05-jahresabschluss.md) (Bilanz, Handelsbilanz, Steuerbilanz,
 Maßgeblichkeitsprinzip — deren HB/SB-Überleitung bei AfA und Teilwert besonders relevant ist).
 
+> **Modul-Metadaten**
+> **Modul:** 07 · Anlagen & Inventur · **Einträge:** 10 FEST · **Stand:** 2026-04-23
+> **Baut auf:** [01-grundlagen.md](./01-grundlagen.md), [02-buchhaltung.md](./02-buchhaltung.md), [04-steuer-meldungen.md](./04-steuer-meldungen.md), [05-jahresabschluss.md](./05-jahresabschluss.md) · **Spätere Module:** 09 referenziert dieses
+
 ---
 
 ## Inhaltsverzeichnis
@@ -37,7 +41,7 @@ Maßgeblichkeitsprinzip — deren HB/SB-Überleitung bei AfA und Teilwert besond
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Gesamtheit derjenigen Vermögensgegenstände, die **dazu bestimmt sind, dem Geschäftsbetrieb dauernd zu dienen** (§ 247 Abs. 2 HGB). Das **Dauerhaftigkeits-Kriterium** ist objektiv-funktional: nicht die physische Lebensdauer entscheidet, sondern die vom Unternehmer vorgesehene **Nutzungsabsicht** am Bilanzstichtag. Abgegrenzt vom Umlaufvermögen, das zum Verbrauch, zur Verarbeitung oder zur Veräußerung bestimmt ist.
 
 **Drei Kategorien nach § 266 Abs. 2 HGB (Bilanz-Gliederung, Position A):**
@@ -58,7 +62,7 @@ Gesamtheit derjenigen Vermögensgegenstände, die **dazu bestimmt sind, dem Gesc
 | **Teilwertabschreibung** | **Wahlrecht bei dauernder Wertminderung** (HB-Pflicht, SB-Wahl) | **Pflicht** bei jeder Wertminderung (strenges Niederstwertprinzip) |
 | **Beispiel** | Produktionsmaschine, Firmen-PKW | Warenbestand, Forderungen |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 247 Abs. 2 HGB** — Legaldefinition des Anlagevermögens
 - **§ 266 Abs. 2 HGB** — Bilanz-Gliederung Aktivseite, Position A
 - **§ 253 HGB** — Bewertung (AK/HK als Ausgangsgröße, AfA, Teilwertabschreibung)
@@ -122,7 +126,7 @@ Gesamtheit derjenigen Vermögensgegenstände, die **dazu bestimmt sind, dem Gesc
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Zwei gesetzlich definierte Bewertungsmaßstäbe für den **Zugang** eines Vermögensgegenstands:
 
 - **Anschaffungskosten (AK) — § 255 Abs. 1 HGB:** Aufwendungen, die geleistet werden, um einen Vermögensgegenstand **zu erwerben** und ihn in einen betriebsbereiten Zustand zu versetzen, soweit sie dem Vermögensgegenstand **einzeln zugeordnet** werden können. AK sind die Grundlage für Fremdzugänge (Kauf).
@@ -156,7 +160,7 @@ Zwei gesetzlich definierte Bewertungsmaßstäbe für den **Zugang** eines Vermö
 
 **Wahlrechte-Stetigkeit:** Die einmal gewählte Methode der HK-Ermittlung ist nach § 252 Abs. 1 Nr. 6 HGB (Methodenstetigkeit) fortzuführen; Änderungen sind im [Anhang](./05-jahresabschluss.md#4-anhang) zu begründen.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 255 HGB** — Definition AK und HK mit allen Bestandteilen
 - **§ 6 Abs. 1 Nr. 1 EStG** — AK/HK als Bewertungsobergrenze in der Steuerbilanz
 - **§ 9b EStG** — Behandlung der abziehbaren Vorsteuer (kein Bestandteil der AK/HK)
@@ -218,7 +222,7 @@ Zwei gesetzlich definierte Bewertungsmaßstäbe für den **Zugang** eines Vermö
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Systematische Verteilung der **Anschaffungs- oder Herstellungskosten** eines abnutzbaren Anlagegegenstands auf die **betriebsgewöhnliche Nutzungsdauer**. Begründet im Grundsatz der Periodenabgrenzung (§ 252 Abs. 1 Nr. 5 HGB): Der Werteverzehr soll denjenigen Perioden als Aufwand zugeordnet werden, denen er wirtschaftlich entspricht. Anwendung auf **abnutzbare** Anlagen (Maschinen, Fahrzeuge, Gebäude, Software); **nicht** auf Grundstücke (keine Abnutzung) oder Finanzanlagen.
 
 **AfA-Methoden im deutschen Steuerrecht:**
@@ -251,7 +255,7 @@ Letztes Jahr: entsprechend bis zum Monat des Ausscheidens oder Ende der ND
 
 → Typische HB/SB-Abweichung: Degressive AfA in HB mögliche, in SB nur bei gesetzlicher Zulassung.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 7 EStG** — AfA-Grundnorm mit allen Methoden
 - **§ 253 Abs. 3 HGB** — Handelsrechtliche planmäßige Abschreibung
 - **§ 7a EStG** — Sonderabschreibungen (nicht Gegenstand dieses Eintrags, siehe Batch 2)
@@ -329,7 +333,7 @@ Letztes Jahr: entsprechend bis zum Monat des Ausscheidens oder Ende der ND
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Der Zeitraum in Jahren, über den ein abnutzbarer Anlagegegenstand voraussichtlich **wirtschaftlich sinnvoll nutzbar** ist. Maßgeblich ist die **betriebsgewöhnliche** (nicht die technisch-physische) ND. Sie bestimmt direkt den jährlichen AfA-Satz: bei linearer AfA gilt `AfA-Satz = 100 % ÷ ND`.
 
 **Bestimmung der Nutzungsdauer:**
@@ -378,7 +382,7 @@ Formel bei Teilwertabschreibung:
 Neue Jahres-AfA = Buchwert nach Teilwertabschreibung ÷ Restnutzungsdauer
 ```
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 7 Abs. 1 Satz 1 EStG** — „betriebsgewöhnliche Nutzungsdauer"
 - **§ 7 Abs. 4 EStG** — Gesetzlich fixierte ND für Gebäude (33 ⅓ / 40 / 50 Jahre je nach Bauart)
 - **§ 7 Abs. 4 Nr. 2 EStG (Fassung seit 01.01.2023)** — Erhöhung der Wohngebäude-AfA von 2 % auf 3 %
@@ -442,7 +446,7 @@ Neue Jahres-AfA = Buchwert nach Teilwertabschreibung ÷ Restnutzungsdauer
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Abnutzbare, bewegliche Wirtschaftsgüter des Anlagevermögens, die **selbstständig nutzbar** sind und deren **Anschaffungs- oder Herstellungskosten netto 800 €** (ab 01.01.2018) nicht übersteigen. Ein GWG darf im Wirtschaftsjahr der Anschaffung oder Herstellung **in voller Höhe als Betriebsausgabe** abgezogen werden, statt über die Nutzungsdauer planmäßig abgeschrieben zu werden (§ 6 Abs. 2 EStG).
 
 **Tatbestandsmerkmale (§ 6 Abs. 2 Satz 1 EStG):**
@@ -485,7 +489,7 @@ Jährliche Entscheidung pro Wirtschaftsjahr — für **alle** Gegenstände > 250
 
 **Nicht kombinierbar im selben Wirtschaftsjahr.**
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 6 Abs. 2 EStG** — GWG-Sofortabzug
 - **§ 6 Abs. 2 Satz 4 EStG** — Verzeichnis-Pflicht
 - **§ 9b Abs. 1 EStG** — Abgrenzung Vorsteuer (netto-Rechnung)
@@ -553,7 +557,7 @@ Jährliche Entscheidung pro Wirtschaftsjahr — für **alle** Gegenstände > 250
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Alternative zum GWG-Sofortabzug für mittelwertige Anlagegüter: Alle abnutzbaren, beweglichen, selbstständig nutzbaren Anlagegegenstände mit AK/HK netto zwischen **250,01 € und 1.000 €** werden in einem **jährlich neu gebildeten Sammelposten** zusammengefasst und als **Gesamtheit** über **fünf Wirtschaftsjahre linear** abgeschrieben (20 % p. a.). Die individuelle Nutzungsdauer und das individuelle Schicksal der Einzelgegenstände treten in den Hintergrund — es existiert **kein Einzelausweis** im Anlagenverzeichnis für Sammelposten-Gegenstände.
 
 **Schwellenwerte und Pool-Bildung:**
@@ -601,7 +605,7 @@ Die Entscheidung zwischen GWG und Sammelposten muss **für alle** Anlagegüter z
 
 Der Pool wird nur dann wirksam, wenn der Mandant die Sammelposten-Variante gewählt hat. Wahl der GWG-Variante heißt: Gegenstände 800,01–1.000 € werden einzel-aktiviert und regulär abgeschrieben.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 6 Abs. 2a EStG** — Poolabschreibung
 - **R 6.13 EStR** — Verwaltungsanweisung
 - **BMF-Schreiben vom 30.09.2010** (IV C 6 - S 2180/09/10001) — Sammelposten-Behandlung bei Umwandlungen und Betriebsaufgaben
@@ -670,7 +674,7 @@ Der Pool wird nur dann wirksam, wenn der Mandant die Sammelposten-Variante gewä
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 
 **Teilwert (§ 6 Abs. 1 Nr. 1 Satz 3 EStG):**
 > Der Betrag, den ein Erwerber des ganzen Betriebs im Rahmen des Gesamtkaufpreises für das einzelne Wirtschaftsgut ansetzen würde, unter der Voraussetzung, dass er den Betrieb fortführt.
@@ -718,7 +722,7 @@ Das ist eine der seltenen Konstellationen, wo die HB **strenger** ist als die SB
 
 Wertaufholung wirkt **wie ein negativer Abschreibungsaufwand** — also als Ertrag in der GuV.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 6 Abs. 1 Nr. 1 Satz 2, 3 EStG** — Teilwert und Teilwertabschreibung beim AV
 - **§ 6 Abs. 1 Nr. 2 Satz 2, 3 EStG** — beim UV
 - **§ 6 Abs. 1 Nr. 1 Satz 4 EStG** — steuerliches Wertaufholungsgebot
@@ -806,7 +810,7 @@ Wertaufholung wirkt **wie ein negativer Abschreibungsaufwand** — also als Ertr
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Laufend zu führendes **Nebenbuch**, in dem jeder einzelne Gegenstand des Anlagevermögens mit allen bewertungs- und abschreibungsrelevanten Daten dokumentiert wird. Rechtsgrundlage ist die Pflicht zur ordnungsmäßigen Buchführung (§§ 238, 240 HGB + § 140 AO); die inhaltlichen Anforderungen ergeben sich aus R 5.4 EStR. Das Anlagenverzeichnis ist die Grundlage für die AfA-Berechnung, den Anlagenspiegel (§ 284 Abs. 3 HGB) und die Betriebsprüfung.
 
 **Pflicht-Inhalte pro Anlage (R 5.4 EStR):**
@@ -855,7 +859,7 @@ Laufend zu führendes **Nebenbuch**, in dem jeder einzelne Gegenstand des Anlage
 | Rechtsgrundlage | § 140 AO + R 5.4 EStR | § 284 Abs. 3 HGB (nur KapG) |
 | Frequenz | laufend | einmal pro GJ im Anhang |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 140 AO** — Derivative Pflicht zur Buchführung (HGB-Pflichtige)
 - **§ 141 AO** — Originäre steuerliche Buchführungspflicht (Umsatz > 600.000 € oder Gewinn > 60.000 €)
 - **§ 145 AO** — Allgemeine Anforderungen an die Buchführung
@@ -923,7 +927,7 @@ Laufend zu führendes **Nebenbuch**, in dem jeder einzelne Gegenstand des Anlage
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 **Schriftliches Dokument**, das die einzelnen Vermögensgegenstände und Schulden eines Kaufmanns zum **Zeitpunkt der Aufstellung** nach **Art, Menge und Wert** vollständig auflistet (§ 240 Abs. 1 HGB). Der Kaufmann ist verpflichtet, ein Inventar aufzustellen:
 
 - **Bei Beginn** seines Handelsgewerbes (**Eröffnungsinventar**, § 240 Abs. 1 HGB)
@@ -953,7 +957,7 @@ Das Inventar ist die **unmittelbare Grundlage** für die Aufstellung der Bilanz 
 
 Obwohl das **Inventar** grundsätzlich lückenlos ist, lassen die **Inventur-Vereinfachungen** nach § 241 HGB Abstriche vom Prinzip der jährlichen Voll-Aufnahme zu. Diese werden in [Inventur](#10-inventur--241-hgb--festwert-verfahren--240-abs-3-hgb) behandelt.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 240 Abs. 1 HGB** — Eröffnungsinventar
 - **§ 240 Abs. 2 HGB** — Jahresinventar zum GJ-Ende
 - **§ 240 Abs. 3 HGB** — **Festwert-Verfahren** (siehe integrierte Behandlung in [Inventur](#10-inventur--241-hgb--festwert-verfahren--240-abs-3-hgb))
@@ -1028,7 +1032,7 @@ Obwohl das **Inventar** grundsätzlich lückenlos ist, lassen die **Inventur-Ver
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 **Vorgang** der körperlichen — bei unkörperlichen Gegenständen buchmäßigen — Bestandsaufnahme aller Vermögensgegenstände und Schulden. Die Inventur ist die Voraussetzung für die Erstellung des [Inventars](#9-inventar--240-hgb) und mittelbar für die [Bilanz](./05-jahresabschluss.md#2-bilanz). § 241 HGB lässt **vier** Vereinfachungsverfahren zur klassischen Stichtagsinventur zu, die den praktischen Aufwand drastisch reduzieren können.
 
 **Inventur-Formen:**
@@ -1079,7 +1083,7 @@ Für Gegenstände des Sachanlagevermögens sowie Roh-, Hilfs- und Betriebsstoffe
 | Sachanlagen | Werkzeuge, Gerüste, Prüfmittel im Baugewerbe, Hotel-Porzellan und -Besteck, Lehrmittel in Schulen, Norm-Teile in der Produktion |
 | Roh-/Hilfsstoffe | Kleineisenwaren, Schrauben und Muttern, Standardverbrauchsmaterialien |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 240 Abs. 3 HGB** — Festwert-Verfahren
 - **§ 240 Abs. 4 HGB** — Gruppenbewertung (verwandt, aber eigenständig)
 - **§ 241 Nr. 1 HGB** — Stichprobeninventur
@@ -1154,3 +1158,7 @@ Für Gegenstände des Sachanlagevermögens sowie Roh-, Hilfs- und Betriebsstoffe
 - **Bei erstmaliger Einrichtung eines Festwert-Verfahrens oder bei Unklarheit über die Zulässigkeit der Vereinfachungsmethoden Rücksprache mit Steuerberater oder Wirtschaftsprüfer** — eine falsche Methodenwahl führt zu BP-Beanstandungen und ggf. Nachforderungen.
 
 ---
+
+> **Modul-Footer**
+> **Nächstes Modul:** [08 · Technik & Architektur](./08-technik-architektur.md) · **Übersicht:** [INDEX.md](./INDEX.md)
+> **Terminology-Sprint 1 · Modul 07 · Stand 2026-04-23**

@@ -7,6 +7,10 @@ Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (GoBD, DSGVO, Aufbewahrung),
 [04-steuer-meldungen.md](./04-steuer-meldungen.md) (USt, Vorsteuer, UStG, USt-IdNr,
 Reverse-Charge, Kleinunternehmer).
 
+> **Modul-Metadaten**
+> **Modul:** 06 · Belege & Rechnung · **Einträge:** 10 FEST · **Stand:** 2026-04-23
+> **Baut auf:** [01-grundlagen.md](./01-grundlagen.md), [02-buchhaltung.md](./02-buchhaltung.md), [04-steuer-meldungen.md](./04-steuer-meldungen.md) · **Spätere Module:** 08 referenziert dieses
+
 ---
 
 ## Inhaltsverzeichnis
@@ -36,7 +40,7 @@ Reverse-Charge, Kleinunternehmer).
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Jedes Dokument, mit dem über eine Lieferung oder sonstige Leistung abgerechnet wird, **gleichgültig, wie dieses Dokument im Geschäftsverkehr bezeichnet wird** (§ 14 Abs. 1 Satz 1 UStG). Der Begriff ist **rein funktional** — nicht die Überschrift ("Rechnung", "Quittung", "Abrechnung", "Faktura") entscheidet, sondern ob das Dokument eine Lieferung/Leistung und deren Entgelt abrechnet. Eine Rechnung kann aus mehreren Dokumenten bestehen, sofern in einem davon das Entgelt und der Steuerbetrag genannt sind und auf die anderen Dokumente eindeutig verwiesen wird (§ 14 Abs. 1 Satz 4 UStG).
 
 **Pflicht zur Ausstellung (§ 14 Abs. 2 UStG):**
@@ -48,7 +52,7 @@ Jedes Dokument, mit dem über eine Lieferung oder sonstige Leistung abgerechnet 
 | Privatperson sonstige Leistungen (B2C) | Keine Rechnungspflicht (Kulanz möglich) | — |
 | Innergemeinschaftliche Lieferung | Ja, bis zum **15. des Folgemonats** | § 14a Abs. 1 UStG |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 14 UStG** — Ausstellungspflicht, Rechnungsbegriff, Pflichtangaben, elektronische Rechnung
 - **§ 14a UStG** — Zusätzliche Pflichten in besonderen Fällen (ig Lieferungen, Reverse-Charge, Reiseleistungen, Differenzbesteuerung)
 - **§ 14b UStG** — Aufbewahrungspflicht: **10 Jahre** bei Unternehmern, **2 Jahre** bei Privatempfängern von Bauleistungen
@@ -102,7 +106,7 @@ Jedes Dokument, mit dem über eine Lieferung oder sonstige Leistung abgerechnet 
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Geschlossene Liste von inhaltlichen Angaben, die eine Rechnung i. S. v. § 14 UStG zwingend enthalten MUSS, damit sie den Vorsteuerabzug (§ 15 UStG) beim Leistungsempfänger begründet. Fehlt eine Pflichtangabe, ist die Rechnung formal mangelhaft — der Vorsteuerabzug wird versagt, bis die Rechnung durch den Aussteller berichtigt wird (vgl. [Rechnungsberichtigung](#5-rechnungsberichtigung--stornorechnung)).
 
 **Pflichtangaben im Überblick (§ 14 Abs. 4 Satz 1 Nr. 1–10 UStG):**
@@ -131,7 +135,7 @@ Geschlossene Liste von inhaltlichen Angaben, die eine Rechnung i. S. v. § 14 US
 | Differenzbesteuerung (§ 25a UStG) | **„Gebrauchtgegenstände / Sonderregelung"** | § 14a Abs. 6 UStG |
 | Bauleistung an Privat | Hinweis auf 2-jährige Aufbewahrungspflicht | § 14 Abs. 4 Satz 1 Nr. 9 UStG |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 14 Abs. 4 UStG** — Pflichtangaben (Nr. 1–10)
 - **§ 14a UStG** — Zusatzpflichten in besonderen Fällen
 - **§ 15 Abs. 1 UStG** — Vorsteuerabzug nur mit formell ordnungsgemäßer Rechnung
@@ -182,7 +186,7 @@ Geschlossene Liste von inhaltlichen Angaben, die eine Rechnung i. S. v. § 14 US
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Vereinfachte Form der Rechnung für Gesamtbeträge **bis einschließlich 250 € brutto** (Entgelt + USt). Die Kleinbetragsrechnung bedarf eines reduzierten Pflichtangaben-Katalogs nach § 33 UStDV und ermöglicht dem Empfänger dennoch den vollen Vorsteuerabzug.
 
 **Schwellenwert:**
@@ -213,7 +217,7 @@ Vereinfachte Form der Rechnung für Gesamtbeträge **bis einschließlich 250 €
 - **Reverse-Charge-Verfahren** (§ 13b UStG)
 - → In diesen Fällen gilt immer der volle Pflichtangaben-Katalog
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 33 UStDV** — Vereinfachte Rechnungserteilung für Kleinbeträge
 - **§ 14 Abs. 6 Nr. 3 UStG** — Ermächtigungsgrundlage für die UStDV
 - **Zweites Bürokratieentlastungsgesetz vom 30.06.2017** — Anhebung 150 € → 250 €
@@ -259,7 +263,7 @@ Vereinfachte Form der Rechnung für Gesamtbeträge **bis einschließlich 250 €
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Rechnung, die **nicht vom leistenden Unternehmer**, sondern vom **Leistungsempfänger** ausgestellt wird (§ 14 Abs. 2 Satz 3 UStG). Voraussetzung ist eine **vorherige Vereinbarung** zwischen beiden Parteien. Die Gutschrift ist eine vollwertige Rechnung i. S. v. § 14 UStG, muss die Angabe **„Gutschrift"** enthalten (§ 14 Abs. 4 Satz 1 Nr. 10 UStG, eingeführt 30.06.2013 durch das Amtshilferichtlinie-Umsetzungsgesetz) und kann vom leistenden Unternehmer widersprochen werden — im Fall des Widerspruchs verliert sie ihre Eigenschaft als Rechnung.
 
 **Gegenüberstellung — umsatzsteuerliche vs. kaufmännische Gutschrift:**
@@ -275,7 +279,7 @@ Rechnung, die **nicht vom leistenden Unternehmer**, sondern vom **Leistungsempf�
 | **Englischer Begriff** | *self-billing invoice* | *credit note* |
 | **Ordnung in diesem Glossar** | **hier (§ 14 Abs. 2 UStG)** | [Rechnungsberichtigung / Stornorechnung](#5-rechnungsberichtigung--stornorechnung) |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 14 Abs. 2 Satz 3 UStG** — Zulässigkeit der Abrechnung durch den Leistungsempfänger
 - **§ 14 Abs. 4 Satz 1 Nr. 10 UStG** — Pflichtangabe „Gutschrift" (seit 30.06.2013)
 - **Amtshilferichtlinie-Umsetzungsgesetz (AmtshilfeRLUmsG) vom 26.06.2013** — Einführung der Pflichtkennzeichnung
@@ -330,7 +334,7 @@ Rechnung, die **nicht vom leistenden Unternehmer**, sondern vom **Leistungsempf�
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Sammlung von Verfahren, mit denen eine fehlerhafte oder zu stornierende Rechnung **korrigiert oder rückgängig gemacht** werden kann. Zwei praktische Ausprägungen:
 
 1. **Rechnungsberichtigung (Korrekturdokument):** Ein separates Dokument, das **ausdrücklich Bezug auf die ursprüngliche Rechnung nimmt** und die fehlerhafte Angabe korrigiert. Die ursprüngliche Rechnung bleibt bestehen.
@@ -348,7 +352,7 @@ Seit EuGH C-518/14 (*Senatex*, 15.09.2016) und BMF-Schreiben vom 18.09.2020 wirk
 
 Fehlt eine dieser Mindestangaben, ist die Rechnung **nicht berichtigungsfähig** → Vorsteuerabzug erst im Zeitraum der korrekten Neuausstellung.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 14 Abs. 6 UStG** — Verordnungsermächtigung für Berichtigung
 - **§ 31 Abs. 5 UStDV** — Durchführungsvorschrift: Berichtigung durch Bezugnahme auf Ursprungsrechnung
 - **§ 17 UStG** — Änderung der Bemessungsgrundlage (bei nachträglichem Entgeltminderung/Skonto/Rabatt)
@@ -403,7 +407,7 @@ Fehlt eine dieser Mindestangaben, ist die Rechnung **nicht berichtigungsfähig**
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Nach der **neuen Legaldefinition in § 14 Abs. 1 Satz 3 UStG** (eingeführt durch das Wachstumschancengesetz vom 27.03.2024, wirksam ab 01.01.2025) ist eine E-Rechnung eine Rechnung, die:
 
 1. in einem **strukturierten elektronischen Format** ausgestellt, übermittelt und empfangen wird,
@@ -428,7 +432,7 @@ Nach der **neuen Legaldefinition in § 14 Abs. 1 Satz 3 UStG** (eingeführt durc
 - **Word-, Excel- oder HTML-Rechnung** → „sonstige Rechnung"
 - **Bild (JPG, PNG, TIFF)** → „sonstige Rechnung"
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 14 Abs. 1 Satz 3 UStG n. F.** — Legaldefinition E-Rechnung
 - **§ 14 Abs. 2 UStG n. F.** — Pflicht zur E-Rechnung im B2B-Inlandsverkehr
 - **Richtlinie 2014/55/EU** — EU-Rahmen für E-Rechnung im öffentlichen Auftragswesen
@@ -497,7 +501,7 @@ Nach der **neuen Legaldefinition in § 14 Abs. 1 Satz 3 UStG** (eingeführt durc
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Bundesgesetz vom **27.03.2024** (BGBl. 2024 I Nr. 108), das u. a. §§ 14, 14a UStG grundlegend reformiert und die **E-Rechnungspflicht im inländischen B2B-Verkehr** schrittweise ab 01.01.2025 einführt. Hintergrund ist die europäische Initiative „VAT in the Digital Age" (ViDA) zur Harmonisierung elektronischer Rechnungsstellung.
 
 **Einführungs-Zeitplan (Übergangsfristen):**
@@ -519,7 +523,7 @@ Bundesgesetz vom **27.03.2024** (BGBl. 2024 I Nr. 108), das u. a. §§ 14, 14a U
   - Fahrausweise (§ 34 UStDV)
   - Steuerfreie Umsätze nach § 4 Nr. 8–29 UStG (differenzierte Behandlung je Befreiungstatbestand)
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **Wachstumschancengesetz vom 27.03.2024**, BGBl. 2024 I Nr. 108
 - **§ 14 Abs. 1, 2 UStG n. F.** — Neue Rechnungsbegriffe und Versandpflicht
 - **§ 27 UStG** — Übergangsregelungen
@@ -577,7 +581,7 @@ Bundesgesetz vom **27.03.2024** (BGBl. 2024 I Nr. 108), das u. a. §§ 14, 14a U
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Europäische Norm, die das **semantische Datenmodell** der Kernelemente einer elektronischen Rechnung festlegt. Verabschiedet durch das Europäische Komitee für Normung (**CEN**) im Jahr 2017 im Auftrag der EU-Kommission (Mandat **M/528**), als Umsetzung der Richtlinie 2014/55/EU über elektronische Rechnungsstellung im öffentlichen Auftragswesen.
 
 **EN 16931 definiert ausschließlich Semantik (das „Was") — nicht Syntax (das „Wie"):**
@@ -608,7 +612,7 @@ Nationale oder branchenspezifische **Einschränkungen/Präzisierungen** von EN 1
 - **Peppol BIS Billing 3.0** (international)
 - **FatturaPA** (Italien — Sonderfall: weicht in Syntax ab)
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **Richtlinie 2014/55/EU** des Europäischen Parlaments — „über die elektronische Rechnungsstellung bei öffentlichen Aufträgen"
 - **Mandat M/528** der EU-Kommission an CEN (2014)
 - **Durchführungsbeschluss (EU) 2017/1870** — Veröffentlichung der Norm im EU-Amtsblatt
@@ -662,7 +666,7 @@ Nationale oder branchenspezifische **Einschränkungen/Präzisierungen** von EN 1
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die **deutsche CIUS** (Core Invoice Usage Specification) der europäischen Norm EN 16931. Festgelegt und gepflegt von der **KoSIT** (Koordinierungsstelle für IT-Standards) der Freien Hansestadt Bremen im Auftrag des IT-Planungsrats. XRechnung ist ein **reines XML-Format** — es gibt **keine** eingebettete PDF-Komponente (Abgrenzung zu ZUGFeRD).
 
 - **Aktuelle Fassung:** XRechnung **ab Version 3.0** — die seit **01.02.2024** verbindlich anzuwendende Version ist **3.0.1**; Folgeversionen (3.0.2 ff.) werden im KoSIT-Release-Zyklus veröffentlicht.
@@ -692,7 +696,7 @@ Die **deutsche CIUS** (Core Invoice Usage Specification) der europäischen Norm 
 - **Peppol** — internationaler Austausch
 - **E-Mail**, **Upload-Portal**, **De-Mail** — je nach Empfängerbehörde
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **E-Rechnungs-Verordnung des Bundes (E-RechV)** vom 13.10.2017 (BGBl. I S. 3555), zuletzt geändert durch Art. 1 der Verordnung vom 13.10.2020
 - **E-Rechnungs-Gesetz (E-RechG)** des Bundes vom 04.04.2017 — Umsetzung Richtlinie 2014/55/EU für Bund
 - **IT-Planungsrat-Beschluss 2017/22** — Auftrag zur Erarbeitung von XRechnung an KoSIT
@@ -745,7 +749,7 @@ Die **deutsche CIUS** (Core Invoice Usage Specification) der europäischen Norm 
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Hybrides Rechnungsformat, das eine **menschenlesbare PDF/A-3-Datei** mit einem **maschinenlesbaren XML-Anhang** (CII-Syntax nach EN 16931) in **einer einzigen Datei** kombiniert. Herausgegeben vom **FeRD** (Forum elektronische Rechnung Deutschland, angesiedelt bei AWV — Arbeitsgemeinschaft für wirtschaftliche Verwaltung), in enger Kooperation mit Frankreich (FNFE-MPE) — das französische Pendant **Factur-X** ist strukturell identisch zu ZUGFeRD 2.x.
 
 **Versionsgeschichte und Profile:**
@@ -773,7 +777,7 @@ ZUGFeRD-Datei (.pdf)
     └── Anhang: factur-x.xml (maschinenlesbar, CII-Syntax)
 ```
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **ISO 19005-3** — PDF/A-3 Archivformat mit beliebigen Dateianhängen
 - **EN 16931-1 / -2** — semantisches Datenmodell + CII-Syntax
 - **ZUGFeRD-Spezifikation 2.3** (FeRD, öffentlich über ferd-net.de)
@@ -823,3 +827,7 @@ ZUGFeRD-Datei (.pdf)
   - Das Profil **BASIC** (ZUGFeRD 2.x) ist trotz seines Namens **nicht** EN-16931-vollkonform und erfüllt **nicht** die Anforderungen an eine E-Rechnung i. S. v. § 14 UStG n. F.
 
 ---
+
+> **Modul-Footer**
+> **Nächstes Modul:** [07 · Anlagen & Inventur](./07-anlagen-inventur.md) · **Übersicht:** [INDEX.md](./INDEX.md)
+> **Terminology-Sprint 1 · Modul 06 · Stand 2026-04-23**

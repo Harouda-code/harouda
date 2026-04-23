@@ -7,6 +7,10 @@ Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (HGB, AO, GoBD),
 Eröffnungs- / Schlussbilanz, Wirtschaftsjahr) und
 [04-steuer-meldungen.md](./04-steuer-meldungen.md) (KSt, GewSt, E-Bilanz, Kern-Taxonomie).
 
+> **Modul-Metadaten**
+> **Modul:** 05 · Jahresabschluss · **Einträge:** 10 FEST · **Stand:** 2026-04-23
+> **Baut auf:** [01-grundlagen.md](./01-grundlagen.md), [02-buchhaltung.md](./02-buchhaltung.md), [04-steuer-meldungen.md](./04-steuer-meldungen.md) · **Spätere Module:** 07, 08, 09 referenzieren dieses
+
 ---
 
 ## Inhaltsverzeichnis
@@ -36,7 +40,7 @@ Eröffnungs- / Schlussbilanz, Wirtschaftsjahr) und
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Pflicht-Rechenwerk, mit dem ein Kaufmann am Ende jedes Geschäftsjahres seine Vermögenslage und seinen Erfolg darstellt. Kernbestandteile nach § 242 HGB sind **Bilanz** (Vermögensübersicht) und **Gewinn- und Verlustrechnung** (Erfolgsermittlung). Bei Kapitalgesellschaften und haftungsbeschränkten Personengesellschaften (§ 264a HGB) treten **Anhang** und bei mittelgroßen / großen Gesellschaften zusätzlich der **Lagebericht** hinzu (§§ 264, 289 HGB).
 
 **Umfang nach Rechtsform und Größenklasse:**
@@ -69,7 +73,7 @@ Pflicht-Rechenwerk, mit dem ein Kaufmann am Ende jedes Geschäftsjahres seine Ve
 | **Offenlegung** im Unternehmensregister | 12 Monate nach GJ-Ende (§ 325 HGB) |
 | **E-Bilanz-Übermittlung** an Finanzamt | mit Steuererklärung (§ 5b EStG) |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§§ 242–256a HGB** — Allgemeine Vorschriften für alle Kaufleute
 - **§§ 264–289f HGB** — Ergänzende Vorschriften für Kapitalgesellschaften (inkl. § 264a HGB für GmbH & Co KG)
 - **§§ 316–324a HGB** — Prüfung des Jahresabschlusses
@@ -126,7 +130,7 @@ Pflicht-Rechenwerk, mit dem ein Kaufmann am Ende jedes Geschäftsjahres seine Ve
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Stichtagsbezogene Gegenüberstellung des **Vermögens** (Aktiva, Mittelverwendung) und der **Finanzierungsquellen** (Passiva, Mittelherkunft) eines Unternehmens zu einem bestimmten Zeitpunkt — dem **Bilanzstichtag**, meist der letzte Tag des Geschäftsjahres. Die **Bilanzgleichung** `Aktiva = Passiva` gilt definitorisch, da die Passivseite alle Finanzierungsquellen des auf der Aktivseite ausgewiesenen Vermögens enthält.
 
 **Grobgliederung nach § 266 HGB (Staffelform / T-Form):**
@@ -153,7 +157,7 @@ Stichtagsbezogene Gegenüberstellung des **Vermögens** (Aktiva, Mittelverwendun
 | Methodenstetigkeit | § 252 Abs. 1 Nr. 6 | Bewertungsmethoden bleiben konstant |
 | Einzelbewertung | § 252 Abs. 1 Nr. 3 | jeder Vermögensgegenstand einzeln bewertet |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§§ 242, 266 HGB** — Bilanzaufstellung und Gliederung
 - **§§ 246–256a HGB** — Ansatz, Bewertung, Prinzipien
 - **§ 268 HGB** — Vorschriften zu einzelnen Bilanzposten (z. B. Eigenkapital-Veränderung, Haftungsverhältnisse)
@@ -209,7 +213,7 @@ Stichtagsbezogene Gegenüberstellung des **Vermögens** (Aktiva, Mittelverwendun
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Rechnung, die dem Jahresabschluss als Pflichtbestandteil beigefügt ist (§ 242 Abs. 2 HGB) und den **Erfolg** (Gewinn bzw. Verlust) des Geschäftsjahres ermittelt, indem sie sämtliche **Erträge** der Periode sämtlichen **Aufwendungen** gegenüberstellt. Im Gegensatz zur zeitpunktbezogenen Bilanz ist die GuV **zeitraumbezogen** (meist 12 Monate). Aufgestellt in **Staffelform** (§ 275 Abs. 1 HGB).
 
 **Zwei zugelassene Verfahren (§ 275 Abs. 2, 3 HGB):**
@@ -244,7 +248,7 @@ Rechnung, die dem Jahresabschluss als Pflichtbestandteil beigefügt ist (§ 242 
       = Jahresüberschuss / Jahresfehlbetrag
 ```
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 242 Abs. 2 HGB** — Pflicht zur Aufstellung
 - **§ 275 HGB** — Gliederung (Gesamtkosten- und Umsatzkostenverfahren)
 - **§ 276 HGB** — Größenabhängige Erleichterungen (kleine KapG: Zusammenfassung von Posten)
@@ -304,7 +308,7 @@ Rechnung, die dem Jahresabschluss als Pflichtbestandteil beigefügt ist (§ 242 
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Schriftlicher Ergänzungs- und Erläuterungsteil des Jahresabschlusses, der **Bilanz** und **GuV** inhaltlich ausfüllt, ergänzt und erläutert (§ 284 Abs. 1 HGB). Pflichtbestandteil bei **Kapitalgesellschaften** (§ 264 Abs. 1 HGB) und bei Personenhandelsgesellschaften ohne unbeschränkt haftende natürliche Person (§ 264a HGB — typischer Fall: GmbH & Co KG).
 
 **Aufgaben des Anhangs:**
@@ -339,7 +343,7 @@ Schriftlicher Ergänzungs- und Erläuterungsteil des Jahresabschlusses, der **Bi
 | Mittelgroße KapG | Teilweise Erleichterungen nach § 288 Abs. 2 HGB |
 | Große KapG | Vollständiger Anhang |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 242 Abs. 3 HGB** — Anhang als Teil des Jahresabschlusses bei KapG (i. V. m. § 264 Abs. 1)
 - **§ 264 Abs. 1 HGB** — Anhang als Pflichtbestandteil bei KapG
 - **§ 264a HGB** — Ausdehnung auf PersGes ohne unbeschränkt haftende natürliche Person
@@ -392,7 +396,7 @@ Schriftlicher Ergänzungs- und Erläuterungsteil des Jahresabschlusses, der **Bi
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Erzählender Bericht über **Verlauf und Lage** des Geschäftsjahres, der den Jahresabschluss **begleitet**, aber **nicht Teil** davon ist (§ 242 HGB enumeriert JA-Bestandteile abschließend; Lagebericht erscheint erst in § 264 HGB). Pflicht bei **mittelgroßen und großen Kapitalgesellschaften** (§ 264 Abs. 1 HGB i. V. m. § 267 HGB); kleine KapG sind befreit (§ 264 Abs. 1 Satz 4 HGB).
 
 **Zentrale Aussagebereiche (§ 289 HGB):**
@@ -419,7 +423,7 @@ Erzählender Bericht über **Verlauf und Lage** des Geschäftsjahres, der den Ja
 | Mittelgroße KapG | ✅ Pflicht |
 | Große KapG | ✅ Pflicht (+ ggf. NFE/NFB) |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 264 Abs. 1 HGB** — Aufstellungspflicht für mittelgroße und große KapG
 - **§ 289 HGB** — Inhalt (allgemeiner Lagebericht)
 - **§§ 289a-289g HGB** — Erweiterungen: Abhängigkeitsbericht, NFE/NFB, Vergütungsbericht, Erklärung zur Unternehmensführung, Konzernlagebericht
@@ -470,7 +474,7 @@ Erzählender Bericht über **Verlauf und Lage** des Geschäftsjahres, der den Ja
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Grundsatz, nach dem für bilanzierende Steuerpflichtige (§ 5 Abs. 1 Satz 1 EStG) das in der **Handelsbilanz** ausgewiesene Betriebsvermögen **maßgebend** für die **Steuerbilanz** ist, **solange nicht** zwingende steuerliche Vorschriften entgegenstehen oder ein steuerliches Wahlrecht unabhängig ausgeübt wird. Er sichert die Verzahnung zweier parallel geltender Bilanzordnungen und vermeidet doppelte Buchhaltungs-Aufwände.
 
 **Dogmatische Struktur (§ 5 Abs. 1 EStG):**
@@ -509,7 +513,7 @@ Endgültige Steuerbilanz
 | Geringwertige Wirtschaftsgüter (GWG) | Freie Wahl | Sonderregeln | § 6 Abs. 2, 2a EStG |
 | Sonderabschreibungen / Investitionsabzugsbetrag | nicht zulässig | zulässig | §§ 7g, 7b EStG |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 5 Abs. 1 Satz 1 HS 1 EStG** — Maßgeblichkeit der Handelsbilanz
 - **§ 5 Abs. 1 Satz 1 HS 2 EStG** — Unabhängige steuerliche Wahlrechte (seit BilMoG)
 - **§ 5 Abs. 1 Satz 2, 3 EStG** — Aufzeichnungspflicht in besonderem, laufend zu führendem Verzeichnis (bei unabhängig ausgeübten Wahlrechten)
@@ -572,7 +576,7 @@ Endgültige Steuerbilanz
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Bilanz nach den Regeln des **Handelsgesetzbuchs** (§§ 238 ff. HGB), aufgestellt zur Erfüllung handelsrechtlicher Rechenschafts- und Publizitätspflichten. Adressaten sind **Anteilseigner**, **Gläubiger** und (bei publizitätspflichtigen Unternehmen) die **Öffentlichkeit**. Grundprinzipien: **Gläubigerschutz** durch das **Vorsichtsprinzip** (§ 252 Abs. 1 Nr. 4 HGB), **Vollständigkeit** (§ 246 HGB), **Bilanzidentität** (§ 252 Abs. 1 Nr. 1 HGB).
 
 **Charakteristische Prinzipien der Handelsbilanz:**
@@ -595,7 +599,7 @@ Bilanz nach den Regeln des **Handelsgesetzbuchs** (§§ 238 ff. HGB), aufgestell
 | Freiberufler | Nein (außer freiwillig) | — (Wahlrecht zur EÜR nach § 4 Abs. 3 EStG) |
 | Kapitalgesellschaft | Ja (erweitert durch Anhang + ggf. Lagebericht) | § 264 HGB |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§§ 238, 242 HGB** — Buchführungs- und Bilanzierungspflicht für Kaufleute
 - **§§ 243–256a HGB** — Bilanzierungsgrundsätze und Bewertungsregeln
 - **§§ 264–289f HGB** — KapG-spezifische Anforderungen (Anhang, Lagebericht, Größenklassen, Offenlegung)
@@ -646,7 +650,7 @@ Bilanz nach den Regeln des **Handelsgesetzbuchs** (§§ 238 ff. HGB), aufgestell
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Bilanz zur Ermittlung des **steuerlichen Gewinns** als Bemessungsgrundlage für **Einkommensteuer, Körperschaftsteuer und Gewerbesteuer**. Rechtsgrundlage: § 4 Abs. 1 EStG (Betriebsvermögensvergleich) i. V. m. § 5 EStG (Gewerbetreibende mit Buchführungspflicht). Die Steuerbilanz folgt dem Aufbau der Handelsbilanz (Maßgeblichkeitsprinzip), wird aber durch **zwingende steuerliche Bewertungs- und Ansatzvorschriften** modifiziert.
 
 **Erstellungs-Methoden (§ 60 Abs. 2 EStDV):**
@@ -670,7 +674,7 @@ Bilanz zur Ermittlung des **steuerlichen Gewinns** als Bemessungsgrundlage für 
 | Nicht abzugsfähige BA | GuV-Posten | Hinzurechnung | § 4 Abs. 5 EStG |
 | Gewerbesteuer als BA | abzugsfähig | Nicht abzugsfähig | § 4 Abs. 5b EStG (seit 2008) |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 4 Abs. 1 EStG** — Betriebsvermögensvergleich (Grundvorschrift)
 - **§ 5 Abs. 1 EStG** — Maßgeblichkeit (siehe #6)
 - **§ 5 Abs. 2-6 EStG** — Steuerliche Sondervorschriften (Verbote, Gebote)
@@ -738,7 +742,7 @@ Bilanz zur Ermittlung des **steuerlichen Gewinns** als Bemessungsgrundlage für 
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Passivposten der Bilanz für Verpflichtungen, die **dem Grunde nach bestehen** oder **wahrscheinlich bestehen**, aber **der Höhe nach oder im Zeitpunkt der Inanspruchnahme ungewiss** sind (§ 249 Abs. 1 HGB). Ihre Bildung ist **Pflicht** (nicht Wahlrecht) nach dem Vorsichts- und Imparitätsprinzip. Abgegrenzt von gewissen Verbindlichkeiten (bestimmt) und Rücklagen (Eigenkapital-Bestandteil).
 
 **Drei Arten nach § 249 HGB:**
@@ -767,7 +771,7 @@ Passivposten der Bilanz für Verpflichtungen, die **dem Grunde nach bestehen** o
 - **Objektivierbare Quantifizierbarkeit** (Schätzbarkeit mit hinreichender Wahrscheinlichkeit)
 - **Ungewissheit** in Höhe oder Zeitpunkt (sonst: Verbindlichkeit)
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 249 HGB** — Begriff und Pflicht zur Bildung
 - **§ 253 Abs. 1, 2 HGB** — Bewertung und Abzinsung
 - **§ 266 Abs. 3 HGB** — Gliederung der Passivseite (Rückstellungen = Position B)
@@ -834,7 +838,7 @@ Passivposten der Bilanz für Verpflichtungen, die **dem Grunde nach bestehen** o
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Bilanzposten für die **periodengerechte Zuordnung** (§ 252 Abs. 1 Nr. 5 HGB) von Ausgaben und Einnahmen, deren Zahlungszeitpunkt vor dem Abschlussstichtag liegt, deren Aufwands- bzw. Ertragswirkung aber erst **nach** dem Stichtag eintritt. Pflichtansatz nach § 250 HGB für Kaufleute. Zwei Ausprägungen:
 
 **Zwei Arten:**
@@ -866,7 +870,7 @@ Bilanzposten für die **periodengerechte Zuordnung** (§ 252 Abs. 1 Nr. 5 HGB) v
 **Abbau / Auflösung:**
 RAP werden im Folgejahr **anteilig aufgelöst**: der auf das neue Jahr entfallende Teil wird als Aufwand (ARAP) bzw. Ertrag (PRAP) erfasst. Die Auflösung muss der ursprünglich angesetzten Zeitspanne entsprechen.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 250 HGB** — Pflicht zur Bildung von ARAP (Abs. 1) und PRAP (Abs. 2)
 - **§ 266 Abs. 2 C HGB** — ARAP in der Aktiv-Gliederung
 - **§ 266 Abs. 3 D HGB** — PRAP in der Passiv-Gliederung
@@ -919,3 +923,7 @@ RAP werden im Folgejahr **anteilig aufgelöst**: der auf das neue Jahr entfallen
 - **Bei komplexen Abgrenzungen (langfristige Verträge, Tauschgeschäfte, bedingte Elemente) vor Ansatz Rücksprache mit Steuerberater** — die Software soll die einfachen Fälle automatisieren und die komplexen explizit als „manuelle Entscheidung erforderlich" markieren.
 
 ---
+
+> **Modul-Footer**
+> **Nächstes Modul:** [06 · Belege & Rechnung](./06-belege-rechnung.md) · **Übersicht:** [INDEX.md](./INDEX.md)
+> **Terminology-Sprint 1 · Modul 05 · Stand 2026-04-23**

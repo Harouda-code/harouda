@@ -13,6 +13,10 @@ Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (DSGVO-Grundbegriff, Verschw
 [07-anlagen-inventur.md](./07-anlagen-inventur.md) (Anlagenverzeichnis-Aufbewahrung) und
 [08-technik-architektur.md](./08-technik-architektur.md) (Mandantenfähigkeit, RLS, CAS, Event-Sourcing, Hash-Chain — die technischen Substrate, auf denen Crypto-Shredding aufsetzt).
 
+> **Modul-Metadaten**
+> **Modul:** 09 · DSGVO & Compliance · **Einträge:** 9 FEST + 1 DRAFT · **Stand:** 2026-04-23
+> **Baut auf:** [01-grundlagen.md](./01-grundlagen.md), [02-buchhaltung.md](./02-buchhaltung.md), [07-anlagen-inventur.md](./07-anlagen-inventur.md), [08-technik-architektur.md](./08-technik-architektur.md) · **Spätere Module:** — (letztes Modul)
+
 ---
 
 ## Inhaltsverzeichnis
@@ -42,7 +46,7 @@ Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (DSGVO-Grundbegriff, Verschw
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Schriftlicher Vertrag gem. Art. 28 Abs. 3 DSGVO zwischen einem **Verantwortlichen** und einem **Auftragsverarbeiter**, der den Rahmen der Datenverarbeitung regelt: Gegenstand, Dauer, Art und Zweck, Art der Daten, Kategorien betroffener Personen, Rechte und Pflichten des Verantwortlichen, acht vorgeschriebene Pflichten des Auftragsverarbeiters (Art. 28 Abs. 3 lit. a–h).
 
 **Pflichtinhalte gem. Art. 28 Abs. 3 DSGVO:**
@@ -69,7 +73,7 @@ Schriftlicher Vertrag gem. Art. 28 Abs. 3 DSGVO zwischen einem **Verantwortliche
 | eIDAS-Zeitstempeldienst | qualifizierter VDA (z. B. Bundesdruckerei) | AVV — prüfen, ob Verarbeitung personenbezogen |
 | Support-E-Mail-Provider | Mailgun / SendGrid / eigene Lösung | AVV nötig |
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **Art. 28 DSGVO** — Auftragsverarbeiter (inhaltliche Pflichten)
 - **Art. 29 DSGVO** — Verarbeitung unter der Aufsicht des Verantwortlichen
 - **Art. 30 DSGVO** — Verzeichnis von Verarbeitungstätigkeiten (VVT)
@@ -115,7 +119,7 @@ Schriftlicher Vertrag gem. Art. 28 Abs. 3 DSGVO zwischen einem **Verantwortliche
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 - **Verantwortlicher (Art. 4 Nr. 7):** die Stelle, die **allein oder gemeinsam mit anderen** über die **Zwecke und Mittel** der Verarbeitung personenbezogener Daten entscheidet.
 - **Auftragsverarbeiter (Art. 4 Nr. 8):** die Stelle, die **personenbezogene Daten im Auftrag des Verantwortlichen** verarbeitet.
 
@@ -143,7 +147,7 @@ Schriftlicher Vertrag gem. Art. 28 Abs. 3 DSGVO zwischen einem **Verantwortliche
 
 **Achtung:** die letzte Zeile ist der häufigste Fehler — wenn Harouda Logs für eigene Analytik nutzt, wird es für **diese Verarbeitung** zum eigenständigen Verantwortlichen. Lösung: keine Nutzung von Mandanten-Daten für eigene Zwecke, oder separate rechtliche Grundlage (Einwilligung, berechtigtes Interesse) + Transparenz.
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **Art. 4 Nr. 7, 8, 9, 10 DSGVO** — Definitionen
 - **Art. 24 DSGVO** — Verantwortlichkeit des Verantwortlichen
 - **Art. 26 DSGVO** — Gemeinsam Verantwortliche (Joint Controllers)
@@ -182,7 +186,7 @@ Schriftlicher Vertrag gem. Art. 28 Abs. 3 DSGVO zwischen einem **Verantwortliche
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Sämtliche technischen und organisatorischen Maßnahmen, die ein Verantwortlicher oder Auftragsverarbeiter unter Berücksichtigung von Stand der Technik, Implementierungskosten, Art, Umfang, Umständen und Zwecken der Verarbeitung sowie Eintrittswahrscheinlichkeit und Schwere der Risiken für die Rechte und Freiheiten natürlicher Personen ergreift, um ein dem Risiko angemessenes Schutzniveau zu gewährleisten (Art. 32 Abs. 1 DSGVO).
 
 **Sechs Schutzziele (Art. 32 Abs. 1 lit. b + c + d):**
@@ -215,7 +219,7 @@ Sämtliche technischen und organisatorischen Maßnahmen, die ein Verantwortliche
 | **Löschkonzept** | Crypto-Shredding (siehe #6); schriftliche Löschfristen pro Datenkategorie |
 | **Meldewesen** | 72-h-Meldekette (siehe #9); Kontakte Aufsichtsbehörde + DPO hinterlegt |
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **Art. 5 Abs. 1 lit. f DSGVO** — Integrität und Vertraulichkeit als Grundprinzip
 - **Art. 24 Abs. 1 DSGVO** — allgemeine Verantwortungspflicht
 - **Art. 25 DSGVO** — Privacy by Design/Default
@@ -263,7 +267,7 @@ Sämtliche technischen und organisatorischen Maßnahmen, die ein Verantwortliche
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Systematische Bewertung der Auswirkungen einer geplanten Verarbeitung personenbezogener Daten auf den Schutz dieser Daten — **vor Beginn der Verarbeitung** durchzuführen, wenn die Verarbeitung voraussichtlich ein **hohes Risiko** für die Rechte und Freiheiten der betroffenen Personen zur Folge hat (Art. 35 Abs. 1 DSGVO).
 
 **Pflicht-Trigger (Art. 35 Abs. 3 DSGVO + Listen der Aufsichtsbehörden):**
@@ -313,7 +317,7 @@ Systematische Bewertung der Auswirkungen einer geplanten Verarbeitung personenbe
 | ✅ freigegeben | DPO-Unterschrift, Release-Freigabe erteilt |
 | 🔄 Re-Evaluation fällig | bei wesentlicher Verarbeitungsänderung |
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **Art. 35 DSGVO** — DSFA
 - **Art. 36 DSGVO** — Vorherige Konsultation (bei hohem Restrisiko)
 - **Art. 9 DSGVO** — besondere Kategorien
@@ -354,7 +358,7 @@ Systematische Bewertung der Auswirkungen einer geplanten Verarbeitung personenbe
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Gesamtheit der in Art. 12–23 DSGVO normierten Rechte, die jede betroffene natürliche Person gegenüber dem Verantwortlichen geltend machen kann.
 
 **Übersicht der sieben Kernrechte:**
@@ -379,7 +383,7 @@ Gesamtheit der in Art. 12–23 DSGVO normierten Rechte, die jede betroffene nat�
 | Identitätsprüfung | erforderlich, aber nicht überzogen |
 | Begründungspflicht | bei Ablehnung: Gründe + Hinweis auf Beschwerderecht |
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **Art. 12 DSGVO** — allgemeine Informationspflichten + Verfahren
 - **Art. 13, 14 DSGVO** — Informationspflichten bei Erhebung
 - **Art. 15–22 DSGVO** — die sieben Kernrechte
@@ -420,7 +424,7 @@ Gesamtheit der in Art. 12–23 DSGVO normierten Rechte, die jede betroffene nat�
 | **Status** | DRAFT |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Architekturmuster, bei dem personenbezogene Daten mit einem **pro-Person einzigartigen Schlüssel** verschlüsselt werden. Die Verschlüsselung erfolgt transparent auf Feld- oder Objektebene; die Schlüssel werden **separat** in einem Key-Management-System (KMS) verwaltet. Wird der Schlüssel vernichtet, ist das Chiffrat ohne Zusatzinformation nicht mehr entschlüsselbar — die Struktur der Aufzeichnung bleibt erhalten, der Inhalt ist faktisch unzugänglich.
 
 > ⚠ **Rechtliche Präzisierung:** Crypto-Shredding ist **technisches Verfahren**, **nicht** Rechtsgrundlage. Es setzt **keine Löschung im Sinne von Art. 17 Abs. 1 DSGVO** um, sondern die **Einschränkung der Verarbeitung** nach **Art. 18 Abs. 1 lit. b DSGVO** — die greift, wenn der Löschpflicht eine Aufbewahrungspflicht entgegensteht (**Art. 17 Abs. 3 lit. b DSGVO**, hier: § 147 AO / § 257 HGB / GoBD).
@@ -509,7 +513,7 @@ CREATE TABLE encryption_key_refs (
 );
 ```
 
-**Rechtsgrundlage & Standards (präzisiert):**
+### Rechtsgrundlage & Standards (präzisiert)
 
 *Primäre Rechtsgrundlagen (für die Einordnung als Art. 18-Umsetzung):*
 - **Art. 17 Abs. 1 DSGVO** — Recht auf Löschung (Ausgangsanspruch)
@@ -596,7 +600,7 @@ CREATE TABLE encryption_key_refs (
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 - **Pseudonymisierung (Art. 4 Nr. 5 DSGVO):** Verarbeitung personenbezogener Daten in einer Weise, auf welche die personenbezogenen Daten **ohne Hinzuziehung zusätzlicher Informationen** nicht mehr einer spezifischen betroffenen Person zugeordnet werden können — sofern diese zusätzlichen Informationen gesondert aufbewahrt werden und technischen und organisatorischen Maßnahmen unterliegen. **Pseudonyme Daten bleiben personenbezogen.**
 - **Anonymisierung (Erwägungsgrund 26):** Verarbeitung, die dazu führt, dass die betroffene Person **nicht oder nicht mehr identifizierbar** ist — unter Berücksichtigung aller Mittel, die vom Verantwortlichen oder einer anderen Person **nach allgemeinem Ermessen** wahrscheinlich genutzt werden, um die natürliche Person zu identifizieren. **Anonymisierte Daten fallen nicht mehr unter DSGVO.**
 
@@ -622,7 +626,7 @@ Faktoren:
 
 **k-Anonymität als Kriterium:** jeder Datensatz ist in einer Gruppe von mindestens `k` Datensätzen mit identischen quasi-identifizierenden Attributen — `k ≥ 5` oft als Richtwert, `k ≥ 20` für sensitive Daten.
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **Art. 4 Nr. 5 DSGVO** — Pseudonymisierung
 - **Erwägungsgrund 26 DSGVO** — Anonymisierung
 - **Art. 25 DSGVO** — Pseudonymisierung als Privacy by Design-Maßnahme
@@ -663,7 +667,7 @@ Faktoren:
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Übermittlung personenbezogener Daten an einen Empfänger in einem Land außerhalb des Europäischen Wirtschaftsraums (EU + Island + Liechtenstein + Norwegen). DSGVO Kapitel V (Art. 44–50) regelt, unter welchen Bedingungen solche Transfers zulässig sind: grundsätzlich nur dann, wenn das empfangende Land ein **angemessenes Schutzniveau** bietet oder zusätzliche **Garantien** gewährleistet werden.
 
 **Rechtsgrundlagen für Drittlandtransfer (Hierarchie):**
@@ -704,7 +708,7 @@ Faktoren:
 5. Organisatorische und vertragliche Maßnahmen
 6. Dokumentation + regelmäßige Neubewertung
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **Art. 44–50 DSGVO** — Drittlandtransfer
 - **Art. 45 DSGVO** — Angemessenheitsbeschluss
 - **Art. 46 DSGVO** — Angemessene Garantien
@@ -745,7 +749,7 @@ Faktoren:
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Verletzung des Schutzes personenbezogener Daten ist „eine Verletzung der Sicherheit, die zur unbeabsichtigten oder unrechtmäßigen Vernichtung, zum Verlust, zur Veränderung, zur unbefugten Offenlegung von oder zum unbefugten Zugang zu personenbezogenen Daten führt, die übermittelt, gespeichert oder auf sonstige Weise verarbeitet wurden" (Art. 4 Nr. 12 DSGVO).
 
 **Drei Kategorien einer Datenpanne:**
@@ -807,7 +811,7 @@ Direkte Info an Betroffene
 - Empfehlungen für Betroffene zur Risikominimierung
 - Kontakt zur weiteren Information
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **Art. 33 DSGVO** — Meldung an Aufsichtsbehörde (72-h-Regel)
 - **Art. 34 DSGVO** — Benachrichtigung betroffener Personen
 - **Art. 4 Nr. 12 DSGVO** — Definition der Verletzung
@@ -852,7 +856,7 @@ Direkte Info an Betroffene
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Berufsspezifische Schweigepflicht, die für bestimmte Berufsgruppen (Steuerberater, Rechtsanwälte, Ärzte, Priester, …) zusätzlich zur allgemeinen DSGVO gilt. Sie ist **strafrechtlich** in § 203 StGB und **standesrechtlich** in § 57 StBerG verankert und umfasst **alle** im Rahmen des Berufsausübung anvertrauten Tatsachen — personenbezogen oder nicht.
 
 **Drei Regelungsebenen im Vergleich:**
@@ -911,7 +915,7 @@ Abs. 4 präzisiert: *„Die Hinzuziehung muss zur Inanspruchnahme einer Tätigke
 | Dokumentation der Erforderlichkeit | Mandanten-Vertrag bezieht Software-Nutzung ein |
 | **Feature-Gate „§ 203-Perimeter"** | jedes Feature im Product-Backlog bekommt Label `inside-203` oder `outside-203`; Letztere brauchen separate rechtliche Prüfung vor Merge |
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **§ 203 StGB** — Verletzung von Privatgeheimnissen
 - **§ 203 Abs. 3 StGB** — Mitwirkende Personen
 - **§ 203 Abs. 4 StGB** — Erforderlichkeits-Kriterium für Dritteinbeziehung
@@ -946,3 +950,7 @@ Abs. 4 präzisiert: *„Die Hinzuziehung muss zur Inanspruchnahme einer Tätigke
 - **Bei jedem Ausnahmefall (Polizei-Anfrage, Gerichtsbeschluss, Medien-Anfrage): Rücksprache mit Fachanwalt für Strafrecht + Datenschutzrecht, bevor Daten herausgegeben werden — sonst droht Strafbarkeit nach § 203 StGB für den Steuerberater persönlich.**
 
 ---
+
+> **Modul-Footer**
+> **Nächstes Modul:** — (letztes Modul) · **Übersicht:** [INDEX.md](./INDEX.md)
+> **Terminology-Sprint 1 · Modul 09 · Stand 2026-04-23**

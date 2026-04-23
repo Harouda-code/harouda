@@ -15,6 +15,10 @@ Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (AO, HGB) und
 (Krankengeld, Elterngeld, Mutterschaftsgeld), Pfändungstabelle und
 Lohnpfändung (§ 850 ff. ZPO), Betriebliche Altersvorsorge (bAV).
 
+> **Modul-Metadaten**
+> **Modul:** 03 · Lohn & SV · **Einträge:** 20 FEST · **Stand:** 2026-04-23
+> **Baut auf:** [01-grundlagen.md](./01-grundlagen.md), [04-steuer-meldungen.md](./04-steuer-meldungen.md) · **Spätere Module:** —
+
 ---
 
 ## Inhaltsverzeichnis
@@ -54,7 +58,7 @@ Lohnpfändung (§ 850 ff. ZPO), Betriebliche Altersvorsorge (bAV).
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Der vom Arbeitgeber geschuldete Gesamt-Geldwert der Arbeitsleistung **vor jeglichen Abzügen** für Steuern oder Sozialversicherung. Umfasst neben dem vertraglichen Grundlohn alle Zulagen, Zuschläge, Sachbezüge und Einmalzahlungen, soweit sie arbeitsrechtlich geschuldet oder freiwillig gewährt werden. Bildet die **Bemessungsgrundlage** für nahezu alle nachfolgenden Abzüge.
 
 **Typische Bestandteile:**
@@ -65,7 +69,7 @@ Der vom Arbeitgeber geschuldete Gesamt-Geldwert der Arbeitsleistung **vor jeglic
 - Einmalzahlungen (Weihnachtsgeld, Urlaubsgeld, 13. Monatsgehalt, Bonus)
 - Überstundenvergütung, Prämien, Provisionen
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 611a BGB — Arbeitsvertrag (Grundlage der Zahlungspflicht)
 - § 14 SGB IV — Arbeitsentgelt (SV-rechtliche Definition)
 - § 19 EStG — Einkünfte aus nichtselbständiger Arbeit
@@ -111,7 +115,7 @@ Der vom Arbeitgeber geschuldete Gesamt-Geldwert der Arbeitsleistung **vor jeglic
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Eine **Sonderform der Einkommensteuer** (§ 38 EStG), die der Arbeitgeber für jeden Arbeitnehmer berechnet, vom Bruttolohn **einbehält** (Quellensteuer) und an das Betriebsstätten-Finanzamt abführt. Rechtlich bleibt Schuldner der LSt der Arbeitnehmer (§ 38 Abs. 2 EStG), doch der Arbeitgeber **haftet** für korrekte Einbehaltung und Abführung (§ 42d EStG). Die LSt ist eine **Vorauszahlung auf die Einkommensteuer** — die endgültige Steuerlast ergibt sich erst bei der Jahres-Einkommensteuer-Veranlagung (§ 46 EStG).
 
 **Berechnungsgrundlage:**
@@ -120,7 +124,7 @@ Eine **Sonderform der Einkommensteuer** (§ 38 EStG), die der Arbeitgeber für j
 - **ELStAM** (elektronische Lohnsteuer-Abzugsmerkmale, §§ 39, 39e EStG — eigener Eintrag in Batch 2)
 - Amtliche **Lohnsteuertabelle** (Tages-, Wochen-, Monats-, Jahresbasis) oder **programmierter Algorithmus** nach § 39b Abs. 6 EStG
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 38 EStG — Pflicht zur Einbehaltung
 - § 38a EStG — Höhe der Lohnsteuer
 - § 38b EStG — Steuerklassen I–VI
@@ -170,7 +174,7 @@ Eine **Sonderform der Einkommensteuer** (§ 38 EStG), die der Arbeitgeber für j
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Eine **Zuschlagsteuer zur Lohnsteuer** (nicht zum Bruttolohn!), die der Arbeitgeber nur einbehält, wenn der Arbeitnehmer einer der vertraglich anerkannten Religionsgemeinschaften angehört. Wird gemeinsam mit der LSt einbehalten und abgeführt, über die LStA gemeldet. Die Einnahmen fließen an die jeweilige Religionsgemeinschaft, nicht an den Fiskus — der Staat fungiert nur als **Einzug-Dienstleister**.
 
 **Hebesätze:**
@@ -179,7 +183,7 @@ Eine **Zuschlagsteuer zur Lohnsteuer** (nicht zum Bruttolohn!), die der Arbeitge
 | Bayern, Baden-Württemberg | **8 %** der LSt |
 | Alle anderen 14 Bundesländer | **9 %** der LSt |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - Kirchensteuergesetze der **einzelnen Bundesländer** (KiStG BY, KiStG NRW, etc.) — keine bundeseinheitliche Regelung, nur Rahmen durch **Grundgesetz Art. 140 GG i. V. m. Art. 137 Abs. 6 WRV**
 - § 51a EStG — Besonderheiten bei Kapitalerträgen (nicht lohn-relevant)
 - Bundeseinheitliche Regeln für Kappungsgrenze (2,75 % bis 4 % des zvE, je Bundesland)
@@ -223,7 +227,7 @@ Eine **Zuschlagsteuer zur Lohnsteuer** (nicht zum Bruttolohn!), die der Arbeitge
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Eine Ergänzungsabgabe zur Einkommen-, Lohn-, Körperschaft- und Kapitalertragsteuer, 1991 zur Finanzierung der deutschen Wiedervereinigung eingeführt. Der **Regelsatz beträgt 5,5 % der Bemessungsgrundlage** (bei Arbeitnehmern: der Lohnsteuer). Seit dem Gesetz zur Rückführung des Solidaritätszuschlags 1995 (in Kraft 01.01.2021) ist der Zuschlag für etwa 90 % der Lohn- und Einkommensteuerzahler **faktisch abgeschafft** — durch drastisch erhöhte Freigrenzen und eine gleitende Milderungszone.
 
 **Drei-Zonen-Modell (Stand 2025/2026):**
@@ -236,7 +240,7 @@ Eine Ergänzungsabgabe zur Einkommen-, Lohn-, Körperschaft- und Kapitalertragst
 
 Die Grenzwerte sind **jährlich indexiert** und werden durch das BMF per Verordnung angepasst. Bei Ehegatten-Zusammenveranlagung verdoppeln sich die Grenzwerte.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **Solidaritätszuschlaggesetz (SolZG 1995)** — Rahmengesetz
 - § 1 SolZG — Erhebung
 - § 3 SolZG — Bemessungsgrundlage + **Freigrenze**
@@ -281,7 +285,7 @@ Die Grenzwerte sind **jährlich indexiert** und werden durch das BMF per Verordn
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die gesetzliche Sozialversicherung in Deutschland ist ein **umlagefinanziertes Pflichtversicherungssystem** für abhängig Beschäftigte. Der allgemeine Rahmen (Begriffe, Beitragspflicht, Meldeverfahren) ist im **Sozialgesetzbuch Viertes Buch (SGB IV)** kodifiziert und wird durch die Sondergesetze der einzelnen Zweige (SGB V, VI, III, XI, VII) konkretisiert. Die **vier lohn-relevanten Zweige**, bei denen der Arbeitnehmer einen Anteil zahlt, sind: Kranken-, Renten-, Arbeitslosen- und Pflegeversicherung. Die **Unfallversicherung (SGB VII)** trägt der Arbeitgeber allein — sie ist außerhalb des Scopes dieses Eintrags.
 
 **Strukturprinzipien:**
@@ -291,7 +295,7 @@ Die gesetzliche Sozialversicherung in Deutschland ist ein **umlagefinanziertes P
 - **Arbeitgeberzuschuss** bei freiwillig oder privat versicherten Arbeitnehmern (§ 257 SGB V)
 - **Einzug** erfolgt **zentral über die Krankenkasse** des Arbeitnehmers als sogenannte "Einzugsstelle" (§ 28h SGB IV) — der Arbeitgeber meldet alle SV-Beiträge an die Krankenkasse, die sie an die anderen Zweige weiterleitet
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **SGB IV** — allgemeiner Teil (Arbeitsentgelt § 14, Beschäftigung § 7, Meldeverfahren §§ 28a ff.)
 - **SGB V** — Krankenversicherung (→ [KV](#6-krankenversicherung-kv))
 - **SGB VI** — Rentenversicherung (→ [RV](#7-rentenversicherung-rv))
@@ -341,7 +345,7 @@ Die gesetzliche Sozialversicherung in Deutschland ist ein **umlagefinanziertes P
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Der größte und organisatorisch komplexeste Zweig der gesetzlichen Sozialversicherung. Träger sind die **gesetzlichen Krankenkassen** (GKV) — rund 95 Pflichtkassen, die miteinander konkurrieren und je einen **individuellen Zusatzbeitragssatz** erheben. Der Arbeitnehmer hat **freie Kassenwahl** (§ 173 SGB V). Die KV fungiert zugleich als **zentrale Einzugsstelle** für alle vier SV-Zweige (§ 28h SGB IV).
 
 **Beitragssystematik (Stand 2025/2026, jährlich gegen Rechengrößenverordnung zu verifizieren):**
@@ -355,7 +359,7 @@ Der größte und organisatorisch komplexeste Zweig der gesetzlichen Sozialversic
 - **Beitragsbemessungsgrenze KV (BBG):** jährlich angepasst, Eintrag in Batch 2
 - **Jahresarbeitsentgeltgrenze (JAEG):** Grenze zur Versicherungsfreiheit / Wechsel in PKV; jährlich angepasst, Eintrag in Batch 2
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **SGB V** — Kernkodifikation
 - § 5 SGB V — Versicherungspflicht
 - § 6 SGB V — Versicherungsfreiheit (JAEG-Überschreitung)
@@ -407,7 +411,7 @@ Der größte und organisatorisch komplexeste Zweig der gesetzlichen Sozialversic
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Der älteste (1889, Bismarck) und zweitgrößte Zweig der deutschen Sozialversicherung. Finanziert im **Umlageverfahren**: die Beiträge der aktiven Versicherten finanzieren die aktuellen Renten. Trägerorganisationen sind die **Deutsche Rentenversicherung Bund (DRV Bund)** auf Bundesebene sowie regionale Träger (DRV Nord, Mitteldeutschland, etc.). Die Versicherungsnummer (VSNR) wird von der RV vergeben und gilt gleichzeitig als zentrale Kennung für die gesamte SV.
 
 **Beitragssystematik:**
@@ -423,7 +427,7 @@ Der älteste (1889, Bismarck) und zweitgrößte Zweig der deutschen Sozialversic
 - **Hinterbliebenenrente** — Witwen-, Witwer-, Waisenrente
 - Leistungen zur Teilhabe (Reha)
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **SGB VI** — Kernkodifikation
 - § 1 SGB VI — Versicherungspflicht (Arbeitnehmer, bestimmte Selbstständige)
 - § 7 SGB VI — freiwillige Versicherung
@@ -474,7 +478,7 @@ Der älteste (1889, Bismarck) und zweitgrößte Zweig der deutschen Sozialversic
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Gesetzliche Pflichtversicherung gegen das Risiko der Arbeitslosigkeit. Finanziert **Arbeitslosengeld I (ALG I)** — eine einkommensbezogene Versicherungsleistung nach Beschäftigungsverlust. Trägerorganisation ist die **Bundesagentur für Arbeit (BA)** mit Sitz in Nürnberg. Gesetzlich geregelt im **SGB III** (Arbeitsförderung), das neben der ALV auch die aktive Arbeitsmarktpolitik (Weiterbildung, Umschulung, Kurzarbeitergeld) umfasst.
 
 **Beitragssystematik (Stand 2025/2026, gegen aktuelle Rechengrößenverordnung zu prüfen):**
@@ -492,7 +496,7 @@ Der Satz wurde in den letzten Jahren mehrfach verändert (2023 auf 2,6 % nach te
 - **Förderung beruflicher Weiterbildung**
 - **Gründungszuschuss** (selten, Ermessensleistung)
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **SGB III** — Kernkodifikation
 - § 24 SGB III — Versicherungspflicht (Arbeitnehmer, Auszubildende etc.)
 - § 341 SGB III — Beitragssatz (aktuell 2,6 %)
@@ -540,7 +544,7 @@ Der Satz wurde in den letzten Jahren mehrfach verändert (2023 auf 2,6 % nach te
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Jüngster Zweig der gesetzlichen Sozialversicherung (eingeführt 1995). Finanziert Leistungen zur Grundpflege, hauswirtschaftlichen Versorgung und Betreuung bei Pflegebedürftigkeit. Wird **organisatorisch an die Krankenkassen angedockt** (jede KV-Kasse hat eine zugehörige Pflegekasse, § 46 SGB XI). Die PV ist aufgrund der **kinderzahl-abhängigen Beitragsdifferenzierung** und der **Sachsen-Besonderheit** die **rechnerisch komplexeste** der vier Lohn-SV-Zweige.
 
 **Beitragssystematik (Stand 2024/2025 nach PUEG vom Juli 2023, jährlich gegen Rechengrößenverordnung zu prüfen):**
@@ -554,7 +558,7 @@ Jüngster Zweig der gesetzlichen Sozialversicherung (eingeführt 1995). Finanzie
 
 **BBG:** identisch zur [KV](#6-krankenversicherung-kv) (nicht zu RV/ALV!).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **SGB XI** — Kernkodifikation
 - § 1 SGB XI — Grundsatz, Systematik
 - § 20 SGB XI — Versicherungspflicht (folgt der KV-Pflicht)
@@ -611,7 +615,7 @@ Jüngster Zweig der gesetzlichen Sozialversicherung (eingeführt 1995). Finanzie
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Der Betrag, der dem Arbeitnehmer nach Abzug aller **gesetzlich vorgeschriebenen** Abgaben (Lohnsteuer, Kirchensteuer, Solidaritätszuschlag, Arbeitnehmer-Anteile an KV, RV, ALV, PV) sowie ggf. Dritt-Abzügen (Lohnpfändung, freiwillige Direktversicherung, AG-Darlehen) zur Auszahlung verbleibt. Ist der **rechtlich geschuldete Auszahlungsbetrag** (§ 614 BGB i. V. m. § 107 GewO) und die **Bemessungsgrundlage für Pfändungen** (§ 850 ff. ZPO).
 
 **Berechnungsformel (vereinfacht):**
@@ -629,7 +633,7 @@ Bruttolohn                       (#1)
 = Auszahlungsbetrag auf Bankkonto
 ```
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 611a BGB** — Arbeitsvertrag und Entgeltpflicht
 - **§ 614 BGB** — Fälligkeit (i. d. R. nach geleisteter Arbeit)
 - **§ 107 GewO** — Entgeltzahlung; bargeldlos per Überweisung (Sachbezüge max. teilweise)
@@ -679,7 +683,7 @@ Bruttolohn                       (#1)
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Das zentrale elektronische Datenbank-System des Bundes, in dem für jeden Arbeitnehmer die für die Lohnsteuer relevanten persönlichen Merkmale (Steuerklasse, Faktor, Kinderfreibeträge, Konfession, persönliche Freibeträge, Hinzurechnungsbeträge) hinterlegt sind. Seit 2013 Pflicht-Ersatz der papierbasierten Lohnsteuerkarte. Der Arbeitgeber MUSS die Merkmale seiner Arbeitnehmer **vor dem ersten Lohnabzug** elektronisch abrufen und auf **monatliche Änderungsmitteilungen** reagieren.
 
 **Lifecycle des ELStAM-Abrufs:**
@@ -688,7 +692,7 @@ Das zentrale elektronische Datenbank-System des Bundes, in dem für jeden Arbeit
 - **Monatliche Änderungsliste** — AG erhält automatisch Delta-Updates (Heirat, Kind, Kirchenaustritt, Wohnsitzwechsel)
 - **Abmeldung** (bei Ende des Arbeitsverhältnisses) — AG meldet Austrittsdatum
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 39 EStG — Lohnsteuer-Abzugsmerkmale
 - § 39e EStG — **Kernvorschrift: elektronische Bereitstellung**
 - § 39b EStG — Berechnung der LSt auf Basis der ELStAM-Daten
@@ -737,7 +741,7 @@ Das zentrale elektronische Datenbank-System des Bundes, in dem für jeden Arbeit
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Das gesetzlich vorgeschriebene **elektronische Melde- und Übermittlungsverfahren** zwischen Arbeitgebern und den Sozialversicherungsträgern. Basis ist die **Datenerfassungs- und -übermittlungsverordnung (DEÜV)**. Der Arbeitgeber meldet jede versicherungsrelevante Veränderung (Beginn, Ende, Unterbrechung, Jahresmeldung, Änderung) an die **Einzugsstelle** (= Krankenkasse des Arbeitnehmers, § 28h SGB IV), die die Daten wiederum an DRV, BA und ggf. Unfallversicherungsträger weiterleitet.
 
 **Meldungsgrund-Codes (Auswahl):**
@@ -751,7 +755,7 @@ Das gesetzlich vorgeschriebene **elektronische Melde- und Übermittlungsverfahre
 | **54** | Sofortmeldung (§ 28a Abs. 4 SGB IV — ausgewählte Branchen, am ersten Arbeitstag) |
 | **70** | Änderung Beitragsgruppe |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **DEÜV** (Datenerfassungs- und -übermittlungsverordnung) — Kernverordnung
 - § 28a SGB IV — **Meldepflicht des Arbeitgebers**
 - § 28b SGB IV — gemeinsame Grundsätze Gesamtsozialversicherungsbeitrag
@@ -801,7 +805,7 @@ Das gesetzlich vorgeschriebene **elektronische Melde- und Übermittlungsverfahre
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die **gesetzliche Obergrenze** des Arbeitsentgelts, bis zu der Beiträge zur gesetzlichen Sozialversicherung erhoben werden. Entgelt-Bestandteile **oberhalb** der BBG bleiben beitragsfrei. Die BBG wird **jährlich** durch die **Sozialversicherungs-Rechengrößenverordnung** (BMAS-Verordnung auf Basis § 17 SGB IV) angepasst, orientiert an der Entwicklung der Bruttolöhne und -gehälter.
 
 **Zwei Grenzen, zwei Bereiche:**
@@ -816,7 +820,7 @@ Zusätzlich bisher (bis 2024 / Übergang 2025):
 
 **Monatswerte** sind 1/12 des Jahreswertes (nicht genau, sondern gerundet nach Verordnung).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 17 SGB IV** — Ermächtigung zur jährlichen Rechengrößenverordnung
 - **§ 6 Abs. 1 Nr. 1 SGB V** — JAEG-Bezug (zu unterscheiden, siehe [JAEG](#14-jahresarbeitsentgeltgrenze-jaeg))
 - § 157 SGB VI — BBG RV
@@ -873,7 +877,7 @@ Zusätzlich bisher (bis 2024 / Übergang 2025):
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die Einkommensschwelle, oberhalb derer ein Arbeitnehmer **nicht mehr der gesetzlichen Krankenversicherungspflicht unterliegt** (§ 6 Abs. 1 Nr. 1 SGB V). Wer JAEG in drei aufeinanderfolgenden Kalenderjahren überschreitet, **wird versicherungsfrei** und kann wählen: freiwillige GKV-Mitgliedschaft oder Wechsel in die **Private Krankenversicherung (PKV)**. Die JAEG wird jährlich ebenfalls über die **Sozialversicherungs-Rechengrößenverordnung** angepasst und liegt traditionell etwas über der BBG KV/PV.
 
 **Zwei JAEG-Werte:**
@@ -883,7 +887,7 @@ Die Einkommensschwelle, oberhalb derer ein Arbeitnehmer **nicht mehr der gesetzl
 | **Allgemeine JAEG** | Alle Arbeitnehmer, die **nach** 2002 versicherungspflichtig wurden |
 | **Besondere JAEG** | Arbeitnehmer, die am 31.12.2002 bereits in PKV versichert und versicherungsfrei waren (Bestandsschutz nach § 6 Abs. 7 SGB V) — liegt niedriger |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 6 Abs. 1 Nr. 1 SGB V — allgemeine JAEG (Versicherungsfreiheit)
 - § 6 Abs. 6 SGB V — jährliche Anpassung durch BMAS-Verordnung
 - § 6 Abs. 7 SGB V — **besondere JAEG** (Bestandsschutz)
@@ -935,7 +939,7 @@ Die Einkommensschwelle, oberhalb derer ein Arbeitnehmer **nicht mehr der gesetzl
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Eine geringfügige Beschäftigung im Sinne des § 8 SGB IV mit besonderer sozialversicherungs- und steuerrechtlicher Behandlung. Zwei Formen:
 
 **(1) Geringfügig entlohnte Beschäftigung** (§ 8 Abs. 1 Nr. 1 SGB IV):
@@ -956,7 +960,7 @@ Beschäftigung, die von vornherein auf maximal **3 Monate oder 70 Arbeitstage** 
 | Lohnsteuer | **Pauschsteuer 2 %** (inkl. KiSt + SolZ) ODER individuell nach ELStAM | Pauschsteuer 25 % oder individuell |
 | Einzugsstelle | **Minijob-Zentrale** (DRV Knappschaft-Bahn-See) | je nach Fall |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 8 SGB IV** — Begriff der geringfügigen Beschäftigung (Kernvorschrift)
 - § 8a SGB IV — Minijob im Privathaushalt
 - § 14 SGB IV — Zusammenrechnung bei Mehrfachbeschäftigung
@@ -1011,7 +1015,7 @@ Beschäftigung, die von vornherein auf maximal **3 Monate oder 70 Arbeitstage** 
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Ein Beschäftigungsverhältnis mit regelmäßigem Monatsentgelt **oberhalb der Geringfügigkeitsgrenze** ([Minijob](#15-minijob--geringfügige-beschäftigung)) und **unterhalb der oberen Grenze des Übergangsbereichs** (ab 01.01.2023: **2.000 €**). Im Übergangsbereich zahlt der Arbeitnehmer **reduzierte SV-Beiträge** nach einer speziellen Formel, während der Arbeitgeber den **vollen regulären AG-Anteil** leistet. Ziel: sanfter Übergang von Minijob zur Vollbeschäftigung, ohne den Arbeitnehmer mit einem Sprung in die volle Beitragslast zu konfrontieren.
 
 **Berechnung (§ 20 Abs. 2a SGB IV, vereinfacht):**
@@ -1026,7 +1030,7 @@ Die Formel ist **nicht-trivial** und in § 20 Abs. 2a SGB IV direkt kodifiziert.
 
 **AG-Anteil:** unverändert **voll** auf das reale Arbeitsentgelt (keine Reduktion!).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 20 Abs. 2 SGB IV** — Definition Übergangsbereich
 - **§ 20 Abs. 2a SGB IV** — Berechnungsformel für reduzierte AN-Bemessung
 - § 163 Abs. 10 SGB VI — rentenrechtliche Gleichstellung (AN-Entgeltpunkte werden trotz reduzierter Beiträge voll berechnet)
@@ -1076,7 +1080,7 @@ Die Formel ist **nicht-trivial** und in § 20 Abs. 2a SGB IV direkt kodifiziert.
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Eine **vom Arbeitgeber übernommene pauschalierte Lohnsteuer**, die alternativ zur regulären individuellen LSt-Berechnung nach ELStAM angewandt wird. Wirtschaftlich trägt sie der Arbeitgeber (nicht der Arbeitnehmer), wodurch der entsprechende Lohnbestandteil für den AN **steuerfrei** bleibt. Die Pauschsteuer wird direkt vom AG an das Finanzamt abgeführt und über die LStA gemeldet. Drei Hauptvarianten in §§ 40–40b EStG.
 
 **Überblick (vereinfacht):**
@@ -1093,7 +1097,7 @@ Eine **vom Arbeitgeber übernommene pauschalierte Lohnsteuer**, die alternativ z
 
 Die Pauschalierung ist **optional** (Wahlrecht des AG) in allen Fällen außer § 40a Abs. 2 (Minijob mit 2 % — faktisch Regelfall, aber rechtlich ebenfalls wählbar).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 40 EStG** — Pauschalierung in besonderen Fällen
 - **§ 40a EStG** — Pauschalierung bei Teilzeit-/Aushilfskräften (Minijob + kurzfristige Beschäftigung)
 - **§ 40b EStG** — Pauschalierung bei Direktversicherungen (rückwirkend auf 2004 und früher abgeschlossene Verträge)
@@ -1143,7 +1147,7 @@ Die Pauschalierung ist **optional** (Wahlrecht des AG) in allen Fällen außer �
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Drei gesetzlich verpflichtende **Umlagen des Arbeitgebers** zu Ausgleichsfonds, die zwar technisch über die Lohnabrechnung laufen (und über die KV-Einzugsstelle abgerechnet werden), aber **ausschließlich vom Arbeitgeber getragen** werden. Sie sind **kein Arbeitsentgelt-Abzug** beim Arbeitnehmer, erscheinen aber als **AG-Lohnnebenkosten** und sind zwingend in der Gesamtaufwandsbetrachtung (Gesamtkosten AG) zu berücksichtigen.
 
 **Überblick:**
@@ -1158,7 +1162,7 @@ Drei gesetzlich verpflichtende **Umlagen des Arbeitgebers** zu Ausgleichsfonds, 
 - **U1, U2:** Krankenkasse des Arbeitnehmers (nicht Minijob-Zentrale!). Bei Minijobs: Minijob-Zentrale.
 - **U3:** ebenfalls Krankenkasse als technische Einzugsstelle; Empfänger ist aber die BA (Bundesagentur für Arbeit).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **Aufwendungsausgleichsgesetz (AAG)** vom 22.12.2005 — Grundlage U1 und U2
 - § 1 AAG — Geltungsbereich (U1-Pflicht bei ≤ 30 AN)
 - § 7 AAG — Durchführung und Umlagetragung
@@ -1212,7 +1216,7 @@ Drei gesetzlich verpflichtende **Umlagen des Arbeitgebers** zu Ausgleichsfonds, 
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die vom Deutschen Rentenversicherungsträger (meist DRV Bund oder DRV Regional) vergebene, **lebenslang gültige 12-stellige Identifikationsnummer** eines gesetzlich Sozialversicherten. Primäres Identifikationsmerkmal in allen SV-bezogenen Verfahren: DEÜV-Meldungen, Beitragsnachweise, ELStAM-Verknüpfung (in Verbindung mit IdNr), Rentenauskünfte. Die VSNR bleibt **unverändert bei Namenswechsel, Umzug oder Wechsel der Krankenkasse**.
 
 **Struktur (12 Zeichen, Bereichs-Format nach § 147 SGB VI):**
@@ -1227,7 +1231,7 @@ Position 12     Prüfziffer (mod-10-Algorithmus mit gewichteter Summe)
 
 **Beispiel:** `15 220475 M 03 4` → Bereich 15, geboren 22.04.1975, Name beginnt mit M, männlich (03), Prüfziffer 4
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 147 SGB VI** — Versicherungsnummer, Vergabe, Struktur
 - §§ 18f–18h SGB IV — allgemeine Regelungen
 - § 196 SGB VI — Zuständigkeit für Vergabe (DRV)
@@ -1281,7 +1285,7 @@ Position 12     Prüfziffer (mod-10-Algorithmus mit gewichteter Summe)
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Das gesetzlich vorgeschriebene **Dokument**, mit dem der Arbeitgeber dem Arbeitnehmer bei jeder Lohnzahlung die **vollständige Zusammensetzung des Arbeitsentgelts** nachweist. Pflicht nach **§ 108 GewO** (Gewerbeordnung). Gleichzeitig ist die Abrechnung ein **buchhalterischer Beleg** i. S. d. GoBD — unveränderlich zu archivieren und jederzeit reproduzierbar. Die Abrechnung ist der **End-Output** der gesamten Payroll-Pipeline: sie aggregiert Ergebnisse aller in diesem Dokument dokumentierten Einzelberechnungen.
 
 **Pflichtinhalte nach § 108 Abs. 1 GewO + Entgeltbescheinigungsverordnung (EBV):**
@@ -1302,7 +1306,7 @@ Das gesetzlich vorgeschriebene **Dokument**, mit dem der Arbeitgeber dem Arbeitn
 - Eine **Unterzeichnung** ist nicht erforderlich (keine Schriftform)
 - Die Ausgabe **monatlich** mit der Zahlung ist Regelfall
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **§ 108 GewO** — Abrechnung des Arbeitsentgelts (Kernvorschrift)
 - **Entgeltbescheinigungsverordnung (EBV)** vom 19.12.2012 — Detailinhalte
 - § 126b BGB — Textform
@@ -1351,3 +1355,9 @@ Das gesetzlich vorgeschriebene **Dokument**, mit dem der Arbeitgeber dem Arbeitn
 - **Aufbewahrungsfrist des AN:** 4 Jahre (für ESt-Zwecke) bis 10 Jahre (bei Kapitalanlagen oder Verlustvorträgen). Der AG bewahrt regulär 6 Jahre auf, bei steuerrelevanten Belegen (Lohnkonten) 10 Jahre (§ 147 Abs. 3 AO).
 - **Mehrsprachigkeit:** Gesetzlich nicht vorgeschrieben, aber praktisch relevant bei internationalen Belegschaften. Deutsches Original bleibt rechtsverbindlich; Übersetzungen können informatorisch beigelegt werden.
 - **GoBD-Reproduzierbarkeit:** Die Abrechnung MUSS jederzeit aus den archivierten Einzelwerten **byte-genau** reproduzierbar sein (gleiche Werte, gleiches Template). Das bedeutet: Template-Versionen müssen archiviert werden, nicht nur die Output-PDFs.
+
+---
+
+> **Modul-Footer**
+> **Nächstes Modul:** [04 · Steuer-Meldungen](./04-steuer-meldungen.md) · **Übersicht:** [INDEX.md](./INDEX.md)
+> **Terminology-Sprint 1 · Modul 03 · Stand 2026-04-23**

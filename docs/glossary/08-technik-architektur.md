@@ -12,6 +12,10 @@ Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (GoBD, Mandant, Verschwiegen
 [06-belege-rechnung.md](./06-belege-rechnung.md) (E-Rechnung, XRechnung — Peppol-Transport) und
 [07-anlagen-inventur.md](./07-anlagen-inventur.md) (Anlagenverzeichnis, Anlage-Events — typische Event-Sourcing-Domäne).
 
+> **Modul-Metadaten**
+> **Modul:** 08 · Technik & Architektur · **Einträge:** 10 FEST · **Stand:** 2026-04-23
+> **Baut auf:** [01-grundlagen.md](./01-grundlagen.md), [02-buchhaltung.md](./02-buchhaltung.md), [04-steuer-meldungen.md](./04-steuer-meldungen.md), [06-belege-rechnung.md](./06-belege-rechnung.md), [07-anlagen-inventur.md](./07-anlagen-inventur.md) · **Spätere Module:** 09 referenziert dieses
+
 ---
 
 ## Inhaltsverzeichnis
@@ -41,7 +45,7 @@ Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (GoBD, Mandant, Verschwiegen
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die Fähigkeit einer Anwendung, **mehrere voneinander isolierte Mandanten** gleichzeitig auf gemeinsamer Infrastruktur zu bedienen, wobei jeder Mandant den Eindruck einer **dedizierten Instanz** hat — sowohl funktional (eigene Daten, eigene Konfiguration) als auch rechtlich (**keine Vermischung**, **keine Leakage**).
 
 **Architektur-Modelle im Vergleich:**
@@ -60,7 +64,7 @@ Rationale:
 3. **Cross-Mandant-Auswertungen** (z. B. Kanzlei-weite Übersicht für Steuerberater) werden durch gezielte Policy-Ausnahmen möglich
 4. **Supabase/PostgreSQL RLS** liefert ein auf Datenbank-Ebene erzwungenes Filter-System — **deutlich sicherer** als Application-Level-Filter, weil der Filter nicht durch Application-Bugs umgehbar ist
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **§ 203 Abs. 1 Nr. 3 StGB** — Verletzung von Privatgeheimnissen durch Steuerberater; Datenvermischung wäre strafbewehrt
 - **§ 57 Abs. 1 StBerG** — Verschwiegenheitspflicht des Steuerberaters
 - **Art. 5 Abs. 1 lit. f DSGVO** — „Integrität und Vertraulichkeit"
@@ -128,7 +132,7 @@ Rationale:
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Deklaratives Zugriffssteuerungsmodell in PostgreSQL (und darauf aufbauenden Systemen wie Supabase), das **pro Tabelle aktivierbar** ist und **Policies** — SQL-Ausdrücke mit `USING`- und `WITH CHECK`-Klauseln — an jede Query transparent anhängt. RLS wird **in der Datenbank-Engine selbst** durchgesetzt, nicht in der Anwendung — dies ist der fundamentale Sicherheitsvorteil gegenüber Application-Level-Filtern.
 
 **Kern-Mechanik:**
@@ -177,7 +181,7 @@ CREATE POLICY tablename_delete ON tablename FOR DELETE USING (mandant_match);
 -- OR mandant_id = ANY (SELECT mandant_id FROM kanzlei_mandanten WHERE user_id = auth.uid())
 ```
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **Art. 32 Abs. 1 lit. b DSGVO** — „Fähigkeit, Vertraulichkeit, Integrität, Verfügbarkeit auf Dauer sicherzustellen" → RLS ist ein unmittelbarer Baustein
 - **Art. 25 Abs. 2 DSGVO** — „Privacy by Default" → erst erlauben, was nötig ist
 - **GoBD Rz. 149** — Zugriffsschutz / Berechtigungskonzept
@@ -251,7 +255,7 @@ CREATE POLICY tablename_delete ON tablename FOR DELETE USING (mandant_match);
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Architektonische Grundregel, dass alle **monetären Werte** — Geldbeträge, Preise, Steuerbeträge, Buchungsbeträge — ausschließlich in **festkomma-genauen Datentypen** (Decimal / NUMERIC) dargestellt werden, **niemals** in Gleitkomma-Typen (Float, Double, JavaScript-nativer `number`). Die Entscheidung ergibt sich aus einer mathematischen Grenze des IEEE-754-Standards und einer rechtlichen Pflicht zur exakten, nachprüfbaren Buchführung.
 
 **Das IEEE-754-Problem — warum Float verboten ist:**
@@ -330,7 +334,7 @@ export class Money {
 }
 ```
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **§ 239 Abs. 2 HGB** — „Die Eintragungen in Büchern und die sonst erforderlichen Aufzeichnungen müssen vollständig, richtig, zeitgerecht und geordnet vorgenommen werden." → **Richtigkeit** schließt Float-Ungenauigkeit aus
 - **§ 146 Abs. 1 AO** — gleichlautende Anforderung steuerrechtlich
 - **GoBD Rz. 50** — Nachvollziehbarkeit + Nachprüfbarkeit; Reproduzierbarkeit der Buchungsresultate
@@ -404,7 +408,7 @@ export class Money {
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Schichten-Prinzip für die Behandlung von **Zeitstempeln**: Die **Datenbank-Schicht** speichert alle Zeitstempel ausschließlich in **UTC** (Universal Coordinated Time); die **Anwendungs-Logik** arbeitet ebenfalls mit UTC-Instanzen; die **Darstellungsschicht** (UI, Berichte, Exporte) konvertiert erst bei der Präsentation in die **Benutzerschicht** — bei Harouda durchgehend `Europe/Berlin`. Die Trennung eliminiert DST-bedingte Anomalien (doppelte oder fehlende Stunden) im Datenbestand und liefert monotone Zeitreihen.
 
 **Warum UTC in DB:**
@@ -438,7 +442,7 @@ Schichten-Prinzip für die Behandlung von **Zeitstempeln**: Die **Datenbank-Schi
 | `rechnungsdatum` | `DATE` | Kalenderdatum |
 | `event_occurred_at` (Event-Sourcing) | `TIMESTAMPTZ` | exakte Event-Zeit |
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **§ 146 Abs. 1 AO** — „Zeitgerechtheit" der Buchung → klare, reproduzierbare Zeitangaben
 - **GoBD Rz. 107** — „Geschäftsvorfälle sind zeitgerecht — möglichst unmittelbar nach ihrer Entstehung — zu erfassen"
 - **GoBD Rz. 40** — Journalfunktion; chronologische Reihenfolge erforderlich
@@ -524,7 +528,7 @@ Schichten-Prinzip für die Behandlung von **Zeitstempeln**: Die **Datenbank-Schi
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Speicher-Paradigma, bei dem der **Schlüssel** eines Objekts **aus seinem Inhalt abgeleitet** wird — in der Regel als kryptographischer Hash (SHA-256). Das Objekt wird unter diesem Hash gespeichert; zwei identische Objekte haben denselben Schlüssel und werden automatisch dedupliziert. Jede inhaltliche Änderung erzeugt einen **neuen** Schlüssel, der alte bleibt unverändert bestehen. CAS ist das Grundprinzip von Git, IPFS, AWS S3 (mit Object-Lock), Docker Image Registry.
 
 **Kern-Eigenschaften:**
@@ -572,7 +576,7 @@ Speicher-Paradigma, bei dem der **Schlüssel** eines Objekts **aus seinem Inhalt
   └──────────────────────────────────────┘
 ```
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **§ 147 Abs. 1, 2 AO** — 10-jährige Aufbewahrungspflicht mit Integrität
 - **§ 147 Abs. 2 AO** — „bildliche Übereinstimmung" bei elektronischer Aufbewahrung
 - **GoBD Rz. 58** — Unveränderbarkeit
@@ -672,7 +676,7 @@ Speicher-Paradigma, bei dem der **Schlüssel** eines Objekts **aus seinem Inhalt
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Architekturmuster, bei dem der **Systemzustand** nicht direkt als Tabellenzeilen mit UPDATE-Semantik gespeichert wird, sondern als **chronologische, append-only Folge von Ereignissen**, die auf dem System stattgefunden haben. Der aktuelle Zustand wird durch **Replay** (Wiederabspielen) aller relevanten Events rekonstruiert; für Performance existieren zusätzliche **Projektionen** (materialisierte Views) als Snapshot der aktuellen Aggregatzustände.
 
 **Kerngedanke im Kontrast:**
@@ -726,7 +730,7 @@ CREATE INDEX idx_events_aggregate
 | `Rückstellung` | `RueckstellungBildung`, `RueckstellungAuflösung`, `RueckstellungVerbrauch`, `RueckstellungAngepasst` |
 | `Jahresabschluss` | `JAGestartet`, `JAEntwurfErstellt`, `JAZurFeststellungVorgelegt`, `JAFestgestellt`, `JAVeröffentlicht` |
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **GoBD Rz. 58** — Unveränderbarkeit: „Jede nachträgliche Änderung muss als Korrektur erkennbar bleiben" → Event-Sourcing strukturell erfüllt
 - **GoBD Rz. 61–66** — Änderungsprotokoll; wird von Events nativ geliefert
 - **GoBD Rz. 107** — zeitgerechte Erfassung
@@ -828,7 +832,7 @@ CREATE INDEX idx_events_aggregate
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Kryptographische Struktur, bei der jeder Log-Eintrag einen **Hash seines Inhalts** enthält, der **den Hash des vorherigen Eintrags als Input mitführt**. Die resultierende Kette ist **tamper-evident**: jede nachträgliche Änderung eines historischen Eintrags ändert dessen Hash und alle nachfolgenden Hashes, was bei einer Verifikations-Rechnung sofort auffällt. In Harouda als verstärkende Schicht über dem Event-Sourcing implementiert.
 
 **Konstruktionsprinzip:**
@@ -909,7 +913,7 @@ async function verifyChain(mandantId: string): Promise<VerifyResult> {
 
 **Notariats-Anker (optional):** regelmäßige Veröffentlichung des jeweils letzten `entry_hash` an eine externe, unveränderliche Stelle (z. B. qualifizierter Zeitstempeldienst nach eIDAS, Blockchain-Anker) — schützt auch vor Komplettersatz des Logs.
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **GoBD Rz. 58, 59, 60** — Unveränderbarkeit; Hash-Chain ist gängige Umsetzung
 - **§ 146 Abs. 4 AO** — Unveränderbarkeit von Buchungen
 - **§ 147 AO** — Aufbewahrung; Integritätsnachweis über 10 Jahre
@@ -1029,7 +1033,7 @@ async function verifyChain(mandantId: string): Promise<VerifyResult> {
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Organisatorisches und technisches Prinzip, bei dem **kritische Geschäftsvorfälle** erst wirksam werden, nachdem **zwei verschiedene berechtigte Personen** — ein Ausführender (Maker) und ein Genehmigender (Checker) — ihre Zustimmung erteilt haben. Das Prinzip verhindert sowohl **Einzelfehler** (ein Paar Augen sieht mehr) als auch **Einzelbetrug** (keine Person kann allein manipulieren) und ist fester Bestandteil eines Internen Kontrollsystems (IKS).
 
 **Anwendung in Harouda — kritische Vorgänge:**
@@ -1076,7 +1080,7 @@ Organisatorisches und technisches Prinzip, bei dem **kritische Geschäftsvorfäl
 4. **Audit-Log-Pflicht:** alle Approval-Entscheidungen + Begründungen erscheinen in der Hash-Chain.
 5. **Nicht-Wirksamkeit vor Approval:** ein „Approved"-Zustand triggert erst dann die fachliche Wirkung (z. B. Buchung erscheint im Hauptbuch).
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **GoBD Rz. 104** — Internes Kontrollsystem; Vier-Augen-Prinzip ist gängige IKS-Maßnahme
 - **§ 239 Abs. 2 HGB** — Richtigkeit + Ordnungsmäßigkeit; Vier-Augen-Prinzip als Sicherungsmaßnahme
 - **§ 25a KWG** — für Banken Pflicht (nicht direkt für Kanzleien, aber Vorbildcharakter)
@@ -1207,7 +1211,7 @@ Organisatorisches und technisches Prinzip, bei dem **kritische Geschäftsvorfäl
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Mehrstufige, **vollständig on-premise betriebene** Verarbeitungskette, die einen hochgeladenen Beleg in **strukturierte, buchungsfähige Daten** (Rechnungsnummer, Datum, Lieferant, Posten, USt-Sätze, Gesamtbetrag) umwandelt. Jedes Feld erhält einen **Konfidenzwert** (0–100 %), auf dessen Grundlage der Vorgang entweder vollautomatisch verbucht, zur menschlichen Prüfung (**Human-in-the-Loop**) vorgelegt oder komplett manuell erfasst wird. Die Extraktions-Engine ist ein **selbstgehostetes Vision-Transformer-Modell** — **kein** externer Cloud-Dienst, **keine** API-Aufrufe an Fremdanbieter für Belegdaten, **keine** generative KI. Die UI-Bezeichnung ist **„Automatische Dokumentenerkennung"**; die technisch präzise Beschreibung *„dateninterne Verarbeitung ohne externe KI-Dienste"* ist die offizielle Sprachregelung gegenüber Kunden und Prüfern.
 
 **Architektur-Entscheidung — vergleichende Bewertung der Optionen:**
@@ -1383,7 +1387,7 @@ Der Vision-Transformer-basierte Belegleser ist nach Verordnung (EU) 2024/1689 zu
 
 Konsequenz: **Keine besonderen AI-Act-Pflichten** über die ohnehin geltenden DSGVO-/GoBD-Anforderungen hinaus. Die Sprachregelung *„ohne externe KI-Dienste"* ist dabei technisch präzise (keine Cloud-API-Anbindung an AI-Services) und strategisch sicher.
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **GoBD Rz. 135, 136** — elektronische Belegerfassung
 - **GoBD Rz. 137** — ersetzendes Scannen (Papier → Digital + Vernichtung der Papieroriginale)
 - **§ 147 Abs. 2 AO** — elektronische Aufbewahrung mit bildlicher Übereinstimmung
@@ -1482,7 +1486,7 @@ Konsequenz: **Keine besonderen AI-Act-Pflichten** über die ohnehin geltenden DS
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Offenes, föderiertes Netzwerk für den elektronischen Austausch von Geschäftsdokumenten (vor allem elektronischen Rechnungen) zwischen Unternehmen und Verwaltungen, betrieben von der internationalen Organisation **OpenPeppol AISBL**. Die Infrastruktur nutzt das **AS4-Protokoll** (ebMS 3.0 über HTTPS) für den sicheren Transport und ein verteiltes Namens- und Diensteverzeichnis (**SMP/SML**). In Deutschland ist Peppol die vorgegebene Transport-Schicht für **B2G-E-Rechnungen** an Bundesbehörden; für **B2B** ab 2025 als eine der zulässigen Übertragungswege etabliert.
 
 **Architektur-Komponenten:**
@@ -1538,7 +1542,7 @@ Beispiele:
 
 **Leitweg-ID (Deutschland B2G):** 4-stellige Grob-ID + 2–46-stellige Fein-ID + optionale Prüfziffer (z. B. `04011-KAN-89`); Pflicht bei E-Rechnungen an deutsche Bundes-/Landesbehörden seit 27.11.2020 (Bund) bzw. je nach Bundesland (Länder).
 
-**Rechtsgrundlage & Standards:**
+### Rechtsgrundlage & Standards
 - **Richtlinie 2014/55/EU** — E-Rechnungen im öffentlichen Auftragswesen (B2G)
 - **E-Rechnungs-Verordnung (ERechV)** — Bundesverwaltung Deutschland
 - **Landes-E-Rechnungs-Verordnungen** der Bundesländer (unterschiedliche Stichtage)
@@ -1600,3 +1604,7 @@ Beispiele:
 - **Bei Zertifikats-/Konfigurations-Problemen, Anbieter-Migration oder bei B2G-Vergabe-Anforderungen Rücksprache mit IT-Dienstleister und Steuerberater** — die Kombination technischer und rechtlicher Aspekte ist komplex und haftungsrelevant.
 
 ---
+
+> **Modul-Footer**
+> **Nächstes Modul:** [09 · DSGVO & Compliance](./09-dsgvo-compliance.md) · **Übersicht:** [INDEX.md](./INDEX.md)
+> **Terminology-Sprint 1 · Modul 08 · Stand 2026-04-23**

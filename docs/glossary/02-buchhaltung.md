@@ -9,6 +9,10 @@ Eröffnungs-/Abschlussbuchung) bis zu den Belegen und dem Zeitrahmen
 
 Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (HGB, AO, GoBD).
 
+> **Modul-Metadaten**
+> **Modul:** 02 · Buchhaltung · **Einträge:** 20 FEST · **Stand:** 2026-04-23
+> **Baut auf:** [01-grundlagen.md](./01-grundlagen.md) · **Spätere Module:** 03–09 referenzieren dieses
+
 ---
 
 ## Inhaltsverzeichnis
@@ -53,10 +57,10 @@ Baut auf auf [01-grundlagen.md](./01-grundlagen.md) (HGB, AO, GoBD).
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Buchführungsmethode, bei der jeder Geschäftsvorfall auf zwei Konten gleichzeitig gebucht wird — einmal im Soll, einmal im Haben — mit identischem Betrag. Liefert automatisch zwei voneinander unabhängige Ergebnisse (Gewinn aus GuV, Vermögenslage aus Bilanz), die sich gegenseitig kontrollieren (Bilanzgleichung).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 238 Abs. 1 HGB — "Jeder Kaufmann ist verpflichtet, Bücher zu führen und in diesen seine Handelsgeschäfte und die Lage seines Vermögens nach den Grundsätzen ordnungsmäßiger Buchführung ersichtlich zu machen."
 - Grundsätze ordnungsmäßiger Buchführung (GoB), als ungeschriebenes Recht durch Rechtsprechung konkretisiert
 - [GoBD](./01-grundlagen.md#1-gobd) — digitale Umsetzungsvorschriften
@@ -66,7 +70,7 @@ Buchführungsmethode, bei der jeder Geschäftsvorfall auf zwei Konten gleichzeit
 - [Buchungssatz](#7-buchungssatz) — die konkrete Abbildung eines Vorfalls
 - [Konto (Sachkonto)](#3-konto-sachkonto) — Träger der Soll/Haben-Salden
 - [Journal](#10-journal-grundbuch) — chronologische Sammlung der Buchungen
-- [Bilanz](./05-jahresabschluss.md) — Resultat der doppelten Buchführung
+- [Bilanz](./05-jahresabschluss.md#2-bilanz) — Resultat der doppelten Buchführung
 
 **Verwendung im Code:**
 - Kern-Konvention im gesamten Projekt: `journal_entry_lines` hat immer gepaarte Zeilen mit `soll_konto` und `haben_konto` (Migration `0001_init.sql`)
@@ -97,7 +101,7 @@ Buchführungsmethode, bei der jeder Geschäftsvorfall auf zwei Konten gleichzeit
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die beiden Seiten eines Kontos in der [doppelten Buchführung](#1-doppelte-buchführung). "Soll" ist die linke Seite, "Haben" die rechte. Welche Seite einen Zugang oder Abgang bedeutet, hängt vom Kontentyp ab:
 
 | Kontentyp | Zugang | Abgang |
@@ -107,7 +111,7 @@ Die beiden Seiten eines Kontos in der [doppelten Buchführung](#1-doppelte-buchf
 | Aufwandskonto (z. B. Mieten, Löhne) | Soll | Haben |
 | Ertragskonto (z. B. Umsatzerlöse) | Haben | Soll |
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 238 HGB i. V. m. GoB (ungeschriebenes Recht)
 - Keine explizite Legaldefinition — etablierter Fachterminus
 
@@ -146,10 +150,10 @@ Die beiden Seiten eines Kontos in der [doppelten Buchführung](#1-doppelte-buchf
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Sammel- und Strukturierungseinheit der Buchführung. Jedes Konto hat eine Nummer (gemäß [Kontenrahmen](#4-kontenrahmen)), einen Namen, einen Typ (Aktiv/Passiv/Aufwand/Ertrag) und zwei Seiten ([Soll / Haben](#2-soll--haben)). Jede Buchung verändert den Saldo auf mindestens zwei Konten.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 239 Abs. 2 HGB — Grundsatz der geordneten Aufzeichnung
 - GoBD Rz. 44 ff. — Belegprinzip
 - Keine gesetzliche Vorschrift der konkreten Kontonummern; Kontenrahmen sind Branchen-Standards
@@ -174,7 +178,7 @@ Sammel- und Strukturierungseinheit der Buchführung. Jedes Konto hat eine Nummer
 
 **Anmerkungen / Edge-Cases:**
 - harouda-app unterscheidet technisch nicht zwischen Sach- und Personenkonten auf DB-Ebene — beide liegen in `accounts`, aber Personenkonten (Debitoren 10000–69999 in SKR03) werden zusätzlich über `business_partners` verknüpft (Sprint 19).
-- Kontensperren (z. B. nach Festschreibung einer Periode) werden über den [Festschreibungs-Service](./08-technik-architektur.md) geregelt, nicht über ein Feld am Konto selbst.
+- Kontensperren (z. B. nach Festschreibung einer Periode) werden über den Festschreibungs-Service geregelt, nicht über ein Feld am Konto selbst.
 
 ---
 
@@ -190,19 +194,19 @@ Sammel- und Strukturierungseinheit der Buchführung. Jedes Konto hat eine Nummer
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Hierarchisch strukturiertes Verzeichnis aller potentiellen Konten eines Unternehmens, geordnet in Kontenklassen (0–9). Legt fest, welche Nummer für welche Art von Geschäftsvorfall vergeben wird, und ermöglicht damit branchenweit vergleichbare Bilanzen und GuV. Die beiden in Deutschland dominierenden Rahmen sind [SKR03](#5-skr03) (prozessorientiert) und [SKR04](#6-skr04) (abschlussgliederungsorientiert).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - Nicht gesetzlich vorgeschrieben — de-facto-Standard durch DATEV eG und die BStBK-Arbeitskreise
 - § 238 Abs. 1 HGB + GoB fordern "ordnungsmäßige" Gliederung; SKR-Konformität erfüllt diese Forderung pauschal
-- Für E-Bilanz (§ 5b EStG): das Mapping auf die [Taxonomie](./04-steuer-meldungen.md) muss eindeutig sein
+- Für E-Bilanz (§ 5b EStG): das Mapping auf die [Taxonomie](./04-steuer-meldungen.md#17-kern-taxonomie) muss eindeutig sein
 
 **Verwandte Begriffe:**
 - [SKR03](#5-skr03) — Handelsbetriebe, Dienstleister, kleinere Unternehmen
 - [SKR04](#6-skr04) — Industrie, größere Unternehmen, abschluss-gliedernd
 - [Konto (Sachkonto)](#3-konto-sachkonto) — Einzelelement
-- [E-Bilanz-Taxonomie](./04-steuer-meldungen.md) — Übersetzung Kontenrahmen → XBRL
+- [E-Bilanz-Taxonomie](./04-steuer-meldungen.md#17-kern-taxonomie) — Übersetzung Kontenrahmen → XBRL
 
 **Verwendung im Code:**
 - Seed-Datei `src/seeds/skr03Seed.ts` — 130+ SKR03-Konten; SKR04-Seed strukturell vorbereitet
@@ -233,10 +237,10 @@ Hierarchisch strukturiertes Verzeichnis aller potentiellen Konten eines Unterneh
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Der in Deutschland am weitesten verbreitete Kontenrahmen, herausgegeben von der DATEV eG. Gliedert die Konten nach dem **Prozessgliederungsprinzip** (Geldfluss/Beschaffung → Produktion → Absatz). Bevorzugt von Einzelunternehmen, Personengesellschaften, Handelsbetrieben und Dienstleistern.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - DATEV-Standard, keine gesetzliche Normung
 - HGB-konforme Ableitbarkeit für Bilanz + GuV durch feste Kontennummern-Bereiche
 
@@ -288,10 +292,10 @@ Der in Deutschland am weitesten verbreitete Kontenrahmen, herausgegeben von der 
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Der zweite große DATEV-Kontenrahmen. Gliedert Konten nach dem **Abschlussgliederungsprinzip** — die Kontennummer folgt der Reihenfolge, in der das Konto später in Bilanz oder GuV erscheint. Erleichtert damit die direkte Ableitung des Jahresabschlusses. Bevorzugt von Industrieunternehmen, Konzernen und größeren Kapitalgesellschaften.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - DATEV-Standard, keine gesetzliche Normung
 - Stärker an § 266 HGB (Bilanzgliederung) und § 275 HGB (GuV-Gliederung) ausgerichtet als SKR03
 
@@ -313,7 +317,7 @@ Der zweite große DATEV-Kontenrahmen. Gliedert Konten nach dem **Abschlussgliede
 **Verwandte Begriffe:**
 - [Kontenrahmen](#4-kontenrahmen) — Oberbegriff
 - [SKR03](#5-skr03) — Alternative nach Prozessgliederung
-- [Bilanz](./05-jahresabschluss.md) / [GuV](./05-jahresabschluss.md) — SKR04 folgt deren Gliederung direkt
+- [Bilanz](./05-jahresabschluss.md#2-bilanz) / [GuV](./05-jahresabschluss.md#3-gewinn--und-verlustrechnung-guv) — SKR04 folgt deren Gliederung direkt
 
 **Verwendung im Code:**
 - Type-Union in `src/types/db.ts`: `Kontenrahmen = 'SKR03' | 'SKR04'`
@@ -342,7 +346,7 @@ Der zweite große DATEV-Kontenrahmen. Gliedert Konten nach dem **Abschlussgliede
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die formalisierte Erfassung eines Geschäftsvorfalls nach dem Schema **"Soll-Konto an Haben-Konto"** mit Betrag und Beleg-Referenz. Jeder Buchungssatz verändert mindestens zwei Konten. Einfacher Buchungssatz: ein Soll-Konto gegen ein Haben-Konto. Zusammengesetzter (gesplitteter) Buchungssatz: mehrere Konten auf einer oder beiden Seiten.
 
 **Beispiel (einfach):**
@@ -351,7 +355,7 @@ Bank 1200 an Forderungen aus L&L 1400   1.190,00 EUR
 ```
 Lies: „Die Bank wird im Soll gebucht (Zugang), gegen Haben auf Forderungen (Abgang, die Forderung ist erloschen)."
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 239 Abs. 2 HGB — Zeitgerechte, vollständige, ordnungsgemäße Aufzeichnung
 - GoBD Rz. 50 — Zeitgerechtigkeit (10-Tage-Regel für laufende Geschäftsvorfälle)
 
@@ -360,7 +364,7 @@ Lies: „Die Bank wird im Soll gebucht (Zugang), gegen Haben auf Forderungen (Ab
 - [Soll / Haben](#2-soll--haben) — die zwei Seiten jedes Satzes
 - [Journal](#10-journal-grundbuch) — chronologische Aufzeichnung aller Sätze
 - [Buchungsstapel](#8-buchungsstapel) — Gruppe von Buchungssätzen
-- [Beleg](./06-belege-rechnung.md) — Pflicht-Referenz jedes Buchungssatzes
+- Beleg — Pflicht-Referenz jedes Buchungssatzes
 
 **Verwendung im Code:**
 - DB-Abbildung: **zweiteilig** — ein Eintrag pro Buchungssatz in `journal_entries` (Metadaten: Datum, Beleg-Nr, Buchungstext) + ein oder mehr Zeilen in `journal_entry_lines` (Betrag, Konten, Soll/Haben)
@@ -392,10 +396,10 @@ Lies: „Die Bank wird im Soll gebucht (Zugang), gegen Haben auf Forderungen (Ab
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Standardisiertes Datei-Format für den Austausch von Buchungssätzen zwischen Buchhaltungssoftware (typischerweise: Mandant → Steuerberater oder zwischen Systemen desselben Mandanten). Von DATEV eG definiert und de-facto-Standard in Deutschland. Eine CSV-Datei mit strengem Header-Format (Versionskennung, Kontenrahmen, Wirtschaftsjahr, DATEV-Beraternummer) und einem Datenblock mit einer Zeile pro Buchungssatz.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - Kein Gesetz; **BStBK-Empfehlung** für Kanzlei-Mandanten-Schnittstelle
 - GoBD Rz. 129–134 — Anforderungen an Datenträgerüberlassung
 - DATEV-Format-Spezifikation (öffentlich zugänglich, aktuelle Version 7.0 „EXTF")
@@ -412,7 +416,7 @@ Die Integrität des Stapels ist durch Header-Prüfsumme und strikte Spalten-Reih
 **Verwandte Begriffe:**
 - [Buchungssatz](#7-buchungssatz) — Einzelelement im Stapel
 - [Journal](#10-journal-grundbuch) — Ziel-Struktur nach Import
-- [DATEV-Schnittstelle](./08-technik-architektur.md) — technische Umsetzung
+- DATEV-Schnittstelle — technische Umsetzung
 - [SKR03](#5-skr03) / [SKR04](#6-skr04) — obligatorischer Header-Parameter
 
 **Verwendung im Code:**
@@ -445,13 +449,13 @@ Die Integrität des Stapels ist durch Header-Prüfsumme und strikte Spalten-Reih
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 - **Debitor:** Geschäftspartner, dem das Unternehmen Leistungen/Waren auf Rechnung verkauft hat — also ein **Schuldner** des Unternehmens (Forderung offen). Im SKR03 im Nummernbereich **10000–69999**.
 - **Kreditor:** Geschäftspartner, von dem das Unternehmen Leistungen/Waren auf Rechnung bezogen hat — also ein **Gläubiger** des Unternehmens (Verbindlichkeit offen). Im SKR03 im Nummernbereich **70000–99999**.
 
 Jeder Debitor/Kreditor hat ein eigenes Personenkonto, das parallel zu den Sammelkonten „Forderungen aus L&L" (SKR03 1400) bzw. „Verbindlichkeiten aus L&L" (SKR03 1600) geführt wird.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 240 Abs. 1 HGB — Pflicht zur Inventarisierung (inkl. offene Posten)
 - § 266 Abs. 2 B.II HGB — Forderungen; § 266 Abs. 3 C HGB — Verbindlichkeiten
 - § 14 UStG — Rechnungsanforderungen (inkl. USt-IdNr von Leistungsempfänger bei B2B-EU)
@@ -460,8 +464,8 @@ Jeder Debitor/Kreditor hat ein eigenes Personenkonto, das parallel zu den Sammel
 - [Konto (Sachkonto)](#3-konto-sachkonto) — Oberbegriff (Debitoren/Kreditoren sind Personenkonten)
 - [SKR03](#5-skr03) — Nummernbereich-Definition
 - `business_partners` — technische Tabelle (seit Migration 0035)
-- [USt-IdNr](./04-steuer-meldungen.md) — Pflichtattribut bei B2B-EU
-- [BZSt / VIES](./04-steuer-meldungen.md) — Prüfsysteme für USt-IdNr (Sprint 20.A.2)
+- [USt-IdNr](./04-steuer-meldungen.md#4-ust-idnr--umsatzsteuer-identifikationsnummer) — Pflichtattribut bei B2B-EU
+- [BZSt](./04-steuer-meldungen.md#5-bzst--bundeszentralamt-für-steuern) / [VIES](./04-steuer-meldungen.md#6-vies--vat-information-exchange-system) — Prüfsysteme für USt-IdNr (Sprint 20.A.2)
 
 **Verwendung im Code:**
 - Datenbank-Tabelle: `public.business_partners` (Migration `0035_business_partners.sql`, seit Sprint 19)
@@ -493,10 +497,10 @@ Jeder Debitor/Kreditor hat ein eigenes Personenkonto, das parallel zu den Sammel
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die **chronologisch** geordnete Aufzeichnung aller Buchungssätze eines Unternehmens in der Reihenfolge ihres Entstehens. Gegenstück zum Hauptbuch (sachliche Gliederung nach Konten). Im Journal entsteht die „Zeitreihe", die GoBD-Konformität technisch prüfbar macht — Manipulationen sind durch Verkettung benachbarter Einträge (Hash-Chain) erkennbar.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 239 Abs. 2 HGB — „Die Eintragungen … müssen … zeitgerecht … erfolgen"
 - § 146 Abs. 1 AO — Ordnungsvorschriften
 - GoBD Rz. 50 (Zeitgerechtigkeit), Rz. 58 ff. (Unveränderbarkeit), Rz. 154 (Hash-Chain implizit)
@@ -504,8 +508,8 @@ Die **chronologisch** geordnete Aufzeichnung aller Buchungssätze eines Unterneh
 **Verwandte Begriffe:**
 - [Buchungssatz](#7-buchungssatz) — Einzelelement im Journal
 - [Doppelte Buchführung](#1-doppelte-buchführung) — Methode, die das Journal füllt
-- [Festschreibung](./08-technik-architektur.md) — macht Journaleinträge unveränderbar
-- [Hash-Chain](./08-technik-architektur.md) — technische Manipulationserkennung
+- Festschreibung — macht Journaleinträge unveränderbar
+- [Hash-Chain](./08-technik-architektur.md#7-hash-chain--audit-log) — technische Manipulationserkennung
 - Hauptbuch (folgt in Batch 2) — sachliche Gegenperspektive
 
 **Verwendung im Code:**
@@ -541,10 +545,10 @@ Die **chronologisch** geordnete Aufzeichnung aller Buchungssätze eines Unterneh
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die **sachlich** geordnete Darstellung aller Buchungssätze, gruppiert nach Konten. Gegenstück zum chronologisch geordneten [Journal](#10-journal-grundbuch). Jedes Konto im Hauptbuch zeigt alle Soll- und Haben-Bewegungen des Kontos sowie den daraus resultierenden [Saldo](#12-saldo). Zusammen mit dem Journal erfüllt das Hauptbuch die GoB-Anforderung „sowohl zeitliche als auch sachliche Nachvollziehbarkeit".
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 238 Abs. 1 HGB i. V. m. GoB — sachliche Ordnung der Aufzeichnungen
 - § 239 Abs. 2 HGB — Ordnungsmäßigkeit
 - GoBD Rz. 37 ff. — Ordnungsmäßigkeitsanforderungen
@@ -584,7 +588,7 @@ Die **sachlich** geordnete Darstellung aller Buchungssätze, gruppiert nach Kont
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die Differenz zwischen Soll- und Haben-Summe eines Kontos zu einem bestimmten Stichtag. Je nachdem, welche Seite überwiegt, spricht man von **Soll-Saldo** (Soll > Haben) oder **Haben-Saldo** (Haben > Soll). Der Saldo ist die Grundeinheit jeder Auswertung (Kontenblatt, SuSa, Bilanz, GuV) und muss mit dem Stichtag eindeutig datiert sein.
 
 **Berechnung:**
@@ -594,7 +598,7 @@ Saldo = Σ Soll-Bewegungen − Σ Haben-Bewegungen
  Passiv-/Ertragskonto positiv bei Haben-Saldo)
 ```
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - Kein gesetzlich definierter Begriff — etablierter Fachterminus
 - Indirekt § 242 HGB — Jahresabschluss-Pflicht setzt periodisch ermittelte Salden voraus
 - GoBD Rz. 50 — Zeitgerechtigkeit: Salden müssen zeitgerecht fortgeschrieben werden
@@ -634,14 +638,14 @@ Saldo = Σ Soll-Bewegungen − Σ Haben-Bewegungen
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 - **Eröffnungsbilanz:** Stichtag-Bilanz zum **Anfang** eines [Wirtschaftsjahres](#20-wirtschaftsjahr--geschäftsjahr) (01.01. bei Kalenderjahr). Übernimmt per **Bilanzidentität** die Salden aus der Schlussbilanz des Vorjahres. Bei Unternehmensgründung ist die Eröffnungsbilanz die **Gründungsbilanz** — erstmalige Ermittlung aller Vermögens- und Schuldwerte.
 - **Schlussbilanz:** Stichtag-Bilanz zum **Ende** eines Wirtschaftsjahres (31.12. bei Kalenderjahr). Ergebnis aller Geschäftsvorfälle des Jahres + des GuV-Ergebnisses.
 
 **Bilanzidentität (Prinzip):**
 > Die Werte der Schlussbilanz eines Jahres = die Werte der Eröffnungsbilanz des Folgejahres. Keine „Lücke" zwischen Perioden erlaubt.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 242 Abs. 1 HGB — Pflicht zur Aufstellung einer Eröffnungsbilanz (bei Beginn des Handelsgewerbes) und einer Schlussbilanz (zu jedem Schluss eines Geschäftsjahrs)
 - § 252 Abs. 1 Nr. 1 HGB — **Grundsatz der Bilanzidentität**
 - §§ 266, 268 HGB — Gliederungsvorschriften
@@ -651,7 +655,7 @@ Saldo = Σ Soll-Bewegungen − Σ Haben-Bewegungen
 - [Saldenvortrag](#15-saldenvortrag) — der Übertragungsmechanismus
 - [Wirtschaftsjahr](#20-wirtschaftsjahr--geschäftsjahr) — Zeitrahmen beider Bilanzen
 - Bilanz (folgt in [05-jahresabschluss.md](./05-jahresabschluss.md)) — allgemeiner Oberbegriff
-- [Jahresabschluss](./05-jahresabschluss.md) — Schlussbilanz ist dessen Kernbestandteil
+- [Jahresabschluss](./05-jahresabschluss.md#1-jahresabschluss) — Schlussbilanz ist dessen Kernbestandteil
 
 **Verwendung im Code:**
 - Tabelle: `public.fiscal_years` (Migration `0030_client_rechtsform_stammdaten.sql`) — hält Wirtschaftsjahres-Metadaten inkl. Start- und Enddatum
@@ -682,7 +686,7 @@ Saldo = Σ Soll-Bewegungen − Σ Haben-Bewegungen
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Spezielle Buchungssätze, die **technisch** den Übergang zwischen zwei Wirtschaftsjahren abbilden:
 
 - **Abschlussbuchungen** (am Ende des Jahres): Saldieren alle Konten und übertragen deren Endstände auf die Bilanzkonten „Schlussbilanzkonto" (SBK, SKR03 9999) und „Gewinn- und Verlustkonto" (GuV, SKR03 9998). Schließen faktisch alle Konten.
@@ -690,14 +694,14 @@ Spezielle Buchungssätze, die **technisch** den Übergang zwischen zwei Wirtscha
 
 Diese Buchungen sind **keine Geschäftsvorfälle im eigentlichen Sinn**, sondern rein buchungs-technische Operationen zur Realisierung der Bilanzidentität.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 242 HGB + § 252 Abs. 1 Nr. 1 HGB — Bilanzidentität erzwingt diese Technik
 - Keine explizite Vorschrift zur konkreten Umsetzung — fachlich etabliert
 
 **Verwandte Begriffe:**
 - [Eröffnungsbilanz / Schlussbilanz](#13-eröffnungsbilanz--schlussbilanz) — das Ergebnis dieser Buchungen
 - [Saldenvortrag](#15-saldenvortrag) — alternative/vereinfachte Technik ohne explizite EB/SB-Buchungen
-- [Festschreibung](./08-technik-architektur.md) — nach Abschlussbuchungen wird die Periode typischerweise festgeschrieben
+- Festschreibung — nach Abschlussbuchungen wird die Periode typischerweise festgeschrieben
 - Konto 9000 (EBK), Konto 9998 (GuV), Konto 9999 (SBK) — die technischen Durchlauf-Konten in SKR03
 
 **Verwendung im Code:**
@@ -730,10 +734,10 @@ Diese Buchungen sind **keine Geschäftsvorfälle im eigentlichen Sinn**, sondern
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die Übernahme der Schluss-Salden eines Wirtschaftsjahres als Anfangs-Salden des Folgejahres **ohne** explizite [Eröffnungsbuchungen](#14-eröffnungsbuchung--abschlussbuchung). Die Software markiert die Salden technisch als „aus Vorjahr übernommen" und sie erscheinen als Anfangsbestand in den Kontenblättern des neuen Jahres. Nur Bilanzkonten werden vorgetragen; GuV-Konten starten immer bei Null (ihr Saldo fließt ins Eigenkapital).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 252 Abs. 1 Nr. 1 HGB — Bilanzidentität (zwingend, unabhängig von der Technik)
 - Keine explizite Vorschrift zur Methode — faktisch akzeptiert bei klarer Nachvollziehbarkeit (GoBD Rz. 37 ff.)
 
@@ -747,7 +751,7 @@ Die Übernahme der Schluss-Salden eines Wirtschaftsjahres als Anfangs-Salden des
 **Verwendung im Code:**
 - Keine explizite Implementierung — der Saldenvortrag wird als **Abfrage-Logik** realisiert: „Anfangsbestand eines Kontos für Jahr N = Saldo des Kontos zum Stichtag 31.12. von Jahr N-1"
 - Der Bilanz-Builder zieht die Vorjahres-Schlusssalden bei Bedarf per Query ab, speichert sie nicht redundant
-- Voraussetzung: [Festschreibung](./08-technik-architektur.md) des Vorjahres muss aktiv sein (sonst könnten sich Vorjahres-Werte ändern)
+- Voraussetzung: Festschreibung des Vorjahres muss aktiv sein (sonst könnten sich Vorjahres-Werte ändern)
 
 **Nicht verwechseln mit:**
 - **Vortragskonten (SKR)** — technische Hilfskonten (EBK 9000, SBK 9999 in SKR03) für explizite EB/SB-Buchungen; Saldenvortrag kommt OHNE diese aus
@@ -772,7 +776,7 @@ Die Übernahme der Schluss-Salden eines Wirtschaftsjahres als Anfangs-Salden des
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Die **oberste Gliederungsebene** innerhalb eines [Kontenrahmens](#4-kontenrahmen) — eine einstellige Ziffer (0–9), die die Art aller darunter liegenden Konten bestimmt. Darunter folgen **Kontengruppen** (zweite Ziffer) und **Einzelkonten** (dritte + vierte Ziffer, teilweise länger bei Personenkonten). Die Klasse-Struktur von SKR03 und SKR04 ist unterschiedlich — siehe die Tabellen in den jeweiligen Einträgen.
 
 **Beispiel SKR03:**
@@ -784,7 +788,7 @@ Klasse 1 = Finanz- und Privatkonten
     Konto 1000 = Kasse
 ```
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - Kein gesetzlicher Begriff — DATEV-Struktur-Standard
 - § 238 HGB + GoB erfordern „Ordnungsmäßigkeit"; Klassen-Struktur erfüllt das per Konvention
 
@@ -823,13 +827,13 @@ Klasse 1 = Finanz- und Privatkonten
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Jedes Dokument, das den Anlass und Inhalt eines Geschäftsvorfalls nachweist und damit die Grundlage für einen Buchungssatz bildet. Beispiele: Eingangsrechnung, Ausgangsrechnung, Kassenbon, Bankkontoauszug, Lohnabrechnung, Zollquittung, Leistungsnachweis. Jeder [Buchungssatz](#7-buchungssatz) MUSS einen Beleg als Referenz haben — das ist das sogenannte **Belegprinzip**.
 
 **Das Belegprinzip (GoB-Kernsatz):**
 > „Keine Buchung ohne Beleg." — GoBD Rz. 44
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 239 Abs. 1 HGB — Jede Eintragung muss auf einen Beleg zurückgeführt werden können
 - GoBD Rz. 44–49 — Belegprinzip, Belegfunktionen (Beweis-, Kontroll-, Informationsfunktion)
 - § 147 AO — Aufbewahrungspflicht 10 Jahre für Belege (Buchungsbelege, Geschäftsbriefe) bzw. 6 Jahre für sonstige Handelsbriefe
@@ -872,10 +876,10 @@ Jedes Dokument, das den Anlass und Inhalt eines Geschäftsvorfalls nachweist und
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Eindeutiger Identifikator eines [Belegs](#17-beleg) innerhalb eines Mandanten (bzw. Wirtschaftsjahres). Muss **lückenlos** (oder mit dokumentierter Lückengrund, z. B. Storno) und **chronologisch** vergeben werden, um die Vollständigkeit der Buchführung nachzuweisen. Formatfreiheit ist gesetzlich gegeben, aber in der Praxis folgen Belegnummern Schema-Konventionen wie `YYYY-NNNN` oder `ER-YYYY-NNNN` (Eingangsrechnungen) / `AR-YYYY-NNNN` (Ausgangsrechnungen).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 239 Abs. 2 HGB — fortlaufende, geordnete Aufzeichnung
 - GoBD Rz. 45, Rz. 47 — Vollständigkeit, Richtigkeit, Ordnung
 - § 14 Abs. 4 Nr. 4 UStG — Rechnungsnummer als Pflichtangabe (einmalige Nummer, die sich vom Rechnungssteller fortlaufend und eindeutig vergibt)
@@ -915,7 +919,7 @@ Eindeutiger Identifikator eines [Belegs](#17-beleg) innerhalb eines Mandanten (b
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Das **reale wirtschaftliche Ereignis**, das zu einer Vermögens-, Schulden- oder Ergebnis-Änderung eines Unternehmens führt und buchhalterisch erfasst werden muss. Jeder Geschäftsvorfall wird durch mindestens einen [Beleg](#17-beleg) dokumentiert und in einem oder mehreren [Buchungssätzen](#7-buchungssatz) abgebildet. Beispiele: Verkauf einer Ware, Zahlungseingang, Abschreibung eines Anlageguts, Gehaltszahlung, Mieteingang.
 
 **Abgrenzungstriade:**
@@ -927,7 +931,7 @@ Beleg (Nachweisdokument)
 Buchungssatz (formale Aufzeichnung)
 ```
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 238 Abs. 1 HGB — Pflicht zur Aufzeichnung „seiner Handelsgeschäfte" = Geschäftsvorfälle
 - § 239 Abs. 2 HGB — Vollständigkeitsgebot (alle Geschäftsvorfälle, nicht nur ausgewählte)
 - GoBD Rz. 37, Rz. 46 — Vollständigkeit und Wahrheit
@@ -965,13 +969,13 @@ Buchungssatz (formale Aufzeichnung)
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
-Der **Zeitraum**, für den ein Unternehmen seinen [Jahresabschluss](./05-jahresabschluss.md) aufstellt und die Steuerveranlagung vornimmt. Regelfall: 12 Monate, beginnend am 01.01. und endend am 31.12. (= **Kalenderjahr**). Abweichungen sind zulässig, müssen aber bei der Finanzverwaltung beantragt werden (**abweichendes Wirtschaftsjahr**, typisch bei Saisongeschäften: z. B. 01.07.–30.06. bei Landwirtschaft).
+### Definition
+Der **Zeitraum**, für den ein Unternehmen seinen [Jahresabschluss](./05-jahresabschluss.md#1-jahresabschluss) aufstellt und die Steuerveranlagung vornimmt. Regelfall: 12 Monate, beginnend am 01.01. und endend am 31.12. (= **Kalenderjahr**). Abweichungen sind zulässig, müssen aber bei der Finanzverwaltung beantragt werden (**abweichendes Wirtschaftsjahr**, typisch bei Saisongeschäften: z. B. 01.07.–30.06. bei Landwirtschaft).
 
 **Sonderfall Rumpfwirtschaftsjahr:**
 Ein Wirtschaftsjahr von weniger als 12 Monaten, entsteht bei Gründung, Liquidation, Umstellung oder Wirtschaftsjahr-Wechsel.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - **Handelsrecht:** § 240 Abs. 2 HGB — „Für den Schluss eines jeden Geschäftsjahrs …", § 242 Abs. 1 HGB — Schlussbilanz-Pflicht am Geschäftsjahres-Ende
 - **Steuerrecht:** § 4a EStG — Gewinnermittlung nach Wirtschaftsjahr; Kalenderjahr ist Regelfall, Abweichungen erfordern Zustimmung des Finanzamts (§ 4a Abs. 1 Nr. 3 EStG)
 - § 7 Abs. 4 Satz 3 KStG — Wirtschaftsjahr-Regelungen für Kapitalgesellschaften
@@ -979,8 +983,8 @@ Ein Wirtschaftsjahr von weniger als 12 Monaten, entsteht bei Gründung, Liquidat
 **Verwandte Begriffe:**
 - [Eröffnungsbilanz / Schlussbilanz](#13-eröffnungsbilanz--schlussbilanz) — begrenzen das Wirtschaftsjahr
 - [Saldenvortrag](#15-saldenvortrag) — Übergang zwischen zwei Wirtschaftsjahren
-- [Jahresabschluss](./05-jahresabschluss.md) — wird für jedes Wirtschaftsjahr erstellt
-- [Festschreibung](./08-technik-architektur.md) — nach Jahresende wird das Wirtschaftsjahr festgeschrieben
+- [Jahresabschluss](./05-jahresabschluss.md#1-jahresabschluss) — wird für jedes Wirtschaftsjahr erstellt
+- Festschreibung — nach Jahresende wird das Wirtschaftsjahr festgeschrieben
 
 **Verwendung im Code:**
 - Datenbank-Tabelle: `public.fiscal_years` (Migration `0030_client_rechtsform_stammdaten.sql`)
@@ -999,3 +1003,9 @@ Ein Wirtschaftsjahr von weniger als 12 Monaten, entsteht bei Gründung, Liquidat
 - Für **Personengesellschaften** kann das Wirtschaftsjahr vom Kalenderjahr abweichen; für **natürliche Personen** ist das Wirtschaftsjahr immer = Kalenderjahr (Ausnahme: Land- und Forstwirte nach § 4a Abs. 1 Nr. 1 EStG).
 - Ein **Wechsel** des Wirtschaftsjahres ist nur einmal und nur mit Einwilligung des Finanzamts möglich (§ 4a Abs. 1 Nr. 2 EStG).
 - harouda-app unterstützt abweichende Wirtschaftsjahre strukturell (Start-/End-Datum als freie Felder), hat aber keine Sondervalidierungen für Rumpfjahre (TECH-DEBT-Kandidat).
+
+---
+
+> **Modul-Footer**
+> **Nächstes Modul:** [03 · Lohn & SV](./03-lohn-sv.md) · **Übersicht:** [INDEX.md](./INDEX.md)
+> **Terminology-Sprint 1 · Modul 02 · Stand 2026-04-23**

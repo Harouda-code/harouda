@@ -461,7 +461,7 @@ Monatliche oder quartalsweise Steueranmeldung, mit der Unternehmer dem Finanzamt
 |---|---|
 | **Deutsch (primär)** | Zusammenfassende Meldung |
 | **Synonyme (DE)** | ZM (Abkürzung, im Code und Text bevorzugt) |
-| **Arabisch** | الإقرار التجميعي للتوريدات داخل الاتحاد الأوروبي (تقرير إضافي يُقدَّم إلى BZSt — وليس إلى مصلحة الضرائب المحلية — يسرد كل التوريدات والخدمات التي قدَّمتها الشركة إلى عملاء في دول أوروبية أخرى خلال الفترة، مع ذكر رقم USt-IdNr لكل عميل والمبلغ الصافي؛ هدفه تمكين السلطات الأوروبية من المطابقة المتقاطعة ومكافحة الاحتيال الضريبي) |
+| **Arabisch** | الإقرار التجميعي للتوريدات داخل الاتحاد الأوروبي (تقرير يُقدَّم إلى BZSt — وليس إلى مصلحة الضرائب المحلية — يسرد كل التوريدات والخدمات التي قدَّمتها الشركة إلى عملاء في دول أوروبية أخرى، مع ذكر رقم USt-IdNr لكل عميل والمبلغ الصافي) |
 | **Englisch (Code-Kontext)** | `ZM` / `ZusammenfassendeMeldung`; konzeptuell EC Sales List / Recapitulative Statement |
 | **Kategorie** | Rechtsbegriff / Steueranmeldung |
 | **Status** | FEST |
@@ -522,7 +522,7 @@ Unvollständige oder falsche ZM → **Aberkennung der Steuerfreiheit** der ig Li
 |---|---|
 | **Deutsch (primär)** | Kleinunternehmer |
 | **Synonyme (DE)** | Kleinunternehmer-Regelung, § 19-Unternehmer |
-| **Arabisch** | الشركة الصغيرة المعفاة من ضريبة القيمة المضافة (وضع ضريبي خاص للشركات التي لم تتجاوز إيراداتها عتبة معينة في السنة السابقة؛ المُعفى لا يُحصِّل USt من عملائه ولا يحق له خصم Vorsteuer، ما يُبسِّط إجراءاته المحاسبية تبسيطاً كبيراً — لكنه يظل "شركة" بمفهوم القانون ولا تُعفى من قواعد GoBD والإقرار الضريبي السنوي) |
+| **Arabisch** | الشركة الصغيرة المعفاة من ضريبة القيمة المضافة (وضع ضريبي خاص للشركات التي لم تتجاوز إيراداتها عتبة معينة في السنة السابقة؛ المُعفى لا يُحصِّل USt من عملائه ولا يحق له خصم Vorsteuer، لكنه يظل "شركة" بمفهوم القانون ويبقى خاضعاً لقواعد GoBD والإقرار الضريبي السنوي) |
 | **Englisch (Code-Kontext)** | `kleinunternehmer` (Flag an `clients`-Tabelle) |
 | **Kategorie** | Rechtsbegriff / Steuerstatus |
 | **Status** | FEST |

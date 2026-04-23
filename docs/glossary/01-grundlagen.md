@@ -4,6 +4,10 @@
 Institutionen, auf die das gesamte System aufbaut. Alle anderen
 Glossar-Dateien referenzieren Begriffe aus diesem Kapitel.
 
+> **Modul-Metadaten**
+> **Modul:** 01 · Grundlagen · **Einträge:** 10 FEST · **Stand:** 2026-04-27
+> **Baut auf:** — (Fundament-Modul, keine Vorgänger) · **Spätere Module:** 02–09 referenzieren dieses
+
 ---
 
 ## Inhaltsverzeichnis
@@ -33,17 +37,17 @@ Glossar-Dateien referenzieren Begriffe aus diesem Kapitel.
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Verwaltungsanweisung des Bundesministeriums der Finanzen (BMF), die festlegt, wie Buchführung, Aufzeichnungen und Unterlagen in elektronischer Form geführt und aufbewahrt werden müssen. Bindet die Finanzverwaltung und ist faktisch für alle buchführungspflichtigen Unternehmen in Deutschland maßgeblich.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - BMF-Schreiben vom 28.11.2019 (IV A 4 - S 0316/19/10003 :001), zuletzt geändert durch BMF vom 11.03.2024
 - Konkretisiert §§ 145–147 AO und § 238 ff. HGB
 
 **Verwandte Begriffe:**
 - [Abgabenordnung (AO)](#2-abgabenordnung-ao) — gesetzliche Grundlage
 - [Handelsgesetzbuch (HGB)](#3-handelsgesetzbuch-hgb) — parallele handelsrechtliche Pflichten
-- [Festschreibung](./08-technik-architektur.md) — technische Umsetzung der GoBD-Unveränderbarkeit
+- Festschreibung — technische Umsetzung der GoBD-Unveränderbarkeit
 
 **Verwendung im Code:**
 - `src/domain/gobd/FestschreibungsService.ts`
@@ -71,10 +75,10 @@ Verwaltungsanweisung des Bundesministeriums der Finanzen (BMF), die festlegt, wi
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Das "Grundgesetz" des deutschen Steuerrechts. Regelt das Besteuerungsverfahren, die Mitwirkungspflichten der Steuerpflichtigen, Aufbewahrungsfristen und die Rechte der Finanzverwaltung (z. B. Betriebsprüfung). Gilt für alle Steuerarten, soweit nicht Einzelsteuergesetze (UStG, EStG, ...) speziellere Regelungen enthalten.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - AO vom 16.03.1976 in der jeweils aktuellen Fassung
 - Für dieses Projekt besonders relevant:
   - § 140 AO — Buchführungspflicht nach anderen Gesetzen
@@ -87,7 +91,7 @@ Das "Grundgesetz" des deutschen Steuerrechts. Regelt das Besteuerungsverfahren, 
 - [GoBD](#1-gobd) — Verwaltungsanweisung zur AO
 - [HGB](#3-handelsgesetzbuch-hgb) — handelsrechtliches Pendant
 - [Betriebsprüfung](#7-betriebsprüfung) — AO-Verfahren
-- [Z3-Export](./08-technik-architektur.md) — technische Umsetzung § 147 Abs. 6 AO
+- Z3-Export — technische Umsetzung § 147 Abs. 6 AO
 
 **Verwendung im Code:**
 - Häufig als Rechtsgrundlage in JSDoc-Kommentaren zitiert, z. B. `src/domain/gobd/FestschreibungsService.ts` verweist auf § 146 AO
@@ -114,10 +118,10 @@ Das "Grundgesetz" des deutschen Steuerrechts. Regelt das Besteuerungsverfahren, 
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Das Kerngesetz des deutschen Handelsrechts. Drittes Buch ("Handelsbücher", §§ 238–342p HGB) regelt die handelsrechtliche Buchführungs- und Rechnungslegungspflicht aller Kaufleute, inkl. Jahresabschluss, Bilanzierung, Bewertung, Offenlegung.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - HGB vom 10.05.1897 (geltende Fassung jährlich aktualisiert)
 - Für dieses Projekt besonders relevant:
   - § 238 HGB — Buchführungspflicht
@@ -131,8 +135,8 @@ Das Kerngesetz des deutschen Handelsrechts. Drittes Buch ("Handelsbücher", §§
 
 **Verwandte Begriffe:**
 - [AO](#2-abgabenordnung-ao) — steuerrechtliches Pendant
-- [Jahresabschluss](./05-jahresabschluss.md) — Kernprodukt aus §§ 242 ff. HGB
-- [Bilanz](./05-jahresabschluss.md) — § 266 HGB
+- [Jahresabschluss](./05-jahresabschluss.md#1-jahresabschluss) — Kernprodukt aus §§ 242 ff. HGB
+- [Bilanz](./05-jahresabschluss.md#2-bilanz) — § 266 HGB
 
 **Verwendung im Code:**
 - `src/domain/accounting/BalanceSheetBuilder.ts` — implementiert § 266 HGB
@@ -155,23 +159,23 @@ Das Kerngesetz des deutschen Handelsrechts. Drittes Buch ("Handelsbücher", §§
 |---|---|
 | **Deutsch (primär)** | Mandant |
 | **Synonyme (DE)** | Mandantin (weibl.) |
-| **Arabisch** | الموكِّل (العميل الذي يتعاقد مع مكتب الاستشارات الضريبية للحصول على خدمات محاسبية وضريبية؛ قد يكون شخصاً طبيعياً أو شركة) |
+| **Arabisch** | الموكِّل (العميل الذي يتعاقد مع مكتب الاستشارات الضريبية وفقاً لـ § 3 StBerG؛ شخص طبيعي أو اعتباري) |
 | **Englisch (Code-Kontext)** | `client` (Datenbank-Tabelle + Typ) |
 | **Kategorie** | Rechtsbegriff / Datentyp |
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Natürliche oder juristische Person, für die eine Steuerberatungskanzlei steuerliche und buchhalterische Leistungen erbringt. In harouda-app technisch als Row in der `clients`-Tabelle modelliert; eine [Kanzlei](#5-kanzlei) kann beliebig viele Mandanten haben.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 3 StBerG — Berufsbild des Steuerberaters
 - § 57 StBerG — Verschwiegenheitspflicht gegenüber Mandanten
 - Kein gesetzlich definierter Begriff, aber berufsrechtlich etabliert
 
 **Verwandte Begriffe:**
 - [Kanzlei](#5-kanzlei) — Dienstleister-Seite (technisch: `company`)
-- [Mandantenfähigkeit](./08-technik-architektur.md) — technische Trennung im Multi-Tenant-System
+- [Mandantenfähigkeit](./08-technik-architektur.md#1-mandantenfähigkeit-multi-tenancy) — technische Trennung im Multi-Tenant-System
 - `client_id` — Fremdschlüssel auf `clients`-Tabelle in jeder datenrelevanten Row
 
 **Verwendung im Code:**
@@ -181,7 +185,7 @@ Natürliche oder juristische Person, für die eine Steuerberatungskanzlei steuer
 - Spalten in data tables: `client_id uuid NOT NULL` (Multi-Tenant-Isolation via RLS seit Migration 0026)
 
 **Nicht verwechseln mit:**
-- **Kunde** (allgemein) — "Kunde" bezeichnet oft B2C-Endkunden eines Mandanten; im Kanzlei-Kontext ist der Mandant der Kunde der Kanzlei, aber der "Kunde" eines Mandanten ist ein [Debitor](./02-buchhaltung.md)
+- **Kunde** (allgemein) — "Kunde" bezeichnet oft B2C-Endkunden eines Mandanten; im Kanzlei-Kontext ist der Mandant der Kunde der Kanzlei, aber der "Kunde" eines Mandanten ist ein [Debitor](./02-buchhaltung.md#9-debitor--kreditor)
 - **User** — Person mit Login-Zugang; ein User kann Zugriff auf mehrere Mandanten haben, ist aber nicht selbst ein Mandant
 - **Company** (im Code) — in harouda-app technisch die [Kanzlei](#5-kanzlei), nicht der Mandant
 
@@ -196,23 +200,23 @@ Natürliche oder juristische Person, für die eine Steuerberatungskanzlei steuer
 |---|---|
 | **Deutsch (primär)** | Kanzlei |
 | **Synonyme (DE)** | Steuerberatungskanzlei, Steuerkanzlei, Steuerberatungsgesellschaft (bei GmbH/PartGmbB-Form) |
-| **Arabisch** | مكتب الاستشارات الضريبية (الكيان المهني الذي يعمل فيه المستشارون الضريبيون ويقدمون خدماتهم للموكِّلين) |
+| **Arabisch** | مكتب الاستشارات الضريبية (الكيان المهني الذي يمارس فيه المستشارون الضريبيون مهنتهم — سواءً كممارسة فردية أو PartG/PartGmbB أو شركة استشارات ضريبية GmbH) |
 | **Englisch (Code-Kontext)** | `company` (Datenbank-Tabelle + Typ) |
 | **Kategorie** | Rechtsbegriff / Datentyp |
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
-Organisationseinheit, in der Steuerberater ihre Berufstätigkeit ausüben. In harouda-app technisch als Row in der `companies`-Tabelle modelliert. Eine Kanzlei kann mehrere [Mandanten](#4-mandant) betreuen und hat mehrere Mitglieder ([CompanyRole](./08-technik-architektur.md)) mit unterschiedlichen Rollen (owner, admin, member, readonly, tax_auditor).
+### Definition
+Organisationseinheit, in der Steuerberater ihre Berufstätigkeit ausüben. In harouda-app technisch als Row in der `companies`-Tabelle modelliert. Eine Kanzlei kann mehrere [Mandanten](#4-mandant) betreuen und hat mehrere Mitglieder (CompanyRole) mit unterschiedlichen Rollen (owner, admin, member, readonly, tax_auditor).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 56 StBerG — Berufliche Zusammenschlüsse
 - § 50 StBerG — Kanzleisitz-Pflicht
 - Kein handelsrechtlicher Begriff per se; rechtlich meist als Einzelpraxis, PartG, PartGmbB oder Steuerberatungs-GmbH organisiert
 
 **Verwandte Begriffe:**
 - [Mandant](#4-mandant) — Leistungsempfänger-Seite
-- [Mandantenfähigkeit](./08-technik-architektur.md) — technisches Gegenstück zur Kanzlei-Mandanten-Beziehung
+- [Mandantenfähigkeit](./08-technik-architektur.md#1-mandantenfähigkeit-multi-tenancy) — technisches Gegenstück zur Kanzlei-Mandanten-Beziehung
 - `company_id` — Fremdschlüssel auf `companies`-Tabelle, top-level Tenant-Isolation
 
 **Verwendung im Code:**
@@ -244,10 +248,10 @@ Organisationseinheit, in der Steuerberater ihre Berufstätigkeit ausüben. In ha
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Zur unbeschränkten Hilfeleistung in Steuersachen befugte Person nach bestandenem Steuerberaterexamen und Bestellung durch die zuständige Steuerberaterkammer. Übt einen "freien Beruf" aus, unterliegt Berufspflichten wie Verschwiegenheit, Unabhängigkeit und Eigenverantwortung.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - §§ 3, 32 ff. StBerG — Berufsbefugnis
 - § 57 StBerG — Allgemeine Berufspflichten
 - BOStB (Berufsordnung der Steuerberater)
@@ -286,18 +290,18 @@ Zur unbeschränkten Hilfeleistung in Steuersachen befugte Person nach bestandene
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Förmliche Prüfung durch die Finanzverwaltung, bei der Buchführung und steuerlich relevante Unterlagen eines Unternehmens geprüft werden. Der Prüfer kann Datenzugriff in drei Stufen verlangen (Z1 unmittelbar, Z2 mittelbar, Z3 Datenträgerüberlassung).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - §§ 193–203 AO — Außenprüfung
 - § 147 Abs. 6 AO — Datenzugriffsrechte
 - § 200 AO — Mitwirkungspflichten
 - GoBD Rz. 158 ff. — Datenzugriff
 
 **Verwandte Begriffe:**
-- [Z3-Export](./08-technik-architektur.md) — technische Umsetzung § 147 Abs. 6 AO
-- [GDPdU](#1-gobd) (historisch, nur noch als Dateiformat-Kontext)
+- Z3-Export — technische Umsetzung § 147 Abs. 6 AO
+- GDPdU (historisch, nur noch als Dateiformat-Kontext)
 - [GoBD](#1-gobd) — Ordnungsrahmen
 - `tax_auditor`-Rolle — Read-only-Zugang für Prüfer (Migration 0007)
 
@@ -323,22 +327,22 @@ Förmliche Prüfung durch die Finanzverwaltung, bei der Buchführung und steuerl
 |---|---|
 | **Deutsch (primär)** | Bundessteuerberaterkammer |
 | **Synonyme (DE)** | BStBK (Abkürzung, im Code und Text bevorzugt) |
-| **Arabisch** | الاتحاد الاتحادي لغرف المستشارين الضريبيين (الهيئة المهنية العليا التي تجمع غرف المستشارين الضريبيين الإقليمية في ألمانيا وتصدر الإرشادات المهنية الملزمة) |
+| **Arabisch** | الاتحاد الاتحادي لغرف المستشارين الضريبيين (الهيئة المهنية العليا الجامعة لـ 21 غرفة إقليمية؛ تُصدر إرشادات ملزمة مهنياً — لا تشريعياً — وفق §§ 85 ff. StBerG) |
 | **Englisch (Code-Kontext)** | `bstbk` (Präfix in Code-Modulen) |
 | **Kategorie** | Institution / Rechtsbegriff |
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Dachverband der 21 regionalen Steuerberaterkammern in Deutschland, Körperschaft des öffentlichen Rechts. Erlässt Berufsrichtlinien (z. B. Hinweise zu Bescheinigungen beim Jahresabschluss) und vertritt den Berufsstand gegenüber Gesetzgeber und Öffentlichkeit.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - §§ 85 ff. StBerG — Steuerberaterkammern und BStBK als Dachverband
 - BStBK-Hinweise zur Erstellung von Jahresabschlüssen (Stand 2023) — praxisrelevantes Regelwerk für Bescheinigungen
 
 **Verwandte Begriffe:**
 - [Steuerberater](#6-steuerberater-stb) — Berufsausübung, geregelt durch Kammern
-- [Bescheinigung](./05-jahresabschluss.md) — BStBK-Musterformulare nutzen das Projekt (Sprint 17.5)
+- Bescheinigung — BStBK-Musterformulare nutzen das Projekt (Sprint 17.5)
 
 **Verwendung im Code:**
 - `src/domain/jahresabschluss/bstbk/bstbkBescheinigungen.ts` — 3 BStBK-Bescheinigungstypen (Stand 2023)
@@ -360,16 +364,16 @@ Dachverband der 21 regionalen Steuerberaterkammern in Deutschland, Körperschaft
 |---|---|
 | **Deutsch (primär)** | DSGVO |
 | **Synonyme (DE)** | Datenschutz-Grundverordnung, GDPR (englisch, selten im deutschen Text) |
-| **Arabisch** | اللائحة العامة الأوروبية لحماية البيانات (لائحة أوروبية مطبقة مباشرة في جميع دول الاتحاد منذ 2018 تحمي البيانات الشخصية للأفراد) |
+| **Arabisch** | اللائحة العامة الأوروبية لحماية البيانات — اللائحة (EU) 2016/679 (سارية مباشرة في جميع دول الاتحاد منذ 25.05.2018؛ تُكمَّل في ألمانيا بقانون BDSG) |
 | **Englisch (Code-Kontext)** | `privacy`, `dsgvo` (als Modul-Präfix) |
 | **Kategorie** | Rechtsbegriff / EU-Verordnung |
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 EU-Verordnung 2016/679, seit 25.05.2018 in allen EU-Mitgliedsstaaten unmittelbar anwendbar. Regelt den Schutz natürlicher Personen bei der Verarbeitung personenbezogener Daten und deren freien Datenverkehr. In Deutschland ergänzt durch das BDSG (Bundesdatenschutzgesetz).
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - Verordnung (EU) 2016/679 (DSGVO)
 - BDSG (neu, seit 25.05.2018)
 - Für dieses Projekt besonders relevant:
@@ -381,7 +385,7 @@ EU-Verordnung 2016/679, seit 25.05.2018 in allen EU-Mitgliedsstaaten unmittelbar
   - Art. 33 DSGVO — Meldung von Verletzungen des Schutzes personenbezogener Daten
 
 **Verwandte Begriffe:**
-- [AV-Vertrag](./09-dsgvo-compliance.md) — Art. 28 DSGVO (zwischen Kanzlei und harouda-app als Auftragsverarbeiter)
+- [AV-Vertrag](./09-dsgvo-compliance.md#1-auftragsverarbeitung-avv--28-dsgvo) — Art. 28 DSGVO (zwischen Kanzlei und harouda-app als Auftragsverarbeiter)
 - [Verschwiegenheitspflicht](#10-verschwiegenheitspflicht) — § 57 StBerG, ergänzt DSGVO
 - `privacy_requests` — Tabelle für Art. 15/17-Anfragen (Migration 0023)
 - `privacy_incidents` — Art. 33-Meldungen (Migration 0023)
@@ -414,10 +418,10 @@ EU-Verordnung 2016/679, seit 25.05.2018 in allen EU-Mitgliedsstaaten unmittelbar
 | **Status** | FEST |
 | **Aufgenommen am** | 2026-04-22, Terminology-Sprint 1 |
 
-**Definition:**
+### Definition
 Gesetzliche Pflicht des Steuerberaters, über alle im Rahmen der Berufsausübung bekannt gewordenen Tatsachen Stillschweigen zu bewahren. Gilt gegenüber jedermann, auch gegenüber Behörden (mit engen Ausnahmen, z. B. Geldwäsche-Verdachtsmeldung). Strafrechtlich flankiert durch § 203 StGB.
 
-**Rechtsgrundlage:**
+### Rechtsgrundlage
 - § 57 Abs. 1 StBerG — Berufsverschwiegenheit
 - § 203 Abs. 1 Nr. 3 StGB — strafrechtlicher Schutz (bis zu 1 Jahr Freiheitsstrafe bei Verstoß)
 - § 102 AO — Auskunftsverweigerungsrecht im Besteuerungsverfahren
@@ -441,3 +445,9 @@ Gesetzliche Pflicht des Steuerberaters, über alle im Rahmen der Berufsausübung
 **Anmerkungen / Edge-Cases:**
 - Bei Software-Einsatz muss die Verschwiegenheit gegenüber dem Auftragsverarbeiter durch AV-Vertrag (Art. 28 DSGVO) sichergestellt werden — sonst verletzt die Kanzlei § 57 StBerG durch die Weitergabe selbst.
 - Die Pflicht überdauert das Mandatsende und sogar den Tod des Mandanten.
+
+---
+
+> **Modul-Footer**
+> **Nächstes Modul:** [02 · Buchhaltung](./02-buchhaltung.md) · **Übersicht:** [INDEX.md](./INDEX.md)
+> **Terminology-Sprint 1 · Modul 01 · Stand 2026-04-27**

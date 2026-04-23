@@ -81,7 +81,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Buchungssatz | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#7-buchungssatz) |
 | Buchungsstapel | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#8-buchungsstapel) |
 | Bundessteuerberaterkammer → BStBK | ✅ | [01-grundlagen.md](./01-grundlagen.md#8-bstbk--bundessteuerberaterkammer) |
-| BZSt — Bundeszentralamt für Steuern | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#5-bzst-bundeszentralamt-für-steuern) |
+| BZSt — Bundeszentralamt für Steuern | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#5-bzst--bundeszentralamt-für-steuern) |
 
 ## C
 
@@ -226,7 +226,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Kirchensteuer (KiSt) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#3-kirchensteuer-kist) |
 | KiSt → Kirchensteuer (KiSt) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#3-kirchensteuer-kist) |
 | Kleinbetragsrechnung (§ 33 UStDV) | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#3-kleinbetragsrechnung--33-ustdv) |
-| Kleinunternehmer (§ 19 UStG) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#9-kleinunternehmer-§-19-ustg) |
+| Kleinunternehmer (§ 19 UStG) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#9-kleinunternehmer--19-ustg) |
 | Konto (Sachkonto) | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#3-konto-sachkonto) |
 | Kontenklasse → Kontenrahmen-Klasse | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#16-kontenrahmen-klasse) |
 | Kontenrahmen | ✅ | [02-buchhaltung.md](./02-buchhaltung.md#4-kontenrahmen) |
@@ -327,7 +327,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Rentenversicherung (RV) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#7-rentenversicherung-rv) |
 | Rentenversicherungsnummer → Versicherungsnummer (VSNR) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#19-versicherungsnummer-vsnr) |
 | Restnutzungsdauer → Nutzungsdauer (AfA-Tabellen) | ✅ | [07-anlagen-inventur.md](./07-anlagen-inventur.md#4-nutzungsdauer--afa-tabellen) |
-| Reverse-Charge-Verfahren (§ 13b UStG) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#10-reverse-charge-verfahren-§-13b-ustg) |
+| Reverse-Charge-Verfahren (§ 13b UStG) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#10-reverse-charge-verfahren--13b-ustg) |
 | RLS → Row-Level Security | ✅ | [08-technik-architektur.md](./08-technik-architektur.md#2-row-level-security-rls) |
 | Row-Level Security (RLS) | ✅ | [08-technik-architektur.md](./08-technik-architektur.md#2-row-level-security-rls) |
 | Rückstellungen (§ 249 HGB) | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#9-rückstellungen--249-hgb) |
@@ -359,7 +359,7 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Steuererklärung → Steueranmeldung / Steuererklärung | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#13-steueranmeldung--steuererklärung-gegenüberstellung) |
 | Steuerliche Bilanz → Steuerbilanz | ✅ | [05-jahresabschluss.md](./05-jahresabschluss.md#8-steuerbilanz) |
 | Steuernummer | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#14-steuernummer) |
-| Steuerschuldnerschaft des Leistungsempfängers → Reverse-Charge | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#10-reverse-charge-verfahren-§-13b-ustg) |
+| Steuerschuldnerschaft des Leistungsempfängers → Reverse-Charge | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#10-reverse-charge-verfahren--13b-ustg) |
 | StB → Steuerberater | ✅ | [01-grundlagen.md](./01-grundlagen.md#6-steuerberater-stb) |
 | Stichprobeninventur → Inventur (§ 241 HGB) + Festwert-Verfahren (§ 240 Abs. 3 HGB) | ✅ | [07-anlagen-inventur.md](./07-anlagen-inventur.md#10-inventur--241-hgb--festwert-verfahren--240-abs-3-hgb) |
 | Stornorechnung → Rechnungsberichtigung / Stornorechnung | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#5-rechnungsberichtigung--stornorechnung) |
@@ -391,31 +391,31 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 | Umlagen → Umlageverfahren (U1, U2, U3) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#18-umlageverfahren-u1-u2-u3) |
 | Umlageverfahren (U1, U2, U3) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#18-umlageverfahren-u1-u2-u3) |
 | Umsatzsteuer (USt) | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#2-umsatzsteuer-ust) |
-| Umsatzsteuer-Identifikationsnummer → USt-IdNr | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#4-ust-idnr-umsatzsteuer-identifikationsnummer) |
-| Umsatzsteuer-Voranmeldung → UStVA | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#7-ustva-umsatzsteuer-voranmeldung) |
-| Umsatzsteuergesetz → UStG | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#1-ustg-umsatzsteuergesetz) |
+| Umsatzsteuer-Identifikationsnummer → USt-IdNr | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#4-ust-idnr--umsatzsteuer-identifikationsnummer) |
+| Umsatzsteuer-Voranmeldung → UStVA | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#7-ustva--umsatzsteuer-voranmeldung) |
+| Umsatzsteuergesetz → UStG | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#1-ustg--umsatzsteuergesetz) |
 | USt → Umsatzsteuer | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#2-umsatzsteuer-ust) |
-| USt-IdNr | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#4-ust-idnr-umsatzsteuer-identifikationsnummer) |
-| UStG — Umsatzsteuergesetz | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#1-ustg-umsatzsteuergesetz) |
-| UStVA — Umsatzsteuer-Voranmeldung | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#7-ustva-umsatzsteuer-voranmeldung) |
+| USt-IdNr | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#4-ust-idnr--umsatzsteuer-identifikationsnummer) |
+| UStG — Umsatzsteuergesetz | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#1-ustg--umsatzsteuergesetz) |
+| UStVA — Umsatzsteuer-Voranmeldung | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#7-ustva--umsatzsteuer-voranmeldung) |
 | UTC in DB / Europe/Berlin in UI | ✅ | [08-technik-architektur.md](./08-technik-architektur.md#4-utc-in-db--europeberlin-in-ui) |
 
 ## V
 
 | Begriff | Status | Datei |
 |---|---|---|
-| Verdienstabrechnung → Lohnabrechnung / Entgeltabrechnung | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#20-lohnabrechnung--entgeltabrechnung) |
 | Verantwortlicher → Verantwortlicher vs. Auftragsverarbeiter | ✅ | [09-dsgvo-compliance.md](./09-dsgvo-compliance.md#2-verantwortlicher-vs-auftragsverarbeiter--art-4-dsgvo) |
+| Verdienstabrechnung → Lohnabrechnung / Entgeltabrechnung | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#20-lohnabrechnung--entgeltabrechnung) |
 | Verantwortlicher vs. Auftragsverarbeiter — Art. 4 DSGVO | ✅ | [09-dsgvo-compliance.md](./09-dsgvo-compliance.md#2-verantwortlicher-vs-auftragsverarbeiter--art-4-dsgvo) |
 | Verschwiegenheitspflicht | ✅ | [01-grundlagen.md](./01-grundlagen.md#10-verschwiegenheitspflicht) |
 | Verschwiegenheitspflicht vs. DSGVO — § 203 StGB + § 57 StBerG | ✅ | [09-dsgvo-compliance.md](./09-dsgvo-compliance.md#10-verschwiegenheitspflicht-vs-dsgvo--203-stgb--57-stberg) |
 | Versicherungsnummer (VSNR) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#19-versicherungsnummer-vsnr) |
 | Versicherungspflichtgrenze → Jahresarbeitsentgeltgrenze (JAEG) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#14-jahresarbeitsentgeltgrenze-jaeg) |
 | Vier-Augen-Prinzip | ✅ | [08-technik-architektur.md](./08-technik-architektur.md#8-vier-augen-prinzip) |
-| VIES — VAT Information Exchange System | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#6-vies-vat-information-exchange-system) |
+| VIES — VAT Information Exchange System | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#6-vies--vat-information-exchange-system) |
 | Vision-Transformer → Dokumentenerkennungs-Pipeline | ✅ | [08-technik-architektur.md](./08-technik-architektur.md#9-dokumentenerkennungs-pipeline-self-hosted-vision-modell) |
 | Vollinventur → Inventur (§ 241 HGB) + Festwert-Verfahren (§ 240 Abs. 3 HGB) | ✅ | [07-anlagen-inventur.md](./07-anlagen-inventur.md#10-inventur--241-hgb--festwert-verfahren--240-abs-3-hgb) |
-| Voranmeldung → UStVA | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#7-ustva-umsatzsteuer-voranmeldung) |
+| Voranmeldung → UStVA | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#7-ustva--umsatzsteuer-voranmeldung) |
 | Vorsteuer | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#3-vorsteuer) |
 | VSNR → Versicherungsnummer (VSNR) | ✅ | [03-lohn-sv.md](./03-lohn-sv.md#19-versicherungsnummer-vsnr) |
 
@@ -440,9 +440,9 @@ Jede Zeile verlinkt zum vollständigen Eintrag.
 |---|---|---|
 | Zeitnahe Inventur → Inventur (§ 241 HGB) + Festwert-Verfahren (§ 240 Abs. 3 HGB) | ✅ | [07-anlagen-inventur.md](./07-anlagen-inventur.md#10-inventur--241-hgb--festwert-verfahren--240-abs-3-hgb) |
 | Zeitstempel-Anker (eIDAS) → Hash-Chain / Audit-Log | ✅ | [08-technik-architektur.md](./08-technik-architektur.md#7-hash-chain--audit-log) |
-| ZM — Zusammenfassende Meldung | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#8-zm-zusammenfassende-meldung) |
+| ZM — Zusammenfassende Meldung | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#8-zm--zusammenfassende-meldung) |
 | ZUGFeRD | ✅ | [06-belege-rechnung.md](./06-belege-rechnung.md#10-zugferd) |
-| Zusammenfassende Meldung → ZM | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#8-zm-zusammenfassende-meldung) |
+| Zusammenfassende Meldung → ZM | ✅ | [04-steuer-meldungen.md](./04-steuer-meldungen.md#8-zm--zusammenfassende-meldung) |
 
 ---
 

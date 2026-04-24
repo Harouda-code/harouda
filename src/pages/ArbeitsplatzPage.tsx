@@ -16,11 +16,14 @@ import {
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
+  AlertCircle,
   BookOpen,
+  CheckSquare,
   ChevronDown,
   ChevronRight,
   FileBarChart,
   FileText,
+  Inbox,
   MousePointer2,
   Plus,
   Receipt,
@@ -51,6 +54,43 @@ const KANZLEI_NAV: KanzleiNavItem[] = [
     to: "/einstellungen/benutzer",
     icon: Users,
     testId: "arbeitsplatz-nav-mitarbeiter",
+  },
+];
+
+// --- Mein Tag (linke Spalte, oberer Block) -------------------------------
+//
+// Drei Schnellzugriffe für den Arbeitsalltag. Fristen + Posteingang sind
+// echte Routes (DeadlinesPage / DocumentsPage). Aufgaben hat aktuell keine
+// Route — `to: null` markiert den Eintrag als nicht-klickbar (visueller
+// Platzhalter), bis das Aufgaben-Modul in einem späteren Sprint angebunden
+// wird. Badges (Anzahl offener Fristen etc.) werden in einem separaten
+// Sprint aus der DB nachgeladen — bewusst hier nicht in MVP.
+
+type MeinTagItem = {
+  label: string;
+  to: string | null;
+  icon: typeof Settings;
+  testId: string;
+};
+
+const MEIN_TAG: MeinTagItem[] = [
+  {
+    label: "Fristen",
+    to: "/einstellungen/fristen",
+    icon: AlertCircle,
+    testId: "arbeitsplatz-meintag-fristen",
+  },
+  {
+    label: "Posteingang",
+    to: "/belege",
+    icon: Inbox,
+    testId: "arbeitsplatz-meintag-posteingang",
+  },
+  {
+    label: "Meine Aufgaben",
+    to: null,
+    icon: CheckSquare,
+    testId: "arbeitsplatz-meintag-aufgaben",
   },
 ];
 
@@ -360,9 +400,68 @@ export default function ArbeitsplatzPage() {
         <section
           className="arbeitsplatz__col arbeitsplatz__col--left"
           data-testid="arbeitsplatz-col-left"
-          aria-label="Kanzleiorganisation"
+          aria-label="Mein Arbeitsplatz"
         >
-          <h2>Kanzleiorganisation</h2>
+          <div
+            className="arbeitsplatz__section-header"
+            data-testid="arbeitsplatz-section-meintag"
+          >
+            Mein Tag
+          </div>
+          <nav aria-label="Mein-Tag-Navigation">
+            <ul className="arbeitsplatz__nav">
+              {MEIN_TAG.map((item) => {
+                const Icon = item.icon;
+                if (item.to === null) {
+                  return (
+                    <li key={item.testId}>
+                      <span
+                        className="arbeitsplatz__nav-link arbeitsplatz__nav-link--disabled"
+                        data-testid={item.testId}
+                        aria-disabled="true"
+                        title="Bald verfügbar"
+                      >
+                        <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
+                        <span>{item.label}</span>
+                      </span>
+                    </li>
+                  );
+                }
+                // DATEV-Muster: Wenn ein Mandant in Arbeit ist, wird die
+                // mandantId an die Zielseite mitgegeben — analog zur
+                // rechten Spalte (Programme-Baum). Ohne aktiven Mandanten
+                // bleibt der Link kanzleiweit. Die Zielseite (DeadlinesPage,
+                // DocumentsPage) entscheidet selbst, ob sie nach mandantId
+                // filtert oder den Parameter ignoriert.
+                const targetTo = activeId
+                  ? buildMandantLink(item.to, activeId)
+                  : item.to;
+                return (
+                  <li key={item.testId}>
+                    <NavLink
+                      to={targetTo}
+                      data-testid={item.testId}
+                      className={({ isActive }) =>
+                        `arbeitsplatz__nav-link${
+                          isActive ? " arbeitsplatz__nav-link--active" : ""
+                        }`
+                      }
+                    >
+                      <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
+                      <span>{item.label}</span>
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <div
+            className="arbeitsplatz__section-header arbeitsplatz__section-header--with-spacing"
+            data-testid="arbeitsplatz-section-kanzlei"
+          >
+            Kanzlei
+          </div>
           <nav aria-label="Kanzlei-Navigation">
             <ul className="arbeitsplatz__nav">
               {KANZLEI_NAV.map((item) => {

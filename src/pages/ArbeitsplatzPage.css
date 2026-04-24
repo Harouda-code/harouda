@@ -117,6 +117,34 @@
   flex-shrink: 0;
 }
 
+/* --- Section-Header (linke Spalte: Gruppen-Trenner) ------------------ */
+
+.arbeitsplatz__section-header {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted, #64748b);
+  padding: 0 12px 6px 12px;
+  margin: 0 0 6px 0;
+  border-bottom: 1px solid var(--border, #e2e8f0);
+}
+
+.arbeitsplatz__section-header--with-spacing {
+  margin-top: 14px;
+}
+
+/* Nicht-klickbarer Platzhalter (z. B. Aufgaben vor Modul-Anbindung). */
+.arbeitsplatz__nav-link--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.arbeitsplatz__nav-link--disabled:hover {
+  background: transparent;
+  color: var(--ink, #1e293b);
+}
+
 /* --- Mittlere Spalte: Header + Suche + Tabelle ------------------------- */
 
 .arbeitsplatz__col-header {

@@ -913,28 +913,42 @@ export type Database = {
           anschrift_ort: string | null
           anschrift_plz: string | null
           anschrift_strasse: string | null
+          berufsgenossenschaft_mitgliedsnr: string | null
+          berufsgenossenschaft_name: string | null
+          betriebsnummer: string | null
           company_id: string | null
           created_at: string
           created_by: string | null
+          finanzamt_bufa_nr: string | null
+          finanzamt_name: string | null
           geschaeftsfuehrer: Json | null
+          gewinnermittlungsart: string | null
           gezeichnetes_kapital: number | null
           hrb_gericht: string | null
           hrb_nummer: string | null
           iban: string | null
           id: string
+          kirchensteuer_erhebungsstelle: string | null
+          kleinunternehmer_regelung: boolean
+          kontenrahmen: string
           last_daten_holen_at: string | null
           mandant_nr: string
           name: string
           owner_id: string | null
           rechtsform: string | null
+          sachkontenlaenge: number
+          status: string
           steuernummer: string | null
           updated_at: string
           updated_by: string | null
           ust_id: string | null
           ust_id_checked_at: string | null
           ust_id_status: string
+          ust_voranmeldung_zeitraum: string | null
+          versteuerungsart: string | null
           wirtschaftsjahr_beginn: string | null
           wirtschaftsjahr_ende: string | null
+          wirtschaftsjahr_typ: string
         }
         Insert: {
           anschrift_hausnummer?: string | null
@@ -942,28 +956,42 @@ export type Database = {
           anschrift_ort?: string | null
           anschrift_plz?: string | null
           anschrift_strasse?: string | null
+          berufsgenossenschaft_mitgliedsnr?: string | null
+          berufsgenossenschaft_name?: string | null
+          betriebsnummer?: string | null
           company_id?: string | null
           created_at?: string
           created_by?: string | null
+          finanzamt_bufa_nr?: string | null
+          finanzamt_name?: string | null
           geschaeftsfuehrer?: Json | null
+          gewinnermittlungsart?: string | null
           gezeichnetes_kapital?: number | null
           hrb_gericht?: string | null
           hrb_nummer?: string | null
           iban?: string | null
           id?: string
+          kirchensteuer_erhebungsstelle?: string | null
+          kleinunternehmer_regelung?: boolean
+          kontenrahmen?: string
           last_daten_holen_at?: string | null
           mandant_nr: string
           name: string
           owner_id?: string | null
           rechtsform?: string | null
+          sachkontenlaenge?: number
+          status?: string
           steuernummer?: string | null
           updated_at?: string
           updated_by?: string | null
           ust_id?: string | null
           ust_id_checked_at?: string | null
           ust_id_status?: string
+          ust_voranmeldung_zeitraum?: string | null
+          versteuerungsart?: string | null
           wirtschaftsjahr_beginn?: string | null
           wirtschaftsjahr_ende?: string | null
+          wirtschaftsjahr_typ?: string
         }
         Update: {
           anschrift_hausnummer?: string | null
@@ -971,28 +999,42 @@ export type Database = {
           anschrift_ort?: string | null
           anschrift_plz?: string | null
           anschrift_strasse?: string | null
+          berufsgenossenschaft_mitgliedsnr?: string | null
+          berufsgenossenschaft_name?: string | null
+          betriebsnummer?: string | null
           company_id?: string | null
           created_at?: string
           created_by?: string | null
+          finanzamt_bufa_nr?: string | null
+          finanzamt_name?: string | null
           geschaeftsfuehrer?: Json | null
+          gewinnermittlungsart?: string | null
           gezeichnetes_kapital?: number | null
           hrb_gericht?: string | null
           hrb_nummer?: string | null
           iban?: string | null
           id?: string
+          kirchensteuer_erhebungsstelle?: string | null
+          kleinunternehmer_regelung?: boolean
+          kontenrahmen?: string
           last_daten_holen_at?: string | null
           mandant_nr?: string
           name?: string
           owner_id?: string | null
           rechtsform?: string | null
+          sachkontenlaenge?: number
+          status?: string
           steuernummer?: string | null
           updated_at?: string
           updated_by?: string | null
           ust_id?: string | null
           ust_id_checked_at?: string | null
           ust_id_status?: string
+          ust_voranmeldung_zeitraum?: string | null
+          versteuerungsart?: string | null
           wirtschaftsjahr_beginn?: string | null
           wirtschaftsjahr_ende?: string | null
+          wirtschaftsjahr_typ?: string
         }
         Relationships: [
           {

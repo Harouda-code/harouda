@@ -203,6 +203,25 @@ export type Client = {
   anschrift_ort?: string | null;
   /** ISO 3166-1 alpha-2. DB-Default 'DE'. */
   anschrift_land?: string | null;
+  // Migration 0041 — DATEV-standard Stammdaten
+  // Buchhalterische Einstellungen:
+  kontenrahmen?: "SKR03" | "SKR04";
+  sachkontenlaenge?: number;
+  gewinnermittlungsart?: "bilanz" | "euer" | null;
+  wirtschaftsjahr_typ?: "kalenderjahr" | "abweichend";
+  // Steuerliche Erfassung:
+  finanzamt_name?: string | null;
+  finanzamt_bufa_nr?: string | null;
+  versteuerungsart?: "soll" | "ist" | null;
+  kleinunternehmer_regelung?: boolean;
+  ust_voranmeldung_zeitraum?: "monatlich" | "vierteljaehrlich" | "jaehrlich" | "befreit" | null;
+  // Lohn-Stammdaten:
+  betriebsnummer?: string | null;
+  berufsgenossenschaft_name?: string | null;
+  berufsgenossenschaft_mitgliedsnr?: string | null;
+  kirchensteuer_erhebungsstelle?: string | null;
+  // System:
+  status?: "in_gruendung" | "aktiv" | "archiviert";
 };
 
 /** Bank-Reconciliation-Match-Record (Migration 0031, Sprint 16).

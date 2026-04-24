@@ -22,6 +22,27 @@ export type ClientInput = {
   geschaeftsfuehrer?: Geschaeftsfuehrer[] | null;
   wirtschaftsjahr_beginn?: string;
   wirtschaftsjahr_ende?: string;
+  // Migration 0033 — Anschrift
+  anschrift_strasse?: string | null;
+  anschrift_hausnummer?: string | null;
+  anschrift_plz?: string | null;
+  anschrift_ort?: string | null;
+  anschrift_land?: string | null;
+  // Migration 0041 — DATEV Stammdaten
+  kontenrahmen?: "SKR03" | "SKR04";
+  sachkontenlaenge?: number;
+  gewinnermittlungsart?: "bilanz" | "euer" | null;
+  wirtschaftsjahr_typ?: "kalenderjahr" | "abweichend";
+  finanzamt_name?: string | null;
+  finanzamt_bufa_nr?: string | null;
+  versteuerungsart?: "soll" | "ist" | null;
+  kleinunternehmer_regelung?: boolean;
+  ust_voranmeldung_zeitraum?: "monatlich" | "vierteljaehrlich" | "jaehrlich" | "befreit" | null;
+  betriebsnummer?: string | null;
+  berufsgenossenschaft_name?: string | null;
+  berufsgenossenschaft_mitgliedsnr?: string | null;
+  kirchensteuer_erhebungsstelle?: string | null;
+  status?: "in_gruendung" | "aktiv" | "archiviert";
 };
 
 export async function fetchClients(): Promise<Client[]> {
@@ -83,6 +104,27 @@ export async function createClient(input: ClientInput): Promise<Client> {
       geschaeftsfuehrer: input.geschaeftsfuehrer ?? [],
       wirtschaftsjahr_beginn: input.wirtschaftsjahr_beginn ?? "01-01",
       wirtschaftsjahr_ende: input.wirtschaftsjahr_ende ?? "12-31",
+      // Migration 0033 — Anschrift (undefined → DB default / NULL)
+      anschrift_strasse: input?.anschrift_strasse,
+      anschrift_hausnummer: input?.anschrift_hausnummer,
+      anschrift_plz: input?.anschrift_plz,
+      anschrift_ort: input?.anschrift_ort,
+      anschrift_land: input?.anschrift_land,
+      // Migration 0041 — DATEV Stammdaten (undefined → DB default)
+      kontenrahmen: input?.kontenrahmen,
+      sachkontenlaenge: input?.sachkontenlaenge,
+      gewinnermittlungsart: input?.gewinnermittlungsart,
+      wirtschaftsjahr_typ: input?.wirtschaftsjahr_typ,
+      finanzamt_name: input?.finanzamt_name,
+      finanzamt_bufa_nr: input?.finanzamt_bufa_nr,
+      versteuerungsart: input?.versteuerungsart,
+      kleinunternehmer_regelung: input?.kleinunternehmer_regelung,
+      ust_voranmeldung_zeitraum: input?.ust_voranmeldung_zeitraum,
+      betriebsnummer: input?.betriebsnummer,
+      berufsgenossenschaft_name: input?.berufsgenossenschaft_name,
+      berufsgenossenschaft_mitgliedsnr: input?.berufsgenossenschaft_mitgliedsnr,
+      kirchensteuer_erhebungsstelle: input?.kirchensteuer_erhebungsstelle,
+      status: input?.status,
     })
     .select("*")
     .single();

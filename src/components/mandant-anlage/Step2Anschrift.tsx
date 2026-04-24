@@ -6,63 +6,42 @@ export function Step2Anschrift() {
   const { register, formState: { errors } } = useFormContext<MandantAnlageData>();
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold mb-4">Anschrift</h2>
+    <div className="wizard-step">
+      <h2 className="wizard-step__title">Anschrift</h2>
 
-      <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-2">
-          <label className="block text-sm font-medium mb-1">Straße</label>
-          <input
-            type="text"
-            {...register("anschrift_strasse")}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+      <div className="wizard-row wizard-row--strasse">
+        <div className="wizard-field">
+          <label className="wizard-field__label">Straße</label>
+          <input type="text" {...register("anschrift_strasse")} className="wizard-field__input" />
         </div>
-        <div>
-          <label className="block text-sm font-medium mb-1">Hausnummer</label>
-          <input
-            type="text"
-            {...register("anschrift_hausnummer")}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <div className="wizard-field">
+          <label className="wizard-field__label">Hausnummer</label>
+          <input type="text" {...register("anschrift_hausnummer")} className="wizard-field__input" />
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
-        <div>
-          <label className="block text-sm font-medium mb-1">PLZ</label>
-          <input
-            type="text"
-            {...register("anschrift_plz")}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="12345"
-          />
-          {errors.anschrift_plz && (
-            <p className="text-red-500 text-sm mt-1">{errors.anschrift_plz.message}</p>
-          )}
+      <div className="wizard-row wizard-row--plz">
+        <div className="wizard-field">
+          <label className="wizard-field__label">PLZ</label>
+          <input type="text" {...register("anschrift_plz")} className="wizard-field__input" placeholder="12345" />
+          {errors.anschrift_plz && <p className="wizard-field__error">{errors.anschrift_plz.message}</p>}
         </div>
-        <div className="col-span-2">
-          <label className="block text-sm font-medium mb-1">Ort</label>
-          <input
-            type="text"
-            {...register("anschrift_ort")}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <div className="wizard-field">
+          <label className="wizard-field__label">Ort</label>
+          <input type="text" {...register("anschrift_ort")} className="wizard-field__input" />
         </div>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium mb-1">Land (ISO-Code)</label>
+      <div className="wizard-field">
+        <label className="wizard-field__label">Land (ISO-Code)</label>
         <input
           type="text"
           {...register("anschrift_land")}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="wizard-field__input"
           placeholder="DE"
           maxLength={2}
         />
-        {errors.anschrift_land && (
-          <p className="text-red-500 text-sm mt-1">{errors.anschrift_land.message}</p>
-        )}
+        {errors.anschrift_land && <p className="wizard-field__error">{errors.anschrift_land.message}</p>}
       </div>
     </div>
   );

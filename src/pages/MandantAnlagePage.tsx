@@ -15,7 +15,6 @@ export default function MandantAnlagePage() {
   const navigate = useNavigate();
 
   const methods = useForm<MandantAnlageData>({
-    // See Phase 4.B.1 commit message for rationale on this cast.
     resolver: zodResolver(mandantAnlageSchema) as unknown as Resolver<MandantAnlageData>,
     mode: "onBlur",
     defaultValues: {
@@ -43,7 +42,6 @@ export default function MandantAnlagePage() {
 
   async function handleSubmitFinal(data: MandantAnlageData) {
     try {
-      // Sanitize: convert "" → null for DB compatibility with CHECK constraints.
       const cleaned = sanitizeFormPayload(data) as unknown as ClientInput;
       const created = await createClient(cleaned);
       toast.success(`Mandant "${created.name}" wurde angelegt.`);
@@ -57,11 +55,11 @@ export default function MandantAnlagePage() {
 
   return (
     <FormProvider {...methods}>
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="bg-white shadow rounded-lg max-w-3xl mx-auto">
-          <header className="px-6 py-4 border-b border-gray-200">
-            <h1 className="text-2xl font-bold">Neuen Mandanten anlegen</h1>
-            <p className="text-sm text-gray-500 mt-1">
+      <div className="wizard-page">
+        <div className="wizard-card">
+          <header className="wizard-header">
+            <h1 className="wizard-header__title">Neuen Mandanten anlegen</h1>
+            <p className="wizard-header__subtitle">
               Vier Schritte zur vollständigen Erfassung der Mandanten-Stammdaten.
             </p>
           </header>

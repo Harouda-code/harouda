@@ -19,54 +19,49 @@ export function Step1Grunddaten() {
   const { register, formState: { errors } } = useFormContext<MandantAnlageData>();
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold mb-4">Grunddaten</h2>
+    <div className="wizard-step">
+      <h2 className="wizard-step__title">Grunddaten</h2>
 
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Mandanten-Nr. <span className="text-red-500">*</span>
+      <div className="wizard-field">
+        <label className="wizard-field__label">
+          Mandanten-Nr.<span className="wizard-field__required">*</span>
         </label>
         <input
           type="text"
           {...register("mandant_nr")}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="wizard-field__input"
           placeholder="z.B. 10001"
         />
         {errors.mandant_nr && (
-          <p className="text-red-500 text-sm mt-1">{errors.mandant_nr.message}</p>
+          <p className="wizard-field__error">{errors.mandant_nr.message}</p>
         )}
       </div>
 
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Name / Firma <span className="text-red-500">*</span>
+      <div className="wizard-field">
+        <label className="wizard-field__label">
+          Name / Firma<span className="wizard-field__required">*</span>
         </label>
         <input
           type="text"
           {...register("name")}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="wizard-field__input"
           placeholder="Mustermann GmbH"
         />
-        {errors.name && (
-          <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-        )}
+        {errors.name && <p className="wizard-field__error">{errors.name.message}</p>}
       </div>
 
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Rechtsform <span className="text-red-500">*</span>
+      <div className="wizard-field">
+        <label className="wizard-field__label">
+          Rechtsform<span className="wizard-field__required">*</span>
         </label>
-        <select
-          {...register("rechtsform")}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
+        <select {...register("rechtsform")} className="wizard-field__select">
           <option value="">-- auswählen --</option>
           {Object.entries(RECHTSFORM_LABELS).map(([value, label]) => (
             <option key={value} value={value}>{label}</option>
           ))}
         </select>
         {errors.rechtsform && (
-          <p className="text-red-500 text-sm mt-1">{errors.rechtsform.message}</p>
+          <p className="wizard-field__error">{errors.rechtsform.message}</p>
         )}
       </div>
     </div>

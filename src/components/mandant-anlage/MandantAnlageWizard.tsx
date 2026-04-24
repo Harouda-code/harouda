@@ -7,6 +7,7 @@ import { Step1Grunddaten } from "./Step1Grunddaten";
 import { Step2Anschrift } from "./Step2Anschrift";
 import { Step3SteuerBank } from "./Step3SteuerBank";
 import { Step4BuchhaltungLohn } from "./Step4BuchhaltungLohn";
+import "./wizard.css";
 
 const STEP_LABELS = ["Grunddaten", "Anschrift", "Steuer & Bank", "Buchhaltung & Lohn"];
 const TOTAL_STEPS = 4;
@@ -31,7 +32,6 @@ export function MandantAnlageWizard({ onCancel, onSubmitFinal, isSubmitting = fa
   const { trigger, handleSubmit } = useFormContext<MandantAnlageData>();
   const currentStepRef = useRef(currentStep);
 
-  // Keep ref in sync for keyboard handler closure.
   useEffect(() => {
     currentStepRef.current = currentStep;
   }, [currentStep]);
@@ -52,20 +52,17 @@ export function MandantAnlageWizard({ onCancel, onSubmitFinal, isSubmitting = fa
     onSubmitFinal(data);
   });
 
-  // Keyboard shortcuts: Enter / Ctrl+Enter / Escape
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       const target = e.target as HTMLElement | null;
       const tag = target?.tagName?.toLowerCase();
 
-      // Escape → cancel (works from anywhere)
       if (e.key === "Escape") {
         e.preventDefault();
         onCancel();
         return;
       }
 
-      // Ctrl/Cmd + Enter → submit (only on last step)
       if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
         if (currentStepRef.current === TOTAL_STEPS) {
           e.preventDefault();
@@ -74,8 +71,6 @@ export function MandantAnlageWizard({ onCancel, onSubmitFinal, isSubmitting = fa
         return;
       }
 
-      // Plain Enter inside <input> → trigger Next (not submit).
-      // Skip textarea/select/button so native behaviour is preserved.
       if (e.key === "Enter" && tag === "input") {
         if (currentStepRef.current < TOTAL_STEPS) {
           e.preventDefault();
@@ -87,14 +82,11 @@ export function MandantAnlageWizard({ onCancel, onSubmitFinal, isSubmitting = fa
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-    // onCancel and onFinal are captured via closure; they're stable references
-    // from the parent's component scope. Intentionally excluding from deps
-    // to avoid re-binding the listener on every render.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="wizard-body">
       <WizardProgressBar currentStep={currentStep} totalSteps={TOTAL_STEPS} labels={STEP_LABELS} />
 
       <form onSubmit={onFinal}>

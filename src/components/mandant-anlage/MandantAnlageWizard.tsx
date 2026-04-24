@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import type { MandantAnlageData } from "../../domain/clients/mandantAnlageSchema";
 import { WizardProgressBar } from "./WizardProgressBar";
@@ -29,22 +29,69 @@ interface MandantAnlageWizardProps {
 export function MandantAnlageWizard({ onCancel, onSubmitFinal, isSubmitting = false }: MandantAnlageWizardProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const { trigger, handleSubmit } = useFormContext<MandantAnlageData>();
+  const currentStepRef = useRef(currentStep);
+
+  // Keep ref in sync for keyboard handler closure.
+  useEffect(() => {
+    currentStepRef.current = currentStep;
+  }, [currentStep]);
 
   async function handleNext() {
-    const fields = STEP_FIELDS[currentStep];
+    const fields = STEP_FIELDS[currentStepRef.current];
     const valid = await trigger(fields as Array<keyof MandantAnlageData>);
-    if (valid && currentStep < TOTAL_STEPS) {
+    if (valid && currentStepRef.current < TOTAL_STEPS) {
       setCurrentStep((s) => s + 1);
     }
   }
 
   function handleBack() {
-    if (currentStep > 1) setCurrentStep((s) => s - 1);
+    if (currentStepRef.current > 1) setCurrentStep((s) => s - 1);
   }
 
   const onFinal = handleSubmit((data) => {
     onSubmitFinal(data);
   });
+
+  // Keyboard shortcuts: Enter / Ctrl+Enter / Escape
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      const target = e.target as HTMLElement | null;
+      const tag = target?.tagName?.toLowerCase();
+
+      // Escape → cancel (works from anywhere)
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onCancel();
+        return;
+      }
+
+      // Ctrl/Cmd + Enter → submit (only on last step)
+      if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+        if (currentStepRef.current === TOTAL_STEPS) {
+          e.preventDefault();
+          onFinal();
+        }
+        return;
+      }
+
+      // Plain Enter inside <input> → trigger Next (not submit).
+      // Skip textarea/select/button so native behaviour is preserved.
+      if (e.key === "Enter" && tag === "input") {
+        if (currentStepRef.current < TOTAL_STEPS) {
+          e.preventDefault();
+          void handleNext();
+        }
+        return;
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+    // onCancel and onFinal are captured via closure; they're stable references
+    // from the parent's component scope. Intentionally excluding from deps
+    // to avoid re-binding the listener on every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="max-w-3xl mx-auto p-6">

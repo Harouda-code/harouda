@@ -13,7 +13,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
-import { Link, NavLink, useSearchParams } from "react-router-dom";
+import { Link, NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
   BookOpen,
@@ -303,9 +303,8 @@ function filterClients(clients: Client[], query: string): Client[] {
 
 export default function ArbeitsplatzPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
-  // TODO: Phase 4.B — restore with new Wizard flow
-  // const [addModalOpen, setAddModalOpen] = useState(false);
 
   const clientsQ = useQuery({
     queryKey: ["clients", "all"],
@@ -355,23 +354,6 @@ export default function ArbeitsplatzPage() {
     }
   }
 
-  // TODO: Phase 4.B — restore with new Wizard flow
-  // function onAddClick() {
-  //   setAddModalOpen(true);
-  // }
-  //
-  // function onMandantCreated(client: Client) {
-  //   setAddModalOpen(false);
-  //   setSearchParams(
-  //     (prev) => {
-  //       const next = new URLSearchParams(prev);
-  //       next.set("mandantId", client.id);
-  //       return next;
-  //     },
-  //     { replace: true }
-  //   );
-  // }
-
   return (
     <div className="arbeitsplatz" data-testid="arbeitsplatz-root">
       <div className="arbeitsplatz__grid">
@@ -416,7 +398,7 @@ export default function ArbeitsplatzPage() {
             <button
               type="button"
               className="arbeitsplatz__add-btn"
-              onClick={() => { /* TODO: Phase 4.B — restore with new Wizard flow */ }}
+              onClick={() => navigate("/mandanten/neu")}
               aria-label="Neuen Mandanten anlegen"
               title="Neuen Mandanten anlegen"
               data-testid="arbeitsplatz-add-mandant"
@@ -520,13 +502,6 @@ export default function ArbeitsplatzPage() {
         </section>
       </div>
 
-      {/* TODO: Phase 4.B — restore with new Wizard flow
-      <MandantAnlageModal
-        open={addModalOpen}
-        onClose={() => setAddModalOpen(false)}
-        onCreated={onMandantCreated}
-      />
-      */}
     </div>
   );
 }

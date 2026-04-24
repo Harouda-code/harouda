@@ -30,6 +30,7 @@ import AccountsPage from "./pages/AccountsPage";
 import JournalPage from "./pages/JournalPage";
 import JournalCsvImportPage from "./pages/JournalCsvImportPage";
 import ClientsPage from "./pages/ClientsPage";
+import MandantAnlagePage from "./pages/MandantAnlagePage";
 import ReportsPage from "./pages/ReportsPage";
 import GuvPage from "./pages/GuvPage";
 import BwaPage from "./pages/BwaPage";
@@ -172,6 +173,7 @@ export default function App() {
             element={<Navigate to="/arbeitsplatz" replace />}
           />
           <Route path="/mandanten" element={<ClientsPage />} />
+          <Route path="/mandanten/neu" element={<MandantAnlagePage />} />
           <Route path="/journal" element={<JournalPage />} />
           <Route path="/journal/import" element={<JournalCsvImportPage />} />
           <Route path="/konten" element={<AccountsPage />} />

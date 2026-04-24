@@ -1,19 +1,21 @@
 import React from "react";
 import { useForm, FormProvider, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import {
   mandantAnlageSchema,
   type MandantAnlageData,
 } from "../domain/clients/mandantAnlageSchema";
 import { MandantAnlageWizard } from "../components/mandant-anlage/MandantAnlageWizard";
+import { createClient, type ClientInput } from "../api/clients";
+import { sanitizeFormPayload } from "../lib/forms/sanitizePayload";
 
 export default function MandantAnlagePage() {
+  const navigate = useNavigate();
+
   const methods = useForm<MandantAnlageData>({
-    // Zod 4 `.default()` makes output type stricter than input (required vs
-    // optional). RHF's single-generic useForm treats TFieldValues == TTransformedValues,
-    // so zodResolver's Resolver<Input, …, Output> doesn't match. The cast is safe:
-    // at runtime, form state carries applied defaults, so z.output describes it
-    // accurately. Revisit if useForm gains ergonomic Input/Output split.
+    // See Phase 4.B.1 commit message for rationale on this cast.
     resolver: zodResolver(mandantAnlageSchema) as unknown as Resolver<MandantAnlageData>,
     mode: "onBlur",
     defaultValues: {
@@ -30,13 +32,27 @@ export default function MandantAnlagePage() {
   });
 
   function handleCancel() {
-    // TODO: Phase 4.B.2 — add confirmation if form is dirty, then navigate back to /mandanten
-    console.log("Cancel clicked (stub — navigation added in 4.B.2)");
+    if (methods.formState.isDirty) {
+      const confirmed = window.confirm(
+        "Es gibt ungespeicherte Änderungen. Möchten Sie den Vorgang wirklich abbrechen?"
+      );
+      if (!confirmed) return;
+    }
+    navigate("/mandanten");
   }
 
   async function handleSubmitFinal(data: MandantAnlageData) {
-    // TODO: Phase 4.B.2 — call createClient() and navigate on success
-    console.log("Submit clicked (stub — API call added in 4.B.2):", data);
+    try {
+      // Sanitize: convert "" → null for DB compatibility with CHECK constraints.
+      const cleaned = sanitizeFormPayload(data) as unknown as ClientInput;
+      const created = await createClient(cleaned);
+      toast.success(`Mandant "${created.name}" wurde angelegt.`);
+      navigate("/mandanten");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error("createClient failed:", err);
+      toast.error(`Fehler beim Anlegen: ${message}`);
+    }
   }
 
   return (

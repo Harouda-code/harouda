@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
@@ -67,6 +68,7 @@ function UstIdBadge({ status }: { status: Client["ust_id_status"] }) {
 
 export default function ClientsPage() {
   const qc = useQueryClient();
+  const navigate = useNavigate();
   const { selectedMandantId, setSelectedMandantId } = useMandant();
   const { settings } = useSettings();
 
@@ -80,8 +82,6 @@ export default function ClientsPage() {
   });
 
   const [search, setSearch] = useState("");
-  // TODO: Phase 4.B — restore with new Wizard flow
-  // const [modalOpen, setModalOpen] = useState(false);
 
   const clients = clientsQ.data ?? [];
   const entries = entriesQ.data ?? [];
@@ -188,20 +188,12 @@ export default function ClientsPage() {
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => { /* TODO: Phase 4.B — restore with new Wizard flow */ }}
+          onClick={() => navigate("/mandanten/neu")}
         >
           <Plus size={16} />
           Neuer Mandant
         </button>
       </header>
-
-      {/* TODO: Phase 4.B — restore with new Wizard flow
-      <MandantAnlageModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onCreated={() => setModalOpen(false)}
-      />
-      */}
 
       {clientsQ.isLoading ? (
         <div className="journal__state">

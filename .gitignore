@@ -36,6 +36,9 @@ vite.config.js
 .env.*
 !.env.example
 
+# Test-Config (kein Secret — VITE_DEMO_MODE für Vitest)
+!.env.test
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

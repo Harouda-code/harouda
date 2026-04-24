@@ -218,8 +218,13 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
 
   // --- Schritt 1 / 2 / 3 (Regression) ------------------------------------
 
-  it("/arbeitsplatz rendert das Grid-Gerüst für einen eingeloggten User", () => {
+  it("/arbeitsplatz rendert das Grid-Gerüst für einen eingeloggten User", async () => {
     const { container, unmount } = renderAt("/arbeitsplatz");
+    // Mein-Tag-Block (Patch 3 des Left-Column-Refactors) nutzt
+    // useSearchParams → erzwingt einen asynchronen Re-Render-Schub
+    // nach dem initialen sync-commit. Ohne flush() wird das Root
+    // u.U. noch nicht im DOM sein, wenn die Assertion läuft.
+    await flush();
     const root = container.querySelector('[data-testid="arbeitsplatz-root"]');
     expect(root).not.toBeNull();
     expect(container.querySelector('[data-testid="login"]')).toBeNull();
@@ -252,7 +257,22 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     expect(center).not.toBeNull();
     expect(right).not.toBeNull();
 
-    expect(left?.querySelector("h2")?.textContent).toBe("Kanzleiorganisation");
+    // Patch 3 Left-Column-Refactor: "Kanzleiorganisation"-h2 wurde durch
+    // zwei section-header-divs ersetzt ("Mein Tag" + "Kanzlei"). Wir
+    // prüfen beide Gruppen-Header via stabile testIds statt fragiler
+    // h2-Selektoren, damit HTML-Änderungen den Test nicht brechen.
+    expect(
+      left?.querySelector<HTMLElement>(
+        '[data-testid="arbeitsplatz-section-meintag"]'
+      )?.textContent
+    ).toBe("Mein Tag");
+    expect(
+      left?.querySelector<HTMLElement>(
+        '[data-testid="arbeitsplatz-section-kanzlei"]'
+      )?.textContent
+    ).toBe("Kanzlei");
+    // Linke Spalte hat keinen <h2> mehr (section-headers sind <div>).
+    expect(left?.querySelector("h2")).toBeNull();
     expect(center?.querySelector("h2")?.textContent).toBe("Mandantenübersicht");
     // Rechte Spalte zeigt ohne ?mandantId= den Empty-State — keine h2 dort.
     expect(right?.querySelector("h2")).toBeNull();
@@ -288,6 +308,36 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
         '[data-testid="arbeitsplatz-col-right"].arbeitsplatz__col--right'
       )
     ).not.toBeNull();
+
+    unmount();
+  });
+
+  it("linke Spalte enthält Mein-Tag-Einträge mit korrekten Routen", async () => {
+    const { container, unmount } = renderAt("/arbeitsplatz");
+    await flush();
+
+    const fristen = container.querySelector<HTMLAnchorElement>(
+      '[data-testid="arbeitsplatz-meintag-fristen"]'
+    );
+    const posteingang = container.querySelector<HTMLAnchorElement>(
+      '[data-testid="arbeitsplatz-meintag-posteingang"]'
+    );
+    // „Meine Aufgaben" ist aktuell ein nicht-klickbarer Platzhalter
+    // (<span>, nicht <a>) — bis das Aufgaben-Modul existiert.
+    const aufgaben = container.querySelector<HTMLSpanElement>(
+      '[data-testid="arbeitsplatz-meintag-aufgaben"]'
+    );
+
+    expect(fristen).not.toBeNull();
+    expect(posteingang).not.toBeNull();
+    expect(aufgaben).not.toBeNull();
+
+    // Ohne ?mandantId= gelten die Basis-Routen ohne Query.
+    expect(fristen?.getAttribute("href")).toBe("/einstellungen/fristen");
+    expect(posteingang?.getAttribute("href")).toBe("/belege");
+    // Platzhalter hat weder href noch role=link.
+    expect(aufgaben?.getAttribute("href")).toBeNull();
+    expect(aufgaben?.getAttribute("aria-disabled")).toBe("true");
 
     unmount();
   });
@@ -617,10 +667,15 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
 
   // --- Schritt 6 (neu: MandantAnlage-Modal via Plus-Button) --------------
 
-  it("Schritt 6 · Plus-Klick öffnet das MandantAnlage-Modal (role=dialog sichtbar)", () => {
+  it("Schritt 6 · Plus-Klick löst keine Modal-Anzeige mehr aus (Navigation stattdessen)", () => {
+    // Design-Änderung (Post d3cbe48): Mandant-Anlage ist eine eigene Route
+    // /mandanten/neu → MandantAnlagePage. Der Plus-Button in Arbeitsplatz
+    // navigiert jetzt dorthin, statt einen Dialog im Arbeitsplatz zu öffnen.
+    // Die vollständige Navigation + Wizard-Flow wird in einem separaten
+    // Test für MandantAnlagePage geprüft; hier stellen wir nur sicher,
+    // dass die alte Modal-Logik NICHT mehr aktiv ist.
     const { container, unmount } = renderAt("/arbeitsplatz");
 
-    // Vor dem Klick kein Dialog.
     expect(
       document.body.querySelector('[role="dialog"][aria-modal="true"]')
     ).toBeNull();
@@ -628,23 +683,29 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     const btn = container.querySelector<HTMLButtonElement>(
       '[data-testid="arbeitsplatz-add-mandant"]'
     );
+    expect(btn).not.toBeNull();
+
     act(() => {
       btn!.click();
     });
 
-    // Dialog ist jetzt im Body (Modal rendert inline, ohne Portal).
-    const dialog = document.body.querySelector(
-      '[role="dialog"][aria-modal="true"]'
-    );
-    expect(dialog).not.toBeNull();
-    expect(dialog?.textContent).toContain("Neuen Mandanten anlegen");
+    expect(
+      document.body.querySelector('[role="dialog"][aria-modal="true"]')
+    ).toBeNull();
     expect(
       document.body.querySelector('[data-testid="mandant-anlage-form"]')
-    ).not.toBeNull();
+    ).toBeNull();
+
     unmount();
   });
 
-  it("Schritt 6 · Esc schließt das Modal, ohne createClient aufzurufen", async () => {
+  it("Schritt 6 · Plus-Klick ruft createClient nicht direkt auf", async () => {
+    // Post-Refactor (d3cbe48): Nach dem Plus-Klick erfolgt Navigation
+    // auf /mandanten/neu, keine Modal-Öffnung. createClient wird
+    // erst auf der Zielseite beim Submit aufgerufen, niemals aus
+    // dem Arbeitsplatz heraus. Der alte Esc-Schließen-Test ist durch
+    // die neue Route-Architektur obsolet und wurde in MandantAnlagePage.test.tsx
+    // (separat) weitergepflegt.
     const clientsModule = await import("../../api/clients");
     const createSpy = vi.spyOn(clientsModule, "createClient");
 
@@ -652,109 +713,23 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     const btn = container.querySelector<HTMLButtonElement>(
       '[data-testid="arbeitsplatz-add-mandant"]'
     );
+    expect(btn).not.toBeNull();
+
     act(() => {
       btn!.click();
     });
-    expect(
-      document.body.querySelector('[role="dialog"]')
-    ).not.toBeNull();
 
-    // Esc via window-keydown (Modal hört global).
-    act(() => {
-      window.dispatchEvent(
-        new KeyboardEvent("keydown", { key: "Escape", bubbles: true })
-      );
-    });
-
-    expect(document.body.querySelector('[role="dialog"]')).toBeNull();
     expect(createSpy).not.toHaveBeenCalled();
-
+    createSpy.mockRestore();
     unmount();
   });
 
-  it("Schritt 6 · erfolgreiche Anlage setzt ?mandantId=<neueId> und schließt das Modal", async () => {
-    // Start mit leerem Store → keine Mandanten vorab.
-    seedClients([]);
-    const { container, unmount } = renderAt("/arbeitsplatz");
-    // Ersten Micro-Task durchlaufen, damit initial-query resolved.
-    await flush();
-
-    // Modal öffnen.
-    const btn = container.querySelector<HTMLButtonElement>(
-      '[data-testid="arbeitsplatz-add-mandant"]'
-    );
-    act(() => {
-      btn!.click();
-    });
-
-    const nrField = document.body.querySelector<HTMLInputElement>(
-      '[data-testid="mandant-anlage-field-mandant-nr"]'
-    );
-    const nameField = document.body.querySelector<HTMLInputElement>(
-      '[data-testid="mandant-anlage-field-name"]'
-    );
-    expect(nrField).not.toBeNull();
-    expect(nameField).not.toBeNull();
-
-    act(() => {
-      typeInto(nrField!, "99999");
-      typeInto(nameField!, "Neuer Test-Mandant GmbH");
-    });
-
-    // Submit via Form (Submit-Button liegt im Footer via form="…"-Attribut).
-    const submitBtn = document.body.querySelector<HTMLButtonElement>(
-      '[data-testid="mandant-anlage-submit"]'
-    );
-    expect(submitBtn).not.toBeNull();
-    act(() => {
-      submitBtn!.click();
-    });
-
-    // Warten, bis Mutation durchgelaufen ist und URL aktualisiert wurde.
-    await vi.waitFor(
-      () => {
-        const search = getSearch(container);
-        if (!search.includes("mandantId=")) {
-          throw new Error(`URL-Query noch ohne mandantId: "${search}"`);
-        }
-      },
-      { timeout: 2000, interval: 10 }
-    );
-
-    // Modal muss geschlossen sein.
-    expect(document.body.querySelector('[role="dialog"]')).toBeNull();
-
-    // Neue Zeile trägt die ID aus dem Query.
-    const search = getSearch(container);
-    const match = /mandantId=([^&]+)/.exec(search);
-    expect(match).not.toBeNull();
-    const newId = decodeURIComponent(match![1]);
-
-    // Der neue Mandant ist in der Liste (Tabelle refresht via Invalidation)
-    // und die entsprechende Zeile ist aktiv markiert.
-    await vi.waitFor(
-      () => {
-        const row = container.querySelector(
-          `[data-testid="arbeitsplatz-mandant-row-${newId}"]`
-        );
-        if (!row) throw new Error("neue Zeile noch nicht gerendert");
-      },
-      { timeout: 2000, interval: 10 }
-    );
-    const activeRow = container.querySelector(
-      `[data-testid="arbeitsplatz-mandant-row-${newId}"]`
-    );
-    expect(
-      activeRow?.classList.contains("arbeitsplatz__table-row--active")
-    ).toBe(true);
-
-    // Rechte Spalte zeigt jetzt den Launcher (neuer Mandant ist aktiv).
-    expect(
-      container.querySelector('[data-testid="arbeitsplatz-launcher-active"]')
-    ).not.toBeNull();
-
-    unmount();
-  });
+  it.todo(
+    "Schritt 6 · erfolgreiche Anlage setzt ?mandantId=<neueId> — " +
+      "vollständiger Wizard-Flow muss in MandantAnlagePage.test.tsx " +
+      "geprüft werden, da /mandanten/neu nach d3cbe48 eine eigene " +
+      "Route ist und renderAt hier kein Target-Route-Element registriert."
+  );
 
   it("Unbekannte mandantId in der URL wird still ignoriert (keine aktive Zeile, console.warn)", async () => {
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});

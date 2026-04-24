@@ -15,7 +15,6 @@ import {
 } from "react";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { MandantAnlageModal } from "../components/MandantAnlageModal";
 import {
   BookOpen,
   ChevronDown,
@@ -305,7 +304,8 @@ function filterClients(clients: Client[], query: string): Client[] {
 export default function ArbeitsplatzPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
-  const [addModalOpen, setAddModalOpen] = useState(false);
+  // TODO: Phase 4.B — restore with new Wizard flow
+  // const [addModalOpen, setAddModalOpen] = useState(false);
 
   const clientsQ = useQuery({
     queryKey: ["clients", "all"],
@@ -355,24 +355,22 @@ export default function ArbeitsplatzPage() {
     }
   }
 
-  function onAddClick() {
-    setAddModalOpen(true);
-  }
-
-  function onMandantCreated(client: Client) {
-    setAddModalOpen(false);
-    // URL-Query auf den neu angelegten Mandanten setzen (replace — konsistent
-    // zu Row-Click aus Schritt 4). Die Tanstack-Query-Invalidation des
-    // Modals (`["clients"]`) erfasst auch den hiesigen Key `["clients","all"]`.
-    setSearchParams(
-      (prev) => {
-        const next = new URLSearchParams(prev);
-        next.set("mandantId", client.id);
-        return next;
-      },
-      { replace: true }
-    );
-  }
+  // TODO: Phase 4.B — restore with new Wizard flow
+  // function onAddClick() {
+  //   setAddModalOpen(true);
+  // }
+  //
+  // function onMandantCreated(client: Client) {
+  //   setAddModalOpen(false);
+  //   setSearchParams(
+  //     (prev) => {
+  //       const next = new URLSearchParams(prev);
+  //       next.set("mandantId", client.id);
+  //       return next;
+  //     },
+  //     { replace: true }
+  //   );
+  // }
 
   return (
     <div className="arbeitsplatz" data-testid="arbeitsplatz-root">
@@ -418,7 +416,7 @@ export default function ArbeitsplatzPage() {
             <button
               type="button"
               className="arbeitsplatz__add-btn"
-              onClick={onAddClick}
+              onClick={() => { /* TODO: Phase 4.B — restore with new Wizard flow */ }}
               aria-label="Neuen Mandanten anlegen"
               title="Neuen Mandanten anlegen"
               data-testid="arbeitsplatz-add-mandant"
@@ -522,11 +520,13 @@ export default function ArbeitsplatzPage() {
         </section>
       </div>
 
+      {/* TODO: Phase 4.B — restore with new Wizard flow
       <MandantAnlageModal
         open={addModalOpen}
         onClose={() => setAddModalOpen(false)}
         onCreated={onMandantCreated}
       />
+      */}
     </div>
   );
 }

@@ -24,7 +24,6 @@ import { useMandant } from "../contexts/MandantContext";
 import { useSettings } from "../contexts/SettingsContext";
 import { lookupBank } from "../data/blz";
 import { formatIban, isValidIban } from "../utils/validators";
-import { MandantAnlageModal } from "../components/MandantAnlageModal";
 import type { Client } from "../types/db";
 import "./ClientsPage.css";
 
@@ -81,7 +80,8 @@ export default function ClientsPage() {
   });
 
   const [search, setSearch] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
+  // TODO: Phase 4.B — restore with new Wizard flow
+  // const [modalOpen, setModalOpen] = useState(false);
 
   const clients = clientsQ.data ?? [];
   const entries = entriesQ.data ?? [];
@@ -188,18 +188,20 @@ export default function ClientsPage() {
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => setModalOpen(true)}
+          onClick={() => { /* TODO: Phase 4.B — restore with new Wizard flow */ }}
         >
           <Plus size={16} />
           Neuer Mandant
         </button>
       </header>
 
+      {/* TODO: Phase 4.B — restore with new Wizard flow
       <MandantAnlageModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         onCreated={() => setModalOpen(false)}
       />
+      */}
 
       {clientsQ.isLoading ? (
         <div className="journal__state">

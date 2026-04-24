@@ -317,7 +317,6 @@ alter table public.accounts        alter column owner_id drop not null;
 alter table public.clients         alter column owner_id drop not null;
 alter table public.journal_entries alter column owner_id drop not null;
 alter table public.documents       alter column owner_id drop not null;
-alter table public.settings        alter column owner_id drop not null;
 alter table public.audit_log       alter column owner_id drop not null;
 
 -- HINWEIS: Die `owner_id`-Spalte bleibt erhalten, bis alle Anwendungen auf

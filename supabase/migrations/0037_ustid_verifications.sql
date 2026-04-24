@@ -49,7 +49,7 @@ create table if not exists public.ustid_verifications (
   created_at timestamptz not null default now(),
   created_by uuid null references auth.users(id),
   entstehungsjahr integer not null
-    generated always as (extract(year from created_at)::integer) stored,
+    generated always as (extract(year from (created_at at time zone 'Europe/Berlin'))::integer) stored,
   retention_until date not null,
   retention_hold boolean not null default false,
   retention_hold_reason text null

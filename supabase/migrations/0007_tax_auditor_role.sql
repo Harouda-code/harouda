@@ -61,7 +61,7 @@ create policy journal_entries_auditor_expiry
       from public.company_members cm
       where cm.company_id = journal_entries.company_id
         and cm.user_id = auth.uid()
-        and cm.role = 'tax_auditor'
+        and cm.role::text = 'tax_auditor'
         and cm.access_valid_until is not null
         and cm.access_valid_until < now()
     )

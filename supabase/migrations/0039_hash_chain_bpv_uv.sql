@@ -193,7 +193,7 @@ language sql
 immutable
 as $$
   select encode(
-    digest(
+    extensions.digest(
       coalesce(p_prev, repeat('0', 64))
       || '|'
       || public.canonical_json_bpv(
@@ -225,7 +225,7 @@ language sql
 immutable
 as $$
   select encode(
-    digest(
+    extensions.digest(
       coalesce(p_prev, repeat('0', 64))
       || '|'
       || public.canonical_json_uv(
@@ -234,7 +234,7 @@ as $$
            p_requested_ust_idnr,
            case
              when p_raw_http_response is null then ''
-             else encode(digest(p_raw_http_response, 'sha256'), 'hex')
+             else encode(extensions.digest(p_raw_http_response, 'sha256'), 'hex')
            end,
            p_verification_status,
            p_verification_source,

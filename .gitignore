@@ -46,3 +46,37 @@ vite.config.js
 *.njsproj
 *.sln
 *.sw?
+
+# === Sprint 2.0: Secrets hardening (never commit) ===
+# Private keys / certificates — eIDAS, JWT RS256, ELSTER, DEUeV
+*.key
+*.pem
+*.pfx
+*.p12
+# future: ERiC Java-Interop (not used yet)
+*.jks
+
+# Credential files (cloud service accounts, OAuth client secrets)
+credentials.json
+*.secret
+.env.vault
+
+# === Sprint 2.0: Additional tool caches / artefacts ===
+# Supabase CLI project-link state (different from supabase/.branches|.temp above)
+.supabase/
+
+# Alternative bundler outputs (defense-in-depth)
+build/
+out/
+.next/
+.vite/
+
+# ESLint cache
+.eslintcache
+
+# Windows folder customization
+desktop.ini
+
+# === Sprint 2.0: Editor/merge artefacts ===
+*.bak
+*.orig

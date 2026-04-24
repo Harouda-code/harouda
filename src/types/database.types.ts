@@ -1,3 +1,4 @@
+Initialising login role...
 export type Json =
   | string
   | number
@@ -919,7 +920,9 @@ export type Database = {
           gezeichnetes_kapital: number | null
           hrb_gericht: string | null
           hrb_nummer: string | null
+          iban: string | null
           id: string
+          last_daten_holen_at: string | null
           mandant_nr: string
           name: string
           owner_id: string | null
@@ -927,6 +930,9 @@ export type Database = {
           steuernummer: string | null
           updated_at: string
           updated_by: string | null
+          ust_id: string | null
+          ust_id_checked_at: string | null
+          ust_id_status: string
           wirtschaftsjahr_beginn: string | null
           wirtschaftsjahr_ende: string | null
         }
@@ -943,7 +949,9 @@ export type Database = {
           gezeichnetes_kapital?: number | null
           hrb_gericht?: string | null
           hrb_nummer?: string | null
+          iban?: string | null
           id?: string
+          last_daten_holen_at?: string | null
           mandant_nr: string
           name: string
           owner_id?: string | null
@@ -951,6 +959,9 @@ export type Database = {
           steuernummer?: string | null
           updated_at?: string
           updated_by?: string | null
+          ust_id?: string | null
+          ust_id_checked_at?: string | null
+          ust_id_status?: string
           wirtschaftsjahr_beginn?: string | null
           wirtschaftsjahr_ende?: string | null
         }
@@ -967,7 +978,9 @@ export type Database = {
           gezeichnetes_kapital?: number | null
           hrb_gericht?: string | null
           hrb_nummer?: string | null
+          iban?: string | null
           id?: string
+          last_daten_holen_at?: string | null
           mandant_nr?: string
           name?: string
           owner_id?: string | null
@@ -975,6 +988,9 @@ export type Database = {
           steuernummer?: string | null
           updated_at?: string
           updated_by?: string | null
+          ust_id?: string | null
+          ust_id_checked_at?: string | null
+          ust_id_status?: string
           wirtschaftsjahr_beginn?: string | null
           wirtschaftsjahr_ende?: string | null
         }

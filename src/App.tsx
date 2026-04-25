@@ -204,10 +204,10 @@ export default function App() {
           />
           <Route path="/mandanten" element={<ClientsPage />} />
           <Route path="/mandanten/neu" element={<MandantAnlagePage />} />
-          <Route path="/journal" element={<JournalPage />} />
+          <Route path="/journal" element={<Navigate to="/buchhaltung/journal" replace />} />
           <Route path="/journal/import" element={<JournalCsvImportPage />} />
-          <Route path="/konten" element={<AccountsPage />} />
-          <Route path="/buchfuehrung" element={<BuchfuehrungIndexPage />} />
+          <Route path="/konten" element={<Navigate to="/buchhaltung/konten" replace />} />
+          <Route path="/buchfuehrung" element={<Navigate to="/buchhaltung/buchfuehrung" replace />} />
           <Route path="/buchfuehrung/uebersicht" element={<BuchfuehrungUebersichtPage />} />
           <Route path="/buchfuehrung/zuordnung" element={<BuchfuehrungMappingPage />} />
           <Route path="/buchfuehrung/plausi" element={<BuchfuehrungPlausiPage />} />
@@ -238,7 +238,7 @@ export default function App() {
             element={<IntegrityDashboardPage />}
           />
           <Route path="/kanzlei-dashboard" element={<KanzleiDashboardPage />} />
-          <Route path="/buchungen/erfassung" element={<BelegerfassungPage />} />
+          <Route path="/buchungen/erfassung" element={<Navigate to="/buchhaltung/buchungen/erfassung" replace />} />
           <Route path="/steuer/euer" element={<EuerPage />} />
           <Route path="/steuer/gewerbesteuer" element={<GewerbesteuerPage />} />
           <Route path="/steuer/kst" element={<KoerperschaftsteuerPage />} />
@@ -292,10 +292,10 @@ export default function App() {
           <Route path="/steuer/est-1a" element={<HauptvorduckESt1APage />} />
           <Route path="/steuer/est-1c" element={<HauptvorduckESt1CPage />} />
           <Route path="/belege" element={<DocumentsPage />} />
-          <Route path="/opos" element={<OposPage />} />
-          <Route path="/liquiditaet" element={<CashflowPage />} />
-          <Route path="/mahnwesen" element={<MahnwesenPage />} />
-          <Route path="/bankimport" element={<BankImportPage />} />
+          <Route path="/opos" element={<Navigate to="/buchhaltung/opos" replace />} />
+          <Route path="/liquiditaet" element={<Navigate to="/buchhaltung/liquiditaet" replace />} />
+          <Route path="/mahnwesen" element={<Navigate to="/buchhaltung/mahnwesen" replace />} />
+          <Route path="/bankimport" element={<Navigate to="/buchhaltung/bankimport" replace />} />
           <Route path="/einstellungen" element={<SettingsPage />} />
           <Route path="/einstellungen/audit" element={<AuditLogPage />} />
           <Route path="/einstellungen/benutzer" element={<MembersPage />} />
@@ -305,22 +305,22 @@ export default function App() {
           <Route path="/e-rechnung/erstellen" element={<XRechnungErstellenPage />} />
           <Route path="/e-rechnung/archiv" element={<InvoiceArchivePage />} />
           <Route path="/buchungen/e-rechnung" element={<ERechnungPage />} />
-          <Route path="/buchungen/belege" element={<BelegeListePage />} />
+          <Route path="/buchungen/belege" element={<Navigate to="/buchhaltung/buchungen/belege" replace />} />
           <Route path="/export/datev" element={<DatevExportPage />} />
           <Route path="/steuern/elster" element={<ElsterPage />} />
           <Route path="/ai/scanner" element={<DocumentScannerPage />} />
-          <Route path="/banking/reconciliation" element={<BankReconciliationPage />} />
+          <Route path="/banking/reconciliation" element={<Navigate to="/buchhaltung/banking/reconciliation" replace />} />
           <Route path="/inventur" element={<InventurPage />} />
           <Route path="/berater/dashboard" element={<AdvisorDashboardPage />} />
           <Route path="/personal/mitarbeiter" element={<EmployeesPage />} />
           <Route path="/personal/abrechnung" element={<PayrollRunPage />} />
           <Route path="/einstellungen/kostenstellen" element={<CostCentersPage />} />
           <Route path="/einstellungen/kostentraeger" element={<CostCarriersPage />} />
-          <Route path="/anlagen/verzeichnis" element={<AnlagenVerzeichnisPage />} />
-          <Route path="/anlagen/afa-lauf" element={<AfaLaufPage />} />
+          <Route path="/anlagen/verzeichnis" element={<Navigate to="/buchhaltung/anlagen/verzeichnis" replace />} />
+          <Route path="/anlagen/afa-lauf" element={<Navigate to="/buchhaltung/anlagen/afa-lauf" replace />} />
           <Route path="/berichte/anlagenspiegel" element={<AnlagenspiegelPage />} />
           <Route path="/berichte/dimensionen" element={<DimensionReportPage />} />
-          <Route path="/banking/belegabfragen" element={<ReceiptRequestsPage />} />
+          <Route path="/banking/belegabfragen" element={<Navigate to="/buchhaltung/banking/belegabfragen" replace />} />
           <Route path="/pruefer" element={<PrueferDashboardPage />} />
           <Route path="/einstellungen/verfahrensdoku" element={<VerfahrensdokuPage />} />
           <Route path="/einstellungen/systemstatus" element={<SystemStatusPage />} />

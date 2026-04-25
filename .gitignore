@@ -83,3 +83,6 @@ desktop.ini
 # === Sprint 2.0: Editor/merge artefacts ===
 *.bak
 *.orig
+
+# Temporary discovery/handoff dumps
+_temp-*.txt

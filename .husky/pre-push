@@ -3,4 +3,4 @@
 # test exits fast. Skip with `git push --no-verify` only if the user explicitly
 # has a reason (e.g. hotfix with known broken test that's queued for follow-up).
 NODE_OPTIONS="--max-old-space-size=4096" npx tsc --noEmit
-NODE_OPTIONS="--max-old-space-size=4096" npx vitest run --bail=1 --no-coverage
+NODE_OPTIONS="--max-old-space-size=4096" npx vitest run --bail=1 --no-coverage --maxWorkers=2

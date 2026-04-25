@@ -2,11 +2,14 @@ import {
   BrowserRouter,
   HashRouter,
   Navigate,
+  Outlet,
   Route,
   Routes,
 } from "react-router-dom";
 import { DEMO_MODE } from "./api/supabase";
 import AppShell from "./components/AppShell";
+import BaseShell from "./components/shell/BaseShell";
+import BuchhaltungShell from "./components/shell/BuchhaltungShell";
 import DemoBanner from "./components/DemoBanner";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RequireAuth } from "./components/RequireAuth";
@@ -159,6 +162,66 @@ export default function App() {
           }
         />
 
+        {/* Phase 1 Patch 1.7 — Module-Shell BuchhaltungShell. */}
+        {/* Routes parallel zu AppShell-Routes; Migration in Patch 1.8/1.9. */}
+        <Route
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="BuchhaltungShell">
+                <BaseShell />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        >
+          <Route element={<BuchhaltungShell />}>
+            <Route path="/buchhaltung/journal" element={<JournalPage />} />
+            <Route path="/buchhaltung/konten" element={<AccountsPage />} />
+            <Route path="/buchhaltung/opos" element={<OposPage />} />
+            <Route path="/buchhaltung/mahnwesen" element={<MahnwesenPage />} />
+            <Route path="/buchhaltung/bankimport" element={<BankImportPage />} />
+            <Route path="/buchhaltung/banking/reconciliation" element={<BankReconciliationPage />} />
+            <Route path="/buchhaltung/banking/belegabfragen" element={<ReceiptRequestsPage />} />
+            <Route path="/buchhaltung/buchfuehrung" element={<BuchfuehrungIndexPage />} />
+            <Route path="/buchhaltung/anlagen/verzeichnis" element={<AnlagenVerzeichnisPage />} />
+            <Route path="/buchhaltung/anlagen/afa-lauf" element={<AfaLaufPage />} />
+            <Route path="/buchhaltung/liquiditaet" element={<CashflowPage />} />
+            <Route path="/buchhaltung/buchungen/erfassung" element={<BelegerfassungPage />} />
+            <Route path="/buchhaltung/buchungen/belege" element={<BelegeListePage />} />
+          </Route>
+        </Route>
+
+        {/* ============================================================
+            Layout-Route #2 — Legacy Redirects (Phase 1 — Patch 1.9)
+            13 alte Pfade leiten auf /buchhaltung/* um.
+            Kein Shell-Mount: <Navigate> rendert keine UI.
+            Auth + ErrorBoundary bleiben erhalten für Konsistenz.
+            Bei vollständiger Entfernung der legacy paths kann dieser
+            gesamte Block in einem Patch gelöscht werden.
+        ============================================================ */}
+        <Route
+          element={
+            <RequireAuth>
+              <ErrorBoundary context="LegacyRedirect" level="page">
+                <Outlet />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        >
+          <Route path="/journal" element={<Navigate to="/buchhaltung/journal" replace />} />
+          <Route path="/konten" element={<Navigate to="/buchhaltung/konten" replace />} />
+          <Route path="/buchfuehrung" element={<Navigate to="/buchhaltung/buchfuehrung" replace />} />
+          <Route path="/buchungen/erfassung" element={<Navigate to="/buchhaltung/buchungen/erfassung" replace />} />
+          <Route path="/opos" element={<Navigate to="/buchhaltung/opos" replace />} />
+          <Route path="/liquiditaet" element={<Navigate to="/buchhaltung/liquiditaet" replace />} />
+          <Route path="/mahnwesen" element={<Navigate to="/buchhaltung/mahnwesen" replace />} />
+          <Route path="/bankimport" element={<Navigate to="/buchhaltung/bankimport" replace />} />
+          <Route path="/buchungen/belege" element={<Navigate to="/buchhaltung/buchungen/belege" replace />} />
+          <Route path="/banking/reconciliation" element={<Navigate to="/buchhaltung/banking/reconciliation" replace />} />
+          <Route path="/anlagen/verzeichnis" element={<Navigate to="/buchhaltung/anlagen/verzeichnis" replace />} />
+          <Route path="/anlagen/afa-lauf" element={<Navigate to="/buchhaltung/anlagen/afa-lauf" replace />} />
+          <Route path="/banking/belegabfragen" element={<Navigate to="/buchhaltung/banking/belegabfragen" replace />} />
+        </Route>
+
         <Route
           element={
             <RequireAuth>
@@ -174,10 +237,7 @@ export default function App() {
           />
           <Route path="/mandanten" element={<ClientsPage />} />
           <Route path="/mandanten/neu" element={<MandantAnlagePage />} />
-          <Route path="/journal" element={<JournalPage />} />
           <Route path="/journal/import" element={<JournalCsvImportPage />} />
-          <Route path="/konten" element={<AccountsPage />} />
-          <Route path="/buchfuehrung" element={<BuchfuehrungIndexPage />} />
           <Route path="/buchfuehrung/uebersicht" element={<BuchfuehrungUebersichtPage />} />
           <Route path="/buchfuehrung/zuordnung" element={<BuchfuehrungMappingPage />} />
           <Route path="/buchfuehrung/plausi" element={<BuchfuehrungPlausiPage />} />
@@ -208,7 +268,6 @@ export default function App() {
             element={<IntegrityDashboardPage />}
           />
           <Route path="/kanzlei-dashboard" element={<KanzleiDashboardPage />} />
-          <Route path="/buchungen/erfassung" element={<BelegerfassungPage />} />
           <Route path="/steuer/euer" element={<EuerPage />} />
           <Route path="/steuer/gewerbesteuer" element={<GewerbesteuerPage />} />
           <Route path="/steuer/kst" element={<KoerperschaftsteuerPage />} />
@@ -262,10 +321,6 @@ export default function App() {
           <Route path="/steuer/est-1a" element={<HauptvorduckESt1APage />} />
           <Route path="/steuer/est-1c" element={<HauptvorduckESt1CPage />} />
           <Route path="/belege" element={<DocumentsPage />} />
-          <Route path="/opos" element={<OposPage />} />
-          <Route path="/liquiditaet" element={<CashflowPage />} />
-          <Route path="/mahnwesen" element={<MahnwesenPage />} />
-          <Route path="/bankimport" element={<BankImportPage />} />
           <Route path="/einstellungen" element={<SettingsPage />} />
           <Route path="/einstellungen/audit" element={<AuditLogPage />} />
           <Route path="/einstellungen/benutzer" element={<MembersPage />} />
@@ -275,22 +330,17 @@ export default function App() {
           <Route path="/e-rechnung/erstellen" element={<XRechnungErstellenPage />} />
           <Route path="/e-rechnung/archiv" element={<InvoiceArchivePage />} />
           <Route path="/buchungen/e-rechnung" element={<ERechnungPage />} />
-          <Route path="/buchungen/belege" element={<BelegeListePage />} />
           <Route path="/export/datev" element={<DatevExportPage />} />
           <Route path="/steuern/elster" element={<ElsterPage />} />
           <Route path="/ai/scanner" element={<DocumentScannerPage />} />
-          <Route path="/banking/reconciliation" element={<BankReconciliationPage />} />
           <Route path="/inventur" element={<InventurPage />} />
           <Route path="/berater/dashboard" element={<AdvisorDashboardPage />} />
           <Route path="/personal/mitarbeiter" element={<EmployeesPage />} />
           <Route path="/personal/abrechnung" element={<PayrollRunPage />} />
           <Route path="/einstellungen/kostenstellen" element={<CostCentersPage />} />
           <Route path="/einstellungen/kostentraeger" element={<CostCarriersPage />} />
-          <Route path="/anlagen/verzeichnis" element={<AnlagenVerzeichnisPage />} />
-          <Route path="/anlagen/afa-lauf" element={<AfaLaufPage />} />
           <Route path="/berichte/anlagenspiegel" element={<AnlagenspiegelPage />} />
           <Route path="/berichte/dimensionen" element={<DimensionReportPage />} />
-          <Route path="/banking/belegabfragen" element={<ReceiptRequestsPage />} />
           <Route path="/pruefer" element={<PrueferDashboardPage />} />
           <Route path="/einstellungen/verfahrensdoku" element={<VerfahrensdokuPage />} />
           <Route path="/einstellungen/systemstatus" element={<SystemStatusPage />} />

@@ -8,7 +8,7 @@
 // hochladen, Bankauszug importieren, E-Rechnung lesen.
 //
 // Click-Outside schliesst das Dropdown automatisch.
-// Reine Praesentation — Routen sind hartcodiert (DATEV-typisch
+// Reine Praesentation — Routen sind hartcodiert (branchenüblich
 // stabil) und keine Daten-Abhaengigkeiten.
 
 import { useEffect, useRef, useState } from "react";

@@ -14,7 +14,7 @@
 
 import type { Account, JournalEntry } from "../../types/db";
 import { Money } from "../../lib/money/Money";
-import { BWA_STRUCTURE, BWA_BY_CODE, type BwaLineDef } from "./bwaStructure";
+import { BWA_STRUCTURE, type BwaLineDef } from "./bwaStructure";
 import { buildGuv } from "./GuvBuilder";
 
 export type VergleichsPeriode = "VORMONAT" | "VORJAHR" | "NONE";
@@ -75,7 +75,7 @@ export type BwaReport = {
   metadata: {
     generatedAt: string;
     vergleichsperiode: VergleichsPeriode;
-    kanzleiReport: "DATEV BWA Form 01 (nachgebildet)";
+    kanzleiReport: "BWA Form 01 (Standardgliederung)";
   };
 };
 
@@ -324,7 +324,7 @@ export function buildBwa(options: BwaOptions): BwaReport {
     metadata: {
       generatedAt: new Date().toISOString(),
       vergleichsperiode: vergleich,
-      kanzleiReport: "DATEV BWA Form 01 (nachgebildet)",
+      kanzleiReport: "BWA Form 01 (Standardgliederung)",
     },
   };
 }

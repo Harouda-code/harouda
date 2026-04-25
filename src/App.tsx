@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import { DEMO_MODE } from "./api/supabase";
 import AppShell from "./components/AppShell";
+import BaseShell from "./components/shell/BaseShell";
+import BuchhaltungShell from "./components/shell/BuchhaltungShell";
 import DemoBanner from "./components/DemoBanner";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RequireAuth } from "./components/RequireAuth";
@@ -158,6 +160,34 @@ export default function App() {
             </RequireAuth>
           }
         />
+
+        {/* Phase 1 Patch 1.7 — Module-Shell BuchhaltungShell. */}
+        {/* Routes parallel zu AppShell-Routes; Migration in Patch 1.8/1.9. */}
+        <Route
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="BuchhaltungShell">
+                <BaseShell />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        >
+          <Route element={<BuchhaltungShell />}>
+            <Route path="/buchhaltung/journal" element={<JournalPage />} />
+            <Route path="/buchhaltung/konten" element={<AccountsPage />} />
+            <Route path="/buchhaltung/opos" element={<OposPage />} />
+            <Route path="/buchhaltung/mahnwesen" element={<MahnwesenPage />} />
+            <Route path="/buchhaltung/bankimport" element={<BankImportPage />} />
+            <Route path="/buchhaltung/banking/reconciliation" element={<BankReconciliationPage />} />
+            <Route path="/buchhaltung/banking/belegabfragen" element={<ReceiptRequestsPage />} />
+            <Route path="/buchhaltung/buchfuehrung" element={<BuchfuehrungIndexPage />} />
+            <Route path="/buchhaltung/anlagen/verzeichnis" element={<AnlagenVerzeichnisPage />} />
+            <Route path="/buchhaltung/anlagen/afa-lauf" element={<AfaLaufPage />} />
+            <Route path="/buchhaltung/liquiditaet" element={<CashflowPage />} />
+            <Route path="/buchhaltung/buchungen/erfassung" element={<BelegerfassungPage />} />
+            <Route path="/buchhaltung/buchungen/belege" element={<BelegeListePage />} />
+          </Route>
+        </Route>
 
         <Route
           element={

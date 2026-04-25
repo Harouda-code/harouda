@@ -1,0 +1,97 @@
+/* src/components/shell/BuchhaltungShell.css
+ *
+ * Module-Shell fuer Buchhaltung — eigenes Naming nach BEM
+ * (.buchhaltung-shell__*). Werte sind angelehnt an die bestehenden
+ * Sidebar-Stile (.shell__*) aus AppShell.css. Bewusste Duplikation
+ * fuer Phase 1; Konsolidierung in eine gemeinsame .module-shell-*
+ * Schicht ist fuer eine spaetere Phase vorgesehen.
+ */
+
+.buchhaltung-shell {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+}
+
+.buchhaltung-shell__sidebar {
+  flex: 0 0 240px;
+  width: 240px;
+  background: var(--sidebar-bg, #f8fafc);
+  border-right: 1px solid var(--border, #e2e8f0);
+  overflow-y: auto;
+  padding: 12px 0;
+}
+
+.buchhaltung-shell__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.buchhaltung-shell__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.buchhaltung-shell__group-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted, #64748b);
+}
+
+.buchhaltung-shell__group-head:hover {
+  color: var(--navy, #0f172a);
+}
+
+.buchhaltung-shell__group.is-active .buchhaltung-shell__group-head {
+  color: var(--navy, #0f172a);
+}
+
+.buchhaltung-shell__items {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0 6px 0;
+}
+
+.buchhaltung-shell__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 28px;
+  text-decoration: none;
+  color: var(--text, #1f2937);
+  font-size: 0.86rem;
+  border-left: 2px solid transparent;
+}
+
+.buchhaltung-shell__item:hover {
+  background: var(--row-hover, #eef2f7);
+}
+
+.buchhaltung-shell__item.is-active {
+  background: var(--row-active, #e0e7f0);
+  border-left-color: var(--navy, #0f172a);
+  color: var(--navy, #0f172a);
+  font-weight: 600;
+}
+
+.buchhaltung-shell__content {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: auto;
+}
+
+@media print {
+  .buchhaltung-shell__sidebar { display: none; }
+}

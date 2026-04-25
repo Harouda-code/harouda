@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Link,
   NavLink,
@@ -11,15 +11,10 @@ import {
   AlertTriangle,
   BadgeCheck,
   BarChart3,
-  Bell,
   BookOpen,
-  Building2,
   Calendar,
   ChevronDown,
   ChevronRight,
-  Clock,
-  Eye,
-  EyeOff,
   FileBarChart,
   FileCheck2,
   FileText,
@@ -27,8 +22,6 @@ import {
   Landmark,
   LayoutDashboard,
   ListOrdered,
-  LogOut,
-  Plus,
   Receipt,
   Settings,
   TrendingUp,
@@ -41,11 +34,15 @@ import { useMandant } from "../contexts/MandantContext";
 import { useYear } from "../contexts/YearContext";
 import { fetchClients } from "../api/clients";
 import { DEMO_MODE } from "../api/supabase";
-import { deriveNotifications } from "../api/notifications";
 import GuidedTour from "./GuidedTour";
 import { UniversalSearchModal } from "./UniversalSearchModal";
-import { usePrivacy } from "../contexts/PrivacyContext";
 import "./AppShell.css";
+import { MandantSwitch } from "./shell/MandantSwitch";
+import { YearSwitch } from "./shell/YearSwitch";
+import { UserPill } from "./shell/UserPill";
+import { Notifications } from "./shell/Notifications";
+import { QuickActions } from "./shell/QuickActions";
+import { PrivacyToggle } from "./shell/PrivacyToggle";
 
 type IconCmp = typeof LayoutDashboard;
 
@@ -241,14 +238,30 @@ export default function AppShell() {
 
   const [expanded, setExpanded] = useState<Record<string, boolean>>(loadExpanded);
 
+  // Auto-Expand beim Route-Wechsel:
+  // Wechselt der Nutzer in eine Route, deren Nav-Gruppe gefaltet ist,
+  // klappt die Gruppe einmalig auf. Anschliessend behaelt der Nutzer die
+  // Kontrolle — ein manuelles Falten ueberlebt weitere Wechsel innerhalb
+  // derselben Gruppe (dieser Effect haengt nur an location.pathname).
+  //
+  // Bewusst akzeptierter cascading render: eine reine Derivation per
+  // useMemo kann "expand-once + allow user collapse" nicht modellieren,
+  // weil sie die Trennung zwischen automatischer Aufklappung und
+  // expliziter Nutzeraktion verliert.
   useEffect(() => {
-    for (const g of GROUPS) {
-      if (!g.items) continue;
-      if (isGroupActive(g, location.pathname) && !expanded[g.id]) {
-        setExpanded((prev) => ({ ...prev, [g.id]: true }));
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setExpanded((prev) => {
+      let changed = false;
+      const next: Record<string, boolean> = { ...prev };
+      for (const g of GROUPS) {
+        if (!g.items) continue;
+        if (isGroupActive(g, location.pathname) && !next[g.id]) {
+          next[g.id] = true;
+          changed = true;
+        }
       }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      return changed ? next : prev;
+    });
   }, [location.pathname]);
 
   useEffect(() => {
@@ -428,439 +441,5 @@ export default function AppShell() {
 
 // ---------------------------------------------------------------------------
 
-function MandantSwitch({
-  active,
-  clients,
-  onChange,
-}: {
-  active: { id: string; mandant_nr: string; name: string } | null;
-  clients: { id: string; mandant_nr: string; name: string }[];
-  onChange: (id: string | null) => void;
-}) {
-  return (
-    <label className="shell__mandantpill" title="Aktiver Mandant">
-      <Building2 size={14} />
-      <select
-        value={active?.id ?? ""}
-        onChange={(e) => onChange(e.target.value || null)}
-        aria-label="Mandant wählen"
-      >
-        <option value="">Alle Mandanten</option>
-        {clients.map((c) => (
-          <option key={c.id} value={c.id}>
-            {c.mandant_nr} · {c.name}
-          </option>
-        ))}
-      </select>
-    </label>
-  );
-}
 
-function YearSwitch({
-  year,
-  years,
-  onChange,
-}: {
-  year: number;
-  years: number[];
-  onChange: (y: number) => void;
-}) {
-  return (
-    <label className="shell__year" title="Geschäftsjahr wechseln">
-      <Calendar size={14} />
-      <span className="shell__year-label">Geschäftsjahr</span>
-      <select
-        value={year}
-        onChange={(e) => onChange(Number(e.target.value))}
-        aria-label="Geschäftsjahr wählen"
-      >
-        {years.map((y) => (
-          <option key={y} value={y}>
-            {y}
-          </option>
-        ))}
-      </select>
-    </label>
-  );
-}
 
-function QuickActions() {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function onClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("click", onClickOutside);
-    return () => document.removeEventListener("click", onClickOutside);
-  }, []);
-
-  return (
-    <div className="shell__dd" ref={ref}>
-      <button
-        type="button"
-        className="shell__dd-trigger shell__dd-trigger--primary"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        title="Schnellaktionen"
-      >
-        <Plus size={16} />
-        <span>Neu</span>
-        <ChevronDown size={12} />
-      </button>
-      {open && (
-        <div className="shell__dd-menu">
-          <Link to="/journal" className="shell__dd-item" onClick={() => setOpen(false)}>
-            <ListOrdered size={14} />
-            <div>
-              <strong>Neue Buchung</strong>
-              <small>Soll/Haben, USt, Skonto</small>
-            </div>
-            <kbd>Strg+N</kbd>
-          </Link>
-          <Link to="/mandanten" className="shell__dd-item" onClick={() => setOpen(false)}>
-            <Users size={14} />
-            <div>
-              <strong>Neuer Mandant</strong>
-              <small>Stammdaten anlegen</small>
-            </div>
-          </Link>
-          <Link to="/belege" className="shell__dd-item" onClick={() => setOpen(false)}>
-            <FileText size={14} />
-            <div>
-              <strong>Beleg hochladen</strong>
-              <small>PDF oder Bild mit OCR</small>
-            </div>
-          </Link>
-          <Link to="/bankimport" className="shell__dd-item" onClick={() => setOpen(false)}>
-            <Landmark size={14} />
-            <div>
-              <strong>Bankauszug importieren</strong>
-              <small>MT940 / CAMT.053</small>
-            </div>
-          </Link>
-          <Link to="/zugferd" className="shell__dd-item" onClick={() => setOpen(false)}>
-            <BadgeCheck size={14} />
-            <div>
-              <strong>E-Rechnung lesen</strong>
-              <small>ZUGFeRD / Factur-X / XRechnung</small>
-            </div>
-          </Link>
-        </div>
-      )}
-    </div>
-  );
-}
-
-const DISMISS_STORAGE_KEY = "harouda:notifications:dismissed";
-
-function loadDismissed(): Set<string> {
-  try {
-    const raw = localStorage.getItem(DISMISS_STORAGE_KEY);
-    if (!raw) return new Set();
-    const parsed = JSON.parse(raw) as string[];
-    return new Set(Array.isArray(parsed) ? parsed : []);
-  } catch {
-    return new Set();
-  }
-}
-
-function saveDismissed(ids: Set<string>): void {
-  try {
-    localStorage.setItem(DISMISS_STORAGE_KEY, JSON.stringify([...ids]));
-  } catch {
-    /* storage full or blocked */
-  }
-}
-
-function PrivacyToggle() {
-  const { isPrivate, toggle } = usePrivacy();
-  return (
-    <button
-      type="button"
-      className="shell__dd-trigger"
-      onClick={toggle}
-      aria-pressed={isPrivate}
-      title={
-        isPrivate
-          ? "Privacy-Modus deaktivieren (Strg+Umschalt+P)"
-          : "Privacy-Modus aktivieren (Strg+Umschalt+P)"
-      }
-      aria-label={
-        isPrivate ? "Privacy-Modus deaktivieren" : "Privacy-Modus aktivieren"
-      }
-      style={
-        isPrivate
-          ? {
-              background: "var(--gold)",
-              color: "var(--navy-900)",
-              borderColor: "var(--gold)",
-            }
-          : undefined
-      }
-    >
-      {isPrivate ? <EyeOff size={16} /> : <Eye size={16} />}
-    </button>
-  );
-}
-
-function Notifications() {
-  const [open, setOpen] = useState(false);
-  const [showDismissed, setShowDismissed] = useState(false);
-  const [dismissed, setDismissed] = useState<Set<string>>(() => loadDismissed());
-  const ref = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
-
-  const allItems = useMemo(
-    () => (open ? deriveNotifications() : []),
-    [open]
-  );
-  const active = useMemo(
-    () => allItems.filter((n) => !dismissed.has(n.id)),
-    [allItems, dismissed]
-  );
-  const dismissedItems = useMemo(
-    () => allItems.filter((n) => dismissed.has(n.id)),
-    [allItems, dismissed]
-  );
-
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    try {
-      const live = deriveNotifications();
-      setCount(live.filter((n) => !dismissed.has(n.id)).length);
-    } catch {
-      /* ignore */
-    }
-  }, [open, dismissed]);
-
-  useEffect(() => {
-    function onClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("click", onClickOutside);
-    return () => document.removeEventListener("click", onClickOutside);
-  }, []);
-
-  function handleItemClick(to: string) {
-    setOpen(false);
-    navigate(to);
-  }
-
-  function dismiss(id: string) {
-    const next = new Set(dismissed);
-    next.add(id);
-    setDismissed(next);
-    saveDismissed(next);
-  }
-
-  function restore(id: string) {
-    const next = new Set(dismissed);
-    next.delete(id);
-    setDismissed(next);
-    saveDismissed(next);
-  }
-
-  function clearDismissed() {
-    setDismissed(new Set());
-    saveDismissed(new Set());
-  }
-
-  return (
-    <div className="shell__dd" ref={ref}>
-      <button
-        type="button"
-        className="shell__dd-trigger"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        title="Benachrichtigungen"
-        aria-label={`Benachrichtigungen (${count})`}
-      >
-        <Bell size={16} />
-        {count > 0 && <span className="shell__dd-badge">{count}</span>}
-      </button>
-      {open && (
-        <div className="shell__dd-menu shell__dd-menu--wide">
-          <header className="shell__dd-head">
-            <strong>Benachrichtigungen</strong>
-            <small>Aus Live-Daten abgeleitet</small>
-          </header>
-          {active.length === 0 ? (
-            <div className="shell__dd-empty">
-              <Clock size={18} />
-              <p>Keine offenen Hinweise — Ihre Unterlagen sind im grünen Bereich.</p>
-            </div>
-          ) : (
-            active.map((n) => (
-              <div
-                key={n.id}
-                className={`shell__dd-item shell__dd-notif is-${n.severity}`}
-              >
-                <button
-                  type="button"
-                  onClick={() => handleItemClick(n.to)}
-                  style={{
-                    flex: 1,
-                    background: "transparent",
-                    border: "none",
-                    padding: 0,
-                    textAlign: "left",
-                    cursor: "pointer",
-                    color: "inherit",
-                  }}
-                >
-                  <strong>{n.title}</strong>
-                  <small style={{ display: "block" }}>{n.detail}</small>
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    dismiss(n.id);
-                  }}
-                  title="Als gelesen markieren"
-                  aria-label="Als gelesen markieren"
-                  style={{
-                    background: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: "4px",
-                    color: "var(--muted)",
-                  }}
-                >
-                  ×
-                </button>
-              </div>
-            ))
-          )}
-
-          {dismissedItems.length > 0 && (
-            <div className="shell__dd-section">
-              <button
-                type="button"
-                onClick={() => setShowDismissed((v) => !v)}
-                className="shell__dd-section-toggle"
-              >
-                {showDismissed ? "▾" : "▸"} Gelesene Hinweise (
-                {dismissedItems.length})
-              </button>
-              {showDismissed && (
-                <>
-                  {dismissedItems.map((n) => (
-                    <div
-                      key={n.id}
-                      className="shell__dd-item shell__dd-notif"
-                      style={{ opacity: 0.55 }}
-                    >
-                      <div style={{ flex: 1 }}>
-                        <strong>{n.title}</strong>
-                        <small style={{ display: "block" }}>{n.detail}</small>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => restore(n.id)}
-                        title="Wieder anzeigen"
-                        style={{
-                          background: "transparent",
-                          border: "none",
-                          cursor: "pointer",
-                          color: "var(--navy)",
-                          fontSize: "0.76rem",
-                        }}
-                      >
-                        wiederherstellen
-                      </button>
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={clearDismissed}
-                    className="shell__dd-section-clear"
-                  >
-                    Alle als ungelesen markieren
-                  </button>
-                </>
-              )}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function UserPill({
-  user,
-  onSignOut,
-}: {
-  user: { email?: string | null } | null;
-  onSignOut: () => void;
-}) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function onClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("click", onClickOutside);
-    return () => document.removeEventListener("click", onClickOutside);
-  }, []);
-
-  const email = user?.email ?? "demo@harouda.local";
-  const initial = email.charAt(0).toUpperCase();
-
-  return (
-    <div className="shell__user" ref={ref}>
-      <button
-        type="button"
-        className="shell__user-btn"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        title="Benutzer-Menü"
-      >
-        <span className="shell__user-avatar">{initial}</span>
-        <span className="shell__user-meta">
-          <strong>{email}</strong>
-          <span>Steuerberater:in</span>
-        </span>
-        <ChevronDown size={14} className="shell__user-chev" />
-      </button>
-      {open && (
-        <div className="shell__user-menu">
-          <div className="shell__user-info">
-            <UserCircle2 size={20} />
-            <div>
-              <strong>{email}</strong>
-              <small>Rolle: owner · Demo-Konto</small>
-            </div>
-          </div>
-          <div className="shell__user-divider" />
-          <Link
-            to="/einstellungen"
-            className="shell__user-action"
-            onClick={() => setOpen(false)}
-          >
-            <Settings size={14} />
-            Einstellungen
-          </Link>
-          <button
-            type="button"
-            className="shell__user-action shell__user-action--danger"
-            onClick={onSignOut}
-          >
-            <LogOut size={14} />
-            Abmelden
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}

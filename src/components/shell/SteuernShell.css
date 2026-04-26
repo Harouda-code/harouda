@@ -1,0 +1,55 @@
+/* src/components/shell/SteuernShell.css
+ * Layout-Styles fuer SteuernShell. BEM-Konvention.
+ * Kein CSS-Framework, reines hand-geschriebenes CSS. */
+
+.steuern-shell {
+  display: flex;
+  min-height: 100%;
+  width: 100%;
+}
+
+.steuern-shell__sidebar {
+  flex: 0 0 240px;
+  width: 240px;
+  border-right: 1px solid var(--border, #c3c8d1);
+  background: var(--ivory-50, #fbfbfc);
+  padding: 16px 12px;
+  overflow-y: auto;
+}
+
+.steuern-shell__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.steuern-shell__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.steuern-shell__group-title {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft, #5a6271);
+}
+
+.steuern-shell__group-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.steuern-shell__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 16px;
+  overflow-y: auto;
+}

@@ -46,7 +46,7 @@ export class ErrorBoundary extends Component<
     this.setState({ errorInfo, eventId });
 
     if (this.props.level === "page") {
-      // eslint-disable-next-line no-console
+       
       console.error(
         `[ErrorBoundary] page-level error in ${this.props.context ?? "unknown"}:`,
         error

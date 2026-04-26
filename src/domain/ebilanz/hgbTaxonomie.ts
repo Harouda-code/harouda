@@ -97,7 +97,7 @@ export function pickTaxonomieFuerStichtag(
 ): HgbTaxonomieVersion {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(stichtag);
   if (!m) {
-    // eslint-disable-next-line no-console
+     
     console.warn(
       `[hgbTaxonomie] Ungueltiger Stichtag "${stichtag}" — Fallback auf 6.8.`
     );
@@ -106,7 +106,7 @@ export function pickTaxonomieFuerStichtag(
   const jahr = Number(m[1]);
 
   if (jahr <= 2022) {
-    // eslint-disable-next-line no-console
+     
     console.warn(
       `[hgbTaxonomie] Stichtag ${stichtag} liegt vor dem Support-Start ` +
         `(2023). Fallback auf 6.8 — Ausgabe ist nicht rechtssicher.`
@@ -120,7 +120,7 @@ export function pickTaxonomieFuerStichtag(
   // jahr >= 2026
   const v69 = HGB_TAXONOMIE_VERSIONEN["6.9"];
   if (v69.status === "stable") return "6.9";
-  // eslint-disable-next-line no-console
+   
   console.warn(
     `[hgbTaxonomie] Stichtag ${stichtag} erwartet 6.9, Version aber noch ` +
       `nicht als stable markiert (Status="${v69.status}"). Fallback auf 6.8.`

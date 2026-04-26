@@ -120,7 +120,7 @@ function mapTable(node: JSONContent): Content | null {
     .map((r) => mapTableRow(r))
     .filter((row) => {
       if (row.length === 0) {
-        // eslint-disable-next-line no-console
+         
         console.warn("[tiptapToPdfmake] Leere Tabellen-Zeile übersprungen.");
         return false;
       }
@@ -154,7 +154,7 @@ function mapNode(node: JSONContent): Content | Content[] | null {
     case "hardBreak":
       return "\n";
     default: {
-      // eslint-disable-next-line no-console
+       
       console.warn(
         `[tiptapToPdfmake] Unbekannter Node-Type "${node.type}" — Fallback auf Plain-Text.`
       );

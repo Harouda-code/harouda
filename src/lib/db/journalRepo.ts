@@ -297,7 +297,7 @@ export class JournalRepo {
           beleg.partner.name &&
           beleg.partner.name.trim() !== partner.name.trim()
         ) {
-          // eslint-disable-next-line no-console
+           
           console.warn(
             `[belege] partner_name-Drift: Beleg "${beleg.partner.name}" vs. Stammdaten "${partner.name}" (partner_id=${partnerLinkId})`
           );
@@ -307,7 +307,7 @@ export class JournalRepo {
       }
     }
 
-    let journalEntries: JournalEntry[] = [];
+    const journalEntries: JournalEntry[] = [];
     if (status === "GEBUCHT") {
       const pairs = positionsToJournalPairs(beleg.positionen);
       for (const p of pairs) {

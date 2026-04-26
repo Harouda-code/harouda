@@ -6,27 +6,41 @@
 // (Voranmeldungen, Hauptformulare, ESt-Anlagen, Jahresabschluss)
 // und einen <Outlet /> fuer die jeweilige Steuer-Seite.
 //
-// Aktueller Zustand: Sidebar-Skelett ohne NavLinks. Die Gruppen
-// werden in den naechsten Patches mit den konkreten Routen
-// (/steuer/ustva, /steuer/zm, /steuer/anlage-* etc.) gefuellt.
+// Aktueller Zustand: erster NavLink fuer UStVA in Voranmeldungen.
+// Die uebrigen Gruppen folgen in den naechsten Patches.
 
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 import "./SteuernShell.css";
+
+type NavItem = {
+  // Ziel-Route, absolute Pfade.
+  to: string;
+  // Anzeigetext des NavLink.
+  label: string;
+};
 
 type NavGroup = {
   id: string;
   // Anzeigetext der Gruppen-Ueberschrift in der Sidebar.
   title: string;
+  // Vorerst nur Voranmeldungen befuellt; andere Gruppen folgen.
+  items: NavItem[];
 };
 
 // Reihenfolge der Gruppen entspricht der spaeter geplanten
 // Reihenfolge in der Sidebar — von oben nach unten.
 const GROUPS: NavGroup[] = [
-  { id: "voranmeldungen", title: "Voranmeldungen" },
-  { id: "hauptformulare", title: "Hauptformulare" },
-  { id: "est-anlagen", title: "ESt-Anlagen" },
-  { id: "jahresabschluss", title: "Jahresabschluss" },
+  {
+    id: "voranmeldungen",
+    title: "Voranmeldungen",
+    items: [
+      { to: "/steuern/ustva", label: "Umsatzsteuer-Voranmeldung" },
+    ],
+  },
+  { id: "hauptformulare", title: "Hauptformulare", items: [] },
+  { id: "est-anlagen", title: "ESt-Anlagen", items: [] },
+  { id: "jahresabschluss", title: "Jahresabschluss", items: [] },
 ];
 
 export default function SteuernShell() {
@@ -40,8 +54,27 @@ export default function SteuernShell() {
           {GROUPS.map((g) => (
             <div key={g.id} className="steuern-shell__group">
               <h3 className="steuern-shell__group-title">{g.title}</h3>
-              {/* NavLinks folgen in den naechsten Patches. */}
-              <ul className="steuern-shell__group-list" />
+              {g.items.length === 0 ? (
+                // Platzhalter fuer noch leere Gruppen — NavLinks folgen.
+                <ul className="steuern-shell__group-list" />
+              ) : (
+                <ul className="steuern-shell__list">
+                  {g.items.map((it) => (
+                    <li key={it.to}>
+                      <NavLink
+                        to={it.to}
+                        className={({ isActive }) =>
+                          isActive
+                            ? "steuern-shell__link steuern-shell__link--active"
+                            : "steuern-shell__link"
+                        }
+                      >
+                        {it.label}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </nav>

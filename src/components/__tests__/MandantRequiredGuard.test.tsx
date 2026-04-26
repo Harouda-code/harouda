@@ -46,7 +46,7 @@ describe("MandantRequiredGuard", () => {
 
   it("rendert Info-Card + KEINE children, wenn kein Mandant gesetzt ist", () => {
     const { container, unmount } = renderWithMandant(
-      "/steuer/gewst",
+      "/steuer/gewerbesteuer",
       <div data-testid="protected">Inhalt</div>
     );
     expect(
@@ -63,7 +63,7 @@ describe("MandantRequiredGuard", () => {
 
   it("rendert children, sobald ein Mandant in der URL/Fallback gesetzt ist", () => {
     const { container, unmount } = renderWithMandant(
-      "/steuer/gewst?mandantId=c-1",
+      "/steuer/gewerbesteuer?mandantId=c-1",
       <div data-testid="protected">Inhalt</div>
     );
     expect(

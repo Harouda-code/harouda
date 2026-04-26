@@ -153,7 +153,7 @@ jobs:
 
       - name: Sentry release tracking
         if: ${{ secrets.SENTRY_AUTH_TOKEN != '' }}
-        uses: getsentry/action-release@v1
+        uses: getsentry/action-release@v3
         with:
           environment: production
           version: ${{ github.sha }}

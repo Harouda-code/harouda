@@ -39,7 +39,13 @@ const GROUPS: NavGroup[] = [
       { to: "/steuern/zm", label: "Zusammenfassende Meldung" },
     ],
   },
-  { id: "hauptformulare", title: "Hauptformulare", items: [] },
+  {
+    id: "hauptformulare",
+    title: "Hauptformulare",
+    items: [
+      { to: "/steuern", label: "Übersicht" },
+    ],
+  },
   { id: "est-anlagen", title: "ESt-Anlagen", items: [] },
   { id: "jahresabschluss", title: "Jahresabschluss", items: [] },
 ];

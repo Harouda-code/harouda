@@ -1,9 +1,9 @@
 /** @jsxImportSource react */
 // SteuernShell-Smoke-Tests.
 //
-// Pruefen das Sidebar-Skelett: vier Gruppen-Ueberschriften, vier
-// vorbereitete <ul>-Container und die Haupt-Content-Sektion mit
-// Outlet-Aufnahmebereich.
+// Pruefen das Sidebar-Skelett: vier Gruppen-Ueberschriften, der
+// erste NavLink fuer UStVA in Voranmeldungen und die Haupt-Content-
+// Sektion mit Outlet-Aufnahmebereich.
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { act } from "react";
@@ -14,15 +14,15 @@ import SteuernShell from "./SteuernShell";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
 
-function mount() {
+function mount(entry: string = "/steuer") {
   const container = document.createElement("div");
   document.body.appendChild(container);
   const root: Root = createRoot(container);
   act(() => {
     root.render(
-      <MemoryRouter initialEntries={["/steuer"]}>
+      <MemoryRouter initialEntries={[entry]}>
         <Routes>
-          <Route path="/steuer" element={<SteuernShell />} />
+          <Route path="/*" element={<SteuernShell />} />
         </Routes>
       </MemoryRouter>
     );
@@ -58,14 +58,20 @@ describe("SteuernShell", () => {
     r.unmount();
   });
 
-  it("#2 enthaelt vier <ul>-Container in der Sidebar", () => {
+  it("#2 Voranmeldungen hat 1 <li>, die uebrigen Gruppen sind leer", () => {
     const r = mount();
-    const lists = document.querySelectorAll(
-      ".steuern-shell__sidebar ul.steuern-shell__group-list"
-    );
-    expect(lists.length).toBe(4);
-    for (const ul of Array.from(lists)) {
-      expect(ul.children.length).toBe(0);
+    const groups = document.querySelectorAll(".steuern-shell__sidebar .steuern-shell__group");
+    expect(groups.length).toBe(4);
+
+    // Voranmeldungen (erste Gruppe): genau 1 <li>.
+    const voranmeldungenLis = groups[0].querySelectorAll("ul > li");
+    expect(voranmeldungenLis.length).toBe(1);
+
+    // Andere drei Gruppen: <ul> ohne Kinder.
+    for (let i = 1; i < 4; i++) {
+      const ul = groups[i].querySelector("ul");
+      expect(ul).not.toBeNull();
+      expect(ul!.children.length).toBe(0);
     }
     r.unmount();
   });
@@ -74,6 +80,17 @@ describe("SteuernShell", () => {
     const r = mount();
     const main = document.querySelector(".steuern-shell__main");
     expect(main).not.toBeNull();
+    r.unmount();
+  });
+
+  it("#4 zeigt NavLink fuer UStVA in Voranmeldungen", () => {
+    const r = mount("/steuern/ustva");
+    const link = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>(".steuern-shell__sidebar a")
+    ).find((a) => a.textContent === "Umsatzsteuer-Voranmeldung");
+    expect(link).toBeDefined();
+    expect(link!.getAttribute("href")).toBe("/steuern/ustva");
+    expect(link!.className).toContain("steuern-shell__link--active");
     r.unmount();
   });
 });

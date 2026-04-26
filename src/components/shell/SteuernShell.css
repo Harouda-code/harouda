@@ -53,3 +53,31 @@
   padding: 16px;
   overflow-y: auto;
 }
+
+.steuern-shell__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.steuern-shell__link {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.92rem;
+  color: var(--text-primary, #1a1d24);
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.steuern-shell__link:hover {
+  background: var(--hover-bg, #eef0f4);
+}
+
+.steuern-shell__link--active {
+  background: var(--accent-bg, #d6e4ff);
+  font-weight: 600;
+}

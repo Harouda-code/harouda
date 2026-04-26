@@ -10,6 +10,7 @@ import { DEMO_MODE } from "./api/supabase";
 import AppShell from "./components/AppShell";
 import BaseShell from "./components/shell/BaseShell";
 import BuchhaltungShell from "./components/shell/BuchhaltungShell";
+import SteuernShell from "./components/shell/SteuernShell";
 import DemoBanner from "./components/DemoBanner";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RequireAuth } from "./components/RequireAuth";
@@ -187,6 +188,22 @@ export default function App() {
             <Route path="/buchhaltung/liquiditaet" element={<CashflowPage />} />
             <Route path="/buchhaltung/buchungen/erfassung" element={<BelegerfassungPage />} />
             <Route path="/buchhaltung/buchungen/belege" element={<BelegeListePage />} />
+          </Route>
+        </Route>
+
+        {/* Phase 2 Patch 2.1 — Module-Shell SteuernShell. */}
+        {/* Erste parallele Steuern-Route; alte /steuer/* bleiben unveraendert. */}
+        <Route
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="SteuernShell">
+                <BaseShell />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        >
+          <Route element={<SteuernShell />}>
+            <Route path="/steuern/ustva" element={<UstvaPage />} />
           </Route>
         </Route>
 

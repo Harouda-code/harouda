@@ -110,7 +110,7 @@ jobs:
           # call once the ops runbook is finalized.
 
       - name: Apply Supabase migrations (production)
-        uses: supabase/setup-cli@v1
+        uses: supabase/setup-cli@v2
         with:
           version: latest
       - name: Push migrations

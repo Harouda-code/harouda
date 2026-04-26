@@ -4,7 +4,7 @@
 // weiterhin kompilieren.
 
 import { getSvSet } from "./svRates";
-import type { SvCalcInput, SvCalcResult } from "./svRates";
+import type { SvCalcResult } from "./svRates";
 
 export type { SvCalcInput, SvCalcResult } from "./svRates";
 export { calcSv } from "./svRates";

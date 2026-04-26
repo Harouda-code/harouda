@@ -6,14 +6,10 @@
 //
 // API-Level-Only, kein React-Mount.
 
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import { autoSeedDemoIfNeeded } from "../api/demoSeed";
+import { describe, it, expect, beforeEach } from "vitest";
 import { store } from "../api/store";
 import { postPayrollAsJournal } from "../utils/payrollPosting";
-import {
-  AbrechnungArchivRepo,
-  LohnArtRepo,
-} from "../lib/db/lohnRepos";
+import { AbrechnungArchivRepo } from "../lib/db/lohnRepos";
 import { employeeToArbeitnehmer } from "../lib/db/lohnAdapter";
 import {
   buildArchivAbrechnungFromRow,

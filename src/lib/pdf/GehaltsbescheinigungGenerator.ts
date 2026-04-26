@@ -14,7 +14,6 @@
  */
 
 import type { Arbeitnehmer, Lohnabrechnung } from "../../domain/lohn/types";
-import { Money } from "../money/Money";
 import { computeAbrechnungHash } from "../crypto/payrollHash";
 import { PdfReportBase, type PdfReportOptions } from "./PdfBase";
 

@@ -67,11 +67,6 @@ export type FormSpec = {
   formId: FormId;
 };
 
-const euro = new Intl.NumberFormat("de-DE", {
-  style: "currency",
-  currency: "EUR",
-});
-
 function loadDraft(key: string): Record<string, number> {
   try {
     const raw = localStorage.getItem(key);
@@ -219,7 +214,7 @@ function TaxFormBuilderInner({
       if (!f.glField) return 0;
       const v = glValues?.[f.glField];
       if (v === undefined && glValues !== undefined) {
-        // eslint-disable-next-line no-console
+         
         console.warn(
           `[TaxFormBuilder] ${spec.formId}: gl-derived Feld "${f.key}" referenziert glField "${f.glField}", der nicht im Builder-Output vorhanden ist. Anzeige 0,00.`
         );

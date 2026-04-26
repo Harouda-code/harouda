@@ -27,7 +27,7 @@ export class BilanzPdfGenerator extends PdfReportBase {
     const aktivaRows: (string | number)[][] = [];
     const aktivaHighlight: number[] = [];
     const aktivaRowsAll = flattenForRender(bilanz.aktivaRoot).slice(1);
-    aktivaRowsAll.forEach((row, idx) => {
+    aktivaRowsAll.forEach((row, _idx) => {
       if (row.isLeafEntry) return; // Leaf-Buckets nicht zeigen (redundant)
       const indent = "  ".repeat(row.depth);
       aktivaRows.push([

@@ -7,7 +7,6 @@ import { createSession, updateSession } from "../../../api/inventur";
 import { store } from "../../../api/store";
 import type { Account } from "../../../types/db";
 
-const MANDANT_ID = "c-inv-closing";
 const COMPANY = "company-demo";
 
 beforeEach(() => {

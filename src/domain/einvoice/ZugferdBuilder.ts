@@ -20,7 +20,6 @@ import { PDFDocument, AFRelationship } from "pdf-lib";
 import { XRechnungBuilder } from "./XRechnungBuilder";
 import type { XRechnungOptions, ZugferdProfile } from "./types";
 import { PdfReportBase, type PdfReportOptions } from "../../lib/pdf/PdfBase";
-import { Money } from "../../lib/money/Money";
 import { sumMoney } from "../../lib/money/sum";
 
 export type ZugferdBuildOptions = XRechnungOptions & {

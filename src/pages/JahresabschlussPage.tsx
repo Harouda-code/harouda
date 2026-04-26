@@ -23,10 +23,6 @@ import { Money } from "../lib/money/Money";
 import { downloadText } from "../utils/exporters";
 import "./ReportView.css";
 
-function formatString(s: string): string {
-  return new Money(s).toEuroFormat();
-}
-
 export default function JahresabschlussPage() {
   const { selectedYear } = useYear();
   const { settings } = useSettings();

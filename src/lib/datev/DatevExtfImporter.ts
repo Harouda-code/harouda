@@ -30,7 +30,6 @@
  * Bezeichnungen verwendet werden.
  */
 
-import Decimal from "decimal.js";
 import {
   DATEV_COLUMN_POSITIONS,
   datevDateLongToIso,

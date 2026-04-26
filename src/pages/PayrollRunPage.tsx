@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { fetchEmployees } from "../api/employees";
 import { log as auditLog } from "../api/audit";
-import { berechneLohnsteuer, monatsLohnsteuer } from "../utils/lohnsteuer";
+import { monatsLohnsteuer } from "../utils/lohnsteuer";
 import { berechneSv, type SvResult } from "../utils/sozialversicherung";
 import { downloadBlob, downloadText } from "../utils/exporters";
 import {
@@ -521,7 +521,7 @@ export default function PayrollRunPage() {
           });
         } catch (err) {
           archiveErrors++;
-          // eslint-disable-next-line no-console
+           
           console.warn(
             `Archiv-Write fehlgeschlagen für ${r.employee.personalnummer}:`,
             (err as Error).message

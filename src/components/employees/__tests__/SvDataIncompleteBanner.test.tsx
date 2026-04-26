@@ -99,7 +99,7 @@ describe("SvDataIncompleteBanner", () => {
   });
 
   it("#3 Employee ohne Anschrift: Banner listet alle 4 Anschrift-Labels", () => {
-    const r = mount(
+    mount(
       makeEmp({
         anschrift_strasse: null,
         anschrift_hausnummer: null,

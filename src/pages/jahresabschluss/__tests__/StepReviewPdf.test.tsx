@@ -166,7 +166,7 @@ describe("StepReview · PDF-Generate", () => {
 
   it("#5 Entwurfs-Modus: Dateiname enthält '-ENTWURF' und docDef.watermark gesetzt", async () => {
     const download = vi.fn().mockResolvedValue(undefined);
-    const r = renderStep({
+    renderStep({
       state: fullState(),
       downloadImpl: download,
       firmenname: "TestFirma",

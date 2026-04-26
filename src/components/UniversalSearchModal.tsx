@@ -11,8 +11,6 @@ import { useQuery } from "@tanstack/react-query";
 import {
   Bolt,
   FileArchive,
-  FileSearch,
-  FileText,
   Hash,
   ReceiptText,
   Search,

@@ -12,7 +12,6 @@ import {
   Info,
   Landmark,
   ShieldAlert,
-  ShieldCheck,
 } from "lucide-react";
 import { fetchAccounts } from "../api/accounts";
 import { fetchAllEntries } from "../api/dashboard";

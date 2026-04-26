@@ -134,7 +134,7 @@ export function resolveFieldForAccountDetailed(
   if (tags === null || tags === undefined) {
     const rules = findAnlagenRules(account.konto_nr, anlage);
     if (rules.length === 0) return { field: null, source: "none" };
-    // eslint-disable-next-line no-console
+     
     console.warn(
       `[ESt-Anlagen] Konto ${account.konto_nr} (${account.bezeichnung}) ohne tags — Fallback auf Range-Mapping. Bitte Kontenplan migrieren (Migration 0029).`
     );
@@ -144,7 +144,7 @@ export function resolveFieldForAccountDetailed(
   const matches = tags.filter((t) => t.startsWith(prefix));
   if (matches.length === 0) return { field: null, source: "none" };
   if (matches.length > 1) {
-    // eslint-disable-next-line no-console
+     
     console.warn(
       `[ESt-Anlagen] Konto ${account.konto_nr} hat mehrere Tags für ${anlage}: ${matches.join(", ")}. Erster gewinnt: "${matches[0]}".`
     );

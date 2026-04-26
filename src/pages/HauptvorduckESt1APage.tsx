@@ -29,11 +29,6 @@ type JaNein = "ja" | "nein" | "";
 type Religion = "" | "EV" | "RK" | "VD" | "JD" | "IL" | "AL" | "FA" | "FB";
 type ReligionChange = 0 | 1 | 2 | 3;
 
-const euro = new Intl.NumberFormat("de-DE", {
-  style: "currency",
-  currency: "EUR",
-});
-
 const RELIGION_LABEL: Record<Religion, string> = {
   "": "— keine Auswahl —",
   EV: "Evangelisch (EV)",

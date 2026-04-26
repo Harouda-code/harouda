@@ -310,7 +310,7 @@ function AnlageEnergetischeMassnahmenPageInner() {
     const pctSum =
       form.z30_anteil_a +
       form.z30_anteil_b +
-      form.miteig.reduce((s, m) => s + 0, 0); // Miteigentümer % wird nicht einzeln erfasst
+      form.miteig.reduce((s, _m) => s + 0, 0); // Miteigentümer % wird nicht einzeln erfasst
     if (form.miteigentuemer_aktiv && Math.abs(pctSum - 100) > 0.01) {
       warns.push(
         `Miteigentumsanteile (Person A ${form.z30_anteil_a} % + Person B ${form.z30_anteil_b} %) = ${pctSum} % — sollte ohne weitere Miteigentümer 100 % ergeben.`

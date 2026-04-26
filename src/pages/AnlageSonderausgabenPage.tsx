@@ -28,11 +28,6 @@ import "./ReportView.css";
 
 type JaNein = "ja" | "nein" | "";
 
-const euro = new Intl.NumberFormat("de-DE", {
-  style: "currency",
-  currency: "EUR",
-});
-
 // ---------- State ------------------------------------------------------
 
 type AnlageSonderausgaben = {

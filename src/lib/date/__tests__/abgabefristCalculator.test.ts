@@ -44,19 +44,19 @@ describe("abgabefristCalculator", () => {
 
   describe("periodStart / periodEnd (QUARTAL)", () => {
     it("Q1 2025 → 01.01.2025 bis 31.03.2025", () => {
-      const p = { jahr: 2025, art: "QUARTAL" as const, quartal: 1 as 1 };
+      const p = { jahr: 2025, art: "QUARTAL" as const, quartal: 1 as const };
       expect(periodStart(p)).toBe("2025-01-01");
       expect(periodEnd(p)).toBe("2025-03-31");
     });
 
     it("Q3 2025 → 01.07.2025 bis 30.09.2025", () => {
-      const p = { jahr: 2025, art: "QUARTAL" as const, quartal: 3 as 3 };
+      const p = { jahr: 2025, art: "QUARTAL" as const, quartal: 3 as const };
       expect(periodStart(p)).toBe("2025-07-01");
       expect(periodEnd(p)).toBe("2025-09-30");
     });
 
     it("Q4 2025 → 01.10.2025 bis 31.12.2025", () => {
-      const p = { jahr: 2025, art: "QUARTAL" as const, quartal: 4 as 4 };
+      const p = { jahr: 2025, art: "QUARTAL" as const, quartal: 4 as const };
       expect(periodStart(p)).toBe("2025-10-01");
       expect(periodEnd(p)).toBe("2025-12-31");
     });

@@ -7,7 +7,7 @@
  *
  * Rechtsbasis: § 240 HGB, § 241a HGB, § 253 Abs. 3/4 HGB, GoBD Rz. 50-52.
  */
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { AlertTriangle, ArrowLeft, ClipboardCheck, Upload } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";

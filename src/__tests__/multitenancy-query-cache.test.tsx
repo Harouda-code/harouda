@@ -33,14 +33,6 @@ function makeQueryClient(): QueryClient {
   });
 }
 
-async function flush() {
-  for (let i = 0; i < 8; i++) {
-    await act(async () => {
-      await Promise.resolve();
-    });
-  }
-}
-
 async function waitForCount(
   container: HTMLElement,
   testId: string,
@@ -175,7 +167,7 @@ describe("Multi-Tenancy · Query-Cache beim Mandant-Switch (F42-Regression)", ()
     }
 
     function Probe({ id }: { id: string; clientId: string | null }) {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
+       
       const q = useQuery({
         queryKey: ["journal_entries", "all", null],
         queryFn: () => fetchFor(null),

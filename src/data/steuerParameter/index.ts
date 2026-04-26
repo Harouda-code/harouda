@@ -35,7 +35,7 @@ export function getSteuerParameter(jahr: number): SteuerParameter {
   const nearest = years.reduce((best, y) =>
     Math.abs(y - jahr) < Math.abs(best - jahr) ? y : best
   );
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+   
   return BY_YEAR.get(nearest)!;
 }
 

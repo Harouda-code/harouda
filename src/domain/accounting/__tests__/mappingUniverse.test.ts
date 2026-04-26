@@ -134,7 +134,7 @@ describe("Mapping Universe", () => {
         if (inUst && !inBil && !inGuv && !inEuer) inUstvaOnly++;
       }
       // Dokumentation (keine Assertions, nur Konsolen-Ausgabe)
-      // eslint-disable-next-line no-console
+       
       console.log(
         `[Mapping Universe] 1000-9999: mapped=${mapped}, unmapped=${unmapped} ` +
           `(Bilanz-only=${inBilanzOnly}, GuV-only=${inGuvOnly}, ` +

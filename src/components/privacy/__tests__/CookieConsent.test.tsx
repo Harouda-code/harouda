@@ -12,7 +12,7 @@
 // der Banner KEINE react-router-Primitive verwenden; diese Tests würden
 // sonst bei der Destrukturierung des Router-Contexts crashen.
 
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { CookieConsent } from "../CookieConsent";

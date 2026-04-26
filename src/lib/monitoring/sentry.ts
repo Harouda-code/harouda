@@ -15,7 +15,7 @@ export function initSentry(): void {
   const dsn = import.meta.env.VITE_SENTRY_DSN as string | undefined;
 
   if (!dsn) {
-    // eslint-disable-next-line no-console
+     
     console.info("[Sentry] no DSN configured — skipping initialisation");
     return;
   }

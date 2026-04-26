@@ -178,7 +178,7 @@ function xmlEscape(s: string): string {
 function trimToSepa(s: string, max: number): string {
   // SEPA erlaubt nur: a-z A-Z 0-9 / - ? : ( ) . , ' + space
   const clean = s
-    .replace(/[^A-Za-z0-9/?:().,' +\-]/g, "")
+    .replace(/[^A-Za-z0-9/?:().,' +-]/g, "")
     .trim();
   return clean.length > max ? clean.slice(0, max) : clean;
 }

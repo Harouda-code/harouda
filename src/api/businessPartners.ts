@@ -31,10 +31,7 @@ import {
   type ChainBreakReason,
   type ChainVerificationResult,
 } from "../domain/gobd/hashChainVerifier";
-import {
-  computeChainHash,
-  formatUtcTimestamp,
-} from "../lib/crypto/sha256Canonical";
+import { computeChainHash } from "../lib/crypto/sha256Canonical";
 
 const DEBITOR_MIN = 10000;
 const DEBITOR_MAX = 69999;

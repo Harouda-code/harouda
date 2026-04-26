@@ -560,10 +560,6 @@ export function planAbgang(
   const afaHabenKonto = istIndirekt
     ? (anlage.konto_abschreibung_kumuliert as string)
     : anlage.konto_anlage;
-  // „Wert, der in Ausbuchungs-Rechnung vom Anlage-Konto herunterzubuchen ist":
-  // bei direkter Methode = Restbuchwert, bei indirekter = AK (die
-  // kumulierte AfA wird separat aufgelöst).
-  const auszubuchenderAnlageSaldo = istIndirekt ? ak_dec : restbuchwert;
   const kumulierteAfa = ak_dec.sub(restbuchwert);
 
   // Erlös Netto/USt splitten.

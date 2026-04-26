@@ -151,7 +151,7 @@ export function migrateEstFormsV2ToV3(
     if (v2Raw === null) return { migrated: false, reason: "no-v2-data" };
     const v3Key = buildEstStorageKey(formId, mandantId, jahr);
     if (localStorage.getItem(v3Key) !== null) {
-      // eslint-disable-next-line no-console
+       
       console.warn(
         `ESt-Migration V2→V3 übersprungen: V3-Key ${v3Key} existiert bereits. V2-Key ${v2Key} bleibt für User-Klärung erhalten.`
       );

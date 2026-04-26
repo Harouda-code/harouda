@@ -44,6 +44,10 @@ const GROUPS: NavGroup[] = [
     title: "Hauptformulare",
     items: [
       { to: "/steuern", label: "Übersicht" },
+      { to: "/steuern/euer", label: "EÜR" },
+      { to: "/steuern/gewerbesteuer", label: "Gewerbesteuer" },
+      { to: "/steuern/kst", label: "Körperschaftsteuer" },
+      { to: "/steuern/est-1a", label: "ESt 1A (Hauptvordruck)" },
     ],
   },
   { id: "est-anlagen", title: "ESt-Anlagen", items: [] },

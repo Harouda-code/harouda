@@ -58,14 +58,14 @@ describe("SteuernShell", () => {
     r.unmount();
   });
 
-  it("#2 Voranmeldungen hat 1 <li>, die uebrigen Gruppen sind leer", () => {
+  it("#2 Voranmeldungen hat 2 <li>, die uebrigen Gruppen sind leer", () => {
     const r = mount();
     const groups = document.querySelectorAll(".steuern-shell__sidebar .steuern-shell__group");
     expect(groups.length).toBe(4);
 
-    // Voranmeldungen (erste Gruppe): genau 1 <li>.
+    // Voranmeldungen (erste Gruppe): genau 2 <li>.
     const voranmeldungenLis = groups[0].querySelectorAll("ul > li");
-    expect(voranmeldungenLis.length).toBe(1);
+    expect(voranmeldungenLis.length).toBe(2);
 
     // Andere drei Gruppen: <ul> ohne Kinder.
     for (let i = 1; i < 4; i++) {
@@ -90,6 +90,17 @@ describe("SteuernShell", () => {
     ).find((a) => a.textContent === "Umsatzsteuer-Voranmeldung");
     expect(link).toBeDefined();
     expect(link!.getAttribute("href")).toBe("/steuern/ustva");
+    expect(link!.className).toContain("steuern-shell__link--active");
+    r.unmount();
+  });
+
+  it("#5 zeigt NavLink fuer ZM in Voranmeldungen", () => {
+    const r = mount("/steuern/zm");
+    const link = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>(".steuern-shell__sidebar a")
+    ).find((a) => a.textContent === "Zusammenfassende Meldung");
+    expect(link).toBeDefined();
+    expect(link!.getAttribute("href")).toBe("/steuern/zm");
     expect(link!.className).toContain("steuern-shell__link--active");
     r.unmount();
   });

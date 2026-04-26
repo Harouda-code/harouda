@@ -36,6 +36,7 @@ const GROUPS: NavGroup[] = [
     title: "Voranmeldungen",
     items: [
       { to: "/steuern/ustva", label: "Umsatzsteuer-Voranmeldung" },
+      { to: "/steuern/zm", label: "Zusammenfassende Meldung" },
     ],
   },
   { id: "hauptformulare", title: "Hauptformulare", items: [] },

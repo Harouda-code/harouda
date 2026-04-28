@@ -39,7 +39,18 @@ const GROUPS: NavGroup[] = [
       { to: "/steuern/zm", label: "Zusammenfassende Meldung" },
     ],
   },
-  { id: "hauptformulare", title: "Hauptformulare", items: [] },
+  {
+    id: "hauptformulare",
+    title: "Hauptformulare",
+    items: [
+      { to: "/steuern", label: "Übersicht" },
+      { to: "/steuern/euer", label: "EÜR" },
+      { to: "/steuern/gewerbesteuer", label: "Gewerbesteuer" },
+      { to: "/steuern/kst", label: "Körperschaftsteuer" },
+      { to: "/steuern/est-1a", label: "ESt 1A (Hauptvordruck)" },
+      { to: "/steuern/est-1c", label: "ESt 1C (Hauptvordruck)" },
+    ],
+  },
   { id: "est-anlagen", title: "ESt-Anlagen", items: [] },
   { id: "jahresabschluss", title: "Jahresabschluss", items: [] },
 ];

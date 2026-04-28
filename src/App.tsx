@@ -205,6 +205,12 @@ export default function App() {
           <Route element={<SteuernShell />}>
             <Route path="/steuern/ustva" element={<UstvaPage />} />
             <Route path="/steuern/zm" element={<ZmPage />} />
+            <Route path="/steuern" element={<TaxFormsPage />} />
+            <Route path="/steuern/euer" element={<EuerPage />} />
+            <Route path="/steuern/gewerbesteuer" element={<GewerbesteuerPage />} />
+            <Route path="/steuern/kst" element={<KoerperschaftsteuerPage />} />
+            <Route path="/steuern/est-1a" element={<HauptvorduckESt1APage />} />
+            <Route path="/steuern/est-1c" element={<HauptvorduckESt1CPage />} />
           </Route>
         </Route>
 

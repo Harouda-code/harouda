@@ -26,7 +26,9 @@ const GROUPS: Group[] = [
   {
     id: "bilanzierung",
     title: "Bilanzierung",
-    items: [],
+    items: [
+      { to: "/jahresabschluss/ebilanz", label: "E-Bilanz" },
+    ],
   },
   {
     id: "offenlegung",

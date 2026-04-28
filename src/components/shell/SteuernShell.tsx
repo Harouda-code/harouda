@@ -52,7 +52,13 @@ const GROUPS: NavGroup[] = [
     ],
   },
   { id: "est-anlagen", title: "ESt-Anlagen", items: [] },
-  { id: "jahresabschluss", title: "Jahresabschluss", items: [] },
+  {
+    id: "jahresabschluss",
+    title: "Jahresabschluss",
+    items: [
+      { to: "/steuern/ebilanz", label: "E-Bilanz" },
+    ],
+  },
 ];
 
 export default function SteuernShell() {

@@ -58,7 +58,7 @@ describe("SteuernShell", () => {
     r.unmount();
   });
 
-  it("#2 Voranmeldungen hat 2 <li>, Hauptformulare hat 6 <li>, die uebrigen Gruppen sind leer", () => {
+  it("#2 Voranmeldungen hat 2 <li>, Hauptformulare hat 6 <li>, Jahresabschluss hat 1 <li>, ESt-Anlagen ist leer", () => {
     const r = mount();
     const groups = document.querySelectorAll(".steuern-shell__sidebar .steuern-shell__group");
     expect(groups.length).toBe(4);
@@ -70,12 +70,13 @@ describe("SteuernShell", () => {
     // Hauptformulare (zweite Gruppe): genau 6 <li>.
     const hauptformulareLis = groups[1].querySelectorAll("ul > li");
     expect(hauptformulareLis.length).toBe(6);
-    // Letzte zwei Gruppen: <ul> ohne Kinder.
-    for (let i = 2; i < 4; i++) {
-      const ul = groups[i].querySelector("ul");
-      expect(ul).not.toBeNull();
-      expect(ul!.children.length).toBe(0);
-    }
+    // ESt-Anlagen (dritte Gruppe): <ul> ohne Kinder.
+    const estAnlagenUl = groups[2].querySelector("ul");
+    expect(estAnlagenUl).not.toBeNull();
+    expect(estAnlagenUl!.children.length).toBe(0);
+    // Jahresabschluss (vierte Gruppe): genau 1 <li>.
+    const jahresabschlussLis = groups[3].querySelectorAll("ul > li");
+    expect(jahresabschlussLis.length).toBe(1);
     r.unmount();
   });
 

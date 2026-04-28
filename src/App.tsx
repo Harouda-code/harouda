@@ -211,6 +211,7 @@ export default function App() {
             <Route path="/steuern/kst" element={<KoerperschaftsteuerPage />} />
             <Route path="/steuern/est-1a" element={<HauptvorduckESt1APage />} />
             <Route path="/steuern/est-1c" element={<HauptvorduckESt1CPage />} />
+            <Route path="/steuern/ebilanz" element={<EbilanzPage />} />
           </Route>
         </Route>
 

@@ -75,4 +75,26 @@ describe("UmsatzsteuerShell", () => {
     expect(main).not.toBeNull();
     r.unmount();
   });
+
+  it("#4 zeigt NavLink fuer UStVA in Voranmeldungen", () => {
+    const r = mount("/umsatzsteuer/ustva");
+    const link = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>(".umsatzsteuer-shell__sidebar a")
+    ).find((a) => a.textContent === "Umsatzsteuer-Voranmeldung");
+    expect(link).toBeDefined();
+    expect(link!.getAttribute("href")).toBe("/umsatzsteuer/ustva");
+    expect(link!.className).toContain("umsatzsteuer-shell__link--active");
+    r.unmount();
+  });
+
+  it("#5 zeigt NavLink fuer ZM in Zusammenfassende Meldung", () => {
+    const r = mount("/umsatzsteuer/zm");
+    const link = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>(".umsatzsteuer-shell__sidebar a")
+    ).find((a) => a.textContent === "Zusammenfassende Meldung");
+    expect(link).toBeDefined();
+    expect(link!.getAttribute("href")).toBe("/umsatzsteuer/zm");
+    expect(link!.className).toContain("umsatzsteuer-shell__link--active");
+    r.unmount();
+  });
 });

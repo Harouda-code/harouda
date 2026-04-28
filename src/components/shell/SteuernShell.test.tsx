@@ -44,13 +44,12 @@ afterEach(() => {
 });
 
 describe("SteuernShell", () => {
-  it("#1 zeigt die vier Gruppen-Ueberschriften", () => {
+  it("#1 zeigt die drei Gruppen-Ueberschriften", () => {
     const r = mount();
     const titles = Array.from(
       document.querySelectorAll(".steuern-shell__group-title")
     ).map((el) => el.textContent);
     expect(titles).toEqual([
-      "Voranmeldungen",
       "Hauptformulare",
       "ESt-Anlagen",
       "Jahresabschluss",
@@ -58,24 +57,21 @@ describe("SteuernShell", () => {
     r.unmount();
   });
 
-  it("#2 Voranmeldungen hat 2 <li>, Hauptformulare hat 6 <li>, die uebrigen Gruppen sind leer", () => {
+  it("#2 Hauptformulare hat 6 <li>, ESt-Anlagen ist leer, Jahresabschluss ist leer", () => {
     const r = mount();
     const groups = document.querySelectorAll(".steuern-shell__sidebar .steuern-shell__group");
-    expect(groups.length).toBe(4);
-
-    // Voranmeldungen (erste Gruppe): genau 2 <li>.
-    const voranmeldungenLis = groups[0].querySelectorAll("ul > li");
-    expect(voranmeldungenLis.length).toBe(2);
-
-    // Hauptformulare (zweite Gruppe): genau 6 <li>.
-    const hauptformulareLis = groups[1].querySelectorAll("ul > li");
+    expect(groups.length).toBe(3);
+    // Hauptformulare (erste Gruppe): genau 6 <li>.
+    const hauptformulareLis = groups[0].querySelectorAll("ul > li");
     expect(hauptformulareLis.length).toBe(6);
-    // Letzte zwei Gruppen: <ul> ohne Kinder.
-    for (let i = 2; i < 4; i++) {
-      const ul = groups[i].querySelector("ul");
-      expect(ul).not.toBeNull();
-      expect(ul!.children.length).toBe(0);
-    }
+    // ESt-Anlagen (zweite Gruppe): <ul> ohne Kinder.
+    const estAnlagenUl = groups[1].querySelector("ul");
+    expect(estAnlagenUl).not.toBeNull();
+    expect(estAnlagenUl!.children.length).toBe(0);
+    // Jahresabschluss (dritte Gruppe): <ul> ohne Kinder.
+    const jahresabschlussUl = groups[2].querySelector("ul");
+    expect(jahresabschlussUl).not.toBeNull();
+    expect(jahresabschlussUl!.children.length).toBe(0);
     r.unmount();
   });
 
@@ -83,28 +79,6 @@ describe("SteuernShell", () => {
     const r = mount();
     const main = document.querySelector(".steuern-shell__main");
     expect(main).not.toBeNull();
-    r.unmount();
-  });
-
-  it("#4 zeigt NavLink fuer UStVA in Voranmeldungen", () => {
-    const r = mount("/steuern/ustva");
-    const link = Array.from(
-      document.querySelectorAll<HTMLAnchorElement>(".steuern-shell__sidebar a")
-    ).find((a) => a.textContent === "Umsatzsteuer-Voranmeldung");
-    expect(link).toBeDefined();
-    expect(link!.getAttribute("href")).toBe("/steuern/ustva");
-    expect(link!.className).toContain("steuern-shell__link--active");
-    r.unmount();
-  });
-
-  it("#5 zeigt NavLink fuer ZM in Voranmeldungen", () => {
-    const r = mount("/steuern/zm");
-    const link = Array.from(
-      document.querySelectorAll<HTMLAnchorElement>(".steuern-shell__sidebar a")
-    ).find((a) => a.textContent === "Zusammenfassende Meldung");
-    expect(link).toBeDefined();
-    expect(link!.getAttribute("href")).toBe("/steuern/zm");
-    expect(link!.className).toContain("steuern-shell__link--active");
     r.unmount();
   });
 });

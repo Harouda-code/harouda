@@ -215,6 +215,7 @@ export default function App() {
           </Route>
           <Route element={<UmsatzsteuerShell />}>
             <Route path="/umsatzsteuer/ustva" element={<UstvaPage />} />
+            <Route path="/umsatzsteuer/zm" element={<ZmPage />} />
           </Route>
         </Route>
 

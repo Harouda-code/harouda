@@ -38,7 +38,9 @@ const GROUPS: Group[] = [
   {
     id: "zusammenfassende-meldung",
     title: "Zusammenfassende Meldung",
-    items: [],
+    items: [
+      { to: "/umsatzsteuer/zm", label: "Zusammenfassende Meldung" },
+    ],
   },
 ];
 

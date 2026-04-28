@@ -12,6 +12,7 @@ import BaseShell from "./components/shell/BaseShell";
 import BuchhaltungShell from "./components/shell/BuchhaltungShell";
 import SteuernShell from "./components/shell/SteuernShell";
 import UmsatzsteuerShell from "./components/shell/UmsatzsteuerShell";
+import JahresabschlussShell from "./components/shell/JahresabschlussShell";
 import DemoBanner from "./components/DemoBanner";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RequireAuth } from "./components/RequireAuth";
@@ -214,6 +215,9 @@ export default function App() {
           <Route element={<UmsatzsteuerShell />}>
             <Route path="/umsatzsteuer/ustva" element={<UstvaPage />} />
             <Route path="/umsatzsteuer/zm" element={<ZmPage />} />
+          </Route>
+          <Route element={<JahresabschlussShell />}>
+            <Route path="/jahresabschluss/ebilanz" element={<EbilanzPage />} />
           </Route>
         </Route>
 

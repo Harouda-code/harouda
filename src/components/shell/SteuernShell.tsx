@@ -32,14 +32,6 @@ type NavGroup = {
 // Reihenfolge in der Sidebar — von oben nach unten.
 const GROUPS: NavGroup[] = [
   {
-    id: "voranmeldungen",
-    title: "Voranmeldungen",
-    items: [
-      { to: "/steuern/ustva", label: "Umsatzsteuer-Voranmeldung" },
-      { to: "/steuern/zm", label: "Zusammenfassende Meldung" },
-    ],
-  },
-  {
     id: "hauptformulare",
     title: "Hauptformulare",
     items: [

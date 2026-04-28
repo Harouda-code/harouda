@@ -58,7 +58,7 @@ describe("SteuernShell", () => {
     r.unmount();
   });
 
-  it("#2 Voranmeldungen hat 2 <li>, Hauptformulare hat 5 <li>, die uebrigen Gruppen sind leer", () => {
+  it("#2 Voranmeldungen hat 2 <li>, Hauptformulare hat 6 <li>, die uebrigen Gruppen sind leer", () => {
     const r = mount();
     const groups = document.querySelectorAll(".steuern-shell__sidebar .steuern-shell__group");
     expect(groups.length).toBe(4);
@@ -67,9 +67,9 @@ describe("SteuernShell", () => {
     const voranmeldungenLis = groups[0].querySelectorAll("ul > li");
     expect(voranmeldungenLis.length).toBe(2);
 
-    // Hauptformulare (zweite Gruppe): genau 1 <li>.
+    // Hauptformulare (zweite Gruppe): genau 6 <li>.
     const hauptformulareLis = groups[1].querySelectorAll("ul > li");
-    expect(hauptformulareLis.length).toBe(5);
+    expect(hauptformulareLis.length).toBe(6);
     // Letzte zwei Gruppen: <ul> ohne Kinder.
     for (let i = 2; i < 4; i++) {
       const ul = groups[i].querySelector("ul");

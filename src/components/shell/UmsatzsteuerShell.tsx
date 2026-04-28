@@ -26,7 +26,9 @@ const GROUPS: Group[] = [
   {
     id: "voranmeldungen",
     title: "Voranmeldungen",
-    items: [],
+    items: [
+      { to: "/umsatzsteuer/ustva", label: "Umsatzsteuer-Voranmeldung" },
+    ],
   },
   {
     id: "jahreserklaerung",

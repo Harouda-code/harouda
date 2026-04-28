@@ -11,6 +11,7 @@ import AppShell from "./components/AppShell";
 import BaseShell from "./components/shell/BaseShell";
 import BuchhaltungShell from "./components/shell/BuchhaltungShell";
 import SteuernShell from "./components/shell/SteuernShell";
+import UmsatzsteuerShell from "./components/shell/UmsatzsteuerShell";
 import DemoBanner from "./components/DemoBanner";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RequireAuth } from "./components/RequireAuth";
@@ -211,6 +212,9 @@ export default function App() {
             <Route path="/steuern/kst" element={<KoerperschaftsteuerPage />} />
             <Route path="/steuern/est-1a" element={<HauptvorduckESt1APage />} />
             <Route path="/steuern/est-1c" element={<HauptvorduckESt1CPage />} />
+          </Route>
+          <Route element={<UmsatzsteuerShell />}>
+            <Route path="/umsatzsteuer/ustva" element={<UstvaPage />} />
           </Route>
         </Route>
 

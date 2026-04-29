@@ -213,10 +213,12 @@ export default function App() {
             <Route path="/steuern/est-1c" element={<HauptvorduckESt1CPage />} />
           </Route>
           <Route element={<UmsatzsteuerShell />}>
+            <Route path="/umsatzsteuer" element={<Navigate to="/umsatzsteuer/ustva" replace />} />
             <Route path="/umsatzsteuer/ustva" element={<UstvaPage />} />
             <Route path="/umsatzsteuer/zm" element={<ZmPage />} />
           </Route>
           <Route element={<JahresabschlussShell />}>
+            <Route path="/jahresabschluss" element={<Navigate to="/jahresabschluss/ebilanz" replace />} />
             <Route path="/jahresabschluss/ebilanz" element={<EbilanzPage />} />
           </Route>
         </Route>

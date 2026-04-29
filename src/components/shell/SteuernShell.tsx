@@ -2,35 +2,16 @@
 //
 // Module-Shell fuer den Steuern-Bereich.
 //
-// Liefert die linke Sidebar mit einer Gruppe
-// (Hauptformulare)
-// und einen <Outlet /> fuer die jeweilige Steuer-Seite.
-//
-// Aktueller Zustand: NavLinks fuer Hauptformulare.
-// Die uebrigen Gruppen folgen in den naechsten Patches.
+// Nutzt die wiederverwendbare SidebarShell-Komponente.
+// Konfiguriert die Gruppen und reicht sie an SidebarShell durch.
 
-import { NavLink, Outlet } from "react-router-dom";
+import SidebarShell, {
+  type SidebarNavGroup,
+} from "./SidebarShell";
 
 import "./SteuernShell.css";
 
-type NavItem = {
-  // Ziel-Route, absolute Pfade.
-  to: string;
-  // Anzeigetext des NavLink.
-  label: string;
-};
-
-type NavGroup = {
-  id: string;
-  // Anzeigetext der Gruppen-Ueberschrift in der Sidebar.
-  title: string;
-  // Vorerst nur Voranmeldungen befuellt; andere Gruppen folgen.
-  items: NavItem[];
-};
-
-// Reihenfolge der Gruppen entspricht der spaeter geplanten
-// Reihenfolge in der Sidebar — von oben nach unten.
-const GROUPS: NavGroup[] = [
+const GROUPS: SidebarNavGroup[] = [
   {
     id: "hauptformulare",
     title: "Hauptformulare",
@@ -47,44 +28,10 @@ const GROUPS: NavGroup[] = [
 
 export default function SteuernShell() {
   return (
-    <div className="steuern-shell">
-      <aside
-        className="steuern-shell__sidebar"
-        aria-label="Steuern-Navigation"
-      >
-        <nav className="steuern-shell__nav">
-          {GROUPS.map((g) => (
-            <div key={g.id} className="steuern-shell__group">
-              <h3 className="steuern-shell__group-title">{g.title}</h3>
-              {g.items.length === 0 ? (
-                // Platzhalter fuer noch leere Gruppen — NavLinks folgen.
-                <ul className="steuern-shell__group-list" />
-              ) : (
-                <ul className="steuern-shell__list">
-                  {g.items.map((it) => (
-                    <li key={it.to}>
-                      <NavLink
-                        to={it.to}
-                        className={({ isActive }) =>
-                          isActive
-                            ? "steuern-shell__link steuern-shell__link--active"
-                            : "steuern-shell__link"
-                        }
-                      >
-                        {it.label}
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
-        </nav>
-      </aside>
-
-      <section className="steuern-shell__main">
-        <Outlet />
-      </section>
-    </div>
+    <SidebarShell
+      bemBlock="steuern-shell"
+      ariaLabel="Steuern-Navigation"
+      groups={GROUPS}
+    />
   );
 }

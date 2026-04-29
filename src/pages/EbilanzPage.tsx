@@ -1,9 +1,7 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
   AlertTriangle,
-  ArrowLeft,
   CheckCircle2,
   Download,
   Loader2,
@@ -120,9 +118,6 @@ export default function EbilanzPage() {
   return (
     <div className="report">
       <header className="report__head no-print">
-        <Link to="/buchhaltung" className="report__back">
-          <ArrowLeft size={16} /> Zurück zur Buchhaltung
-        </Link>
         <div className="report__head-title">
           <h1>E-Bilanz XBRL (§ 5b EStG, Taxonomie 6.8)</h1>
           <p>

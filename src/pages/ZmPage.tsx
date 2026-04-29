@@ -1,9 +1,7 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
   AlertTriangle,
-  ArrowLeft,
   CheckCircle2,
   Clock,
   Download,
@@ -195,9 +193,6 @@ export default function ZmPage() {
   return (
     <div className="report">
       <header className="report__head no-print">
-        <Link to="/umsatzsteuer" className="report__back">
-          <ArrowLeft size={16} /> Zurück zur Umsatzsteuer
-        </Link>
         <div className="report__head-title">
           <h1>Zusammenfassende Meldung (§ 18a UStG)</h1>
           <p>

@@ -1,7 +1,7 @@
 /** @jsxImportSource react */
 // UmsatzsteuerShell-Smoke-Tests.
 //
-// Pruefen das Sidebar-Skelett: ein Zurueck-Button und drei Gruppen
+// Pruefen das Sidebar-Skelett: drei Gruppen
 // (Voranmeldungen, Jahreserklaerung, Zusammenfassende Meldung)
 // sowie die Haupt-Content-Sektion mit Outlet-Aufnahmebereich.
 
@@ -46,16 +46,6 @@ afterEach(() => {
 });
 
 describe("UmsatzsteuerShell", () => {
-  it("#1 zeigt den Zurueck-Button zur Mandantenuebersicht", () => {
-    const r = mount();
-    const backLink = document.querySelector(
-      ".umsatzsteuer-shell__back-link"
-    );
-    expect(backLink).not.toBeNull();
-    expect(backLink!.textContent).toContain("Zurueck");
-    r.unmount();
-  });
-
   it("#2 zeigt die drei Gruppen-Ueberschriften", () => {
     const r = mount();
     const titles = Array.from(

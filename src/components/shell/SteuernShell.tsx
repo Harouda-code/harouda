@@ -2,11 +2,11 @@
 //
 // Module-Shell fuer den Steuern-Bereich.
 //
-// Liefert die linke Sidebar mit vier vorbereiteten Gruppen
-// (Hauptformulare, ESt-Anlagen)
+// Liefert die linke Sidebar mit einer Gruppe
+// (Hauptformulare)
 // und einen <Outlet /> fuer die jeweilige Steuer-Seite.
 //
-// Aktueller Zustand: NavLinks fuer Hauptformulare. ESt-Anlagen-Gruppe ist Platzhalter.
+// Aktueller Zustand: NavLinks fuer Hauptformulare.
 // Die uebrigen Gruppen folgen in den naechsten Patches.
 
 import { NavLink, Outlet } from "react-router-dom";
@@ -43,7 +43,6 @@ const GROUPS: NavGroup[] = [
       { to: "/steuern/est-1c", label: "ESt 1C (Hauptvordruck)" },
     ],
   },
-  { id: "est-anlagen", title: "ESt-Anlagen", items: [] },
 ];
 
 export default function SteuernShell() {

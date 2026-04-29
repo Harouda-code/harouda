@@ -8,6 +8,7 @@
 
 import SidebarShell from "./SidebarShell";
 import type { SidebarNavGroup } from "./SidebarShell";
+import "./EinkommensteuerShell.css";
 
 const GROUPS: SidebarNavGroup[] = [
   {

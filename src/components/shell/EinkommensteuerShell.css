@@ -1,0 +1,97 @@
+/* src/components/shell/EinkommensteuerShell.css
+ * Layout-Styles fuer EinkommensteuerShell. BEM-Konvention.
+ * Kein CSS-Framework, reines hand-geschriebenes CSS.
+ * Sidebar 260px breit (laengere Anlage-Bezeichnungen
+ * wie "Anlage U (Unterhalt geschiedener Ehegatten)"). */
+
+.einkommensteuer-shell {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+}
+
+.einkommensteuer-shell__sidebar {
+  flex: 0 0 260px;
+  width: 260px;
+  border-right: 1px solid var(--border, #c3c8d1);
+  background: var(--ivory-50, #fbfbfc);
+  padding: 16px 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.einkommensteuer-shell__back-link {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary, #1a1d24);
+  text-decoration: none;
+  background: var(--ivory-100, #f4f5f7);
+  border: 1px solid var(--border, #c3c8d1);
+  transition: background 0.15s ease;
+}
+
+.einkommensteuer-shell__back-link:hover {
+  background: var(--hover-bg, #eef0f4);
+}
+
+.einkommensteuer-shell__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.einkommensteuer-shell__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.einkommensteuer-shell__group-title {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft, #5a6271);
+}
+
+.einkommensteuer-shell__group-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.einkommensteuer-shell__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.einkommensteuer-shell__link {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.92rem;
+  color: var(--text-primary, #1a1d24);
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.einkommensteuer-shell__link:hover {
+  background: var(--hover-bg, #eef0f4);
+}
+
+.einkommensteuer-shell__link--active {
+  background: var(--accent-bg, #d6e4ff);
+  font-weight: 600;
+}

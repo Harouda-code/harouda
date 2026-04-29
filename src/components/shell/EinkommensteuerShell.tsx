@@ -11,6 +11,14 @@ import type { SidebarNavGroup } from "./SidebarShell";
 
 const GROUPS: SidebarNavGroup[] = [
   {
+    id: "hauptformulare",
+    title: "Hauptformulare",
+    items: [
+      { to: "/einkommensteuer/est-1a", label: "ESt 1A (Mantelbogen)" },
+      { to: "/einkommensteuer/est-1c", label: "ESt 1C (beschraenkt steuerpflichtig)" },
+    ],
+  },
+  {
     id: "persoenlich-familie",
     title: "Persoenlich & Familie",
     items: [

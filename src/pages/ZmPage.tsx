@@ -195,8 +195,8 @@ export default function ZmPage() {
   return (
     <div className="report">
       <header className="report__head no-print">
-        <Link to="/steuer" className="report__back">
-          <ArrowLeft size={16} /> Zurück zu Steuer
+        <Link to="/umsatzsteuer" className="report__back">
+          <ArrowLeft size={16} /> Zurück zur Umsatzsteuer
         </Link>
         <div className="report__head-title">
           <h1>Zusammenfassende Meldung (§ 18a UStG)</h1>

@@ -3,10 +3,10 @@
 // Module-Shell fuer den Steuern-Bereich.
 //
 // Liefert die linke Sidebar mit vier vorbereiteten Gruppen
-// (Voranmeldungen, Hauptformulare, ESt-Anlagen, Jahresabschluss)
+// (Hauptformulare, ESt-Anlagen)
 // und einen <Outlet /> fuer die jeweilige Steuer-Seite.
 //
-// Aktueller Zustand: erster NavLink fuer UStVA in Voranmeldungen.
+// Aktueller Zustand: NavLinks fuer Hauptformulare. ESt-Anlagen-Gruppe ist Platzhalter.
 // Die uebrigen Gruppen folgen in den naechsten Patches.
 
 import { NavLink, Outlet } from "react-router-dom";
@@ -44,7 +44,6 @@ const GROUPS: NavGroup[] = [
     ],
   },
   { id: "est-anlagen", title: "ESt-Anlagen", items: [] },
-  { id: "jahresabschluss", title: "Jahresabschluss", items: [] },
 ];
 
 export default function SteuernShell() {

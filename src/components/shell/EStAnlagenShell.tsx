@@ -1,137 +1,88 @@
-// EStAnlagenShell-Komponente.
+// EinkommensteuerShell-Komponente.
 //
-// Eigener Geltungsbereich fuer ESt-Anlagen (23 Anlagen).
-// Bietet einen seitlichen Navigationsbereich mit sieben thematischen
-// Gruppen sowie einen Zurueck-Link zur Hauptsteuer-Uebersicht.
-// Aktueller Zustand: Geruest mit Gruppen-Ueberschriften, ohne NavLinks.
-// Die NavLinks fuer die einzelnen Anlagen folgen in den naechsten
-// Patches.
+// Shell fuer den Einkommensteuer-Bereich mit sieben thematischen
+// Gruppen und insgesamt 23 Anlagen in der seitlichen Navigation.
+// Verwendet den gemeinsamen SidebarShell, sodass Markup und
+// Verhalten der Sidebar mit den uebrigen Modul-Shells identisch
+// sind.
 
-import { Link, NavLink, Outlet } from "react-router-dom";
+import SidebarShell from "./SidebarShell";
+import type { SidebarNavGroup } from "./SidebarShell";
 
-import "./EStAnlagenShell.css";
-
-type GroupItem = {
-  to: string;
-  label: string;
-};
-
-type Group = {
-  id: string;
-  title: string;
-  items: GroupItem[];
-};
-
-const GROUPS: Group[] = [
+const GROUPS: SidebarNavGroup[] = [
   {
     id: "persoenlich-familie",
     title: "Persoenlich & Familie",
     items: [
-      { to: "/steuern/anlage-kind", label: "Anlage Kind" },
-      { to: "/steuern/anlage-vorsorge", label: "Anlage Vorsorgeaufwand" },
-      { to: "/steuern/anlage-av", label: "Anlage AV (Riester)" },
-      { to: "/steuern/anlage-unterhalt", label: "Anlage Unterhalt" },
+      { to: "/einkommensteuer/anlage-kind", label: "Anlage Kind" },
+      { to: "/einkommensteuer/anlage-vorsorge", label: "Anlage Vorsorgeaufwand" },
+      { to: "/einkommensteuer/anlage-av", label: "Anlage AV (Riester)" },
+      { to: "/einkommensteuer/anlage-unterhalt", label: "Anlage Unterhalt" },
     ],
   },
   {
     id: "sonderausgaben-belastungen",
     title: "Sonderausgaben & Aussergewoehnliche Belastungen",
     items: [
-      { to: "/steuern/anlage-haa", label: "Anlage Haushaltsnahe Aufwendungen" },
-      { to: "/steuern/anlage-sonder", label: "Anlage Sonderausgaben" },
-      { to: "/steuern/anlage-agb", label: "Anlage Aussergewoehnliche Belastungen" },
+      { to: "/einkommensteuer/anlage-haa", label: "Anlage Haushaltsnahe Aufwendungen" },
+      { to: "/einkommensteuer/anlage-sonder", label: "Anlage Sonderausgaben" },
+      { to: "/einkommensteuer/anlage-agb", label: "Anlage Aussergewoehnliche Belastungen" },
     ],
   },
   {
     id: "nichtselbststaendig",
     title: "Nichtselbststaendige Arbeit",
     items: [
-      { to: "/steuern/anlage-n", label: "Anlage N" },
-      { to: "/steuern/anlage-n-aus", label: "Anlage N-AUS (Ausland)" },
-      { to: "/steuern/anlage-n-dhf", label: "Anlage N-DHF (Doppelte Haushaltsfuehrung)" },
-      { to: "/steuern/anlage-rav-bav", label: "Anlage R-AV / bAV (Renten)" },
+      { to: "/einkommensteuer/anlage-n", label: "Anlage N" },
+      { to: "/einkommensteuer/anlage-n-aus", label: "Anlage N-AUS (Ausland)" },
+      { to: "/einkommensteuer/anlage-n-dhf", label: "Anlage N-DHF (Doppelte Haushaltsfuehrung)" },
+      { to: "/einkommensteuer/anlage-rav-bav", label: "Anlage R-AV / bAV (Renten)" },
     ],
   },
   {
     id: "selbststaendig-gewerblich",
     title: "Selbststaendige & Gewerbliche Einkuenfte",
     items: [
-      { to: "/steuern/anlage-s", label: "Anlage S (Selbststaendige Arbeit)" },
-      { to: "/steuern/anlage-g", label: "Anlage G (Gewerbebetrieb)" },
-      { to: "/steuern/anlage-u", label: "Anlage U (Unterhalt geschiedener Ehegatten)" },
+      { to: "/einkommensteuer/anlage-s", label: "Anlage S (Selbststaendige Arbeit)" },
+      { to: "/einkommensteuer/anlage-g", label: "Anlage G (Gewerbebetrieb)" },
+      { to: "/einkommensteuer/anlage-u", label: "Anlage U (Unterhalt geschiedener Ehegatten)" },
     ],
   },
   {
     id: "kapital",
     title: "Kapital",
     items: [
-      { to: "/steuern/anlage-kap", label: "Anlage KAP (Kapitalvermoegen)" },
+      { to: "/einkommensteuer/anlage-kap", label: "Anlage KAP (Kapitalvermoegen)" },
     ],
   },
   {
     id: "vermietung",
     title: "Vermietung",
     items: [
-      { to: "/steuern/anlage-v", label: "Anlage V (Vermietung & Verpachtung)" },
-      { to: "/steuern/anlage-v-sonstige", label: "Anlage V-Sonstige" },
-      { to: "/steuern/anlage-v-fewo", label: "Anlage V-FeWo (Ferienwohnung)" },
+      { to: "/einkommensteuer/anlage-v", label: "Anlage V (Vermietung & Verpachtung)" },
+      { to: "/einkommensteuer/anlage-v-sonstige", label: "Anlage V-Sonstige" },
+      { to: "/einkommensteuer/anlage-v-fewo", label: "Anlage V-FeWo (Ferienwohnung)" },
     ],
   },
   {
     id: "sonstige-international",
     title: "Sonstige & Internationales",
     items: [
-      { to: "/steuern/anlage-so", label: "Anlage SO (Sonstige Einkuenfte)" },
-      { to: "/steuern/anlage-aus", label: "Anlage AUS (Auslaendische Einkuenfte)" },
-      { to: "/steuern/anlage-r", label: "Anlage R (Renten)" },
-      { to: "/steuern/anlage-em", label: "Anlage Energetische Massnahmen" },
-      { to: "/steuern/anlage-mobility", label: "Anlage Mobilitaetspraemie" },
+      { to: "/einkommensteuer/anlage-so", label: "Anlage SO (Sonstige Einkuenfte)" },
+      { to: "/einkommensteuer/anlage-aus", label: "Anlage AUS (Auslaendische Einkuenfte)" },
+      { to: "/einkommensteuer/anlage-r", label: "Anlage R (Renten)" },
+      { to: "/einkommensteuer/anlage-em", label: "Anlage Energetische Massnahmen" },
+      { to: "/einkommensteuer/anlage-mobility", label: "Anlage Mobilitaetspraemie" },
     ],
   },
 ];
 
-export default function EStAnlagenShell() {
+export default function EinkommensteuerShell() {
   return (
-    <div className="est-anlagen-shell">
-      <aside className="est-anlagen-shell__sidebar">
-        <Link
-          to="/steuern"
-          className="est-anlagen-shell__back-link"
-        >
-          ← Zurueck zur Hauptsteuer
-        </Link>
-        <nav className="est-anlagen-shell__nav">
-          {GROUPS.map((group) => (
-            <div
-              key={group.id}
-              className="est-anlagen-shell__group"
-            >
-              <h3 className="est-anlagen-shell__group-title">
-                {group.title}
-              </h3>
-              <ul className="est-anlagen-shell__group-list">
-                {group.items.map((item) => (
-                  <li key={item.to}>
-                    <NavLink
-                      to={item.to}
-                      className={({ isActive }) =>
-                        isActive
-                          ? "est-anlagen-shell__link est-anlagen-shell__link--active"
-                          : "est-anlagen-shell__link"
-                      }
-                    >
-                      {item.label}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </nav>
-      </aside>
-      <main className="est-anlagen-shell__main">
-        <Outlet />
-      </main>
-    </div>
+    <SidebarShell
+      bemBlock="einkommensteuer-shell"
+      ariaLabel="Einkommensteuer Navigation"
+      groups={GROUPS}
+    />
   );
 }

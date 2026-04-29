@@ -13,6 +13,7 @@ import BuchhaltungShell from "./components/shell/BuchhaltungShell";
 import SteuernShell from "./components/shell/SteuernShell";
 import UmsatzsteuerShell from "./components/shell/UmsatzsteuerShell";
 import JahresabschlussShell from "./components/shell/JahresabschlussShell";
+import EinkommensteuerShell from "./components/shell/EinkommensteuerShell";
 import DemoBanner from "./components/DemoBanner";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RequireAuth } from "./components/RequireAuth";
@@ -220,6 +221,34 @@ export default function App() {
           <Route element={<JahresabschlussShell />}>
             <Route path="/jahresabschluss" element={<Navigate to="/jahresabschluss/ebilanz" replace />} />
             <Route path="/jahresabschluss/ebilanz" element={<EbilanzPage />} />
+          </Route>
+          <Route element={<EinkommensteuerShell />}>
+            <Route path="/einkommensteuer" element={<Navigate to="/einkommensteuer/est-1a" replace />} />
+            <Route path="/einkommensteuer/est-1a" element={<HauptvorduckESt1APage />} />
+            <Route path="/einkommensteuer/est-1c" element={<HauptvorduckESt1CPage />} />
+            <Route path="/einkommensteuer/anlage-kind" element={<AnlageKindPage />} />
+            <Route path="/einkommensteuer/anlage-vorsorge" element={<AnlageVorsorgePage />} />
+            <Route path="/einkommensteuer/anlage-av" element={<AnlageAVPage />} />
+            <Route path="/einkommensteuer/anlage-unterhalt" element={<AnlageUnterhaltPage />} />
+            <Route path="/einkommensteuer/anlage-haa" element={<AnlageHaushaltsnaheAufwendungenPage />} />
+            <Route path="/einkommensteuer/anlage-sonder" element={<AnlageSonderausgabenPage />} />
+            <Route path="/einkommensteuer/anlage-agb" element={<AnlageAussergewoehnlicheBelastungenPage />} />
+            <Route path="/einkommensteuer/anlage-n" element={<AnlageNPage />} />
+            <Route path="/einkommensteuer/anlage-n-aus" element={<AnlageNAUSPage />} />
+            <Route path="/einkommensteuer/anlage-n-dhf" element={<AnlageNDHFPage />} />
+            <Route path="/einkommensteuer/anlage-rav-bav" element={<AnlageRAVbAVPage />} />
+            <Route path="/einkommensteuer/anlage-s" element={<AnlageSPage />} />
+            <Route path="/einkommensteuer/anlage-g" element={<AnlageGPage />} />
+            <Route path="/einkommensteuer/anlage-u" element={<AnlageUPage />} />
+            <Route path="/einkommensteuer/anlage-kap" element={<AnlageKapPage />} />
+            <Route path="/einkommensteuer/anlage-v" element={<AnlageVPage />} />
+            <Route path="/einkommensteuer/anlage-v-sonstige" element={<AnlageVSonstigePage />} />
+            <Route path="/einkommensteuer/anlage-v-fewo" element={<AnlageVFeWoPage />} />
+            <Route path="/einkommensteuer/anlage-so" element={<AnlageSOPage />} />
+            <Route path="/einkommensteuer/anlage-aus" element={<AnlageAUSPage />} />
+            <Route path="/einkommensteuer/anlage-r" element={<AnlageRPage />} />
+            <Route path="/einkommensteuer/anlage-em" element={<AnlageEnergetischeMassnahmenPage />} />
+            <Route path="/einkommensteuer/anlage-mobility" element={<AnlageMobilitaetspraemiePage />} />
           </Route>
         </Route>
 

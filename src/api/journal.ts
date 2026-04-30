@@ -8,6 +8,7 @@ import {
   computeEntryHash,
 } from "../utils/journalChain";
 import { recordSupplierBooking } from "./supplierPreferences";
+import { monotonicNowIso } from "../utils/monotonicClock";
 
 export type JournalInput = Omit<
   JournalEntry,
@@ -21,7 +22,7 @@ export type JournalInput = Omit<
 >;
 
 function nowIso(): string {
-  return new Date().toISOString();
+  return monotonicNowIso();
 }
 
 /** Liest die Auto-Lock-Dauer für gebuchte Einträge aus den Settings.

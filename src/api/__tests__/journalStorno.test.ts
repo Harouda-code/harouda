@@ -20,7 +20,6 @@ beforeEach(() => {
 
 describe("P1-04: Storno + Korrektur Hash-Chain-Verifikation", () => {
   it("3 Buchungen + 1 reverseEntry → verifyJournalChain ist ok", async () => {
-    const tick = () => new Promise((r) => setTimeout(r, 2));
     await createEntry({
       datum: "2025-03-01",
       beleg_nr: "RE-001",
@@ -36,7 +35,6 @@ describe("P1-04: Storno + Korrektur Hash-Chain-Verifikation", () => {
       gegenseite: null,
       faelligkeit: null,
     });
-    await tick();
     const second = await createEntry({
       datum: "2025-03-02",
       beleg_nr: "RE-002",
@@ -52,7 +50,6 @@ describe("P1-04: Storno + Korrektur Hash-Chain-Verifikation", () => {
       gegenseite: null,
       faelligkeit: null,
     });
-    await tick();
     await createEntry({
       datum: "2025-03-03",
       beleg_nr: "RE-003",
@@ -68,7 +65,6 @@ describe("P1-04: Storno + Korrektur Hash-Chain-Verifikation", () => {
       gegenseite: null,
       faelligkeit: null,
     });
-    await tick();
 
     // Storno auf zweiten Eintrag
     await reverseEntry(second.id, "Doppelbuchung");
@@ -80,10 +76,6 @@ describe("P1-04: Storno + Korrektur Hash-Chain-Verifikation", () => {
   });
 
   it("3 Buchungen + correctEntry → verifyJournalChain ist ok", async () => {
-    // Mini-Delay zwischen createEntry-Aufrufen, damit `created_at`
-    // monoton wächst und `sortForChain` deterministisch sortiert
-    // (Hash-Kette hängt an created_at-Reihenfolge).
-    const tick = () => new Promise((r) => setTimeout(r, 2));
     await createEntry({
       datum: "2025-03-01",
       beleg_nr: "RE-001",
@@ -99,7 +91,6 @@ describe("P1-04: Storno + Korrektur Hash-Chain-Verifikation", () => {
       gegenseite: null,
       faelligkeit: null,
     });
-    await tick();
     const target = await createEntry({
       datum: "2025-03-02",
       beleg_nr: "RE-002",
@@ -115,7 +106,6 @@ describe("P1-04: Storno + Korrektur Hash-Chain-Verifikation", () => {
       gegenseite: null,
       faelligkeit: null,
     });
-    await tick();
     await createEntry({
       datum: "2025-03-03",
       beleg_nr: "RE-003",
@@ -131,7 +121,6 @@ describe("P1-04: Storno + Korrektur Hash-Chain-Verifikation", () => {
       gegenseite: null,
       faelligkeit: null,
     });
-    await tick();
 
     // correctEntry = Storno + Korrektur-Neubuchung in einem Schritt
     await correctEntry(
@@ -246,8 +235,6 @@ describe("P1-04: Storno + Korrektur Hash-Chain-Verifikation", () => {
       gegenseite: null,
       faelligkeit: null,
     });
-    const tick = () => new Promise((r) => setTimeout(r, 2));
-    await tick();
     await reverseEntry(entry.id, "Erster Storno");
     await expect(
       reverseEntry(entry.id, "Zweiter Storno")

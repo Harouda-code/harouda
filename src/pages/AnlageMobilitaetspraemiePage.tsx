@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Info, Printer, Save } from "lucide-react";
+import { Info, Printer, Save } from "lucide-react";
 import { toast } from "sonner";
 import { useMandant } from "../contexts/MandantContext";
 import { useSettings } from "../contexts/SettingsContext";
@@ -252,10 +251,6 @@ function AnlageMobilitaetspraemiePageInner() {
   return (
     <div className="report anlage">
       <header className="report__head no-print">
-        <Link to="/steuer" className="report__back">
-          <ArrowLeft size={16} />
-          Zurück zu Steuerformularen
-        </Link>
         <div className="report__head-title">
           <h1>Anlage Mobilitätsprämie</h1>
           <p>

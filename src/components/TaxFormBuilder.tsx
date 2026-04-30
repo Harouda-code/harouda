@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { Link } from "react-router-dom";
 import {
-  ArrowLeft,
   BookOpen,
   FileText,
   Printer,
@@ -62,7 +60,6 @@ export type FormSpec = {
   title: string;
   subtitle: string;
   resultLabel: string;
-  backTo: string;
   sections: SectionSpec[];
   formId: FormId;
 };
@@ -303,10 +300,6 @@ function TaxFormBuilderInner({
   return (
     <div className="report taxform">
       <header className="report__head no-print">
-        <Link to={spec.backTo} className="report__back">
-          <ArrowLeft size={16} />
-          Zurück
-        </Link>
         <div className="report__head-title">
           <h1>{spec.title}</h1>
           <p>{spec.subtitle}</p>

@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import {
-  ArrowLeft,
   FileText,
   Plus,
   Printer,
@@ -183,10 +181,6 @@ function AnlageVPageInner() {
   return (
     <div className="report taxform">
       <header className="report__head no-print">
-        <Link to="/steuer" className="report__back">
-          <ArrowLeft size={16} />
-          Zurück zu Steuerformularen
-        </Link>
         <div className="report__head-title">
           <h1>Anlage V — Einkünfte aus Vermietung und Verpachtung</h1>
           <p>

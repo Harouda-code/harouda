@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Calculator, Download, Printer, Save } from "lucide-react";
+import { Calculator, Download, Printer, Save } from "lucide-react";
 import { toast } from "sonner";
 import { useSettings } from "../contexts/SettingsContext";
 import { useYear } from "../contexts/YearContext";
@@ -297,10 +296,6 @@ function AnlageNPageInner() {
   return (
     <div className="report anlage">
       <header className="report__head no-print">
-        <Link to="/steuer" className="report__back">
-          <ArrowLeft size={16} />
-          Zurück zu Steuerformularen
-        </Link>
         <div className="report__head-title">
           <h1>Anlage N</h1>
           <p>

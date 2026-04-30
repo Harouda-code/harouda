@@ -23,7 +23,6 @@ const SPEC: FormSpec = {
   subtitle:
     "Freiberufliche und andere selbständige Tätigkeit (§ 18 EStG). Strukturierte Erfassung für den Jahresabschluss.",
   resultLabel: "Einkünfte aus selbständiger Arbeit",
-  backTo: "/steuer",
   sections: [
     {
       title: "Betriebseinnahmen",

@@ -24,7 +24,6 @@ const SPEC: FormSpec = {
   subtitle:
     "Gewerbliche Einkünfte (§ 15 EStG). Wird in Verbindung mit der Gewerbesteuererklärung genutzt.",
   resultLabel: "Einkünfte aus Gewerbebetrieb",
-  backTo: "/steuer",
   sections: [
     {
       title: "Betriebseinnahmen",

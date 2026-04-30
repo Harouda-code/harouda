@@ -1,10 +1,8 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
   AlertTriangle,
-  ArrowLeft,
   CheckCircle2,
   Download,
   ExternalLink,
@@ -199,10 +197,6 @@ export default function ElsterPage() {
   return (
     <div className="report elster">
       <header className="report__head">
-        <Link to="/steuer" className="report__back">
-          <ArrowLeft size={16} />
-          Zurück zu Steuerformularen
-        </Link>
         <div className="report__head-title">
           <h1>
             <Landmark

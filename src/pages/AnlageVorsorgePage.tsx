@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Download, Info, Printer, Save } from "lucide-react";
+import { Download, Info, Printer, Save } from "lucide-react";
 import { toast } from "sonner";
 import { ArchivImportModal } from "../components/ArchivImportModal";
 import { getActiveCompanyId } from "../api/db";
@@ -428,10 +427,6 @@ function AnlageVorsorgePageInner() {
   return (
     <div className="report taxform">
       <header className="report__head no-print">
-        <Link to="/steuer" className="report__back">
-          <ArrowLeft size={16} />
-          Zurück zu Steuerformularen
-        </Link>
         <div className="report__head-title">
           <h1>Anlage Vorsorgeaufwand</h1>
           <p>

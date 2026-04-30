@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
-  ArrowLeft,
   Calculator,
   FileText,
   Info,
@@ -194,10 +192,6 @@ function KoerperschaftsteuerPageInner() {
   return (
     <div className="report taxcalc">
       <header className="report__head no-print">
-        <Link to="/steuer" className="report__back">
-          <ArrowLeft size={16} />
-          Zurück zu Steuerformularen
-        </Link>
         <div className="report__head-title">
           <h1>Körperschaftsteuer</h1>
           <p>

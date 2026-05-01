@@ -58,13 +58,16 @@
   color: var(--navy, #0f172a);
 }
 
-.buchhaltung-shell__items {
+.buchhaltung-shell__group-list {
   display: flex;
   flex-direction: column;
   padding: 2px 0 6px 0;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
 }
 
-.buchhaltung-shell__item {
+.buchhaltung-shell__link {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -75,18 +78,18 @@
   border-left: 2px solid transparent;
 }
 
-.buchhaltung-shell__item:hover {
+.buchhaltung-shell__link:hover {
   background: var(--row-hover, #eef2f7);
 }
 
-.buchhaltung-shell__item.is-active {
+.buchhaltung-shell__link--active {
   background: var(--row-active, #e0e7f0);
   border-left-color: var(--navy, #0f172a);
   color: var(--navy, #0f172a);
   font-weight: 600;
 }
 
-.buchhaltung-shell__content {
+.buchhaltung-shell__main {
   flex: 1 1 auto;
   min-width: 0;
   overflow: auto;

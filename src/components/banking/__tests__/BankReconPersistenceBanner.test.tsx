@@ -6,6 +6,7 @@ import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { BankReconPersistenceBanner } from "../BankReconPersistenceBanner";
 import { listMatches, upsertMatch } from "../../../api/bankReconciliationMatches";
+import { waitForCondition } from "../../../test/waitForCondition";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
@@ -131,8 +132,14 @@ describe("BankReconPersistenceBanner", () => {
     )!;
     await act(async () => {
       btn.click();
-      await flush(20);
     });
+    // mark-pending laeuft async ueber upsertMatch -> Storage.
+    // State-basiert auf der oeffentlichen API listMatches warten,
+    // statt auf Storage-Keys (Implementation-Detail).
+    await waitForCondition(
+      async () => (await listMatches(MANDANT)).length > 0,
+      { timeoutMs: 2000, label: "Match in listMatches sichtbar" }
+    );
     const matches = await listMatches(MANDANT);
     expect(matches).toHaveLength(1);
     expect(matches[0].match_status).toBe("pending_review");
@@ -166,22 +173,35 @@ describe("BankReconPersistenceBanner", () => {
     )!;
     await act(async () => {
       runBtn.click();
-      await flush(15);
     });
-    // Count-Label erscheint.
+    // Auto-Match laeuft async; auf Count-Label im DOM warten.
+    await waitForCondition(
+      () =>
+        document.querySelector(
+          '[data-testid="bank-recon-automatch-count"]'
+        ) !== null,
+      { timeoutMs: 2000, label: "automatch-count erscheint" }
+    );
     const countEl = document.querySelector(
       '[data-testid="bank-recon-automatch-count"]'
     );
     expect(countEl).not.toBeNull();
-    // Accept-Button erscheint.
     const acceptBtn = document.querySelector<HTMLButtonElement>(
       '[data-testid="btn-bank-recon-accept-090"]'
     )!;
     expect(acceptBtn).not.toBeNull();
     await act(async () => {
       acceptBtn.click();
-      await flush(20);
     });
+    // Accept-Click persistiert async; auf auto_matched-Status
+    // ueber die oeffentliche API warten.
+    await waitForCondition(
+      async () => {
+        const m = await listMatches(MANDANT);
+        return m.length > 0 && m[0].match_status === "auto_matched";
+      },
+      { timeoutMs: 2000, label: "match_status=auto_matched" }
+    );
     const matches = await listMatches(MANDANT);
     expect(matches).toHaveLength(1);
     expect(matches[0].match_status).toBe("auto_matched");

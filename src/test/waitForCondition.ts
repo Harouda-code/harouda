@@ -23,8 +23,16 @@ export type WaitForConditionOptions = {
   label?: string;
 };
 
+/**
+ * Predicate kann synchron `boolean` oder `Promise<boolean>` liefern.
+ * Erlaubt Bedingungen, die ueber asynchrone API-Funktionen pruefen
+ * (z.B. `await listMatches(...)`), statt direkt auf Implementation-
+ * Details wie localStorage-Keys zu greifen.
+ */
+export type ConditionPredicate = () => boolean | Promise<boolean>;
+
 export async function waitForCondition(
-  predicate: () => boolean,
+  predicate: ConditionPredicate,
   opts: WaitForConditionOptions = {}
 ): Promise<void> {
   const timeoutMs = opts.timeoutMs ?? 1000;
@@ -38,7 +46,10 @@ export async function waitForCondition(
       await Promise.resolve();
     }
 
-    if (predicate()) return;
+    // `await` auf einem boolean-Wert ist no-op (Promise.resolve ist
+    // implizit) - so funktionieren sync- und async-Predicates ohne
+    // Verzweigung im Code.
+    if (await predicate()) return;
 
     if (Date.now() - start >= timeoutMs) {
       throw new Error(

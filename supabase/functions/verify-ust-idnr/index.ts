@@ -32,16 +32,11 @@
 // ============================================================================
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { corsHeaders, handleCorsPreflight } from "../_shared/cors.ts";
 
 const VIES_URL =
   "https://ec.europa.eu/taxation_customs/vies/services/checkVatService";
 const VIES_TIMEOUT_MS = 15_000;
-
-const cors = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "authorization, content-type",
-};
 
 type Body = {
   ustIdnr: string;
@@ -157,22 +152,26 @@ declare const Deno: any;
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: cors });
+    return handleCorsPreflight(req);
   }
   if (req.method !== "POST") {
-    return new Response("Method not allowed", { status: 405, headers: cors });
+    return new Response("Method not allowed", {
+      status: 405,
+      headers: corsHeaders(req),
+    });
   }
 
   let body: Body;
   try {
     body = await req.json();
   } catch {
-    return json({ error: "invalid json" }, 400);
+    return json(req, { error: "invalid json" }, 400);
   }
 
   const { ustIdnr, requesterUstIdnr, partnerId, clientId, companyId } = body;
   if (!ustIdnr || !clientId || !companyId) {
     return json(
+      req,
       { error: "ustIdnr, clientId und companyId sind erforderlich." },
       400
     );
@@ -186,7 +185,7 @@ Deno.serve(async (req: Request) => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   if (!supabaseUrl || !serviceRoleKey) {
-    return json({ error: "Edge Function nicht konfiguriert." }, 500);
+    return json(req, { error: "Edge Function nicht konfiguriert." }, 500);
   }
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
@@ -194,7 +193,7 @@ Deno.serve(async (req: Request) => {
 
   // -- 2) Format-Fehler: sofort INVALID loggen, kein VIES-Call ---------------
   if (!fmt.valid || !fmt.country) {
-    return await logAndReturn(supabase, {
+    return await logAndReturn(req, supabase, {
       status: "INVALID",
       errorMessage: "Ungültiges USt-IdNr-Format.",
       rawResponse: null,
@@ -223,7 +222,7 @@ Deno.serve(async (req: Request) => {
       VIES_TIMEOUT_MS
     );
   } catch (err) {
-    return await logAndReturn(supabase, {
+    return await logAndReturn(req, supabase, {
       status: (err as Error).name === "AbortError"
         ? "SERVICE_UNAVAILABLE"
         : "ERROR",
@@ -250,7 +249,7 @@ Deno.serve(async (req: Request) => {
     const unavail =
       fault.code !== null &&
       /MS_UNAVAILABLE|TIMEOUT|SERVICE_UNAVAILABLE/i.test(fault.code);
-    return await logAndReturn(supabase, {
+    return await logAndReturn(req, supabase, {
       status: unavail ? "SERVICE_UNAVAILABLE" : "ERROR",
       errorMessage: `VIES SOAP-Fault: ${fault.code ?? "unknown"}`,
       rawResponse: rawBase64,
@@ -263,7 +262,7 @@ Deno.serve(async (req: Request) => {
   }
 
   const parsed = parseViesResponse(rawText);
-  return await logAndReturn(supabase, {
+  return await logAndReturn(req, supabase, {
     status: parsed.valid ? "VALID" : "INVALID",
     errorMessage: null,
     rawResponse: rawBase64,
@@ -292,7 +291,7 @@ type LogArgs = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function logAndReturn(supabase: any, args: LogArgs): Promise<Response> {
+async function logAndReturn(req: Request, supabase: any, args: LogArgs): Promise<Response> {
   const payload = {
     company_id: args.body.companyId,
     client_id: args.body.clientId,
@@ -320,15 +319,15 @@ async function logAndReturn(supabase: any, args: LogArgs): Promise<Response> {
     .select("*")
     .single();
   if (error) {
-    return json({ error: `Log-Insert fehlgeschlagen: ${error.message}` }, 500);
+    return json(req, { error: `Log-Insert fehlgeschlagen: ${error.message}` }, 500);
   }
-  return json(data, 200);
+  return json(req, data, 200);
 }
 
-function json(obj: unknown, status: number): Response {
+function json(req: Request, obj: unknown, status: number): Response {
   return new Response(JSON.stringify(obj), {
     status,
-    headers: { "content-type": "application/json", ...cors },
+    headers: { "content-type": "application/json", ...corsHeaders(req) },
   });
 }
 

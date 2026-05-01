@@ -14,19 +14,19 @@ import "./UmsatzsteuerShell.css";
 const GROUPS: SidebarNavGroup[] = [
   {
     id: "voranmeldungen",
-    title: "Voranmeldungen",
+    label: "Voranmeldungen",
     items: [
       { to: "/umsatzsteuer/ustva", label: "Umsatzsteuer-Voranmeldung" },
     ],
   },
   {
     id: "jahreserklaerung",
-    title: "Jahreserklaerung",
+    label: "Jahreserklaerung",
     items: [],
   },
   {
     id: "zusammenfassende-meldung",
-    title: "Zusammenfassende Meldung",
+    label: "Zusammenfassende Meldung",
     items: [
       { to: "/umsatzsteuer/zm", label: "Zusammenfassende Meldung" },
     ],

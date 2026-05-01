@@ -13,7 +13,7 @@ import "./EinkommensteuerShell.css";
 const GROUPS: SidebarNavGroup[] = [
   {
     id: "hauptformulare",
-    title: "Hauptformulare",
+    label: "Hauptformulare",
     items: [
       { to: "/einkommensteuer/est-1a", label: "ESt 1A (Mantelbogen)" },
       { to: "/einkommensteuer/est-1c", label: "ESt 1C (beschraenkt steuerpflichtig)" },
@@ -21,7 +21,7 @@ const GROUPS: SidebarNavGroup[] = [
   },
   {
     id: "persoenlich-familie",
-    title: "Persoenlich & Familie",
+    label: "Persoenlich & Familie",
     items: [
       { to: "/einkommensteuer/anlage-kind", label: "Anlage Kind" },
       { to: "/einkommensteuer/anlage-vorsorge", label: "Anlage Vorsorgeaufwand" },
@@ -31,7 +31,7 @@ const GROUPS: SidebarNavGroup[] = [
   },
   {
     id: "sonderausgaben-belastungen",
-    title: "Sonderausgaben & Aussergewoehnliche Belastungen",
+    label: "Sonderausgaben & Aussergewoehnliche Belastungen",
     items: [
       { to: "/einkommensteuer/anlage-haa", label: "Anlage Haushaltsnahe Aufwendungen" },
       { to: "/einkommensteuer/anlage-sonder", label: "Anlage Sonderausgaben" },
@@ -40,7 +40,7 @@ const GROUPS: SidebarNavGroup[] = [
   },
   {
     id: "nichtselbststaendig",
-    title: "Nichtselbststaendige Arbeit",
+    label: "Nichtselbststaendige Arbeit",
     items: [
       { to: "/einkommensteuer/anlage-n", label: "Anlage N" },
       { to: "/einkommensteuer/anlage-n-aus", label: "Anlage N-AUS (Ausland)" },
@@ -50,7 +50,7 @@ const GROUPS: SidebarNavGroup[] = [
   },
   {
     id: "selbststaendig-gewerblich",
-    title: "Selbststaendige & Gewerbliche Einkuenfte",
+    label: "Selbststaendige & Gewerbliche Einkuenfte",
     items: [
       { to: "/einkommensteuer/anlage-s", label: "Anlage S (Selbststaendige Arbeit)" },
       { to: "/einkommensteuer/anlage-g", label: "Anlage G (Gewerbebetrieb)" },
@@ -59,14 +59,14 @@ const GROUPS: SidebarNavGroup[] = [
   },
   {
     id: "kapital",
-    title: "Kapital",
+    label: "Kapital",
     items: [
       { to: "/einkommensteuer/anlage-kap", label: "Anlage KAP (Kapitalvermoegen)" },
     ],
   },
   {
     id: "vermietung",
-    title: "Vermietung",
+    label: "Vermietung",
     items: [
       { to: "/einkommensteuer/anlage-v", label: "Anlage V (Vermietung & Verpachtung)" },
       { to: "/einkommensteuer/anlage-v-sonstige", label: "Anlage V-Sonstige" },
@@ -75,7 +75,7 @@ const GROUPS: SidebarNavGroup[] = [
   },
   {
     id: "sonstige-international",
-    title: "Sonstige & Internationales",
+    label: "Sonstige & Internationales",
     items: [
       { to: "/einkommensteuer/anlage-so", label: "Anlage SO (Sonstige Einkuenfte)" },
       { to: "/einkommensteuer/anlage-aus", label: "Anlage AUS (Auslaendische Einkuenfte)" },

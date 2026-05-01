@@ -14,19 +14,19 @@ import "./JahresabschlussShell.css";
 const GROUPS: SidebarNavGroup[] = [
   {
     id: "bilanzierung",
-    title: "Bilanzierung",
+    label: "Bilanzierung",
     items: [
       { to: "/jahresabschluss/ebilanz", label: "E-Bilanz" },
     ],
   },
   {
     id: "offenlegung",
-    title: "Offenlegung",
+    label: "Offenlegung",
     items: [],
   },
   {
     id: "pruefung",
-    title: "Pruefung",
+    label: "Pruefung",
     items: [],
   },
 ];

@@ -2,13 +2,14 @@
 //
 // Module-Shell fuer den Umsatzsteuer-Bereich.
 //
-// Nutzt die wiederverwendbare SidebarShell-Komponente.
-// Konfiguriert die Gruppen und reicht sie an SidebarShell durch.
+// Nutzt die wiederverwendbare SidebarShell-Komponente mit
+// Icons und persistierter Faltgruppen-Anzeige.
+
+import { FileText, Globe } from "lucide-react";
 
 import SidebarShell, {
   type SidebarNavGroup,
 } from "./SidebarShell";
-
 import "./UmsatzsteuerShell.css";
 
 const GROUPS: SidebarNavGroup[] = [
@@ -16,7 +17,11 @@ const GROUPS: SidebarNavGroup[] = [
     id: "voranmeldungen",
     label: "Voranmeldungen",
     items: [
-      { to: "/umsatzsteuer/ustva", label: "Umsatzsteuer-Voranmeldung" },
+      {
+        to: "/umsatzsteuer/ustva",
+        label: "Umsatzsteuer-Voranmeldung",
+        icon: FileText,
+      },
     ],
   },
   {
@@ -28,7 +33,11 @@ const GROUPS: SidebarNavGroup[] = [
     id: "zusammenfassende-meldung",
     label: "Zusammenfassende Meldung",
     items: [
-      { to: "/umsatzsteuer/zm", label: "Zusammenfassende Meldung" },
+      {
+        to: "/umsatzsteuer/zm",
+        label: "Zusammenfassende Meldung",
+        icon: Globe,
+      },
     ],
   },
 ];
@@ -39,6 +48,7 @@ export default function UmsatzsteuerShell() {
       bemBlock="umsatzsteuer-shell"
       ariaLabel="Umsatzsteuer-Navigation"
       groups={GROUPS}
+      storageKey="harouda:umsatzsteuer:nav-expanded"
     />
   );
 }

@@ -12,6 +12,7 @@ import { SettingsProvider } from "../../contexts/SettingsContext";
 import type { BusinessPartner } from "../../types/db";
 import { createBusinessPartner } from "../../api/businessPartners";
 import { logVerification } from "../../api/ustidVerifications";
+import { waitForCondition } from "../../test/waitForCondition";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
@@ -278,9 +279,18 @@ describe("DebitorenPage · Smoke", () => {
     )!;
     await act(async () => {
       btn.click();
-      await flush(20);
     });
-    // ustid_verifications-Eintrag muss existieren
+    // VIES-Verifikation lÃ¤uft async ueber routedVerifyUstIdnr +
+    // logVerification. Wir warten state-basiert, bis der Eintrag im
+    // localStorage erscheint - kein hartes flush(N), das auf CI unter
+    // Last unzuverlaessig ist.
+    await waitForCondition(
+      () =>
+        JSON.parse(
+          localStorage.getItem("harouda-ustid-verifications") ?? "[]"
+        ).length > 0,
+      { timeoutMs: 2000, label: "ustid_verifications-Eintrag erscheint" }
+    );
     const raw = JSON.parse(
       localStorage.getItem("harouda-ustid-verifications") ?? "[]"
     );

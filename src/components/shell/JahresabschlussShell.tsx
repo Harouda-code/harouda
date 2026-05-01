@@ -2,13 +2,14 @@
 //
 // Module-Shell fuer den Jahresabschluss-Bereich.
 //
-// Nutzt die wiederverwendbare SidebarShell-Komponente.
-// Konfiguriert die Gruppen und reicht sie an SidebarShell durch.
+// Nutzt die wiederverwendbare SidebarShell-Komponente mit
+// Icons und persistierter Faltgruppen-Anzeige.
+
+import { FileSpreadsheet } from "lucide-react";
 
 import SidebarShell, {
   type SidebarNavGroup,
 } from "./SidebarShell";
-
 import "./JahresabschlussShell.css";
 
 const GROUPS: SidebarNavGroup[] = [
@@ -16,7 +17,11 @@ const GROUPS: SidebarNavGroup[] = [
     id: "bilanzierung",
     label: "Bilanzierung",
     items: [
-      { to: "/jahresabschluss/ebilanz", label: "E-Bilanz" },
+      {
+        to: "/jahresabschluss/ebilanz",
+        label: "E-Bilanz",
+        icon: FileSpreadsheet,
+      },
     ],
   },
   {
@@ -37,6 +42,7 @@ export default function JahresabschlussShell() {
       bemBlock="jahresabschluss-shell"
       ariaLabel="Jahresabschluss-Navigation"
       groups={GROUPS}
+      storageKey="harouda:jahresabschluss:nav-expanded"
     />
   );
 }

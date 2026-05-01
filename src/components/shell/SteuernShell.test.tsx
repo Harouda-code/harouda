@@ -47,8 +47,8 @@ describe("SteuernShell", () => {
   it("#1 zeigt die eine Gruppen-Ueberschrift", () => {
     const r = mount();
     const titles = Array.from(
-      document.querySelectorAll(".steuern-shell__group-title")
-    ).map((el) => el.textContent);
+      document.querySelectorAll(".steuern-shell__group-head")
+    ).map((el) => el.textContent?.trim());
     expect(titles).toEqual([
       "Hauptformulare",
     ]);
@@ -57,6 +57,12 @@ describe("SteuernShell", () => {
 
   it("#2 Hauptformulare hat 6 <li>", () => {
     const r = mount();
+    // Gruppe ist initial gefaltet — Items werden erst nach Expand
+    // gerendert. Also den Header per Klick oeffnen.
+    const head = document.querySelector<HTMLButtonElement>(
+      ".steuern-shell__group-head"
+    )!;
+    act(() => head.click());
     const groups = document.querySelectorAll(".steuern-shell__sidebar .steuern-shell__group");
     expect(groups.length).toBe(1);
     const hauptformulareLis = groups[0].querySelectorAll("ul > li");

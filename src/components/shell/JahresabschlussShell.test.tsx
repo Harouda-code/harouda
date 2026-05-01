@@ -49,8 +49,8 @@ describe("JahresabschlussShell", () => {
   it("#2 zeigt die drei Gruppen-Ueberschriften", () => {
     const r = mount();
     const titles = Array.from(
-      document.querySelectorAll(".jahresabschluss-shell__group-title")
-    ).map((el) => el.textContent);
+      document.querySelectorAll(".jahresabschluss-shell__group-head")
+    ).map((el) => el.textContent?.trim());
     expect(titles).toEqual([
       "Bilanzierung",
       "Offenlegung",

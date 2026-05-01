@@ -14,7 +14,7 @@ import "./SteuernShell.css";
 const GROUPS: SidebarNavGroup[] = [
   {
     id: "hauptformulare",
-    title: "Hauptformulare",
+    label: "Hauptformulare",
     items: [
       { to: "/steuern", label: "Übersicht" },
       { to: "/steuern/euer", label: "EÜR" },

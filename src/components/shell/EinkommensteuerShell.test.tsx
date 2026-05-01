@@ -51,8 +51,8 @@ describe("EinkommensteuerShell", () => {
   it("#1 zeigt die acht Gruppen-Ueberschriften in korrekter Reihenfolge", () => {
     const r = mount();
     const titles = Array.from(
-      document.querySelectorAll(".einkommensteuer-shell__group-title")
-    ).map((el) => el.textContent);
+      document.querySelectorAll(".einkommensteuer-shell__group-head")
+    ).map((el) => el.textContent?.trim());
     expect(titles).toEqual([
       "Hauptformulare",
       "Persoenlich & Familie",
@@ -75,6 +75,16 @@ describe("EinkommensteuerShell", () => {
 
   it("#3 enthaelt 25 Navigationslinks (2 Hauptformulare + 23 Anlagen)", () => {
     const r = mount();
+    // Alle Gruppen sind initial gefaltet — alle 8 Header per Klick
+    // expandieren, damit die NavLinks im DOM erscheinen.
+    const heads = Array.from(
+      document.querySelectorAll<HTMLButtonElement>(
+        ".einkommensteuer-shell__group-head"
+      )
+    );
+    act(() => {
+      heads.forEach((h) => h.click());
+    });
     const links = document.querySelectorAll(".einkommensteuer-shell__link");
     expect(links.length).toBe(25);
     r.unmount();

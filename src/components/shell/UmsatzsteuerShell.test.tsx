@@ -49,8 +49,8 @@ describe("UmsatzsteuerShell", () => {
   it("#2 zeigt die drei Gruppen-Ueberschriften", () => {
     const r = mount();
     const titles = Array.from(
-      document.querySelectorAll(".umsatzsteuer-shell__group-title")
-    ).map((el) => el.textContent);
+      document.querySelectorAll(".umsatzsteuer-shell__group-head")
+    ).map((el) => el.textContent?.trim());
     expect(titles).toEqual([
       "Voranmeldungen",
       "Jahreserklaerung",

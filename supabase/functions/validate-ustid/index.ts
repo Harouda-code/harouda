@@ -30,14 +30,9 @@
 // ============================================================================
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { corsHeaders, handleCorsPreflight } from "../_shared/cors.ts";
 
 const BZSt_URL = "https://evatr.bff-online.de/evatrRPC";
-
-const cors = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "authorization, content-type",
-};
 
 type Body = {
   ownUstId: string;
@@ -146,10 +141,10 @@ function retentionUntil(isoTs: string): string {
   return `${y + 10}-12-31`;
 }
 
-function json(obj: unknown, status: number): Response {
+function json(req: Request, obj: unknown, status: number): Response {
   return new Response(JSON.stringify(obj), {
     status,
-    headers: { "content-type": "application/json", ...cors },
+    headers: { "content-type": "application/json", ...corsHeaders(req) },
   });
 }
 
@@ -158,17 +153,20 @@ declare const Deno: any;
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: cors });
+    return handleCorsPreflight(req);
   }
   if (req.method !== "POST") {
-    return new Response("Method not allowed", { status: 405, headers: cors });
+    return new Response("Method not allowed", {
+      status: 405,
+      headers: corsHeaders(req),
+    });
   }
 
   let body: Body;
   try {
     body = await req.json();
   } catch {
-    return json({ error: "invalid json" }, 400);
+    return json(req, { error: "invalid json" }, 400);
   }
 
   const {
@@ -184,12 +182,14 @@ Deno.serve(async (req: Request) => {
   } = body;
   if (!ownUstId || !partnerUstId) {
     return json(
+      req,
       { error: "ownUstId und partnerUstId sind erforderlich." },
       400
     );
   }
   if (!clientId || !companyId) {
     return json(
+      req,
       { error: "clientId und companyId sind erforderlich (Sprint 20.A.2)." },
       400
     );
@@ -199,7 +199,7 @@ Deno.serve(async (req: Request) => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   if (!supabaseUrl || !serviceRoleKey) {
-    return json({ error: "Edge Function nicht konfiguriert." }, 500);
+    return json(req, { error: "Edge Function nicht konfiguriert." }, 500);
   }
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
@@ -223,7 +223,7 @@ Deno.serve(async (req: Request) => {
     upstream = await fetch(bzstUrl, { method: "GET" });
   } catch (err) {
     // Netzwerk-Fehler → ERROR-Row loggen
-    return await logAndReturn(supabase, {
+    return await logAndReturn(req, supabase, {
       status: "ERROR",
       message: `Verbindung zu BZSt fehlgeschlagen: ${(err as Error).message}`,
       errorCode: "NETWORK",
@@ -253,7 +253,7 @@ Deno.serve(async (req: Request) => {
     rawHeaders[k] = v;
   });
 
-  return await logAndReturn(supabase, {
+  return await logAndReturn(req, supabase, {
     status: verdict.status,
     message: verdict.message,
     errorCode,
@@ -293,7 +293,7 @@ type LogArgs = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function logAndReturn(supabase: any, args: LogArgs): Promise<Response> {
+async function logAndReturn(req: Request, supabase: any, args: LogArgs): Promise<Response> {
   const bzstValid = args.status === "VALID";
   const payload = {
     company_id: args.body.companyId,
@@ -327,9 +327,10 @@ async function logAndReturn(supabase: any, args: LogArgs): Promise<Response> {
     .single();
   if (error) {
     return json(
+      req,
       { error: `Log-Insert fehlgeschlagen: ${error.message}` },
       500
     );
   }
-  return json(data, 200);
+  return json(req, data, 200);
 }

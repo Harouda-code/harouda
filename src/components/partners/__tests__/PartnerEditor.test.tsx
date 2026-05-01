@@ -10,6 +10,7 @@ import type { BusinessPartner } from "../../../types/db";
 import {
   createBusinessPartner,
 } from "../../../api/businessPartners";
+import { waitForCondition } from "../../../test/waitForCondition";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
@@ -402,8 +403,19 @@ describe("PartnerEditor · Edit-Mode + VIES", () => {
     )!;
     await act(async () => {
       btn.click();
-      await flush(25);
     });
+    // VIES-Verifikation lÃ¤uft async: logVerification -> React-Query
+    // -> Badge re-render. Wir warten state-basiert auf das DOM-Update,
+    // statt auf flush(N) zu vertrauen (CI-Last-Schwankungen).
+    await waitForCondition(
+      () => {
+        const b = document.querySelector(
+          '[data-testid="ustid-status-badge-editor"]'
+        );
+        return b?.getAttribute("data-status") === "VALID";
+      },
+      { timeoutMs: 2000, label: "Badge zeigt status=VALID" }
+    );
     const badge = document.querySelector<HTMLElement>(
       '[data-testid="ustid-status-badge-editor"]'
     )!;

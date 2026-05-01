@@ -2,13 +2,21 @@
 //
 // Module-Shell fuer den Steuern-Bereich.
 //
-// Nutzt die wiederverwendbare SidebarShell-Komponente.
-// Konfiguriert die Gruppen und reicht sie an SidebarShell durch.
+// Nutzt die wiederverwendbare SidebarShell-Komponente mit
+// Icons und persistierter Faltgruppen-Anzeige.
+
+import {
+  Building,
+  BookOpen,
+  FileText,
+  FileWarning,
+  LayoutDashboard,
+  Store,
+} from "lucide-react";
 
 import SidebarShell, {
   type SidebarNavGroup,
 } from "./SidebarShell";
-
 import "./SteuernShell.css";
 
 const GROUPS: SidebarNavGroup[] = [
@@ -16,12 +24,28 @@ const GROUPS: SidebarNavGroup[] = [
     id: "hauptformulare",
     label: "Hauptformulare",
     items: [
-      { to: "/steuern", label: "Übersicht" },
-      { to: "/steuern/euer", label: "EÜR" },
-      { to: "/steuern/gewerbesteuer", label: "Gewerbesteuer" },
-      { to: "/steuern/kst", label: "Körperschaftsteuer" },
-      { to: "/steuern/est-1a", label: "ESt 1A (Hauptvordruck)" },
-      { to: "/steuern/est-1c", label: "ESt 1C (Hauptvordruck)" },
+      { to: "/steuern", label: "\u00dcbersicht", icon: LayoutDashboard },
+      { to: "/steuern/euer", label: "E\u00dcR", icon: BookOpen },
+      {
+        to: "/steuern/gewerbesteuer",
+        label: "Gewerbesteuer",
+        icon: Store,
+      },
+      {
+        to: "/steuern/kst",
+        label: "K\u00f6rperschaftsteuer",
+        icon: Building,
+      },
+      {
+        to: "/steuern/est-1a",
+        label: "ESt 1A (Hauptvordruck)",
+        icon: FileText,
+      },
+      {
+        to: "/steuern/est-1c",
+        label: "ESt 1C (Hauptvordruck)",
+        icon: FileWarning,
+      },
     ],
   },
 ];
@@ -32,6 +56,7 @@ export default function SteuernShell() {
       bemBlock="steuern-shell"
       ariaLabel="Steuern-Navigation"
       groups={GROUPS}
+      storageKey="harouda:steuern:nav-expanded"
     />
   );
 }

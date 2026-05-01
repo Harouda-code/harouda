@@ -185,6 +185,7 @@ export default function App() {
             <Route path="/buchhaltung/bankimport" element={<BankImportPage />} />
             <Route path="/buchhaltung/banking/reconciliation" element={<BankReconciliationPage />} />
             <Route path="/buchhaltung/banking/belegabfragen" element={<ReceiptRequestsPage />} />
+            <Route path="/buchhaltung/euer" element={<EuerPage />} />
             <Route path="/buchhaltung/buchfuehrung" element={<BuchfuehrungIndexPage />} />
             <Route path="/buchhaltung/anlagen/verzeichnis" element={<AnlagenVerzeichnisPage />} />
             <Route path="/buchhaltung/anlagen/afa-lauf" element={<AfaLaufPage />} />
@@ -207,7 +208,7 @@ export default function App() {
         >
           <Route element={<SteuernShell />}>
             <Route path="/steuern" element={<TaxFormsPage />} />
-            <Route path="/steuern/euer" element={<EuerPage />} />
+            <Route path="/steuern/euer" element={<Navigate to="/buchhaltung/euer" replace />} />
             <Route path="/steuern/gewerbesteuer" element={<GewerbesteuerPage />} />
             <Route path="/steuern/kst" element={<KoerperschaftsteuerPage />} />
             <Route path="/steuern/est-1a" element={<HauptvorduckESt1APage />} />
@@ -330,7 +331,7 @@ export default function App() {
             element={<IntegrityDashboardPage />}
           />
           <Route path="/kanzlei-dashboard" element={<KanzleiDashboardPage />} />
-          <Route path="/steuer/euer" element={<EuerPage />} />
+          <Route path="/steuer/euer" element={<Navigate to="/buchhaltung/euer" replace />} />
           <Route path="/steuer/gewerbesteuer" element={<GewerbesteuerPage />} />
           <Route path="/steuer/kst" element={<KoerperschaftsteuerPage />} />
           <Route path="/steuer/anlage-n" element={<AnlageNPage />} />

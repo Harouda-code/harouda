@@ -15,6 +15,7 @@
 
 import {
   BookOpen,
+  FileBarChart,
   FileText,
   Hash,
   Landmark,
@@ -94,14 +95,19 @@ const GROUPS: SidebarNavGroup[] = [
     label: "Auswertung",
     items: [
       {
-        to: "/buchhaltung/liquiditaet",
-        label: "Liquidit\u00e4tsvorschau",
-        icon: TrendingUp,
-      },
-      {
         to: "/buchhaltung/buchfuehrung",
         label: "E\u00dcR-Hub",
         icon: BookOpen,
+      },
+      {
+        to: "/buchhaltung/euer",
+        label: "E\u00dcR (Anlage)",
+        icon: FileBarChart,
+      },
+      {
+        to: "/buchhaltung/liquiditaet",
+        label: "Liquidit\u00e4tsvorschau",
+        icon: TrendingUp,
       },
     ],
   },

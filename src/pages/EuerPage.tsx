@@ -116,8 +116,8 @@ export default function EuerPage() {
   return (
     <div className="report">
       <header className="report__head no-print">
-        <Link to="/steuer" className="report__back">
-          <ArrowLeft size={16} /> Zurück zu Steuer
+        <Link to="/buchhaltung/buchfuehrung" className="report__back">
+          <ArrowLeft size={16} /> Zur\u00fcck zur Buchf\u00fchrung
         </Link>
         <div className="report__head-title">
           <h1>Anlage EÜR 2025 (§ 4 Abs. 3 EStG)</h1>

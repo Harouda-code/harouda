@@ -34,7 +34,7 @@ const CARDS: Card[] = [
     ],
   },
   {
-    to: "/steuer/euer",
+    to: "/buchhaltung/euer",
     icon: FileBarChart,
     title: "EÜR vorbereiten",
     tag: "Anlage EÜR",

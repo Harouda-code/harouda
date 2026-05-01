@@ -7,7 +7,6 @@
 
 import {
   Building,
-  BookOpen,
   FileText,
   FileWarning,
   LayoutDashboard,
@@ -25,7 +24,6 @@ const GROUPS: SidebarNavGroup[] = [
     label: "Hauptformulare",
     items: [
       { to: "/steuern", label: "\u00dcbersicht", icon: LayoutDashboard },
-      { to: "/steuern/euer", label: "E\u00dcR", icon: BookOpen },
       {
         to: "/steuern/gewerbesteuer",
         label: "Gewerbesteuer",

@@ -20,6 +20,7 @@ import {
   updateBusinessPartner,
 } from "../../../api/businessPartners";
 import { logVerification } from "../../../api/ustidVerifications";
+import { waitForCondition } from "../../../test/waitForCondition";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
@@ -220,8 +221,12 @@ describe("IntegrityDashboardPage · Prüfung + Ergebnis", () => {
     )!;
     await act(async () => {
       btn.click();
-      await flush(25);
     });
+    await waitForCondition(
+      () =>
+        document.querySelector('[data-testid="integrity-table"]') !== null,
+      { timeoutMs: 2000, label: "integrity-table erscheint" }
+    );
     const table = document.querySelector('[data-testid="integrity-table"]');
     expect(table).not.toBeNull();
     expect(
@@ -247,8 +252,12 @@ describe("IntegrityDashboardPage · Prüfung + Ergebnis", () => {
       document
         .querySelector<HTMLButtonElement>('[data-testid="btn-run-integrity"]')!
         .click();
-      await flush(25);
     });
+    await waitForCondition(
+      () =>
+        document.querySelector('[data-testid="banner-all-ok"]') !== null,
+      { timeoutMs: 2000, label: "banner-all-ok erscheint" }
+    );
     expect(
       document.querySelector('[data-testid="banner-all-ok"]')
     ).not.toBeNull();
@@ -266,8 +275,12 @@ describe("IntegrityDashboardPage · Prüfung + Ergebnis", () => {
       document
         .querySelector<HTMLButtonElement>('[data-testid="btn-run-integrity"]')!
         .click();
-      await flush(25);
     });
+    await waitForCondition(
+      () =>
+        document.querySelector('[data-testid="banner-broken"]') !== null,
+      { timeoutMs: 2000, label: "banner-broken erscheint" }
+    );
     expect(document.querySelector('[data-testid="banner-broken"]')).not.toBeNull();
     expect(
       document.querySelector('[data-testid="badge-broken-bpv"]')
@@ -308,14 +321,25 @@ describe("IntegrityDashboardPage · Prüfung + Ergebnis", () => {
       document
         .querySelector<HTMLButtonElement>('[data-testid="btn-run-integrity"]')!
         .click();
-      await flush(25);
     });
+    // Erst auf das Result-Banner warten, bevor wir den Export anstossen.
+    await waitForCondition(
+      () =>
+        document.querySelector('[data-testid="banner-all-ok"]') !== null,
+      { timeoutMs: 2000, label: "banner-all-ok erscheint vor Export" }
+    );
     await act(async () => {
       document
         .querySelector<HTMLButtonElement>('[data-testid="btn-export-json"]')!
         .click();
-      await flush();
     });
+    // downloadText ist gemockt - wir warten state-basiert auf den Spy-Aufruf.
+    await waitForCondition(
+      () =>
+        (exporters.downloadText as unknown as { mock: { calls: unknown[][] } })
+          .mock.calls.length > 0,
+      { timeoutMs: 2000, label: "downloadText wird aufgerufen" }
+    );
     expect(exporters.downloadText).toHaveBeenCalledTimes(1);
     const [text, fname, mime] = (
       exporters.downloadText as unknown as { mock: { calls: unknown[][] } }

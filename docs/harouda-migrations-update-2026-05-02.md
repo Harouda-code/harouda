@@ -218,3 +218,180 @@ Select-String -Path "supabase/migrations/*.sql" `
 
 *Verfasser: Abdullah, im Rahmen von Charge 14, Phase 1.*
 *Folge-Charge: 15 (Schema-Konflikt-Aufloesung).*
+
+
+---
+
+# Folge-Update — Charge 15, Phase 1 — 2026-05-02
+
+> **Status:** Schema-Konflikt aufgeloest. Migrations `0050`, `0046`, `0048` manuell auf `harouda` angewendet.
+>
+> **Datum:** 2026-05-02 (gleicher Tag, separates Update)
+> **Ausfuehrender:** Abdullah
+> **Project-Ref:** `harouda` (Supabase, eu-central-1, Free Plan)
+> **`main`-Hash bei Beginn:** `9e85739` (PR #42 gemerged)
+
+---
+
+## 8 — Was wurde in Charge 15 Phase 1 angewendet
+
+### 8.1 — Migration `0050_drop_legacy_settings_and_recreate.sql`
+
+**Status:** Erfolgreich angewendet.
+
+**Vorbedingung-Verifikation (vor `drop table cascade`):**
+
+| Pruefung | Ergebnis |
+|----------|----------|
+| `count(*) from public.settings` | `0` |
+| Foreign Keys auf `public.settings` | keine |
+| Views/Materialized Views auf `public.settings` | keine |
+
+`drop table cascade` war datensicher.
+
+**Verifikation (post-apply):**
+
+Spalten-Struktur:
+
+| Spalte | Typ | Nullable | Default |
+|--------|-----|----------|---------|
+| `id` | `uuid` | NO | `gen_random_uuid()` |
+| `user_id` | `uuid` | NO | — |
+| `mandant_id` | `uuid` | YES | — |
+| `payload` | `jsonb` | NO | `'{}'::jsonb` |
+| `updated_at` | `timestamptz` | NO | `now()` |
+
+RLS-Policies (`select`, `insert`, `update`, `delete`) alle mit Praedikat `user_id = auth.uid()`. RLS aktiviert.
+
+Indizes: `settings_pkey`, `settings_user_idx`, `settings_user_mandant_unique` (mit `nulls not distinct`).
+
+Trigger: `settings_updated_at` (`BEFORE UPDATE`, `EXECUTE FUNCTION settings_set_updated_at()`).
+
+### 8.2 — Migration `0044_user_settings.sql` — Status
+
+**Funktional ersetzt durch `0050`. Datei beibehalten als No-op-Marker.**
+
+Inhalt durch Header-Kommentar ersetzt, der auf `0050` verweist. `db push` fuehrt sie aus, ohne Effekt. Reihenfolge zwischen `0044` und `0050` ist irrelevant, da `0050` den finalen Zustand idempotent herstellt.
+
+### 8.3 — Migration `0046_documents_storage_schema.sql`
+
+**Status:** Erfolgreich angewendet.
+
+**Vorbedingung-Verifikation (vor `add column`):**
+
+| Pruefung | Ergebnis |
+|----------|----------|
+| `belege.id` (uuid) | vorhanden |
+| `documents.file_path` (text) | vorhanden |
+| `documents.beleg_id` | NICHT vorhanden (vor Migration) |
+
+**Verifikation (post-apply):**
+
+| Pruefung | Ergebnis |
+|----------|----------|
+| Storage-Bucket `documents` (`public = false`) | vorhanden |
+| Spalte `documents.beleg_id` (`uuid`, nullable) | vorhanden |
+| FK `documents_beleg_id_fkey` → `belege.id` | mit `ON DELETE SET NULL` |
+| Index `documents_beleg_idx` | vorhanden |
+
+`Storage-Bucket` existierte bereits seit `2026-04-24` (manuelle Anlage in Vorgaenger-Charge). `on conflict (id) do nothing` respektierte den Bestand.
+
+### 8.4 — Migration `0048_fix_rls_belege_leak.sql`
+
+**Status:** Erfolgreich angewendet.
+
+**Vorbedingung-Verifikation:**
+
+| Pruefung | Ergebnis |
+|----------|----------|
+| `is_company_member()`-Funktion | vorhanden |
+| `can_write()`-Funktion | vorhanden |
+| `belege.company_id`, `belege.status` | vorhanden |
+| `beleg_positionen.beleg_id` | vorhanden |
+
+**Vorher (RLS-Leck aus `0022_belege_persistence.sql`):**
+
+| Tabelle | Policy | Praedikat |
+|---------|--------|-----------|
+| `belege` | `belege_select` | `using (true)` ⚠️ |
+| `belege` | `belege_insert` | `with check (true)` ⚠️ |
+| `belege` | `belege_update` | `using (true)` ⚠️ |
+| `belege` | `belege_delete` | `using (status = 'ENTWURF')` (kein Mandant) ⚠️ |
+| `beleg_positionen` | `beleg_pos_select` | `using (true)` ⚠️ |
+| `beleg_positionen` | `beleg_pos_mutate` | `for all using (true) with check (true)` ⚠️ |
+
+**Nachher:**
+
+| Tabelle | Policy | Praedikat |
+|---------|--------|-----------|
+| `belege` | `belege_select` | `is_company_member(company_id)` |
+| `belege` | `belege_insert` | `with check (can_write(company_id))` |
+| `belege` | `belege_update` | `can_write(company_id)` (using + with check) |
+| `belege` | `belege_delete` | `can_write(company_id) and status = 'ENTWURF'` |
+| `beleg_positionen` | `beleg_pos_select` | `EXISTS(belege) and is_company_member(b.company_id)` |
+| `beleg_positionen` | `beleg_pos_insert` | `EXISTS(belege) and can_write(b.company_id)` |
+| `beleg_positionen` | `beleg_pos_update` | `EXISTS(belege) and can_write(b.company_id)` (using + with check) |
+| `beleg_positionen` | `beleg_pos_delete` | `EXISTS(belege) and can_write + status = 'ENTWURF'` |
+
+`beleg_pos_mutate`-Policy entfernt. Vier separate Policies (`select`, `insert`, `update`, `delete`) nun aktiv.
+
+`belege_immutability`-Trigger blieb unveraendert (GoBD Rz. 64).
+
+**Hinweis:** `0048` ist NICHT vollstaendig idempotent — `beleg_pos_insert/update/delete` haben kein `drop policy if exists` davor. Bei erneutem Anwenden (z. B. via `db push` nach Tracker-Reset) wuerden die `create policy`-Statements mit `policy already exists` fehlschlagen. Schuld registrieren als 15-aleph fuer Charge 16+.
+
+---
+
+## 9 — Tracker-Drift
+
+Wie auch `0042`: alle drei Migrations (`0046`, `0048`, `0050`) wurden manuell via Supabase Studio SQL Editor angewendet. **Kein Eintrag** in `supabase_migrations.schema_migrations`.
+
+**Kumulativer Drift-Stand auf `harouda` per 2026-05-02:**
+
+- `0042_fix_cookie_consent_rls.sql` — angewendet, nicht im Tracker.
+- `0044_user_settings.sql` — als No-op deaktiviert (siehe Abschnitt 8.2).
+- `0046_documents_storage_schema.sql` — angewendet, nicht im Tracker.
+- `0048_fix_rls_belege_leak.sql` — angewendet, nicht im Tracker.
+- `0050_drop_legacy_settings_and_recreate.sql` — angewendet, nicht im Tracker.
+
+Die Aufloesung des Trackers bleibt mit Schuld 12-gimel verknuepft (separates Staging-Project + funktionierender `db push`).
+
+---
+
+## 10 — Compliance-Stand nach Charge 15 Phase 1
+
+| Anforderung | Stand |
+|-------------|-------|
+| DSGVO Art. 5 Abs. 1 lit. c (Datenminimierung) bzgl. `cookie_consents` | Behoben (`0042`) |
+| DSGVO Art. 32 (Sicherheit der Verarbeitung) bzgl. `cookie_consents` | Behoben (`0042`) |
+| DSGVO Art. 32 bzgl. `belege` und `beleg_positionen` | **Behoben (`0048`)** |
+| DSGVO Art. 32 bzgl. `settings` | **Behoben (`0050`, RLS strict owner)** |
+| § 203 StGB (Berufsgeheimnis StB) bzgl. `belege` | **Behoben (`0048`)** |
+| GoBD Rz. 100 ff. (Unveraenderbarkeit, Belege in Cloud-Storage) | Schema vorbereitet (`0046`); Code-Anwendung ausstehend |
+| HGB § 257 (Aufbewahrung) | Schema-Vorbereitung (`0046`); Code-Anwendung ausstehend |
+| HGB § 238 ff. (Buchfuehrung) | Spec offen (Schuld 14-gimel, Charge 15 Phase 3) |
+
+**Verbleibend fuer `feat/documents-storage-go-live`:**
+
+1. ~~Schema-Konflikt aufloesen~~ — erledigt.
+2. 2 Test-Mandanten anlegen.
+3. Test-Matrix aus HANDOFF_BATCH_12 Abschnitt 8 durchlaufen.
+4. `belege_immutability`-Trigger bestaetigen.
+5. Schriftliche Bestaetigung an Datenschutz-Verantwortlichen.
+6. StB-Ruecksprache zu Loesch-Policies.
+7. Doku in `docs/staging-rls-verifikation-YYYY-MM-DD.md`.
+
+---
+
+## 11 — Neue Schulden (registriert in HANDOFF_BATCH_16)
+
+| Nr | Beschreibung | Prioritaet |
+|----|--------------|-----------|
+| **15-aleph** | `0048_fix_rls_belege_leak.sql` ist nicht voll idempotent — `beleg_pos_insert/update/delete` haben kein `drop policy if exists`. Bei erneutem Anwenden Fehlschlag. Korrektur in Folge-Migration oder Migration-File-Edit. | niedrig |
+
+---
+
+**Ende Folge-Update — Charge 15 Phase 1.**
+
+*Verfasser: Abdullah.*
+*Status der Datenbank: alle Sicherheits-Migrations bis `0050` einschliesslich angewendet. Tracker-Drift dokumentiert.*
+*Naechste Phase: Charge 15 Phase 2 (Architecture-Governance) oder Charge 16 (Compliance-Verifikation).*

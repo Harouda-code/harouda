@@ -395,3 +395,131 @@ Die Aufloesung des Trackers bleibt mit Schuld 12-gimel verknuepft (separates Sta
 *Verfasser: Abdullah.*
 *Status der Datenbank: alle Sicherheits-Migrations bis `0050` einschliesslich angewendet. Tracker-Drift dokumentiert.*
 *Naechste Phase: Charge 15 Phase 2 (Architecture-Governance) oder Charge 16 (Compliance-Verifikation).*
+
+---
+
+# Folge-Update — Charge 19 Phase 2 (Migration 0052) — 2026-05-02
+
+> **Status:** Migration `0052_revoke_anon_dangerous_grants.sql` wurde manuell via Supabase Studio angewendet.
+>
+> **Datum:** 2026-05-02
+> **Ausfuehrender:** Abdullah
+> **Project-Ref:** `harouda` (Supabase, eu-central-1, Free Plan)
+> **Letzter `main`-Hash bei Beginn:** `6a9d2de`
+> **Vorgaenger-Update:** Charge 15 Phase 1 (Migrations 0046, 0048, 0050)
+
+---
+
+## 12 — Was wurde in Charge 19 Phase 2 (Migration 0052) angewendet
+
+### 12.1 — Migration `0052_revoke_anon_dangerous_grants.sql`
+
+**Status:** Erfolgreich angewendet.
+
+**Hintergrund:** Bei der Vorbereitung der GRANT-Migration fuer Schuld 18-bet wurde entdeckt, dass die Rolle `anon` auf 41 von 42 Tabellen in `public` die Privilegien `TRUNCATE`, `TRIGGER` und `REFERENCES` besitzt. `TRUNCATE` umgeht BEFORE-DELETE-Trigger (z. B. `journal_entries_protect_delete`) und RLS-Policies vollstaendig. Ein nicht-authentifizierter Aufruf koennte theoretisch alle Buchungs-Daten entfernen.
+
+Diese Migration entzieht die nicht-beabsichtigten Privilegien. `SELECT` auf `health_check` fuer `anon` bleibt unveraendert (intentionaler Health-Probe-Zugriff).
+
+**Ausgefuehrtes SQL:**
+
+```sql
+revoke truncate, trigger, references on all tables in schema public from anon;
+```
+
+**Pre-Apply-Verifikation (am 2026-05-02):**
+
+```sql
+select
+  has_schema_privilege('anon', 'public', 'USAGE') as anon_public_usage,
+  has_table_privilege('anon', 'public.health_check', 'SELECT') as anon_health_check_select;
+```
+
+Ergebnis vor Apply: `(true, true)` — Voraussetzungen erfuellt.
+
+**Post-Apply-Verifikation:**
+
+```sql
+select
+  table_name,
+  string_agg(privilege_type, ', ' order by privilege_type) as privs
+from information_schema.role_table_grants
+where table_schema = 'public'
+  and grantee = 'anon'
+group by table_name
+order by table_name;
+```
+
+Ergebnis nach Apply: genau eine Zeile.
+
+| table_name   | privs  |
+|--------------|--------|
+| health_check | SELECT |
+
+→ REVOKE vollstaendig angewendet. Schuld 19-dalet auf DB-Niveau geschlossen.
+
+---
+
+## 13 — Tracker-Drift nach 0052
+
+| Migration | Status auf DB | Status im git-Repo (`main` @ Zeitpunkt der Anwendung) |
+|-----------|---------------|---------------------------------------------------------|
+| 0042 | applied (manuell, Charge 14) | applied (commit) |
+| 0046 | applied (manuell, Charge 15 Phase 1) | applied (commit) |
+| 0048 | applied (manuell, Charge 15 Phase 1) | applied (commit) |
+| 0050 | applied (manuell, Charge 15 Phase 1) | applied (commit) |
+| **0052** | **applied (manuell, Charge 19 Phase 2)** | **NOCH NICHT committed (Tracker-Drift)** |
+| 0053 | nicht angewendet | noch nicht committed (geplant, Folge-PR) |
+
+**Drift-Begruendung:** Wie in Charge 15 Phase 1 dokumentiert: `harouda` hat keinen automatischen Migrations-Tracker fuer manuell via Studio angewendete Files. `db push` ist lokal nicht moeglich (Docker fehlt). Die Drift wird durch diesen Eintrag dokumentiert, der zusammen mit dem Migration-File in einem atomaren PR committed wird.
+
+**Auswirkung:** Bis der PR mit `0052` gemerged ist, weicht der DB-Zustand vom `main`-Stand ab. Nach dem Merge ist die Drift wieder geschlossen (DB und git in Sync auf `0052`).
+
+---
+
+## 14 — Compliance-Stand nach 0052
+
+| Anforderung | Stand vor 0052 | Stand nach 0052 |
+|-------------|----------------|------------------|
+| GoBD Rz. 58, 59, 64 (Unveraenderbarkeit gebuchter Belege) | Trigger-Niveau gegeben; durch `anon TRUNCATE` umgehbar. | Trigger-Niveau gegeben; `anon TRUNCATE` entzogen. |
+| § 257 HGB (Aufbewahrung) | gefaehrdet durch `anon TRUNCATE`. | strukturell gesichert auf REVOKE-Niveau. |
+| § 146 AO (Ordnungsmaessigkeit) | gefaehrdet durch `anon TRUNCATE`. | strukturell gesichert. |
+| Art. 32 DSGVO (Sicherheit der Verarbeitung) | gefaehrdet durch `anon TRUNCATE`. | konkret verbessert. |
+| Least-Privilege-Prinzip fuer `anon` | verletzt (3 ueberfluessige Privs auf 41 Tabellen). | erfuellt — `anon` hat nur den intendierten `SELECT` auf `health_check`. |
+
+**Hinweis:** Die Massnahme schliesst Schuld 19-dalet auf der Privilegien-Ebene. Die operationale Korrektheit (RLS-Konfiguration, Mandanten-Isolation) bleibt durch andere Schichten geschuetzt; `0052` adressiert ausschliesslich die direkte `anon`-Eskalations-Lücke.
+
+---
+
+## 15 — Neue Schulden registriert in Charge 19 Phase 2
+
+| Schuld | Quelle | Beschreibung |
+|--------|--------|--------------|
+| **19-dalet** | Phase 2 Schritt 4 (Vorbereitung GRANT-Migration) | `anon TRUNCATE/TRIGGER/REFERENCES` auf 41 Tabellen — **durch dieses Update geschlossen.** |
+| **19-gimel** | Phase 2 Schritt 3 (Helper-Funktionen-Inspektion) | Function-EXECUTE-Hardening: `REVOKE EXECUTE FROM PUBLIC` + explicit GRANTs fuer `is_company_member`, `can_write`, `is_company_admin`, `client_belongs_to_company`. Eigene Charge. |
+| **19-he** | Phase 2 Schritt 4 (nach Analyse anon-Grants) | `ALTER DEFAULT PRIVILEGES`-cleanup: verhindern, dass kuenftige Tabellen automatisch `anon TRUNCATE/TRIGGER/REFERENCES` erhalten. Eigene Charge. |
+
+Schulden aus Phase 1 (`19-aleph`, `19-bet`) bleiben unveraendert offen — siehe Doku-File aus Charge 19 Phase 1.
+
+---
+
+## 16 — Naechste Schritte (Migration 0053 — Charge 19 Phase 2 Fortsetzung)
+
+Nach Merge des `0052`-PRs:
+
+1. Migration `0053_grant_authenticated_public_tables.sql` als separater PR.
+2. Anwendung der GRANTs fuer `authenticated` (per Gruppe A–E aus dem Inventar).
+3. `service_role` erhaelt `ALL ON ALL TABLES IN SCHEMA public`.
+4. Sequenz-GRANTs fuer `account_report_mapping_id_seq` und `report_lines_id_seq`:
+   - `GRANT USAGE ON SEQUENCE ... TO authenticated`.
+   - Erforderlich, da beide Tabellen `nextval(...)`-Defaults haben und ohne den Grant der INSERT-Pfad scheitert.
+5. Tracker-Drift-Eintrag fuer `0053` in dieser Datei (Abschnitt 17+).
+
+Schulden 19-aleph, 19-bet, 19-gimel, 19-he werden NICHT in der `0053`-Migration mit-bearbeitet.
+
+---
+
+**Ende Folge-Update — Charge 19 Phase 2 (0052).**
+
+*Verfasser: Abdullah.*
+*Status der Datenbank: alle Sicherheits-Migrations bis `0052` einschliesslich angewendet. Tracker-Drift dokumentiert. `anon`-Privileg-Eskalation auf REVOKE-Niveau geschlossen.*
+*Naechste Phase: Migration `0053_grant_authenticated_public_tables.sql` (separater PR).*

@@ -1,0 +1,220 @@
+# harouda-app · Migrations-Update Stop-Notice — 2026-05-02
+
+> **Status:** Phase 1 von Charge 14 wurde unterbrochen. `harouda` befindet sich im Mischzustand:
+> - Migration `0042_fix_cookie_consent_rls.sql` wurde manuell via Supabase Studio angewendet.
+> - Migration `0044_user_settings.sql` schlug mit Schema-Konflikt fehl.
+> - Migrations `0046` und `0048` wurden NICHT angewendet.
+>
+> **Datum:** 2026-05-02
+> **Ausfuehrender:** Abdullah
+> **Project-Ref:** `harouda` (Supabase, eu-central-1, Free Plan)
+> **Letzter `main`-Hash bei Beginn:** `fe2c847`
+
+---
+
+## 1 — Was wurde angewendet
+
+### 1.1 — Migration `0042_fix_cookie_consent_rls.sql`
+
+**Status:** Erfolgreich angewendet.
+
+**Ausgefuehrtes SQL:**
+
+```sql
+drop policy if exists cookie_consents_select on public.cookie_consents;
+create policy cookie_consents_select on public.cookie_consents
+  for select using (user_id = auth.uid());
+```
+
+**Verifikation (post-apply):**
+
+Query:
+
+```sql
+select polname, pg_get_expr(polqual, polrelid) as using_expr
+from pg_policy
+where polrelid = 'public.cookie_consents'::regclass
+  and polname = 'cookie_consents_select';
+```
+
+Ergebnis:
+
+```
+polname                  | using_expr
+-------------------------+--------------------------
+cookie_consents_select   | (user_id = auth.uid())
+```
+
+Das vorherige Praedikat `(user_id IS NULL OR user_id = auth.uid())` wurde durch das strikte Eigentuemer-Praedikat ersetzt. Das RLS-Leck der Charge 7 (Aufgabe 1) ist auf Database-Ebene geschlossen.
+
+**Hinweis:** Die Anwendung erfolgte ueber Supabase Studio SQL Editor, NICHT ueber `supabase db push`. Daher wurde KEIN Eintrag in `supabase_migrations.schema_migrations` erzeugt. Der Migrations-Tracker zeigt weiterhin den Stand vor `0042`.
+
+---
+
+## 2 — Was wurde NICHT angewendet — und warum
+
+### 2.1 — Migration `0044_user_settings.sql`
+
+**Status:** Fehlgeschlagen. Nicht angewendet.
+
+**Fehlermeldung:**
+
+```
+ERROR: 42703: column "mandant_id" of relation "public.settings" does not exist
+```
+
+**Ursachenanalyse:**
+
+Die Migration nutzt `create table if not exists public.settings (...)`. Das `if not exists`-Praedikat ueberspringt die Tabellenerstellung — denn die Tabelle existiert bereits, allerdings mit einer voellig anderen Struktur. Die anschliessende `unique nulls not distinct (user_id, mandant_id)`-Constraint schlaegt fehl, weil die Spalte `mandant_id` in der existierenden Tabelle nicht vorhanden ist.
+
+**Bestehende Tabelle (aus `0001_init.sql`):**
+
+| Spalte | Typ | Nullable |
+|--------|-----|----------|
+| `owner_id` | uuid | NO |
+| `kanzlei_name` | text | NO |
+| `kanzlei_strasse` | text | NO |
+| `kanzlei_plz` | text | NO |
+| `kanzlei_ort` | text | NO |
+| `kanzlei_telefon` | text | NO |
+| `kanzlei_email` | text | NO |
+| `default_steuernummer` | text | NO |
+| `elster_berater_nr` | text | NO |
+| `updated_at` | timestamptz | NO |
+| `company_id` | uuid | YES |
+
+**Erwartete Tabelle (aus `0044_user_settings.sql`):**
+
+| Spalte | Typ | Nullable |
+|--------|-----|----------|
+| `id` | uuid (PK) | NO |
+| `user_id` | uuid | NO |
+| `mandant_id` | uuid | YES |
+| `payload` | jsonb | NO |
+| `updated_at` | timestamptz | NO |
+
+**Befund:** Architektonische Inkonsistenz zwischen `0001_init.sql` (wide-table) und `0044_user_settings.sql` (single-row JSONB). Migration `0044` wurde geschrieben unter der Annahme, dass `public.settings` nicht existiert — diese Annahme war falsch.
+
+**Konsumenten-Verifikation:**
+
+- `src/api/settings.ts` exportiert generischen Typ `SettingsPayload` und arbeitet mit `payload`-basierter API.
+- `src/contexts/SettingsContext.tsx` ruft `fetchSettings()` und `saveSettings(payload)` auf, behandelt das Ergebnis als `Partial<Settings>`-JSON-Blob.
+
+Der Client-Code erwartet die JSONB-Struktur — nicht die wide-table. Die existierende Tabelle ist Zombie-Schema: angelegt von `0001_init.sql`, aber von keinem aktuellen Code-Pfad verwendet. `select count(*) from public.settings;` ergab `0`.
+
+### 2.2 — Migration `0046_documents_storage_schema.sql`
+
+**Status:** Nicht angewendet. Reihenfolge-Block durch `0044`.
+
+### 2.3 — Migration `0048_fix_rls_belege_leak.sql`
+
+**Status:** Nicht angewendet. Reihenfolge-Block durch `0044`.
+
+---
+
+## 3 — Aktueller Datenbank-Zustand
+
+| Tabelle / Policy | Stand |
+|------------------|-------|
+| `cookie_consents.cookie_consents_select` | Aktualisiert auf `USING (user_id = auth.uid())` |
+| `public.settings` | Wide-table aus `0001_init.sql`, leer (0 Zeilen), nicht von Code verwendet |
+| `public.belege` | Stand `0041` (RLS-Leck aus `0048` weiterhin offen) |
+| `public.beleg_positionen` | Stand `0041` (RLS-Leck aus `0048` weiterhin offen) |
+| Storage-Bucket `documents` | Nicht vorhanden (`0046` nicht angewendet) |
+| `supabase_migrations.schema_migrations` | Nicht aktualisiert (manueller Studio-Workflow) |
+
+---
+
+## 4 — Beschluss
+
+Charge 14 Phase 1 wird unterbrochen. Die manuelle Anwendung weiterer Migrations ist gesperrt, bis der Schema-Konflikt zwischen `0001_init.sql` und `0044_user_settings.sql` aufgeloest ist.
+
+**Begruendung:**
+
+1. Der Konflikt ist nicht durch reine Anwendungsreihenfolge loesbar.
+2. Eine ad-hoc-Loesung (`DROP TABLE` im SQL Editor) wuerde Drift zwischen Migrations-Files und Datenbank verursachen.
+3. Charge 14 ist explizit auf Manual-DB-Phase beschraenkt; Code- bzw. Migrations-Files-Aenderungen gehoeren in eine eigene Code-Phase.
+
+---
+
+## 5 — Naechste Schritte (Charge 15)
+
+### 5.1 — Neue Schuld registriert
+
+**14-aleph:** Schema-Konflikt zwischen `0001_init.sql` (Zeile 78) und `0044_user_settings.sql`. Aufloesung erfordert eine atomare Migration, die das Legacy-Schema entfernt und die JSONB-Struktur erstellt.
+
+### 5.2 — Vorschlag fuer Charge 15
+
+Eine neue Migration `0050_drop_legacy_settings_and_recreate.sql` erstellen, die:
+
+1. `drop table if exists public.settings cascade;` ausfuehrt.
+2. Die JSONB-Struktur aus `0044` neu erstellt (Tabelle, Index, Trigger, RLS-Policies).
+3. Idempotent geschrieben ist und unabhaengig von vorherigen Migration-Ergebnissen ausgefuehrt werden kann.
+
+Anschliessend in dokumentierter Reihenfolge anwenden:
+
+1. `0044_user_settings.sql` (wird durch `if not exists` no-op, da `0050` die Tabelle bereits korrekt anlegt — oder `0044` wird durch eine kommentar-only-Variante ersetzt; Entscheidung in Charge 15).
+2. `0046_documents_storage_schema.sql`.
+3. `0048_fix_rls_belege_leak.sql`.
+4. `0050_drop_legacy_settings_and_recreate.sql` (in der korrekten zeitlichen Reihenfolge — siehe Charge 15 Architekturentscheidung).
+
+### 5.3 — Ruecksprachen
+
+- **Datenschutz-Verantwortlicher:** Information ueber den unterbrochenen Stand. RLS-Leck `0042` wurde geschlossen, RLS-Leck `0048` (belege) ist weiterhin offen.
+- **StB:** Keine GoBD-relevante Aenderung in Charge 14 erfolgt. `belege`-Tabelle bleibt unveraendert.
+
+---
+
+## 6 — Compliance-Status
+
+| Anforderung | Stand |
+|-------------|-------|
+| DSGVO Art. 5 Abs. 1 lit. c (Datenminimierung) bzgl. `cookie_consents` | Behoben durch `0042` |
+| DSGVO Art. 32 (Sicherheit der Verarbeitung) bzgl. `cookie_consents` | Behoben durch `0042` |
+| DSGVO Art. 32 bzgl. `belege`/`beleg_positionen` | Weiterhin offen (`0048` nicht angewendet) |
+| GoBD Rz. 100 ff. (Unveraenderbarkeit, Belege in Cloud-Storage) | Weiterhin offen (`0046` nicht angewendet) |
+| HGB § 257 (Aufbewahrung) | Weiterhin offen (Belege noch in `localStorage`) |
+
+---
+
+## 7 — Anhang: Verwendete Verifikations-Queries
+
+### 7.1 — Policy-Inspektion
+
+```sql
+select polname, pg_get_expr(polqual, polrelid) as using_expr
+from pg_policy
+where polrelid = 'public.cookie_consents'::regclass
+  and polname = 'cookie_consents_select';
+```
+
+### 7.2 — Tabellen-Struktur-Inspektion
+
+```sql
+select column_name, data_type, is_nullable
+from information_schema.columns
+where table_schema = 'public'
+  and table_name = 'settings'
+order by ordinal_position;
+```
+
+### 7.3 — Datenbestand-Pruefung
+
+```sql
+select count(*) as row_count from public.settings;
+```
+
+### 7.4 — Migration-Files-Inspektion (PowerShell)
+
+```powershell
+Select-String -Path "supabase/migrations/*.sql" `
+  -Pattern "create table.*public\.settings|create table if not exists public\.settings" `
+  -CaseSensitive:$false
+```
+
+---
+
+**Ende Stop-Notice — 2026-05-02.**
+
+*Verfasser: Abdullah, im Rahmen von Charge 14, Phase 1.*
+*Folge-Charge: 15 (Schema-Konflikt-Aufloesung).*

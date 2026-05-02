@@ -1,7 +1,7 @@
-import { useEffect, useMemo } from "react";
-import { ChevronLeft, ChevronRight, Link2, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ChevronLeft, ChevronRight, Link2, Loader2, X } from "lucide-react";
 import type { Document, JournalEntry } from "../types/db";
-import { getDocumentUrl, formatFileSize } from "../api/documents";
+import { getAnyDocumentUrl, formatFileSize } from "../api/documents";
 import "./DocumentPreview.css";
 
 type Props = {
@@ -12,6 +12,21 @@ type Props = {
   onNavigate: (doc: Document) => void;
 };
 
+/**
+ * Lokaler Zustand der Vorschau-Aufloesung.
+ *
+ * `notAvailable` signalisiert das _erwartete_ Fehlen einer URL
+ * (z. B. fehlender Storage-Pfad oder geloeschter Blob).
+ * `error` signalisiert _unerwartete_ I/O-Fehler (Netzwerk, Storage,
+ * abgelaufene Session). Die Trennung ermoeglicht differenzierte
+ * UI-Hinweise.
+ */
+type PreviewState =
+  | { kind: "loading" }
+  | { kind: "loaded"; url: string }
+  | { kind: "notAvailable" }
+  | { kind: "error"; message: string };
+
 export default function DocumentPreview({
   doc,
   entries,
@@ -19,7 +34,45 @@ export default function DocumentPreview({
   onClose,
   onNavigate,
 }: Props) {
-  const url = useMemo(() => getDocumentUrl(doc), [doc]);
+  const [previewState, setPreviewState] = useState<PreviewState>({
+    kind: "loading",
+  });
+
+  useEffect(() => {
+    let cancelled = false;
+    // Vorher-Zustand auf "loading" setzen, damit beim Wechsel zwischen
+    // Dokumenten (siblings navigation) NICHT kurzzeitig die URL des
+    // vorherigen Dokuments sichtbar bleibt. Der ESLint-Hinweis weist auf
+    // einen zusaetzlichen Render-Cycle hin — das ist hier BEWUSST in Kauf
+    // genommen, weil der UX-Schaden (Flicker) groesser waere als die
+    // Performance-Kosten eines zusaetzlichen Renders.
+    //
+    // Saubere Loesung waere `<DocumentPreview key={doc.id} />` im Parent —
+    // beruehrt aber DocumentsPage.tsx und liegt damit ausserhalb des
+    // Scopes von PR 4 (refactor/documents-preview-async).
+    // Geplant fuer Charge 11, Schuld 10-ح.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPreviewState({ kind: "loading" });
+
+    getAnyDocumentUrl(doc)
+      .then((url) => {
+        if (cancelled) return;
+        setPreviewState(
+          url ? { kind: "loaded", url } : { kind: "notAvailable" }
+        );
+      })
+      .catch((err: unknown) => {
+        if (cancelled) return;
+        const message =
+          err instanceof Error ? err.message : "Unbekannter Fehler.";
+        setPreviewState({ kind: "error", message });
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [doc]);
+
   const linkedEntry = useMemo(
     () =>
       doc.journal_entry_id
@@ -83,17 +136,39 @@ export default function DocumentPreview({
             </button>
           )}
           <div className="docprev__viewer">
-            {url && isImage && <img src={url} alt={doc.file_name} />}
-            {url && isPdf && (
+            {previewState.kind === "loading" && (
+              <div
+                className="docprev__empty"
+                role="status"
+                aria-live="polite"
+              >
+                <Loader2
+                  size={32}
+                  className="docprev__spinner"
+                  aria-hidden="true"
+                />
+                <p>Vorschau wird geladen…</p>
+              </div>
+            )}
+            {previewState.kind === "loaded" && isImage && (
+              <img src={previewState.url} alt={doc.file_name} />
+            )}
+            {previewState.kind === "loaded" && isPdf && (
               <iframe
-                src={url}
+                src={previewState.url}
                 title={doc.file_name}
                 style={{ width: "100%", height: "100%", border: 0 }}
               />
             )}
-            {!url && (
+            {previewState.kind === "notAvailable" && (
               <div className="docprev__empty">
                 <p>Vorschau nicht verfügbar.</p>
+              </div>
+            )}
+            {previewState.kind === "error" && (
+              <div className="docprev__empty" role="alert">
+                <p>Vorschau konnte nicht geladen werden.</p>
+                <p className="docprev__error-detail">{previewState.message}</p>
               </div>
             )}
           </div>

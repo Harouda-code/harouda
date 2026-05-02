@@ -27,6 +27,7 @@ import {
   updateDocumentOcrCloud,
   deleteDocumentCloud,
   downloadDocumentAsFileCloud,
+  getDocumentSignedUrl,
 } from "./documentsCloud";
 
 // ---------------------------------------------------------------------------
@@ -102,6 +103,11 @@ export async function deleteDocument(
  * in die Konsole. Konsumenten muessen in den Folge-PRs auf
  * `getDocumentSignedUrl()` (async) umgestellt werden.
  *
+ * @deprecated Seit PR 4 (`refactor/documents-preview-async`) bevorzugt
+ * `getAnyDocumentUrl(doc)` verwenden. Diese Funktion bleibt aus
+ * Backward-Compatibility-Gruenden erhalten und wird in einem spaeteren
+ * Cleanup-PR entfernt, sobald alle Konsumenten migriert sind.
+ *
  * Diese Asymmetrie ist BEWUSST — die synchrone Signatur wird in JSX
  * direkt verwendet, ein Async-Refactor gehoert nicht in PR 2.
  */
@@ -114,6 +120,38 @@ export function getDocumentUrl(doc: Document): string | null {
       );
     }
     return null;
+  }
+  return getDocumentUrlLegacy(doc);
+}
+
+/**
+ * Async-faehiger Wrapper, der ein Document zu einer anzeigbaren URL aufloest —
+ * unabhaengig vom Storage-Backend.
+ *
+ * Verhalten:
+ *   - Legacy-Modus (Flag OFF):
+ *       Ruft `getDocumentUrlLegacy()` auf. Liefert `null`, wenn kein Blob
+ *       in localStorage existiert (z. B. Cache geloescht).
+ *   - Cloud-Modus  (Flag ON):
+ *       Liefert `null`, wenn `doc.file_path` fehlt (Dokument hat keinen
+ *       Storage-Pfad — erwarteter Sonderfall).
+ *       Andernfalls wird `getDocumentSignedUrl()` aufgerufen. Bei Storage-
+ *       oder Netzwerk-Fehler wirft die Funktion — der Aufrufer ist fuer
+ *       die Fehler-Behandlung zustaendig.
+ *
+ * Diese Asymmetrie ist BEWUSST: `null` signalisiert das _erwartete_ Fehlen
+ * eines Dokuments (`notAvailable`), waehrend Exceptions _unerwartete_
+ * I/O-Fehler signalisieren (`error`). Die UI kann beide Faelle dadurch
+ * unterscheiden und passende Hinweise anzeigen.
+ *
+ * Default-TTL fuer Signed URLs: 1 Stunde (siehe `getDocumentSignedUrl`).
+ */
+export async function getAnyDocumentUrl(
+  doc: Document
+): Promise<string | null> {
+  if (USE_SUPABASE_STORAGE) {
+    if (!doc.file_path) return null;
+    return getDocumentSignedUrl(doc);
   }
   return getDocumentUrlLegacy(doc);
 }

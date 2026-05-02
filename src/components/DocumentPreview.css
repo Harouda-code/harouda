@@ -75,6 +75,32 @@
 .docprev__empty {
   color: var(--muted);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.docprev__empty p {
+  margin: 0;
+}
+.docprev__spinner {
+  color: var(--navy);
+  animation: docprev-spin 1s linear infinite;
+}
+.docprev__error-detail {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  max-width: 480px;
+  word-break: break-word;
+}
+@keyframes docprev-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .docprev__nav {

@@ -1,0 +1,89 @@
+-- 0052_revoke_anon_dangerous_grants.sql
+-- harouda-app · Charge 19 Phase 2 · REVOKE-Repair (Schuld 19-dalet)
+--
+-- Hintergrund:
+--   In Charge 19 Phase 2 wurde im Rahmen der Vorbereitung der GRANT-
+--   Migration entdeckt, dass die Rolle `anon` auf 41 von 42 Tabellen
+--   in `public` die Privilegien `TRUNCATE`, `TRIGGER` und `REFERENCES`
+--   besitzt. Diese stammen aus einer früheren Migration oder
+--   `ALTER DEFAULT PRIVILEGES`-Anweisung und sind nicht beabsichtigt.
+--
+--   Auswirkung des Ist-Zustands:
+--     - `TRUNCATE` umgeht BEFORE-DELETE-Trigger (z. B.
+--       journal_entries_protect_delete) und RLS-Policies.
+--     - Ein nicht-authentifizierter Aufruf könnte theoretisch alle
+--       Buchungs-Daten löschen.
+--     - Verstoß gegen GoBD Rz. 58/59/64 (Unveränderbarkeit),
+--       § 257 HGB (Aufbewahrung), § 146 AO (Ordnungsmäßigkeit),
+--       Art. 32 DSGVO (Sicherheit der Verarbeitung).
+--
+--   Diese Migration entzieht die nicht-beabsichtigten Privilegien.
+--   `SELECT` auf `health_check` bleibt unverändert (intentionaler
+--   nicht-authentifizierter Health-Probe-Zugriff).
+--
+-- Methodik:
+--   Bulk-REVOKE über ALL TABLES IN SCHEMA public. Da die zu
+--   entziehenden Privilegien (TRUNCATE, TRIGGER, REFERENCES) auf
+--   keiner Tabelle für `anon` beabsichtigt sind, ist eine
+--   Whitelist-Aufzählung nicht erforderlich.
+--
+-- Out-of-Scope:
+--   - GRANTs für `authenticated` und `service_role` (Migration 0053).
+--   - REVOKE für SELECT/INSERT/UPDATE/DELETE auf `anon` (kein Beleg
+--     für Existenz solcher Grants gemäß Inventar).
+--   - Storage-Schema-Privilegien.
+--   - Function-EXECUTE-Hardening (Schuld 19-gimel).
+--   - `ALTER DEFAULT PRIVILEGES` (Schuld 19-he).
+--
+-- Idempotency:
+--   REVOKE ist in PostgreSQL idempotent. Wiederholte Ausführung
+--   verändert nichts.
+--
+-- Reihenfolge:
+--   Diese Migration MUSS vor 0053_grant_authenticated_public_tables.sql
+--   angewendet werden. REVOKE bevor GRANT ist die sichere Reihenfolge —
+--   falls 0053 fehlschlägt, bleibt zumindest die anon-Härtung erhalten.
+--
+-- Voraussetzungen (vor Anwendung verifiziert in Charge 19 Phase 2):
+--   - has_schema_privilege('anon', 'public', 'USAGE') = true
+--   - has_table_privilege('anon', 'public.health_check', 'SELECT') = true
+--
+-- Rechtsbasis:
+--   - GoBD Rz. 58, 59, 64, 100 ff.
+--   - § 146 AO, § 147 AO, § 257 HGB
+--   - Art. 32 DSGVO
+--   - Least-Privilege-Prinzip
+
+
+-- ============================================================
+-- REVOKE: TRUNCATE, TRIGGER, REFERENCES auf allen public-Tabellen
+-- ============================================================
+--
+-- Hinweis: Dies entzieht NICHT SELECT/INSERT/UPDATE/DELETE.
+-- Der intentionale `SELECT`-Grant auf `health_check` für `anon`
+-- bleibt unverändert.
+
+revoke truncate, trigger, references on all tables in schema public from anon;
+
+
+-- ============================================================
+-- Verifikation (manuell nach Anwendung ausführen)
+-- ============================================================
+--
+-- Erwartetes Ergebnis: Genau eine Zeile.
+--   table_name = 'health_check'
+--   privs      = 'SELECT'
+--
+-- Verifikations-Query:
+--
+--   select
+--     table_name,
+--     string_agg(privilege_type, ', ' order by privilege_type) as privs
+--   from information_schema.role_table_grants
+--   where table_schema = 'public'
+--     and grantee = 'anon'
+--   group by table_name
+--   order by table_name;
+--
+-- Falls weitere Zeilen erscheinen, wurde der REVOKE nicht vollständig
+-- angewendet -- STOPP, vor 0053 untersuchen.

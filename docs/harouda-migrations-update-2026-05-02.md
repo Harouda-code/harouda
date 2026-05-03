@@ -1153,6 +1153,201 @@ nach Least-Privilege-Mapping. Tracker-Drift dokumentiert (siehe §24).*
 *Status des Repos: Branch `fix/charge-19-phase-2-0054`, abgeleitet von
 `main` @ `12e35c0`. Migration-Datei und Doku-Sektionen 23–26 lokal
 vorhanden, noch nicht committed.*
+
+## §27 — Charge 19 Phase 2 Step 4: Migration 0055 (Schuld 19-zayin geschlossen)
+
+### §27.1 Identifikation
+
+| Item | Wert |
+|------|------|
+| Charge | 19 |
+| Phase | 2 |
+| Step | 4 (letzter Step von Phase 2) |
+| Migration | `supabase/migrations/0055_revoke_anon_authenticated_sequence_update.sql` |
+| Vorgänger-Migration | `0054_grant_authenticated_public_tables.sql` |
+| Geschlossene Schuld | 19-zayin (`anon`/`authenticated` UPDATE auf public-Sequenzen) |
+| Apply-Datum | 2026-05-03 |
+| Apply-Methode | Supabase Studio SQL Editor, manuell, einmalig |
+| Apply-Ergebnis | `Success. No rows returned.` (keine Warnung, keine Fehler) |
+| Branch | `fix/charge-19-phase-2-0055` |
+| HANDOFF-Referenz | HANDOFF nach Charge 19 Phase 2 Step 3, §3.2 / §4 / §5 |
+
+### §27.2 Pre-Check via `pg_class.relacl + aclexplode()` (Lehre 53 + Lehre 58)
+
+Vor dem Schreiben von 0055 wurde die ACL-Diagnostik primär ausgeführt. `information_schema.role_usage_grants` allein genügt nicht (Lehre 58, registriert in §26.3).
+
+**Bestätigt vor Apply:**
+
+- `anon` hat `UPDATE` auf:
+  - `public.account_report_mapping_id_seq`
+  - `public.report_lines_id_seq`
+- `authenticated` hat `UPDATE` auf beide Sequenzen.
+- `authenticated` hat `USAGE` auf beide Sequenzen (intendiert per 0054, nicht zu entfernen).
+- `service_role` hat `SELECT`, `UPDATE`, `USAGE` auf beide Sequenzen (intendiert per 0054, nicht zu entfernen).
+- `postgres` hat `SELECT`, `UPDATE`, `USAGE` auf beide Sequenzen (Plattform-Default).
+- `is_grantable = false` für jede Zeile.
+- Keine unerwarteten Grantees, keine unerwarteten public-Sequenzen.
+
+Pre-Check-Ergebnis stimmt mit HANDOFF §4.2 überein — architektonisch freigegeben.
+
+### §27.3 Scope
+
+**In-Scope (genau eine aktive SQL-Anweisung):**
+
+```sql
+revoke update on all sequences in schema public from anon, authenticated;
+```
+
+**Out-of-Scope (explizit nicht berührt):**
+
+- `USAGE` für `authenticated` auf Sequenzen (bleibt, intendiert per 0054).
+- `ALL` für `service_role` auf Sequenzen (bleibt, intendiert per 0054).
+- Tabellen-GRANTs jeglicher Art.
+- RLS-Policy-Änderungen.
+- Helper-Function-`EXECUTE`-Hardening (Schuld 19-gimel, separate Charge).
+- `ALTER DEFAULT PRIVILEGES`-Cleanup (Schuld 19-he, separate Charge).
+- Storage-Schema-/Bucket-Privilegien.
+- Triggers.
+
+### §27.4 Datei-Verifikation (numerisch, Lehre 48)
+
+| Eigenschaft | Wert |
+|-------------|------|
+| Pfad | `supabase/migrations/0055_revoke_anon_authenticated_sequence_update.sql` |
+| SHA256 | `2e54516b99df9c67f73b357d38ca621de8aec9fa2044b098eee8470c423abad8` |
+| Bytes | 4146 |
+| Zeilen | 81 (LF-Count = 81, Datei endet mit LF) |
+| Encoding | reines ASCII (keine Umlaute, kein BOM) |
+| Line-Endings | LF (CR-Count = 0) |
+| Aktive `REVOKE`-Statements | 1 (Zeile 47) |
+| Aktive `GRANT`-Statements | 0 |
+| Aktive `ALTER`-Statements | 0 |
+| Aktive `CREATE`-Statements | 0 |
+| Aktive `DROP`-Statements | 0 |
+| Cross-Verifikation | SHA256 in Sandbox = SHA256 auf lokaler Disk (`Get-FileHash`) |
+
+### §27.5 Apply (Supabase Studio, manuell)
+
+**Vorgehen:**
+
+1. Datei-Inhalt aus lokaler Disk in die Zwischenablage geladen (`Get-Content -Raw -Path … | Set-Clipboard`).
+2. SQL Editor in Supabase Dashboard geöffnet, neuer leerer Query-Tab.
+3. Visueller Pre-Run-Check vor dem Klick auf Run:
+   - Erste Zeile = `-- migration: 0055_revoke_anon_authenticated_sequence_update.sql`
+   - Aktive Zeile = `revoke update on all sequences in schema public from anon, authenticated;` (ohne sichtbare Verfälschung)
+   - Letzte Zeile = `-- ende migration 0055`
+4. Run einmalig ausgelöst.
+
+**Ergebnis:**
+
+- Statusmeldung: `Success. No rows returned.`
+- Mehrfach-Run vermieden (Lehre 54).
+- Keine Warnungen, keine Fehlermeldungen.
+- Idempotenz-Garantie: REVOKE auf nicht-existierende Privilegien wäre no-op, hier aber waren UPDATE-Privilegien aktiv und wurden tatsächlich entfernt.
+
+### §27.6 Post-Apply Verifikation V1–V4
+
+Combined query mit `has_sequence_privilege()` — eine Zeile, zwölf Spalten:
+
+| Check | Spalte | Ergebnis | Erwartet |
+|-------|--------|----------|----------|
+| V1 | `v1_auth_arm_usage` | `true` | `true` |
+| V1 | `v1_auth_rl_usage` | `true` | `true` |
+| V2 | `v2_auth_arm_update` | `false` | `false` |
+| V2 | `v2_auth_rl_update` | `false` | `false` |
+| V3 | `v3_anon_arm_update` | `false` | `false` |
+| V3 | `v3_anon_rl_update` | `false` | `false` |
+| V4 | `v4_sr_arm_usage` | `true` | `true` |
+| V4 | `v4_sr_arm_select` | `true` | `true` |
+| V4 | `v4_sr_arm_update` | `true` | `true` |
+| V4 | `v4_sr_rl_usage` | `true` | `true` |
+| V4 | `v4_sr_rl_select` | `true` | `true` |
+| V4 | `v4_sr_rl_update` | `true` | `true` |
+
+**Bilanz: 12/12 bestanden.** Keine Abweichung, kein STOP-Trigger ausgelöst.
+
+### §27.7 V5 (ACL-Cross-Check via `aclexplode`) — übersprungen
+
+V5 war im ursprünglichen Migration-Entwurf als optionaler Verifikations-Kommentar enthalten und wurde in Option B entfernt. Nach erfolgreichen V1–V4 wurde architektonisch entschieden, V5 für diese Charge zu überspringen.
+
+**Begründung:**
+
+- Lehre 58 fordert zwei Datenquellen primär *vor* einem Eingriff (Pre-Check). Für 0055 wurde dies in §27.2 mit `pg_class.relacl + aclexplode()` erfüllt.
+- `has_sequence_privilege()` in V1–V4 ist für boolesche Privileg-Existenzfragen ausreichend. Lehre 58 zielt auf die Entdeckung *unerwarteter* Privilegien — nicht auf die Verifikation einer gezielten Entzugs-Operation, deren erwartete Wirkung präzise definiert ist.
+- V5 bleibt als optionale Compliance-Replay-Komponente verfügbar und ist in Charge 20 (Schuld 10-aleph) ohnehin Teil des umfassenden ACL-Re-Check über das gesamte Schema.
+
+### §27.8 Operative Lage nach 0055
+
+| Rolle | Privilegien auf public-Sequenzen | Quelle |
+|-------|----------------------------------|--------|
+| `anon` | (keine) | 0055 (UPDATE entzogen; keine Sequenz-Privilegien verbleibend) |
+| `authenticated` | `USAGE` | 0054 (`USAGE`-GRANT), 0055 (`UPDATE`-REVOKE) |
+| `service_role` | `SELECT`, `UPDATE`, `USAGE` | 0054 (unverändert durch 0055) |
+| `postgres` | `SELECT`, `UPDATE`, `USAGE` | Plattform (unverändert) |
+
+### §27.9 Repo-Zustand vor Tracker-Append
+
+| Item | Wert |
+|------|------|
+| Branch | `fix/charge-19-phase-2-0055` |
+| Branch-Basis | `1a908e2` (= `origin/main` vor Branch-Erstellung) |
+| Migration-Datei | `supabase/migrations/0055_revoke_anon_authenticated_sequence_update.sql` — untracked |
+| Existierende lokale Append-Payloads | `docs/append-charge19-phase2-005{2,3,4}.md` — untracked, unberührt |
+| Diese neue Append-Payload | `docs/append-charge19-phase2-0055.md` — lokales Artefakt, untracked, nicht zu committen |
+| Modifizierte tracked Dateien | keine |
+| Staged Dateien | keine |
+| Tracker-Doku | `docs/harouda-migrations-update-2026-05-02.md` — bisher unverändert (Append folgt nach dieser Payload-Erstellung) |
+
+### §27.10 Lehren-Bestätigung durch Charge 19 Phase 2 Step 4
+
+| # | Lehre | Bestätigt durch 0055 |
+|---|-------|----------------------|
+| 45 | Verifikation > Bestätigen | V1–V4 als experimentelle DB-Bestätigung, nicht logische Ableitung |
+| 47 | DB-Realität kann Spec-Annahmen widersprechen | Pre-existing UPDATE für `anon`/`authenticated` war in keiner Schema-Spec dokumentiert |
+| 48 | Werte numerisch verifizieren, nicht visuell | SHA256 + Byte/Line-Count vor und nach Datei-Transfer Sandbox→Disk |
+| 50 | Branch-first vor jedem Commit | `fix/charge-19-phase-2-0055` vor jeder Datei-Operation erstellt |
+| 53 | Pre-existing-Grants vor jeder GRANT/REVOKE-Migration prüfen | §27.2 Pre-Check |
+| 54 | Ein sensibler Schritt pro Antwort | strikt eingehalten über die Einzelschritte dieser 0055-Session (Pre-Check, Git-Setup, Draft-Reduktion, Datei-Erstellung, Apply, V1–V4, Tracker-Payload-Draft) |
+| 55 | VS Code für Tracker-Append, nicht PowerShell `Add-Content` | für anstehende Append-Operation auf §27 anzuwenden |
+| 56 | CRLF-Conversion erwartbar bei Notepad-Append | trifft auf .md-Tracker-Doku zu (akzeptabel); nicht auf SQL-Migration (LF wurde erzwungen, SHA256-verifiziert) |
+| 58 | Sequenz-Privilegien-Inspektion: zwei Datenquellen | `pg_class.relacl + aclexplode()` als Pre-Check primär eingesetzt (§27.2) |
+
+### §27.11 Schulden-Statusupdate
+
+| Schuld | Beschreibung | Status nach 0055 |
+|--------|--------------|-------------------|
+| **19-zayin** | `anon`/`authenticated` UPDATE auf public-Sequenzen | **geschlossen DB-seitig** durch 0055 (Apply + V1–V4 12/12) |
+| ~~19-dalet~~ | ~~`anon` TRUNCATE/TRIGGER/REFERENCES~~ | geschlossen durch 0052 |
+| ~~19-vav~~ | ~~`authenticated` TRUNCATE/TRIGGER/REFERENCES~~ | geschlossen durch 0053 |
+| ~~18-bet~~ | ~~GRANT-Repair `authenticated` + `service_role`~~ | geschlossen durch 0054 |
+| 19-aleph | `protect_update`-Whitelist erweitern | offen, spätere Charge |
+| 19-bet | `localStorage`-Settings → DB-Side | offen, spätere Charge |
+| 19-gimel | Helper-Function-EXECUTE-Hardening | offen, spätere Charge |
+| 19-he | `ALTER DEFAULT PRIVILEGES`-Cleanup | offen, spätere Charge |
+| 18-aleph | BEFORE-DELETE-Trigger für `belege`/`beleg_positionen` | offen, Charge 21 |
+| 10-aleph | Compliance-Verifikation Replay | offen, Charge 20 (empfohlen als nächste Charge) |
+
+### §27.12 Charge 19 Phase 2 — Abschluss
+
+Mit erfolgreichem Apply von 0055 ist Charge 19 Phase 2 vollständig abgeschlossen. Vier Steps, vier geschlossene Schulden, alle V-Checks bestanden:
+
+| Step | Migration | Schuld | V-Checks | Status |
+|------|-----------|--------|----------|--------|
+| Step 1 | `0052_revoke_anon_dangerous_grants.sql` | 19-dalet | bestanden | geschlossen |
+| Step 2 | `0053_revoke_authenticated_dangerous_grants.sql` | 19-vav | bestanden | geschlossen |
+| Step 3 | `0054_grant_authenticated_public_tables.sql` | 18-bet | bestanden + V2-Befund (19-zayin entdeckt) | geschlossen |
+| Step 4 | `0055_revoke_anon_authenticated_sequence_update.sql` | 19-zayin | 12/12 bestanden | geschlossen |
+
+**Test-Baseline:** Referenz-Test-Baseline bleibt: 204 Files / 2036 passed / 1 todo. Für 0055 wurde keine neue Testausführung benötigt oder dokumentiert, da die Migration ausschließlich DB-ACL betrifft und keinen Code-Pfad ändert.
+
+**Nächster architektonischer Entscheidungspunkt:** Charge 20 (Compliance-Verifikation Replay, Schuld 10-aleph) oder Charge 21 (BEFORE-DELETE-Trigger, Schuld 18-aleph). HANDOFF §8 empfiehlt Charge 20 als nächste Charge, da 19-zayin nun geschlossen ist und Compliance-Replay ohne diesen Befund sauberer ausgeführt werden kann.
+
+---
+
+**Ende §27 — Charge 19 Phase 2 Step 4 dokumentiert.**
+
+*Quelle: Apply 2026-05-03, V1–V4 12/12 bestanden, SHA256 `2e54516b…3abad8` cross-verifiziert.*
+
 *Naechste Schritte: Append der Sektionen 23–26 plus dieses Footer-Updates
 in `docs/harouda-migrations-update-2026-05-02.md`, numerische Verifikation
 der gesamten Datei (Lehre 48), atomarer Commit + Push + PR auf Branch

@@ -733,3 +733,429 @@ Schulden 19-aleph, 19-bet, 19-gimel, 19-he werden NICHT in der `0054`-Migration 
 *Verfasser: Abdullah.*
 *Status der Datenbank: alle Sicherheits-Migrations bis `0053` einschliesslich angewendet. Tracker-Drift dokumentiert. `authenticated`-Privileg-Eskalation auf REVOKE-Niveau geschlossen.*
 *Naechste Phase: Migration `0054_grant_authenticated_public_tables.sql` (separater PR, Schuld 18-bet).*
+
+
+---
+
+## 23 — Charge 19 Phase 2 Step 3: Migration 0054 GRANT-Repair
+
+> **Status:** Migration `0054_grant_authenticated_public_tables.sql` wurde manuell via Supabase Studio angewendet.
+>
+> **Datum:** 2026-05-03
+> **Ausfuehrender:** Abdullah
+> **Project-Ref:** `harouda` (Supabase, eu-central-1, Free Plan)
+> **Letzter `main`-Hash bei Beginn:** `12e35c0`
+> **Vorgaenger-Update:** Charge 19 Phase 2 Step 2 (Migration 0053)
+
+---
+
+### 23.1 — Ziel
+
+Schliessung der Schuld 18-bet (GRANT-Repair). Nach den restriktiven Migrations
+`0052` (REVOKE anon dangerous) und `0053` (REVOKE authenticated dangerous)
+besass die Rolle `authenticated` keine SELECT/INSERT/UPDATE/DELETE-Grants mehr,
+und `service_role` besass keine CRUD-Privilegien — nur REFERENCES, TRIGGER,
+TRUNCATE. Das Backend war operativ unfaehig.
+
+`0054` stellt die Operabilitaet fuer beide Rollen wieder her, und zwar nach
+dem Least-Privilege-Prinzip pro Tabelle in fuenf Gruppen (A–E), abgeleitet
+aus dem RLS-Policy-Inventar.
+
+---
+
+### 23.2 — Source-of-Truth Korrektur
+
+**Diskrepanz entdeckt:** Der HANDOFF-Eintrag fuer Charge 19 Phase 2 Step 3
+(§3.1) verwies auf "Sektion 16" dieser Doku als Quelle des Gruppe A–E
+Mappings. Sektion 16 enthaelt jedoch nur die geplanten naechsten Schritte
+nach `0052` (Stand vor der Schuld 19-vav-Entdeckung) — kein detailliertes
+Tabellen-Mapping mit expliziten Tabellen-Namen.
+
+**Korrektur:** Das Gruppe-Mapping wurde nach der in HANDOFF_BATCH_19 §8.4
+spezifizierten Methodik neu aufgebaut. Der Master schreibt explizit vor:
+
+1. RLS-Policy-Inventar via `pg_policies`-Abfrage erstellen (Z. 518–527).
+2. Pro Tabelle die `cmd`-Werte aggregieren (Z. 528).
+3. GRANT-Mapping aus den `cmd`-Werten ableiten (Z. 529–532).
+
+Diese Methodik wurde am 2026-05-03 als Pre-Check Phase 6/N ausgefuehrt
+(siehe §23.5). Das Resultat ergab das Gruppe-Mapping deterministisch und
+nachvollziehbar aus dem DB-Zustand selbst — und nicht aus einer fixen
+Tabellenliste in einer Vorgaenger-Doku, die nicht existierte.
+
+**Konsequenz fuer kuenftige HANDOFFs:** Verweise auf "Sektion X enthaelt das
+Mapping" muessen vor Verwendung verifiziert werden. Schreibanweisung Nr. 39
+aus HANDOFF_BATCH_19 ("HANDOFF-Status-Behauptungen sind Hypothesen, keine
+Fakten") wurde in dieser Charge erneut bestaetigt.
+
+---
+
+### 23.3 — Migration-Zusammenfassung
+
+**Datei:** `supabase/migrations/0054_grant_authenticated_public_tables.sql`
+**Groesse:** 13475 Bytes (LF), 214 Zeilen, 45 GRANT-Statements
+**Encoding:** Pure ASCII (keine Umlaute, keine UTF-8-Spezialzeichen).
+
+**Inhalt nach RLS-Policy-Inventar (134 Policies auf 41 Tabellen):**
+
+| Gruppe | Anzahl Tabellen | GRANT fuer `authenticated` |
+|--------|------------------|------------------------------|
+| A — Voll-CRUD | 32 | `SELECT, INSERT, UPDATE, DELETE` |
+| B — S/I/D | 1 (`dunning_records`) | `SELECT, INSERT, DELETE` |
+| C — S/I/U | 1 (`user_profiles`) | `SELECT, INSERT, UPDATE` |
+| D — Append-Only | 6 (`app_logs`, `audit_log`, `cookie_consents`, `privacy_incidents`, `privacy_requests`, `ustid_verifications`) | `SELECT, INSERT` |
+| E — Read-Only | 1 (`business_partners_versions`) | `SELECT` |
+| **Summe authenticated** | **41** | — |
+
+**Sequenz-GRANTs fuer `authenticated` (Lehre 52):**
+
+- `GRANT USAGE ON SEQUENCE public.account_report_mapping_id_seq TO authenticated`
+- `GRANT USAGE ON SEQUENCE public.report_lines_id_seq           TO authenticated`
+
+**`service_role`-GRANTs (Bulk):**
+
+- `GRANT ALL ON ALL TABLES    IN SCHEMA public TO service_role`
+- `GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO service_role`
+
+**Out-of-Scope (explizit):** Schulden 19-aleph, 19-bet, 19-gimel, 19-he,
+18-aleph (BEFORE-DELETE-Trigger fuer `belege`/`beleg_positionen`, Charge 21),
+sowie Storage-Schema-Privilegien.
+
+**Tabelle `health_check`:** out-of-scope. Hat keine RLS-Policies und behaelt
+SELECT-only fuer `authenticated` aus frueherer Konfiguration (intentional
+fuer Frontend-Health-Probe). Inkrementell fuegt `0054` ihr keine Privilegien
+hinzu — sie ist die 42. Tabelle im schema, die nicht ueber das RLS-Inventar
+laeuft.
+
+---
+
+### 23.4 — Apply-Ergebnis
+
+**Methode:** Manuelle Anwendung via Supabase Studio SQL Editor (konsistent
+mit `0042`, `0046`, `0048`, `0050`, `0052`, `0053` — `db push` lokal nicht
+moeglich, Falle 3.12).
+
+**Studio-Output (zweiter Versuch, erfolgreich):**
+
+```
+Success. No rows returned
+```
+
+Keine `ERROR`. Keine `WARNING`. Keine `NOTICE`.
+
+**Inzident beim ersten Apply-Versuch:** Statt der Migration-SQL wurde
+versehentlich der Result-Template-Text in den SQL-Editor eingefuegt. Studio
+meldete `ERROR: 42601 syntax error at or near "==="`. Recovery: Editor
+geleert, Clipboard aus der lokalen Migration-Datei neu geladen,
+Clipboard-Praefix und -Length (13475) verifiziert, dann erneut ausgefuehrt.
+Erneute Bestaetigung von Falle 3.2 im Chat-Copy-Paste-Pfad.
+
+---
+
+### 23.5 — Pre-Apply Verifikation (sechs Phasen)
+
+| Phase | Inhalt | Ergebnis |
+|-------|--------|----------|
+| 1/N | `git status`, branch, commit | `main` @ `12e35c0`, working tree clean |
+| 2/N | Tabellen-GRANTs `authenticated` + `service_role` | 43 Zeilen, exakt wie erwartet (1 fuer `authenticated/health_check`, 42 fuer `service_role` mit `REFERENCES, TRIGGER, TRUNCATE`) |
+| 3/N | Sequenz-GRANTs via `information_schema.role_usage_grants` | 0 Zeilen — wirkte sauber, war aber unvollstaendig (siehe §23.7) |
+| 4/N | Sequenz-Inventar | 2 Sequenzen, beide bigint: `account_report_mapping_id_seq`, `report_lines_id_seq` |
+| 5/N | RLS-Policy-Anzahl | 134 Policies (= HANDOFF §3.1 Erwartung) |
+| 6/N | RLS-Policy-Inventar via `pg_policies` (Master §8.4) | 134 Zeilen / 41 Tabellen, Aggregation pro Tabelle ergab Gruppe A–E exakt nach HANDOFF §3.1 |
+
+Anschliessend: `git pull origin main` (`Already up to date.`), Branch-Erstellung
+`fix/charge-19-phase-2-0054` (Lehre 50), Datei-Erstellung, manueller Transfer
+ins Repo, numerische Verifikation auf Datei-System (Length=13475, Lines=214,
+GRANT-Count=45, Lehre 48), dann Apply.
+
+---
+
+### 23.6 — Post-Apply Verifikation (V1–V4)
+
+**(V1) `authenticated` — Tabellen-GRANTs**
+
+42 Zeilen — exaktes Match mit Erwartung:
+
+- 32 × `DELETE, INSERT, SELECT, UPDATE` (Gruppe A)
+- `dunning_records` = `DELETE, INSERT, SELECT` (Gruppe B)
+- `user_profiles` = `INSERT, SELECT, UPDATE` (Gruppe C)
+- 6 × `INSERT, SELECT` (Gruppe D)
+- `business_partners_versions` = `SELECT` (Gruppe E)
+- `health_check` = `SELECT` (intentional, unveraendert)
+
+**(V2) `authenticated` — Sequenz-Privilegien (`has_sequence_privilege()`)**
+
+```
+sequence_name                 | has_usage | has_select | has_update
+account_report_mapping_id_seq | true      | false      | true
+report_lines_id_seq           | true      | false      | true
+```
+
+Bewertung pro Privileg fuer den Scope von `0054`:
+
+- **`has_usage = true`** ist das Erfolgskriterium von `0054` (Lehre 52).
+  Beide Sequenzen erhielten `USAGE` durch die Migration. Dieses Kriterium
+  ist erfuellt.
+- **`has_select = false`** wie erwartet — `0054` granted `SELECT` nicht und
+  kein anderer Mechanismus tut es ebenfalls.
+- **`has_update = true`** war unerwartet. Diagnostische Folge-Abfrage via
+  `pg_class.relacl + aclexplode()` ergab: das `UPDATE`-Privileg ist ein
+  direkter ACL-Eintrag fuer `authenticated` auf beiden Sequenzen. Die
+  ACL-Diagnostik zeigte zudem: dasselbe `UPDATE`-Privileg existiert
+  ebenfalls fuer `anon`. Beide Eintraege bestanden bereits vor `0054` —
+  der Migration-Text enthaelt nur `grant usage on sequence ... to
+  authenticated` und keine `UPDATE`-Grants. Quelle der pre-existing
+  Eintraege noch zu klaeren; vermutlich aus frueheren Default-Privileges.
+  Pre-existing und out-of-scope fuer `0054`.
+
+V2 wird daher als bestanden fuer den Scope von `0054` gewertet. Das
+gemeinsame Befund-Paar `anon/UPDATE` und `authenticated/UPDATE` auf
+Sequenzen wird als forward-reference fuer eine kuenftige Schuld
+festgehalten (siehe §23.8).
+
+**(V3) `service_role` — Tabellen-GRANTs**
+
+42 Zeilen, jede mit 7 Privilegien:
+`DELETE, INSERT, REFERENCES, SELECT, TRIGGER, TRUNCATE, UPDATE`
+
+Vor `0054`: 3 Privilegien (`REFERENCES, TRIGGER, TRUNCATE`).
+Nach `0054`: 7 Privilegien (`+DELETE, +INSERT, +SELECT, +UPDATE`).
+`grant all on all tables in schema public to service_role` wurde lueckenlos
+auf alle 42 Tabellen angewendet. Vollstaendige Operabilitaet von
+`service_role` hergestellt.
+
+**(V4) `service_role` — Sequenz-Privilegien (`has_sequence_privilege()`)**
+
+```
+sequence_name                 | has_usage | has_select | has_update
+account_report_mapping_id_seq | true      | true       | true
+report_lines_id_seq           | true      | true       | true
+```
+
+Alle drei Privilegien (USAGE, SELECT, UPDATE) gesetzt — exakt wie
+beabsichtigt durch `grant all on all sequences in schema public to
+service_role`. V4 bestanden.
+
+---
+
+### 23.7 — Methodische Anmerkung zu Pre-Check Phase 3/N
+
+Pre-Check Phase 3/N nutzte `information_schema.role_usage_grants` und gab
+0 Zeilen zurueck — was den Eindruck erweckte, es bestehe kein Sequenz-Grant
+fuer `authenticated` oder `service_role`. V2 zeigte jedoch (verifiziert
+ueber ACL-Diagnostik), dass auf den Sequenzen bereits `UPDATE`-Privilegien
+fuer `anon` und `authenticated` existierten.
+
+`information_schema.role_usage_grants` deckt nur das SQL-Standard-Privileg
+`USAGE` ab. Die PostgreSQL-spezifischen Sequenz-Privilegien `SELECT` und
+`UPDATE` werden dort nicht aufgefuehrt. Pre-Check 3/N war damit
+unvollstaendig — die pre-existing `UPDATE`-Eintraege wurden nicht erkannt.
+
+Eine vollstaendige Sequenz-Privilegien-Inspektion erfordert zwei Quellen:
+
+- `information_schema.role_usage_grants` fuer `USAGE`.
+- `pg_class.relacl` via `aclexplode()` fuer `SELECT` und `UPDATE`.
+
+Diese Erkenntnis wird als forward-reference fuer eine spaetere Lehre
+festgehalten (siehe §23.8).
+
+---
+
+### 23.8 — Schluss-Status und Forward-References
+
+**Schuld 18-bet (GRANT-Repair fuer `authenticated` + `service_role`):**
+durch `0054` geschlossen. Beide Rollen sind operativ in Bezug auf alle
+41 RLS-Policy-Tabellen sowie die 2 Sequenzen. RLS-Policy-Schicht (134
+Policies) bleibt unveraendert wirksam und stellt die eigentliche
+Mandanten-Isolation sicher.
+
+**Forward-References (Detail in spaeterer Sektion):**
+
+- **Schuld 19-zayin (kuenftig)** — `anon` und `authenticated` besitzen ein
+  pre-existing `UPDATE`-Privileg auf den Sequenzen
+  `account_report_mapping_id_seq` und `report_lines_id_seq` (per
+  ACL-Diagnostik in V2 nachgewiesen). Das erlaubt einen direkten
+  `setval()`-Aufruf und damit einen DoS-Vektor durch Sequenz-Counter-Reset
+  oder ID-Space-Exhaustion. Quelle der pre-existing Eintraege noch zu
+  klaeren; vermutlich aus frueheren Default-Privileges. Durch `0054`
+  weder verursacht noch behoben. Eigene REVOKE-Migration in spaeterer
+  Charge.
+
+- **Lehre 58 (kuenftig)** — Pre-Check fuer Sequenz-Privilegien benoetigt
+  zwei Datenquellen (`information_schema.role_usage_grants` plus
+  `pg_class.relacl` via `aclexplode()`); siehe §23.7.
+
+- **Lehre 57 (kuenftig)** — HANDOFF-Verweise auf externe Dokument-Sektionen
+  muessen vor Verwendung faktisch verifiziert werden; siehe §23.2.
+
+---
+
+## 24 — Tracker-Drift nach Migration 0054
+
+| Migration | Status auf DB | Status im git-Repo (`main` @ Zeitpunkt der Anwendung) |
+|-----------|---------------|---------------------------------------------------------|
+| 0042 | applied (manuell, Charge 14) | applied (commit) |
+| 0046 | applied (manuell, Charge 15 Phase 1) | applied (commit) |
+| 0048 | applied (manuell, Charge 15 Phase 1) | applied (commit) |
+| 0050 | applied (manuell, Charge 15 Phase 1) | applied (commit) |
+| 0052 | applied (manuell, Charge 19 Phase 2 Step 1) | applied (commit) |
+| 0053 | applied (manuell, Charge 19 Phase 2 Step 2) | applied (commit, `12e35c0`) |
+| **0054** | **applied (manuell, Charge 19 Phase 2 Step 3, 2026-05-03)** | **NOCH NICHT committed (Tracker-Drift)** |
+
+**Lokaler Zustand:**
+
+- Migration-Datei existiert lokal:
+  `supabase/migrations/0054_grant_authenticated_public_tables.sql`
+  (13475 Bytes, 214 Zeilen, 45 GRANT-Statements).
+- Branch: `fix/charge-19-phase-2-0054`, abgeleitet von `main` @ `12e35c0`.
+- `git status --short` meldet die Datei als untracked (`??`).
+
+**Drift-Begruendung:** Wie in Charge 15 Phase 1 dokumentiert: `harouda` hat
+keinen automatischen Migrations-Tracker fuer manuell via Studio angewendete
+Files. `db push` ist lokal nicht moeglich (Docker fehlt, Falle 3.12). Die
+Drift wird durch diesen Eintrag dokumentiert und durch einen atomaren PR
+geschlossen, der die Migration-Datei zusammen mit der vorliegenden
+Doku-Sektion (23–26 plus Footer) in `main` ueberfuehrt.
+
+**Auswirkung:** Bis der PR mit `0054` und dieser Doku gemerged ist, weicht
+der DB-Zustand vom `main`-Stand ab. Nach dem Merge ist die Drift wieder
+geschlossen (DB und git in Sync auf `0054`).
+
+**Naechste Schritte zur Drift-Schliessung (Reihenfolge):**
+
+1. `git add supabase/migrations/0054_grant_authenticated_public_tables.sql`
+   plus diese Doku-Datei.
+2. Numerische Verifikation der gesamten Doku-Datei (Lehre 48: Length und
+   Zeilenzahl mit Tool ermitteln, nicht von Hand).
+3. `git commit` mit aussagekraeftiger Message
+   (z. B. "feat(db): 0054 GRANT-Repair authenticated + service_role").
+4. **Vor `git push`:** Claude Code (Desktop-App) schliessen
+   (HANDOFF §7 Punkt 11).
+5. `git push -u origin fix/charge-19-phase-2-0054`.
+6. PR oeffnen mit Verweis auf Schuld 18-bet und auf §23–§26 dieser Doku.
+
+---
+
+## 25 — Compliance-Stand nach Charge 19 Phase 2 Step 3
+
+**Sicherheits-Schichten der Charge 19 Phase 2 (drei Steps, drei Migrations):**
+
+| Schuld | Migration | Step | Status |
+|--------|-----------|------|--------|
+| 19-dalet (`anon TRUNCATE/TRIGGER/REFERENCES`) | `0052` | 1 | geschlossen |
+| 19-vav (`authenticated TRUNCATE/TRIGGER/REFERENCES`) | `0053` | 2 | geschlossen |
+| 18-bet (GRANT-Repair `authenticated` + `service_role`) | `0054` | 3 | geschlossen |
+
+**Operative Lage nach `0054`:**
+
+| Rolle | Vor `0052` | Nach `0053` | Nach `0054` |
+|-------|-----------|--------------|---------------|
+| `anon` | TRUNCATE/TRIGGER/REFERENCES auf public tables + intentionaler `SELECT` auf `health_check` | nur `SELECT` auf `health_check` (intentional) | unveraendert |
+| `authenticated` | volle CRUD-Operabilitaet auf Studio-Default-Niveau | nur `SELECT` auf `health_check` (intentional, sonst keine CRUD-Privilegien) | CRUD nach Gruppe A–E auf 41 RLS-Policy-Tabellen + `USAGE` auf 2 Sequenzen |
+| `service_role` | Default-Niveau ohne CRUD | unveraendert (REFERENCES/TRIGGER/TRUNCATE) | `ALL` auf alle 42 Tabellen + `ALL` auf 2 Sequenzen |
+
+**RLS-Schicht:** unveraendert. 134 Policies auf 41 Tabellen wirksam (Stand
+vor `0054` und nach `0054` identisch). Mandanten-Isolation und
+GoBD-relevante Restriktionen (`*_client_consistency`,
+`journal_entries_auditor_expiry`, `*_no_delete`, `*_no_update`) bleiben in
+Kraft. Die GRANT-Schicht ist nun konsistent mit der RLS-Schicht — Lehre 44
+(GRANT und RLS sind orthogonale Schichten) operativ umgesetzt.
+
+| Anforderung | Stand vor 0054 | Stand nach 0054 |
+|-------------|----------------|------------------|
+| GoBD Rz. 58, 59, 64 (Unveraenderbarkeit gebuchter Belege) | RLS- und Trigger-Niveau gegeben; durch fehlende GRANTs operativ unbestaetigt. | RLS- und Trigger-Niveau gegeben; durch GRANT-Schicht jetzt operativ pruefbar. |
+| § 257 HGB (Aufbewahrung) | strukturell gesichert (REVOKE-Niveau aus 0052/0053). | unveraendert strukturell gesichert; Operabilitaet wiederhergestellt. |
+| § 146 AO (Ordnungsmaessigkeit der Buchfuehrung) | strukturell gesichert. | unveraendert strukturell gesichert. |
+| Art. 32 DSGVO (Sicherheit der Verarbeitung) | gehaertet auf REVOKE-Niveau. | gehaertet plus operativ pruefbar. |
+| Least-Privilege-Prinzip fuer `authenticated` | `authenticated` operativ tot — kein verifizierter Zugriff. | erfuellt — pro Tabelle exakt die Privilegien, die durch RLS-Policies abgedeckt sind. |
+| Operabilitaet `service_role` | nicht gegeben (REFERENCES/TRIGGER/TRUNCATE only). | hergestellt (Voll-Zugriff). |
+
+**Hinweis:** Die Massnahme schliesst Schuld 18-bet auf der Privilegien-Ebene
+fuer den Scope von 41 RLS-Policy-Tabellen plus 2 Sequenzen. Die operationale
+Korrektheit (RLS-Konfiguration, Mandanten-Isolation, Trigger-Wirksamkeit)
+wird in der Charge 20 Compliance-Verifikation replay erneut systematisch
+gegen DB-Realitaet abgeglichen. Charge 20 bleibt damit der naechste
+verifikatorische Meilenstein nach Drift-Schliessung von `0054`.
+
+---
+
+## 26 — Neue Erkenntnisse: Schuld 19-zayin, Lehre 57, Lehre 58
+
+### 26.1 — Schuld 19-zayin (registriert)
+
+| Feld | Wert |
+|------|------|
+| **Name** | `19-zayin` (siebter hebraeischer Buchstabe; konsistent mit der Reihe `19-aleph`, `19-bet`, `19-gimel`, `19-dalet`, `19-he`, `19-vav`) |
+| **Quelle** | Charge 19 Phase 2 Step 3, Post-Apply V2 plus ACL-Diagnostik via `aclexplode(c.relacl)` |
+| **Beschreibung** | `anon` und `authenticated` besitzen ein direktes `UPDATE`-Privileg auf den Sequenzen `public.account_report_mapping_id_seq` und `public.report_lines_id_seq`. Pre-existing — durch `0054` weder verursacht noch behoben. Quelle der Eintraege noch zu klaeren; vermutlich aus frueheren Default-Privileges. |
+| **Risiko** | DB-seitig waere `setval()` fuer diese Rollen erlaubt; konkrete Ausnutzbarkeit haengt vom verfuegbaren SQL/RPC-Ausfuehrungspfad ab. Das Privileg ist dennoch least-privilege-widrig und als DoS-Risiko zu behandeln. Zwei theoretische Angriffspfade bei vorhandener Ausfuehrungsmoeglichkeit: (a) Counter-Reset (`setval(seq, 1)`), wodurch nachfolgende INSERTs mit `duplicate key violation` fehlschlagen koennten; (b) Counter-Sprung in die Naehe des `bigint`-Maximums mit nachfolgender ID-Space-Erschoepfung. |
+| **Compliance-Bezug** | GoBD Rz. 58/59/64 (Unveraenderbarkeit der Buchungs-Reihenfolge) und Art. 32 DSGVO (Sicherheit der Verarbeitung) potenziell betroffen, sobald Reporting-Daten aus `report_lines` hervorgehen. |
+| **Geplante Migration** | `0055_revoke_anon_authenticated_sequence_update.sql` — REVOKE `UPDATE ON ALL SEQUENCES IN SCHEMA public FROM anon, authenticated`. Idempotenz wie ueblich. |
+| **Earliest Charge** | nach Drift-Schliessung `0054` (Merge des `0054`-PRs), als separater PR. Nicht in `0054` integrierbar (Atomaritaets-Beschluss aus HANDOFF_BATCH_19 §1). |
+| **Out-of-Scope fuer 0055** | `service_role` (intendiert `ALL` per `0054`); `USAGE` fuer `authenticated` (intendiert per `0054`); `setval()` aus Application-Layer (separates Thema, falls dort genutzt — laut aktueller Recherche nicht vorgesehen). |
+
+### 26.2 — Lehre 57 (registriert)
+
+> **HANDOFF-Verweise auf externe Dokument-Sektionen sind Hypothesen, keine
+> Fakten — vor Verwendung als Source-of-Truth zwingend zu verifizieren.**
+>
+> Wenn ein HANDOFF-Eintrag den Wortlaut "siehe Sektion X von Doku Y" als
+> Mapping-Quelle fuer eine sicherheitsrelevante Migration nennt, ist die
+> tatsaechliche Existenz des Mappings in dieser Sektion vor jedem
+> Migrations-Schritt zu pruefen. Liegt das versprochene Mapping dort nicht
+> vor, ist die Source-of-Truth aus den primaeren Master-Quellen
+> (HANDOFF_BATCH_*, DB-Inventar) neu aufzubauen, nicht stillschweigend
+> aus dem DB-Zustand zu erraten.
+>
+> Verstaerkt Schreibanweisung Nr. 39 ("HANDOFF-Status-Behauptungen sind
+> Hypothesen, keine Fakten") aus HANDOFF_BATCH_19 §1.
+>
+> Praktischer Beleg: Charge 19 Phase 2 Step 3 — HANDOFF §3.1 verwies auf
+> Sektion 16 dieser Doku als Quelle des Gruppe A–E Mappings; Sektion 16
+> enthielt jedoch nur Plan-Text ohne Tabellen-Mapping. Das Mapping wurde
+> nach HANDOFF_BATCH_19 §8.4 plus Pre-Check Phase 6/N (`pg_policies`)
+> rekonstruiert.
+
+### 26.3 — Lehre 58 (registriert)
+
+> **Pre-Check fuer Sequenz-Privilegien benoetigt zwei Datenquellen.**
+>
+> `information_schema.role_usage_grants` deckt nur das SQL-Standard-Privileg
+> `USAGE` ab. Die PostgreSQL-spezifischen Sequenz-Privilegien `SELECT` und
+> `UPDATE` werden dort nicht aufgefuehrt. Eine Pre-Check-Abfrage, die nur
+> `role_usage_grants` konsultiert, kann pre-existing `SELECT`- und
+> `UPDATE`-Eintraege fuer beliebige Rollen uebersehen.
+>
+> Vollstaendige Inspektion erfordert:
+>
+> - `information_schema.role_usage_grants` fuer `USAGE`.
+> - `pg_class.relacl` via `aclexplode()` fuer `SELECT` und `UPDATE`,
+>   einschliesslich Aufloesung von OID 0 als `PUBLIC` und OIDs >0 via
+>   `pg_roles.rolname`.
+>
+> Verstaerkt Lehre 53 (Pre-existing-Grants vor jeder GRANT-Migration
+> pruefen) durch Erweiterung des Quellbereichs um die ACL-Direktinspektion.
+>
+> Praktischer Beleg: Charge 19 Phase 2 Step 3 — Pre-Check Phase 3/N gab
+> 0 Zeilen zurueck und liess den Eindruck eines sauberen Sequenz-Zustands
+> entstehen; ACL-Diagnostik nach Apply zeigte pre-existing
+> `UPDATE`-Eintraege fuer `anon` und `authenticated` (siehe Schuld
+> 19-zayin in §26.1).
+
+---
+
+**Ende Folge-Update — Charge 19 Phase 2 Step 3 (0054).**
+
+*Verfasser: Abdullah.*
+*Status der Datenbank: alle Sicherheits-Migrations bis `0054` einschliesslich
+angewendet. `authenticated` und `service_role` operativ wiederhergestellt
+nach Least-Privilege-Mapping. Tracker-Drift dokumentiert (siehe §24).*
+*Status des Repos: Branch `fix/charge-19-phase-2-0054`, abgeleitet von
+`main` @ `12e35c0`. Migration-Datei und Doku-Sektionen 23–26 lokal
+vorhanden, noch nicht committed.*
+*Naechste Schritte: Append der Sektionen 23–26 plus dieses Footer-Updates
+in `docs/harouda-migrations-update-2026-05-02.md`, numerische Verifikation
+der gesamten Datei (Lehre 48), atomarer Commit + Push + PR auf Branch
+`fix/charge-19-phase-2-0054`. Anschliessend Charge 20
+(Compliance-Verifikation replay, Schuld 10-aleph) und in eigener Charge
+Migration `0055` zur Schliessung der Schuld 19-zayin.*

@@ -1,0 +1,77 @@
+-- migration: 0053_revoke_authenticated_dangerous_grants.sql
+-- charge:    19, phase 2, step 2
+-- schuld:    19-vav (entdeckt in Charge 19 Phase 2 Step 2 Vorbereitung)
+-- referenz:  HANDOFF nach Charge 19 Phase 2 Step 1, Pre-existing-Grants-Check
+-- vorgaenger: 0052_revoke_anon_dangerous_grants.sql
+
+-- zweck:
+-- die rolle `authenticated` besitzt aktuell auf 42 tabellen im schema public
+-- die privilegien TRUNCATE, TRIGGER und REFERENCES. ursache vermutlich
+-- ALTER DEFAULT PRIVILEGES aus frueheren migrations (siehe schuld 19-he).
+--
+-- TRUNCATE umgeht:
+--   * RLS-policies vollstaendig (PostgreSQL-eigenheit, vgl. lehre 44).
+--   * BEFORE DELETE-trigger wie journal_entries_protect_delete (0022).
+--   * mandanten-isolation — entfernt zeilen aller mandanten gleichzeitig.
+--
+-- TRIGGER ermoeglicht das anlegen/aendern beliebiger trigger durch eine
+-- nicht-administrative rolle. das durchbricht das least-privilege-prinzip
+-- und ermoeglicht code-injection in DML-pfade.
+--
+-- REFERENCES ermoeglicht das anlegen von foreign-keys auf interne tabellen,
+-- was eine fluechtige existenz-pruefung exposed (information disclosure).
+--
+-- konsequenz ohne diese migration:
+-- jede authentifizierte sitzung kann z. b. `truncate public.journal_entries`
+-- ausfuehren und damit alle buchungen aller mandanten loeschen, ohne dass
+-- BEFORE-DELETE-trigger oder RLS-policies das verhindern.
+--
+-- compliance-bezug:
+--   * GoBD Rz. 58, 59, 64 (Unveraenderbarkeit gebuchter Belege).
+--   * Paragraph 257 HGB (Aufbewahrung).
+--   * Paragraph 146 AO (Ordnungsmaessigkeit der Buchfuehrung).
+--   * Art. 32 DSGVO (Sicherheit der Verarbeitung).
+--
+-- scope:
+-- diese migration entfernt ausschliesslich die drei privilegien
+-- TRUNCATE, TRIGGER, REFERENCES von der rolle `authenticated`.
+-- es werden KEINE crud-grants (SELECT/INSERT/UPDATE/DELETE) hinzugefuegt
+-- und KEINE sequenz-grants angelegt. das ist scope von 0054.
+-- die rolle `service_role` wird nicht beruehrt: eine spaetere
+-- `GRANT ALL ... TO service_role`-anweisung in 0054 bleibt damit kompatibel.
+--
+-- nicht im scope:
+--   * helper-function-EXECUTE-hardening (schuld 19-gimel).
+--   * ALTER DEFAULT PRIVILEGES-cleanup (schuld 19-he).
+--   * crud-grants fuer authenticated (folge-migration 0054).
+--   * service_role-grants (folge-migration 0054).
+--
+-- idempotenz:
+-- REVOKE auf nicht-existierende privilegien ist in PostgreSQL ein no-op.
+-- mehrfaches anwenden dieser migration ist daher gefahrlos.
+
+revoke truncate, trigger, references
+  on all tables in schema public
+  from authenticated;
+
+-- verifikations-query (manuell auszufuehren nach apply):
+--
+-- select
+--   table_name,
+--   string_agg(privilege_type, ', ' order by privilege_type) as privs
+-- from information_schema.role_table_grants
+-- where table_schema = 'public'
+--   and grantee = 'authenticated'
+-- group by table_name
+-- order by table_name;
+--
+-- erwartetes ergebnis nach apply: genau eine zeile.
+--
+-- table_name   | privs
+-- -------------+--------
+-- health_check | SELECT
+--
+-- alle anderen 41 tabellen erscheinen nicht mehr im result-set,
+-- da sie nach dem REVOKE keine privilegien fuer `authenticated` mehr haben.
+-- der `health_check / SELECT`-eintrag bleibt erhalten (intentional, fuer
+-- frontend-health-probe).

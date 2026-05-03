@@ -523,3 +523,213 @@ Schulden 19-aleph, 19-bet, 19-gimel, 19-he werden NICHT in der `0053`-Migration 
 *Verfasser: Abdullah.*
 *Status der Datenbank: alle Sicherheits-Migrations bis `0052` einschliesslich angewendet. Tracker-Drift dokumentiert. `anon`-Privileg-Eskalation auf REVOKE-Niveau geschlossen.*
 *Naechste Phase: Migration `0053_grant_authenticated_public_tables.sql` (separater PR).*
+
+---
+
+# Folge-Update — Charge 19 Phase 2 Step 2 (Migration 0053) — 2026-05-02
+
+> **Status:** Migration `0053_revoke_authenticated_dangerous_grants.sql` wurde manuell via Supabase Studio angewendet.
+>
+> **Datum:** 2026-05-02
+> **Ausfuehrender:** Abdullah
+> **Project-Ref:** `harouda` (Supabase, eu-central-1, Free Plan)
+> **Letzter `main`-Hash bei Beginn:** `48fabda`
+> **Vorgaenger-Update:** Charge 19 Phase 2 Step 1 (Migration 0052)
+
+---
+
+## 17 — Was wurde in Charge 19 Phase 2 Step 2 (Migration 0053) angewendet
+
+### 17.1 — Migration `0053_revoke_authenticated_dangerous_grants.sql`
+
+**Status:** Erfolgreich angewendet.
+
+**Hintergrund:** Bei der Pre-existing-Grants-Pruefung vor Schreiben der GRANT-Migration `0054` (Schuld 18-bet) wurde entdeckt, dass die Rolle `authenticated` auf 42 Tabellen im Schema `public` die Privilegien `TRUNCATE`, `TRIGGER` und `REFERENCES` besitzt. Die Ursache liegt vermutlich in `ALTER DEFAULT PRIVILEGES` aus frueheren Migrations (siehe Schuld 19-he).
+
+`TRUNCATE` durch eine authentifizierte Rolle umgeht:
+
+- RLS-Policies vollstaendig (PostgreSQL-Eigenheit, vgl. Lehre 44).
+- BEFORE-DELETE-Trigger wie `journal_entries_protect_delete` (Migration `0022`).
+- Mandanten-Isolation — entfernt Zeilen aller Mandanten gleichzeitig.
+
+Diese Befund war nicht in HANDOFF nach Charge 19 Phase 2 Step 1 §3.1 dokumentiert. HANDOFF nahm implizit eine `authenticated`-Tabelle ohne Privilegien an. Die tatsaechliche DB-Realitaet zeigte 84 Zeilen in `information_schema.role_table_grants` fuer die beiden Rollen `authenticated` und `service_role`. Die Diskrepanz wird in Sektion 21 dokumentiert.
+
+`SELECT` auf `health_check` fuer `authenticated` bleibt unveraendert (intentionaler Health-Probe-Zugriff, gleiche Begruendung wie bei `0052` fuer `anon`).
+
+**Ausgefuehrtes SQL:**
+
+```sql
+revoke truncate, trigger, references
+  on all tables in schema public
+  from authenticated;
+```
+
+**Pre-Apply-Snapshot (am 2026-05-02):**
+
+```sql
+select count(*) as authenticated_table_grants
+from information_schema.role_table_grants
+where table_schema = 'public'
+  and grantee = 'authenticated';
+```
+
+Ergebnis vor Apply: `127`.
+
+Erlaeuterung der Zahl: 41 Tabellen mit je 3 Privilegien (`REFERENCES`, `TRIGGER`, `TRUNCATE`) = 123, plus `health_check` mit 4 Privilegien (`REFERENCES`, `SELECT`, `TRIGGER`, `TRUNCATE`) = 127.
+
+**Pre-Apply-Verifikation `health_check`:**
+
+```sql
+select privilege_type
+from information_schema.role_table_grants
+where table_schema = 'public'
+  and grantee = 'authenticated'
+  and table_name = 'health_check'
+order by privilege_type;
+```
+
+Ergebnis: 4 Zeilen — `REFERENCES`, `SELECT`, `TRIGGER`, `TRUNCATE`. Der `SELECT`-Eintrag ist intentional und darf nach Apply NICHT entfernt sein.
+
+**Post-Apply-Verifikation:**
+
+```sql
+select
+  table_name,
+  string_agg(privilege_type, ', ' order by privilege_type) as privs
+from information_schema.role_table_grants
+where table_schema = 'public'
+  and grantee = 'authenticated'
+group by table_name
+order by table_name;
+```
+
+Ergebnis nach Apply: genau eine Zeile.
+
+| table_name   | privs  |
+|--------------|--------|
+| health_check | SELECT |
+
+**Cross-Check:**
+
+```sql
+select count(*) as remaining_count
+from information_schema.role_table_grants
+where table_schema = 'public'
+  and grantee = 'authenticated';
+```
+
+Ergebnis: `1`. Differenz zum Pre-Apply-Snapshot: 127 − 1 = 126 entfernte Privilegien. Erwartung: 41 × 3 (gewoehnliche Tabellen) + 3 (`health_check` ohne `SELECT`) = 126. Tatsache und Erwartung stimmen ueberein.
+
+REVOKE vollstaendig angewendet. Schuld 19-vav auf DB-Niveau geschlossen.
+
+---
+
+## 18 — Tracker-Drift nach 0053
+
+| Migration | Status auf DB | Status im git-Repo (`main` @ Zeitpunkt der Anwendung) |
+|-----------|---------------|---------------------------------------------------------|
+| 0042 | applied (manuell, Charge 14) | applied (commit) |
+| 0046 | applied (manuell, Charge 15 Phase 1) | applied (commit) |
+| 0048 | applied (manuell, Charge 15 Phase 1) | applied (commit) |
+| 0050 | applied (manuell, Charge 15 Phase 1) | applied (commit) |
+| 0052 | applied (manuell, Charge 19 Phase 2 Step 1) | applied (commit) |
+| **0053** | **applied (manuell, Charge 19 Phase 2 Step 2)** | **NOCH NICHT committed (Tracker-Drift)** |
+| 0054 | nicht angewendet | noch nicht committed (geplant, Folge-PR) |
+
+**Drift-Begruendung:** Wie in Charge 15 Phase 1 und 19 Phase 2 Step 1 dokumentiert: `harouda` hat keinen automatischen Migrations-Tracker fuer manuell via Studio angewendete Files. `db push` ist lokal nicht moeglich (Docker fehlt). Die Drift wird durch diesen Eintrag dokumentiert, der zusammen mit dem Migration-File in einem atomaren PR committed wird.
+
+**Auswirkung:** Bis der PR mit `0053` gemerged ist, weicht der DB-Zustand vom `main`-Stand ab. Nach dem Merge ist die Drift wieder geschlossen (DB und git in Sync auf `0053`).
+
+---
+
+## 19 — Compliance-Stand nach 0053
+
+| Anforderung | Stand vor 0053 | Stand nach 0053 |
+|-------------|----------------|------------------|
+| GoBD Rz. 58, 59, 64 (Unveraenderbarkeit gebuchter Belege) | Trigger-Niveau gegeben; durch `authenticated TRUNCATE` umgehbar. | Trigger-Niveau gegeben; `authenticated TRUNCATE` entzogen. |
+| Paragraph 257 HGB (Aufbewahrung) | gefaehrdet durch `authenticated TRUNCATE`. | strukturell gesichert auf REVOKE-Niveau. |
+| Paragraph 146 AO (Ordnungsmaessigkeit) | gefaehrdet durch `authenticated TRUNCATE`. | strukturell gesichert. |
+| Art. 32 DSGVO (Sicherheit der Verarbeitung) | gefaehrdet durch `authenticated TRUNCATE`. | konkret verbessert. |
+| Mandanten-Isolation | gefaehrdet — `TRUNCATE` umgeht RLS und entfernt alle Mandanten-Zeilen. | strukturell gesichert auf REVOKE-Niveau. |
+| Least-Privilege-Prinzip fuer `authenticated` | verletzt (3 ueberfluessige Privs auf 42 Tabellen). | erfuellt — `authenticated` hat nur den intendierten `SELECT` auf `health_check`. |
+
+**Hinweis:** Die Massnahme schliesst Schuld 19-vav auf der Privilegien-Ebene. Die Operabilitaet der Anwendung ueber `@supabase/supabase-js` ist nach `0053` weiterhin nicht gegeben — `authenticated` besitzt nun ueberhaupt keine SELECT/INSERT/UPDATE/DELETE-Grants. Diese werden in Migration `0054` (Schuld 18-bet) systematisch nach RLS-Policy-Inventar ergaenzt.
+
+**Zwischenstand der Operabilitaet:** Anwendung ist auf REVOKE-Niveau sicher, aber operativ tot (kein `authenticated` Zugriff auf Tabellen ausser `health_check / SELECT`). Dieser Zwischenstand ist beabsichtigt und temporaer bis `0054` angewendet ist.
+
+---
+
+## 20 — Neue Schuld registriert in Charge 19 Phase 2 Step 2
+
+| Schuld | Quelle | Beschreibung | Status |
+|--------|--------|--------------|--------|
+| **19-vav** | Phase 2 Step 2 (Pre-existing-Grants-Check vor `0054`-Vorbereitung) | `authenticated TRUNCATE/TRIGGER/REFERENCES` auf 42 Tabellen — durch `0053` geschlossen. | GESCHLOSSEN |
+
+Die Schulden 18-bet (GRANT-Repair Operabilitaet), 19-aleph, 19-bet, 19-gimel, 19-he bleiben unveraendert offen. 18-bet wird in Migration `0054` adressiert.
+
+---
+
+## 21 — Diskrepanz mit HANDOFF nach Charge 19 Phase 2 Step 1, plus Falle 3.2 Manifestation #12
+
+### 21.1 — HANDOFF-Diskrepanz
+
+HANDOFF §3.1 implizierte, dass `authenticated` keine vorhandenen Privilegien auf `public`-Tabellen besitzt. Diese Annahme war ein Folgefehler aus Charge 18 §5: dort wurde durch RLS-Test mit `42501`-Fehler geschlossen, dass GRANTs fehlen — was korrekt war fuer `SELECT/INSERT/UPDATE/DELETE`, aber NICHT fuer `TRUNCATE/TRIGGER/REFERENCES`. Diese drei wurden waehrend Charge 18 nicht getestet, weil `42501` auf `SELECT` auftrat und die Diagnose dort endete.
+
+In Charge 19 Phase 2 Step 2 wurde die Diskrepanz durch den expliziten `role_table_grants`-Check entdeckt. Lehre 53 (Pre-existing-Grants-Check vor jeder GRANT-Migration) erwies sich damit als unmittelbar wertvoll — ohne diesen Schritt waere die Privileg-Eskalation auch nach `0054` weiterhin offen geblieben.
+
+**Praxis-Konsequenz:** Bei kuenftigen GRANT-Migrationen oder wenn `42501` als Diagnose-Endpunkt auftritt: die Privileg-Liste fuer ALLE `privilege_type`-Werte (nicht nur `SELECT/INSERT/UPDATE/DELETE`) zu pruefen, nicht aus dem Symptom auf den Vollumfang schliessen.
+
+### 21.2 — Falle 3.2 Manifestation #12
+
+Beim Pre-Patch-Baseline-Check fuer Tracker-Doku (Sektion 22 dieser Datei) wurde der Befehl
+
+```powershell
+(Get-Content "docs/harouda-migrations-update-2026-05-02.md").Count
+```
+
+aus dem Chat in PowerShell kopiert. Die Chat-Anzeige hatte den Dateinamen automatisch in einen Markdown-Link umgewandelt:
+
+```
+docs/[harouda-migrations-update-2026-05-02.md](http://harouda-migrations-update-2026-05-02.md)
+```
+
+PowerShell akzeptierte den Befehl ohne Fehler und lieferte korrekte Werte zurueck. Ursache: PowerShell interpretiert `[...]` als Wildcard-Pattern (Falle 3.9). Das Pattern `[harouda-...md]` matchte zufaellig genau eine Datei in `docs/`, und der `(http://...)`-Suffix wurde von `Get-Content`/`Get-Item` als trailing-text ignoriert.
+
+**Risiko:** Der Befehl funktionierte zufaellig korrekt. Bei mehreren matching files oder Sonderzeichen-Konflikten wuerde derselbe Befehl stillschweigend falsche Werte liefern.
+
+**Verifikation per `Get-ChildItem -Path docs -Filter *.md | Select-Object Name, Length`:** Datei existiert mit Namen `harouda-migrations-update-2026-05-02.md` (ohne `[`/`]`/URLs) und `Length = 22528`. Die zufaellig korrekten Pre-Patch-Werte (525 Zeilen, 22528 Bytes) sind damit numerisch bestaetigt.
+
+**Eintrag fuer Falle-3.2-Liste:** Diese Manifestation #12 ist die zwoelfte beobachtete Wirkung von Falle 3.2 (zuvor: SEPTUPLE-DIRECTIONAL bis Charge 17, danach Manifestation #11 in Phase 2 Step 1 fuer File-System-Output). Falle 3.2 ist damit weiterhin aktiv beim Kopieren von Pfaden aus dem Chat in PowerShell.
+
+**Praxis-Konsequenz:** Pfade aus dem Chat NIEMALS in PowerShell einfuegen. Stattdessen entweder
+
+- per Tab-Completion in PowerShell ergaenzen,
+- oder den Pfad per Hand abtippen.
+
+Die HANDOFF-Schreibanweisung "Bei jedem Datei-Test: numerische Verifikation" (Lehre 48) wird damit verstaerkt: zusaetzlich zur numerischen Verifikation muss auch die Eingabe des Pfades selbst gegen Falle 3.2 abgesichert werden.
+
+---
+
+## 22 — Naechste Schritte (Migration 0054 — GRANT-Repair, Schuld 18-bet)
+
+Nach Merge des `0053`-PRs:
+
+1. Migration `0054_grant_authenticated_public_tables.sql` als separater PR.
+2. Anwendung der GRANTs fuer `authenticated` (per Gruppe A–E aus dem Inventar von Charge 19 Phase 2 Step 1).
+3. `service_role` erhaelt `GRANT ALL ON ALL TABLES IN SCHEMA public` plus `GRANT ALL ON ALL SEQUENCES IN SCHEMA public`.
+4. Sequenz-GRANTs fuer `account_report_mapping_id_seq` und `report_lines_id_seq`:
+   - `GRANT USAGE ON SEQUENCE ... TO authenticated`.
+   - Erforderlich, da beide Tabellen `nextval(...)`-Defaults haben und ohne den Grant der INSERT-Pfad scheitert (Lehre 52).
+5. Tracker-Drift-Eintrag fuer `0054` in dieser Datei (Abschnitt 23+).
+
+Die Migration-Nummer fuer die GRANT-Repair-Migration verschiebt sich damit von urspruenglich geplant `0053` auf `0054`. Der HANDOFF-Eintrag und die Migration-Mapping aus Phase 2 Step 1 bleiben inhaltlich gueltig — nur die Datei-Nummer aendert sich. Diese Verschiebung ist eine direkte Folge der Schuld 19-vav-Entdeckung.
+
+Schulden 19-aleph, 19-bet, 19-gimel, 19-he werden NICHT in der `0054`-Migration mit-bearbeitet.
+
+---
+
+**Ende Folge-Update — Charge 19 Phase 2 Step 2 (0053).**
+
+*Verfasser: Abdullah.*
+*Status der Datenbank: alle Sicherheits-Migrations bis `0053` einschliesslich angewendet. Tracker-Drift dokumentiert. `authenticated`-Privileg-Eskalation auf REVOKE-Niveau geschlossen.*
+*Naechste Phase: Migration `0054_grant_authenticated_public_tables.sql` (separater PR, Schuld 18-bet).*

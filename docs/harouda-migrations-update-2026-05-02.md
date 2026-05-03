@@ -1354,3 +1354,180 @@ der gesamten Datei (Lehre 48), atomarer Commit + Push + PR auf Branch
 `fix/charge-19-phase-2-0054`. Anschliessend Charge 20
 (Compliance-Verifikation replay, Schuld 10-aleph) und in eigener Charge
 Migration `0055` zur Schliessung der Schuld 19-zayin.*
+
+
+## §28 — Charge 20: Compliance-Verifikation Replay (Schuld 10-aleph) — 11.C Diagnostic Outcome
+
+**Status:** ABGESCHLOSSEN als 11.C Diagnostic / verification suspended at V5 due to ACL drift before Setup.
+**Datum:** Drafting 2026-05-03 · Diagnostic Execution 2026-05-03.
+**Charge-Typ:** Compliance-Verifikation / Replay (keine Migration-Apply, keine Schema-Aenderung, keine GRANT-Aenderung). Outcome: Diagnostic Stop vor Setup.
+
+### §28.1 Identifikation
+
+- **Charge:** 20
+- **Branch:** `verify/charge-20-compliance-replay`
+- **Branch-Creation-HEAD:** `49af1aa` (`fix(db): revoke sequence update from anon authenticated (#51)`)
+- **Pre-Execution-HEAD:** `49af1aa` (kein commit auf branch erfolgt; Charge endet als 11.C ohne DB-write)
+- **Verification-Doc:** `docs/staging-rls-verifikation-2026-05-03.md` (untracked, lokal persistiert mit 11.C-Outcome; nicht staged/committed). Reviewed filesystem-rename via `Rename-Item` vom urspruenglichen draft-Filename auf den Final-Filename ist erfolgt.
+- **Environment:** staging
+- **Region:** Central EU (Frankfurt)
+- **Tester:** Abdallah Harouda
+- **Master-HANDOFF:** `HANDOFF_BATCH_19.md` §12 (Charge-20 binding).
+
+### §28.2 Vorgeschichte / Binding
+
+- **Charge 18 (Diagnostic):** Verifikations-Voraussetzungen nicht erfuellt (GRANT-Luecken) — Verifikation ausgesetzt, Schuld 10-aleph open.
+- **Charge 19 Phase 1:** `journal_entries` inspection (PR #44).
+- **Charge 19 Phase 2:** GRANT-Repair via Migrationen 0052 / 0053 / 0054 / 0055 (PRs #46–#51) — schloss strukturelle GRANT-Luecken aus Charge 18.
+- **Charge 20:** wiederholt Schuld 10-aleph auf Basis der durch Charge 19 Phase 2 reparierten ACL-Baseline. **Outcome: 11.C** — V5 deckt einen neuen, in Charge 18/19 nicht sichtbaren Drift auf (MAINTAIN-Privileg, PG17).
+
+### §28.3 Scope
+
+**Geplanter Scope (in-scope):**
+1. ACL Re-Check V1–V6 (read-only, pre-Setup).
+2. Setup test data (transactional one-batch).
+3. 12 RLS-Szenarien (HANDOFF_BATCH_12 §8 + Sc. 8b).
+4. Cleanup (transactional one-batch).
+5. Verification-Doc-Fertigstellung + reviewed filesystem-rename auf Final-Filename.
+6. `journal_entries` documentation-only follow-up.
+
+**Tatsaechlich ausgefuehrter Scope:**
+- ACL V1–V5: ausgefuehrt (V5 mit STOP).
+- V6, Setup, Pre-Existence-Check, RLS-Szenarien, Cleanup: **NICHT ausgefuehrt** wegen V5-Stop.
+- Verification-Doc-Fertigstellung + filesystem-rename auf Final-Filename: erfolgt.
+
+**Out-of-Scope (unveraendert):**
+- Datenschutz-Sign-off (post-Charge-20).
+- StB-Ruecksprache zu Loesch-Policies (post-Charge-20).
+- BEFORE-DELETE-Trigger fuer `belege` / `beleg_positionen` (Charge 21).
+- Schulden 19-aleph / 19-bet / 19-gimel / 19-he (spaetere Charges).
+- Mirror-Tests fuer User B.
+
+### §28.4 Drafting-Status
+
+- Setup-SQL, Cleanup-SQL, 12 Scenario-SQLs, ACL V1–V6 SQL: **gedrafted und genehmigt** (Sessions 1–3, pre-execution).
+- Verification-Doc-Skeleton: erstellt, strukturell reviewed (R-1 bis R-9), keine Blocker.
+- Drafts bleiben als Replay-Asset fuer Charge 23 erhalten — keine Loeschung wegen 11.C-Outcome.
+
+### §28.5 Verlauf
+
+Phase A — Replay-Execution (gestoppt nach V5):
+
+| Schritt | Aktion | Modus | Outcome |
+|--------|--------|-------|---------|
+| A.1 | ACL V1 (authenticated table grants, information_schema) | read-only | PASS — 42 rows (Gruppen A–E + health_check) |
+| A.2 | ACL V2 (authenticated sequence privileges) | read-only | PASS — usage=true, select=false, update=false (post-0055 verified) |
+| A.3 | ACL V3 (service_role table grants, information_schema) | read-only | PASS — 42 rows × 7 privs |
+| A.4 | ACL V4 (service_role sequence privileges) | read-only | PASS — alle drei privs true |
+| A.5 | ACL V5 (pg_class.relacl + aclexplode, Lehre 58) | read-only | **STOP** — A1=0, A2=0, A3=0, A4=41, A5=0, A6=42 (drift in A4 + A6) |
+| A.6 | Diagnostic-Probe (post-V5, read-only) | read-only | MAINTAIN-Privileg auf 41 public application tables fuer anon, authenticated, postgres, service_role; `health_check` einzige Ausnahme |
+| A.7 | V6, Pre-Existence, Setup, Setup-Verif, 12 Szenarien, Cleanup, Cleanup-Verif | — | **NICHT AUSGEFUEHRT** — Replay-Execution gestoppt nach V5 |
+
+Phase B — Dokumentations-/Repo-Abschluss nach Diagnostic Outcome (NICHT Fortsetzung der Replay-Execution):
+
+| Schritt | Aktion | Modus | Hinweis |
+|--------|--------|-------|---------|
+| B.1 | Verification-Doc auf 11.C umstellen (Section 6, 9, 11, 12, 13, Appendix A/B) | file-write | erfolgt; lokal persistiert; nicht staged/committed |
+| B.2 | Reviewed filesystem-rename via `Rename-Item` auf `staging-rls-verifikation-2026-05-03.md`. Kein `git mv`, weil das File untracked ist; File bleibt nach rename untracked unter dem neuen Namen. | filesystem-rename | erfolgt |
+| B.3 | Tracker-§28-Append (Lehre 55, atomic PowerShell-script). Tracker (`docs/harouda-migrations-update-2026-05-02.md`) ist tracked und erscheint nach diesem Schritt als `M ` in `git status`. | repo-write | dieser Eintrag |
+| B.4 | Selective `git add` (NICHT `git add -A`): umbenanntes Verification-Doc unter Final-Filename + modifizierter Tracker. Charge-19 Append-Payloads bleiben unstaged. → `git commit` → `git push` (`--no-verify` falls Husky pre-push OOM, wie in Charge 19) | repo-write | nach Tracker-Append |
+| B.5 | PR erstellen, CI gruen, squash-merge | GitHub | finaler Schritt |
+
+**Hinweis:** Phase B ist Dokumentations-/Repo-Abschluss eines Diagnostic Outcomes, **keine** Fortsetzung der Replay-Execution. Setup, RLS-Szenarien und Cleanup wurden bewusst nicht ausgefuehrt. V5-Stop ist ein praeventives Gate, das DB-state-Pollution und Charge-18-Wiederholung verhindert hat. Der eigentliche Replay (urspruenglich geplante Schritte nach V5/V6) erfolgt erst in Charge 23 nach Charge-22-Korrektur.
+
+### §28.6 Findings (Diagnostic Outcome)
+
+- **F1 (V5-A4):** 41 service_role-table-rows zeigen `actual_privs = 8` statt expected `7`. Differenz: zusaetzliches Privileg `MAINTAIN`.
+- **F2 (V5-A6):** 42 authenticated-table-rows zeigen Gruppen-Mapping-Drift; Ursache: unerwartetes `MAINTAIN` in actual_privs gegenueber Gruppen-Definition (A 4 privs, B 3, C 3, D 2, E 1, health_check 1).
+- **F3 (Diagnostic-Probe):** `MAINTAIN` ist explizit in `pg_class.relacl` fuer 4 Rollen × 41 public application tables (anon, authenticated, postgres, service_role). 164 MAINTAIN-grants gesamt. `health_check` als einzige public application table ohne MAINTAIN.
+- **F4 (Source-of-data):** `information_schema.table_privileges` (V1/V3) listet `MAINTAIN` nicht — V1/V3 erschienen als PASS. `pg_class.relacl + aclexplode()` (V5) deckt MAINTAIN auf. **Lehre 58 in Charge 20 empirisch validiert.**
+
+Detail-Output: siehe Verification-Doc Section 11 + Appendix A.
+
+### §28.7 Klassifikation
+
+- **Outcome:** 11.C — Diagnostic / verification suspended at V5 due to ACL drift before Setup.
+- **11.B (Replay erfolgreich):** NOT REACHED.
+- **11.D (Prerequisite-Failure anderen Typs):** not used; 11.C deckt diesen Fall ab.
+
+### §28.8 Repo-Zustand
+
+**Aktueller Zustand (vor Tracker-Append B.3):**
+
+```
+?? docs/append-charge19-phase2-0052.md
+?? docs/append-charge19-phase2-0053.md
+?? docs/append-charge19-phase2-0054.md
+?? docs/append-charge19-phase2-0055.md
+?? docs/staging-rls-verifikation-2026-05-03.md
+```
+
+5 untracked Eintraege. Kein `M ` (modified-tracked). Keine staged Eintraege. Verification-Doc ist lokal persistiert mit 11.C-Inhalt unter dem Final-Filename, aber als untracked file — nicht staged/committed.
+
+**Erwarteter Zustand nach Tracker-Append (B.3), vor `git add` (B.4):**
+
+```
+?? docs/append-charge19-phase2-0052.md
+?? docs/append-charge19-phase2-0053.md
+?? docs/append-charge19-phase2-0054.md
+?? docs/append-charge19-phase2-0055.md
+?? docs/staging-rls-verifikation-2026-05-03.md
+ M docs/harouda-migrations-update-2026-05-02.md
+```
+
+Hinweise:
+- Verification-Doc bleibt unter `staging-rls-verifikation-2026-05-03.md` untracked, bis es durch selective `git add` in B.4 staged wird.
+- Der Tracker (`docs/harouda-migrations-update-2026-05-02.md`) ist tracked und erscheint nach Tracker-Append als `M ` (modified-tracked).
+- Keine staged Eintraege bis zum expliziten `git add` in B.4.
+
+**Nicht im Repo (bewusst):**
+- HANDOFF (`HANDOFF_charge20_current_state.md`) liegt ausserhalb des Repos und wird nicht versioniert.
+- Charge-19 Append-Payloads (`docs/append-charge19-phase2-005{2,3,4,5}.md`) bleiben untracked — nicht beruehren, nicht committen.
+
+### §28.9 Lehren-Bezug
+
+| Lehre / Falle | Anwendung in Charge 20 |
+|---------------|------------------------|
+| Lehre 47 | DB-Realitaet via Probes verifiziert (Schemas, RLS-Policies, Triggers — bereits in Drafting-Phase). |
+| Lehre 48 | Numerische Verifikation (V5-A1..A6 als integer drift-counts), nicht visuell. |
+| Lehre 50 | Branch-first: `verify/charge-20-compliance-replay` vor jedem write erstellt. |
+| Lehre 52 | Sequenz-USAGE-GRANTs separat (V2/V4 PASS bestaetigt). |
+| Lehre 54 | Ein sensitive op pro Response/Step waehrend drafting + execution. |
+| Lehre 55 | Tracker-Append via atomic PowerShell-script. |
+| **Lehre 58** | **Empirisch validiert in Charge 20**: aclexplode hat MAINTAIN-Drift aufgedeckt, den information_schema nicht zeigte. V5-Pattern verbindlich fuer alle kuenftigen ACL-Verifikationen. |
+| Falle 3.2 #12 | Pfade via Tab-completion, nie copy-paste. |
+| Falle 3.2 #13 | PowerShell-code manuell tippen, nie copy-paste. |
+
+**Neue Lessons aus Charge 20** (Detail in Verification-Doc Section 12):
+- C20-1: Lehre 58 nicht nur theoretisch — MAINTAIN-Privileg (PG17) ist konkretes Drift-Beispiel.
+- C20-2: V5-Gate-Wirksamkeit — Pre-Setup-ACL-Re-Check verhinderte Charge-18-Wiederholung.
+- C20-3: PG-Version-Awareness — `GRANT ALL` expandiert in PG17 inkl. MAINTAIN; Konvention: explizite Privilege-Listen statt `GRANT ALL`.
+
+### §28.10 Schulden-Statusupdate
+
+| Schuld | Status nach Charge 20 | Begruendung |
+|--------|------------------------|-------------|
+| **10-aleph** | **OPEN / PENDING** (unchanged) | Verifikation in Charge 20 nicht abgeschlossen wegen V5-Stop. Erwartete closure: nach Charge 22 (corrective) und Charge 23 (replay). |
+| **18-aleph** | OPEN — defense-in-depth gap (reframed) | Reframing-Annahme aus Drafting-Phase **empirisch unverifiziert in Charge 20** (Sc. 8b nicht ausgefuehrt). Empirische Bestaetigung erfolgt in Charge 23. Charge 21 ergaenzt BEFORE-DELETE-Trigger. |
+| **18-bet** | CLOSED (durch Charge 19 Phase 2, GRANT-Repair via 0054) | Unveraendert. |
+| **19-zayin** | CLOSED (durch 0055; siehe §27.11) | Unveraendert. V2/V4 PASS bestaetigen 0055-Wirksamkeit empirisch. |
+| **20-aleph (NEU)** | **OPEN** | Titel: "MAINTAIN privilege drift on 41 public application tables for anon/authenticated/postgres/service_role." Evidence: V5-A4, V5-A6, Diagnostic-Probe (siehe Verification-Doc Section 11 + Appendix A). Korrektur-Scope: PENDING CLARIFICATION in Charge 22. Risk-Profile (preliminary): anon=HIGH, authenticated=MEDIUM-HIGH, postgres=NONE, service_role=LOW. |
+| 19-aleph / 19-bet / 19-gimel / 19-he | OPEN — spaetere Charges | Nicht im Charge-20-Scope. |
+
+### §28.11 Folge-Charges
+
+| Charge | Zweck | Reihenfolge-Abhaengigkeit |
+|--------|-------|---------------------------|
+| **Charge 21** | BEFORE-DELETE-Trigger fuer `belege` / `beleg_positionen` (Schuld 18-aleph defense-in-depth-Closure) | unabhaengig — kann parallel zu 22/23 oder davor/danach laufen |
+| **Charge 22 (corrective)** | REVOKE MAINTAIN auf public application tables (Schuld 20-aleph). **Korrektur-Scope (anon/authenticated narrow vs. full inkl. postgres/service_role): pending clarification im Charge-22-Drafting.** Pre-Migration: erneute V5-A4/A6-Probe als Pre-Check (Lehre 53/55-Pattern). | folgt Charge 20 |
+| **Charge 23 (replay)** | Wiederholter Replay von Schuld 10-aleph. Verwendet die in Charge 20 gedrafteten Setup/Cleanup/12-Szenarien-SQLs unveraendert + V6. Erwartetes Outcome: 11.B, sofern Charge 22 erfolgreich. | folgt Charge 22 |
+
+### §28.12 Cross-References
+
+- **Verification-Doc:** `docs/staging-rls-verifikation-2026-05-03.md` (untracked, lokal persistiert mit 11.C-Outcome).
+- **Master-HANDOFF:** `HANDOFF_BATCH_19.md` §12.
+- **Vorgaenger-Tracker-Eintraege:** §27 (Charge 19 Phase 2, inkl. §27.11 zu Schuld 19-zayin / 0055), §26 (Charge 19 Phase 1) — finale §-Nummerierung beim Append-Tag verifizieren.
+- **Charge-19-Migrations:** `supabase/migrations/0052_revoke_anon_dangerous_grants.sql`, `0053_revoke_authenticated_dangerous_grants.sql`, `0054_grant_authenticated_public_tables.sql`, `0055_revoke_anon_authenticated_sequence_update.sql`.
+- **Folge-Charges:** Charge 21 (BEFORE-DELETE), Charge 22 (corrective MAINTAIN-REVOKE), Charge 23 (replay 10-aleph).
+- **External reference:** PostgreSQL 17 release notes / `GRANT` documentation — `MAINTAIN` privilege scope (VACUUM, ANALYZE, CLUSTER, REFRESH MATERIALIZED VIEW, REINDEX, LOCK TABLE).
+

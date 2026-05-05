@@ -218,7 +218,7 @@ describe("Arbeitsplatz · Musterfirma-Smoke (End-to-End)", () => {
       );
       expect(anlageN).not.toBeNull();
       expect(anlageN!.getAttribute("href")).toBe(
-        `/steuer/anlage-n?mandantId=${encodeURIComponent(kuehnId)}`
+        `/einkommensteuer/anlage-n?mandantId=${encodeURIComponent(kuehnId)}`
       );
 
       // Negativ-Assertion: FEHLT-Labels dürfen nicht im Tree-DOM stehen.

@@ -620,13 +620,13 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     );
 
     // Right-Column-Tree: die 5 Modul-Header-Haupt-Links. Einkommensteuer
-    // zeigt jetzt auf den Mantelbogen `/steuer/est-1a`, nicht mehr auf
+    // zeigt jetzt auf den Mantelbogen `/einkommensteuer/est-1a`, nicht mehr auf
     // `/steuer/euer` — siehe TREE_MODULES in ArbeitsplatzPage.tsx.
     const expected: Array<[string, string]> = [
       ["arbeitsplatz-launcher-rewe", "/buchfuehrung"],
       ["arbeitsplatz-launcher-anlagen", "/anlagen/verzeichnis"],
-      ["arbeitsplatz-launcher-einkommensteuer", "/steuer/est-1a"],
-      ["arbeitsplatz-launcher-umsatzsteuer", "/steuer/ustva"],
+      ["arbeitsplatz-launcher-einkommensteuer", "/einkommensteuer/est-1a"],
+      ["arbeitsplatz-launcher-umsatzsteuer", "/umsatzsteuer/ustva"],
       ["arbeitsplatz-launcher-lohn", "/lohn"],
     ];
 
@@ -907,7 +907,7 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
       '[data-testid="arbeitsplatz-tree-ust-ustva"]'
     );
     expect(ustvaSub!.getAttribute("href")).toBe(
-      "/steuer/ustva?mandantId=c-1"
+      "/umsatzsteuer/ustva?mandantId=c-1"
     );
 
     unmount();

@@ -5,6 +5,7 @@ import {
   Outlet,
   Route,
   Routes,
+  useLocation,
 } from "react-router-dom";
 import { DEMO_MODE } from "./api/supabase";
 import AppShell from "./components/AppShell";
@@ -133,6 +134,21 @@ import IntegrityDashboardPage from "./pages/admin/IntegrityDashboardPage";
 import "./App.css";
 
 const Router = DEMO_MODE ? HashRouter : BrowserRouter;
+
+// Redirect-Helper fuer die Steuer-Shell-Migration: leitet auf den Ziel-Pfad
+// um und uebernimmt search + hash der aktuellen Location, damit Query-Strings
+// wie ?mandantId=... durch den Redirect erhalten bleiben. Bare <Navigate to="/x" />
+// laesst search/hash fallen, weil React Router den string-form `to` als
+// vollstaendige Ziel-Location interpretiert.
+function NavigateWithSearch({ to }: { to: string }) {
+  const location = useLocation();
+  return (
+    <Navigate
+      to={{ pathname: to, search: location.search, hash: location.hash }}
+      replace
+    />
+  );
+}
 
 export default function App() {
   return (
@@ -283,6 +299,38 @@ export default function App() {
           <Route path="/anlagen/verzeichnis" element={<Navigate to="/buchhaltung/anlagen/verzeichnis" replace />} />
           <Route path="/anlagen/afa-lauf" element={<Navigate to="/buchhaltung/anlagen/afa-lauf" replace />} />
           <Route path="/banking/belegabfragen" element={<Navigate to="/buchhaltung/banking/belegabfragen" replace />} />
+
+          {/* Steuer-Shell-Migration: Legacy /steuer/* (Einkommensteuer + Umsatzsteuer)
+              leitet auf die neuen Module-Shell-Pfade /einkommensteuer/* bzw. /umsatzsteuer/* um.
+              NavigateWithSearch uebernimmt search + hash der aktuellen Location, damit
+              Query-Strings wie ?mandantId=... durch den Redirect erhalten bleiben. */}
+          <Route path="/steuer/est-1a" element={<NavigateWithSearch to="/einkommensteuer/est-1a" />} />
+          <Route path="/steuer/est-1c" element={<NavigateWithSearch to="/einkommensteuer/est-1c" />} />
+          <Route path="/steuer/anlage-n" element={<NavigateWithSearch to="/einkommensteuer/anlage-n" />} />
+          <Route path="/steuer/anlage-s" element={<NavigateWithSearch to="/einkommensteuer/anlage-s" />} />
+          <Route path="/steuer/anlage-g" element={<NavigateWithSearch to="/einkommensteuer/anlage-g" />} />
+          <Route path="/steuer/anlage-v" element={<NavigateWithSearch to="/einkommensteuer/anlage-v" />} />
+          <Route path="/steuer/anlage-so" element={<NavigateWithSearch to="/einkommensteuer/anlage-so" />} />
+          <Route path="/steuer/anlage-aus" element={<NavigateWithSearch to="/einkommensteuer/anlage-aus" />} />
+          <Route path="/steuer/anlage-kind" element={<NavigateWithSearch to="/einkommensteuer/anlage-kind" />} />
+          <Route path="/steuer/anlage-vorsorge" element={<NavigateWithSearch to="/einkommensteuer/anlage-vorsorge" />} />
+          <Route path="/steuer/anlage-r" element={<NavigateWithSearch to="/einkommensteuer/anlage-r" />} />
+          <Route path="/steuer/anlage-kap" element={<NavigateWithSearch to="/einkommensteuer/anlage-kap" />} />
+          <Route path="/steuer/anlage-mobility" element={<NavigateWithSearch to="/einkommensteuer/anlage-mobility" />} />
+          <Route path="/steuer/anlage-v-sonstige" element={<NavigateWithSearch to="/einkommensteuer/anlage-v-sonstige" />} />
+          <Route path="/steuer/anlage-v-fewo" element={<NavigateWithSearch to="/einkommensteuer/anlage-v-fewo" />} />
+          <Route path="/steuer/anlage-unterhalt" element={<NavigateWithSearch to="/einkommensteuer/anlage-unterhalt" />} />
+          <Route path="/steuer/anlage-u" element={<NavigateWithSearch to="/einkommensteuer/anlage-u" />} />
+          <Route path="/steuer/anlage-rav-bav" element={<NavigateWithSearch to="/einkommensteuer/anlage-rav-bav" />} />
+          <Route path="/steuer/anlage-n-aus" element={<NavigateWithSearch to="/einkommensteuer/anlage-n-aus" />} />
+          <Route path="/steuer/anlage-n-dhf" element={<NavigateWithSearch to="/einkommensteuer/anlage-n-dhf" />} />
+          <Route path="/steuer/anlage-av" element={<NavigateWithSearch to="/einkommensteuer/anlage-av" />} />
+          <Route path="/steuer/anlage-em" element={<NavigateWithSearch to="/einkommensteuer/anlage-em" />} />
+          <Route path="/steuer/anlage-haa" element={<NavigateWithSearch to="/einkommensteuer/anlage-haa" />} />
+          <Route path="/steuer/anlage-sonder" element={<NavigateWithSearch to="/einkommensteuer/anlage-sonder" />} />
+          <Route path="/steuer/anlage-agb" element={<NavigateWithSearch to="/einkommensteuer/anlage-agb" />} />
+          <Route path="/steuer/ustva" element={<NavigateWithSearch to="/umsatzsteuer/ustva" />} />
+          <Route path="/steuer/zm" element={<NavigateWithSearch to="/umsatzsteuer/zm" />} />
         </Route>
 
         <Route
@@ -316,8 +364,6 @@ export default function App() {
           <Route path="/berichte/vorjahresvergleich" element={<VorjahresvergleichPage />} />
           <Route path="/berichte/susa" element={<SuSaPage />} />
           <Route path="/steuer" element={<TaxFormsPage />} />
-          <Route path="/steuer/ustva" element={<UstvaPage />} />
-          <Route path="/steuer/zm" element={<ZmPage />} />
           <Route path="/lohn" element={<LohnPage />} />
           <Route path="/lohn/lohnsteueranmeldung" element={<LohnsteuerAnmeldungPage />} />
           <Route path="/lohn/sv-meldungen" element={<SvMeldungenPage />} />
@@ -334,55 +380,6 @@ export default function App() {
           <Route path="/steuer/euer" element={<Navigate to="/buchhaltung/euer" replace />} />
           <Route path="/steuer/gewerbesteuer" element={<GewerbesteuerPage />} />
           <Route path="/steuer/kst" element={<KoerperschaftsteuerPage />} />
-          <Route path="/steuer/anlage-n" element={<AnlageNPage />} />
-          <Route path="/steuer/anlage-s" element={<AnlageSPage />} />
-          <Route path="/steuer/anlage-g" element={<AnlageGPage />} />
-          <Route path="/steuer/anlage-v" element={<AnlageVPage />} />
-          <Route path="/steuer/anlage-so" element={<AnlageSOPage />} />
-          <Route path="/steuer/anlage-aus" element={<AnlageAUSPage />} />
-          <Route path="/steuer/anlage-kind" element={<AnlageKindPage />} />
-          <Route path="/steuer/anlage-vorsorge" element={<AnlageVorsorgePage />} />
-          <Route path="/steuer/anlage-r" element={<AnlageRPage />} />
-          <Route path="/steuer/anlage-kap" element={<AnlageKapPage />} />
-          <Route
-            path="/steuer/anlage-mobility"
-            element={<AnlageMobilitaetspraemiePage />}
-          />
-          <Route
-            path="/steuer/anlage-v-sonstige"
-            element={<AnlageVSonstigePage />}
-          />
-          <Route
-            path="/steuer/anlage-v-fewo"
-            element={<AnlageVFeWoPage />}
-          />
-          <Route
-            path="/steuer/anlage-unterhalt"
-            element={<AnlageUnterhaltPage />}
-          />
-          <Route path="/steuer/anlage-u" element={<AnlageUPage />} />
-          <Route path="/steuer/anlage-rav-bav" element={<AnlageRAVbAVPage />} />
-          <Route path="/steuer/anlage-n-aus" element={<AnlageNAUSPage />} />
-          <Route path="/steuer/anlage-n-dhf" element={<AnlageNDHFPage />} />
-          <Route path="/steuer/anlage-av" element={<AnlageAVPage />} />
-          <Route
-            path="/steuer/anlage-em"
-            element={<AnlageEnergetischeMassnahmenPage />}
-          />
-          <Route
-            path="/steuer/anlage-haa"
-            element={<AnlageHaushaltsnaheAufwendungenPage />}
-          />
-          <Route
-            path="/steuer/anlage-sonder"
-            element={<AnlageSonderausgabenPage />}
-          />
-          <Route
-            path="/steuer/anlage-agb"
-            element={<AnlageAussergewoehnlicheBelastungenPage />}
-          />
-          <Route path="/steuer/est-1a" element={<HauptvorduckESt1APage />} />
-          <Route path="/steuer/est-1c" element={<HauptvorduckESt1CPage />} />
           <Route path="/belege" element={<DocumentsPage />} />
           <Route path="/einstellungen" element={<SettingsPage />} />
           <Route path="/einstellungen/audit" element={<AuditLogPage />} />

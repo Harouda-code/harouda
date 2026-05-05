@@ -1531,3 +1531,56 @@ Hinweise:
 - **Folge-Charges:** Charge 21 (BEFORE-DELETE), Charge 22 (corrective MAINTAIN-REVOKE), Charge 23 (replay 10-aleph).
 - **External reference:** PostgreSQL 17 release notes / `GRANT` documentation — `MAINTAIN` privilege scope (VACUUM, ANALYZE, CLUSTER, REFRESH MATERIALIZED VIEW, REINDEX, LOCK TABLE).
 
+## §29 — Charge 21: Migration 0056 BEFORE-DELETE-Schutz für gebuchte Belege (Schuld 18-aleph defense-in-depth-Closure)
+
+### Merge-Fakten
+
+- PR: **#53**
+- Merge-Commit: **`5e42cab`**
+- Migration auf `main`: **`supabase/migrations/0056_protect_gebucht_beleg_deletion.sql`**
+
+### Scope-Zusammenfassung
+
+Charge 21 schließt die DELETE-Defense-in-depth-Lücke für gebuchte Belege. Migration 0056 fügt zwei BEFORE-DELETE-Triggerfunktionen und die zugehörigen Trigger auf Tabellenebene hinzu:
+
+- Funktion `public.belege_protect_delete()`
+- Funktion `public.beleg_positionen_protect_delete()`
+- Trigger `trg_belege_protect_delete` auf `public.belege`
+- Trigger `trg_beleg_positionen_protect_delete` auf `public.beleg_positionen`
+
+Die Triggerfunktionen blockieren DELETE-Operationen bei `belege.status = 'GEBUCHT'` (direkt) bzw. bei Eltern-`belege.status = 'GEBUCHT'` (für `beleg_positionen`) mit `RAISE EXCEPTION` (SQLSTATE `P0001`) und einem Hinweis auf den regulären Korrektur- bzw. Storno-Workflow. Begründung: GoBD Rz. 64 (Rückbeziehbarkeit von Korrektur- bzw. Stornobuchungen).
+
+Migration 0056 ändert keine Tabellenspalten, keine Constraints, keine RLS-Policies und keine `GRANT`/`REVOKE`-Privilegien. Die bestehende BEFORE-UPDATE-Immutabilität aus Migration 0022 (`belege_immutability`, `public.prevent_gebucht_beleg_mutation()`) bleibt unverändert.
+
+### Empirisches Verifikations-Ergebnis (Staging)
+
+| Szenario | Klasse | Ergebnis | Beweis |
+|----------|--------|----------|--------|
+| **S1** | Positivkontrolle — DELETE auf `belege.status='ENTWURF'` | **PASS** | DELETE erfolgreich; Trigger blockiert nicht |
+| **S5** | Positiv-Cascade-Kontrolle — Company-DELETE mit ENTWURF-Kindern | **PASS** | FK-Cascade läuft vollständig; Trigger blockiert nicht |
+| **S6** | Positivkontrolle — Direkter Position-DELETE bei ENTWURF-Eltern | **PASS** | DELETE erfolgreich; Eltern-Beleg unverändert |
+| **S2** | Primärer Trigger-Beweis — Direkter DELETE auf `belege.status='GEBUCHT'` | **PASS** | SQLSTATE `P0001` aus `public.belege_protect_delete()` |
+| **S4** | Primärer Cascade-Trigger-Beweis — Company-DELETE mit GEBUCHT-Kind | **PASS** | SQLSTATE `P0001` aus `public.belege_protect_delete()` (FK-Cascade-Pfad) |
+| **S7** | Primärer Trigger-Beweis — Direkter Position-DELETE bei GEBUCHT-Eltern | **PASS** | SQLSTATE `P0001` aus `public.beleg_positionen_protect_delete()` |
+| **S8** | RLS-Layering — authenticated DELETE auf ENTWURF | **BLOCKED** | Pre-existierende RLS-Helper-Rekursion in `public.is_company_member` / `public.can_write`; siehe Issue **#54** |
+| **S9** | RLS-Layering — authenticated DELETE auf GEBUCHT-Beleg | **HOLD** | Gleicher authenticated/RLS-Pfad wie S8; siehe Issue **#54** |
+| **S10** | RLS-Layering — authenticated Position-DELETE bei GEBUCHT-Eltern | **HOLD** | Gleicher authenticated/RLS-Pfad wie S8; siehe Issue **#54** |
+| **Cleanup** | Hybrid-Lifecycle Base-Cleanup | **PASS** | Charge-21-IDs in `auth.users`, `public.companies`, `public.company_members`, `public.belege`, `public.beleg_positionen` jeweils 0 |
+
+S8/S9/S10 sind nicht durch Migration 0056 blockiert. Die Rekursion liegt in den RLS-Hilfsfunktionen aus Migration 0004 und wird in Issue **#54** separat behandelt. Die Trigger-Schicht ist davon nicht betroffen.
+
+### Residuale Risiken
+
+| ID | Beschreibung | Status |
+|----|--------------|--------|
+| **R-21-A** | TRUNCATE auf `public.belege` / `public.beleg_positionen` umgeht Row-level BEFORE-DELETE-Trigger und ist durch Migration 0056 nicht abgedeckt | residual / out-of-scope für Charge 21 |
+| **R-21-B** | DELETE auf `belege.status='STORNIERT'` ist durch Migration 0056 nicht blockiert; Triggerbedingung deckt ausschließlich `'GEBUCHT'` ab | residual / out-of-scope für Charge 21 |
+
+Beide Residuale waren bereits vor dem Merge bekannt und werden durch Charge 21 nicht adressiert.
+
+### Schuld 18-aleph — Closure-Statement
+
+Schuld 18-aleph ist **auf der Trigger-Schicht geschlossen**: Migration 0056 etabliert auf Tabellenebene den BEFORE-DELETE-Schutz für gebuchte Belege und ihre Positionen. S2/S4/S7 belegen empirisch, dass GEBUCHT-DELETE auf direktem Pfad, FK-Cascade-Pfad und Direkt-Positions-Pfad blockiert wird; S1/S5/S6 belegen empirisch, dass ENTWURF-DELETE nicht überblockt wird.
+
+Die **authenticated/RLS-Layering-Verifikation (S8/S9/S10) bleibt offen** und ist auf Issue **#54** verschoben. Sobald die RLS-Helper-Rekursion dort behoben ist, werden S8/S9/S10 unter dem Authenticated-Pfad nachgezogen, ohne Migration 0056 nachträglich zu verändern.
+

@@ -1584,3 +1584,59 @@ Schuld 18-aleph ist **auf der Trigger-Schicht geschlossen**: Migration 0056 etab
 
 Die **authenticated/RLS-Layering-Verifikation (S8/S9/S10) bleibt offen** und ist auf Issue **#54** verschoben. Sobald die RLS-Helper-Rekursion dort behoben ist, werden S8/S9/S10 unter dem Authenticated-Pfad nachgezogen, ohne Migration 0056 nachträglich zu verändern.
 
+## §30 — Issue #54: Migration 0057 SECURITY-DEFINER-Helper gegen RLS-Rekursion
+
+### Apply-Fakten
+
+- Migration: **`supabase/migrations/0057_security_definer_company_helpers.sql`**
+- Apply-Ziel: **Staging**
+- Apply-Ergebnis: **`Success. No rows returned.`**
+- Betroffene Funktionen:
+  - `public.is_company_member(uuid)`
+  - `public.can_write(uuid)`
+  - `public.is_company_admin(uuid)`
+
+### Scope-Zusammenfassung
+
+Migration 0057 behebt die RLS-Rekursion in den zentralen Company-/Membership-Helpern. Die drei bestehenden Helper wurden mit unveränderter fachlicher Semantik neu definiert als:
+
+- `LANGUAGE sql`
+- `STABLE`
+- `SECURITY DEFINER`
+- `SET search_path = pg_catalog, public`
+
+Die Funktionskörper prüfen weiterhin ausschließlich die Mitgliedschaft bzw. Schreib-/Admin-Berechtigung des aktuellen JWT-Subjects über `auth.uid()` gegen `public.company_members`.
+
+Migration 0057 ändert keine Tabellen, keine Constraints, keine RLS-Policies und keine bestehenden Frontend-Routen. Weitere RPCs, Protokollierungsänderungen und Bootstrap-Logik bleiben ausdrücklich außerhalb dieses Scopes.
+
+### Post-Apply-Verifikation
+
+| Prüfbereich | Ergebnis |
+|-------------|----------|
+| `security_definer` für alle drei Helper | **PASS** — alle drei Funktionen haben `security_definer = true` |
+| `search_path` | **PASS** — alle drei Funktionen haben `search_path=pg_catalog, public` |
+| Funktionsinhaber | **PASS** — `postgres`, mit `bypassrls = true` |
+| EXECUTE für `authenticated` | **PASS** — `true` |
+| EXECUTE für `anon` | **PASS** — `false` |
+| EXECUTE für `public` | **PASS** — `false` |
+| EXECUTE für `service_role` | **PASS** — `false` |
+| Funktionskommentare | **PASS** — alle drei Kommentare dokumentieren Issue #54 und die SECURITY-DEFINER-Umstellung |
+| RLS-Policies auf `companies` / `company_members` | **PASS** — unverändert gegenüber dem Pre-Apply-Snapshot |
+
+### Empirisches Staging-Ergebnis
+
+Die Verifikation wurde mit transaktionslokalen Testdaten durchgeführt und am Ende per `ROLLBACK` verworfen.
+
+| Szenario | Ergebnis |
+|----------|----------|
+| Helper-Wahrheitstabelle für eigene Company | **PASS** — `is_company_member`, `is_company_admin` und `can_write` liefern `true` |
+| Helper-Wahrheitstabelle für fremde Company | **PASS** — alle drei Helper liefern `false` |
+| Mandanten-Isolation | **PASS** — fremde Company bleibt nicht sichtbar bzw. nicht berechtigt |
+| Cleanup nach `ROLLBACK` | **PASS** — Test-Companies: `0`, Test-Memberships: `0` |
+
+### Closure-Statement
+
+Issue #54 ist auf der Helper-Schicht geschlossen: Die RLS-Helper lesen `public.company_members` nun unter einem kontrollierten SECURITY-DEFINER-Kontext und vermeiden dadurch die bisherige Rekursion bei RLS-Policies, die diese Helper selbst verwenden.
+
+Die erste Mandanten-Bootstrap-Logik bleibt eine separate Folgearbeit. Migration 0057 löst die Helper-Rekursion, ändert aber nicht die strukturelle Bootstrap-Frage rund um Erst-Company und Erst-Membership.
+

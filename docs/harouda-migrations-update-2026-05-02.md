@@ -1640,3 +1640,84 @@ Issue #54 ist auf der Helper-Schicht geschlossen: Die RLS-Helper lesen `public.c
 
 Die erste Mandanten-Bootstrap-Logik bleibt eine separate Folgearbeit. Migration 0057 löst die Helper-Rekursion, ändert aber nicht die strukturelle Bootstrap-Frage rund um Erst-Company und Erst-Membership.
 
+## §31 — Charge 0058: Company Bootstrap RPC für Erst-Mandantenanlage
+
+### Merge-Fakten
+
+- Pull Request: **#57**
+- Merge-Commit: **`ab758cb`**
+- Migration: **`supabase/migrations/0058_company_bootstrap_rpc.sql`**
+- Frontend-Integration: **`src/contexts/CompanyContext.tsx`**
+- Test-Datei: **`src/contexts/__tests__/CompanyContext.test.tsx`**
+
+### Scope-Zusammenfassung
+
+Migration 0058 stellt eine atomare SECURITY-DEFINER-Routine `public.bootstrap_first_company(p_name text, p_slug text)` bereit, mit der ein authentifizierter Aufrufer ohne bestehende Mitgliedschaft genau eine Company und genau eine zugehörige `owner`-Mitgliedschaft in einer Transaktion anlegt. Die RPC liefert das Ergebnis als einzeilige Tabelle mit den Spalten `(id uuid, name text)`.
+
+Der Funktionskörper schreibt ausschließlich auf:
+
+- `public.companies`
+- `public.company_members`
+
+Identitätsquelle ist ausschließlich `auth.uid()`. Es gibt keinen vom Aufrufer gesteuerten Identitätsparameter wie `p_user_id`. Die Migration ändert weder RLS-Policies noch das `audit_log`-Schema und lässt die Helper aus Migration 0057 unverändert.
+
+### Sicherheits- und Nebenläufigkeitsmodell
+
+- `LANGUAGE plpgsql`
+- `SECURITY DEFINER`
+- `SET search_path = pg_catalog, public`
+- alle Tabellen- und Funktionsreferenzen schemaqualifiziert (`public.companies`, `public.company_members`, `pg_catalog.btrim`, `pg_catalog.hashtext`, `pg_catalog.pg_advisory_xact_lock`, `auth.uid()`)
+- explizite GRANTs:
+  - `authenticated` darf ausführen
+  - `anon`, `PUBLIC` und `service_role` dürfen nicht ausführen
+- transaktions-skopierter Advisory-Lock `pg_advisory_xact_lock(hashtext('harouda:bootstrap_first_company'), hashtext(v_user_id::text))` serialisiert konkurrierende Bootstrap-Aufrufe desselben Nutzers und schließt das TOCTOU-Fenster zwischen Existenzprüfung und INSERT
+- `EXISTS`-Wache gegen `public.company_members` lehnt einen zweiten Bootstrap mit `SQLSTATE P0001` ab
+- erwartete Fehlerklassen: `28000` fehlende Authentifizierung, `22023` leerer Pflichtwert für `p_name` oder `p_slug`, `P0001` bestehende Mitgliedschaft
+
+### Frontend-Änderung
+
+`CompanyContext.bootstrapFirstCompany` ruft die RPC genau einmal pro Erst-Bootstrap-Versuch auf:
+
+```ts
+supabase.rpc("bootstrap_first_company", { p_name, p_slug })
+```
+
+- das Ergebnis wird als Array konsumiert (`returns table` liefert eine Zeilen-Liste); der erste Eintrag wird zum aktiven Mandanten
+- generische Fehler werden über `console.error("Failed to bootstrap company:", error)` protokolliert; `activeCompanyId` bleibt in diesem Fall `null`
+- `error.code === "P0001"` mit Nachricht `already has memberships` löst genau einen Recovery-Aufruf von `loadMemberships()` aus und übernimmt den dabei gefundenen Mitgliedschaftseintrag
+- aus dem Frontend wird kein `p_user_id` übergeben
+
+### Tests und Verifikation
+
+| Prüfbereich | Ergebnis |
+|-------------|----------|
+| Neue `CompanyContext`-Tests (7 Fälle: RPC einmal/keinmal, generischer Fehler, P0001-Recovery, Slug-Unique-Verletzung, DEMO_MODE, `user === null`, kein `p_user_id` in den Params) | **PASS** |
+| Vollständige Test-Suite | **PASS** — 205 Dateien / 2043 Tests / 1 todo / 0 Fehler |
+| Staging-Apply | **PASS** — `Success. No rows returned.` |
+| V1 Funktions-Metadaten (`prosecdef`, `proconfig`, Args, Result Shape, Volatility) | **PASS** |
+| V2.a `has_function_privilege` für `anon` / `authenticated` / `service_role` | **PASS** — `false / true / false` |
+| V2.b PUBLIC-ACL-Inspektion via `pg_proc.proacl` mit `aclexplode` und `acldefault` | **PASS** — kein PUBLIC-EXECUTE-Eintrag |
+| V2.c Diagnostik-ACL-Dump | **PASS** — nur `authenticated` mit `EXECUTE` |
+| V4 Funktions-Sicherheits-Inspektion (Advisory-Lock vorhanden, kein `p_user_id`, keine Helper-Aufrufe, kein `service_role`-Token) | **PASS** |
+| V3 simulierter Aufruf unter `set local role authenticated` mit `request.jwt.claims` | **PASS** |
+| Cleanup nach `ROLLBACK` | **PASS** — Test-Companies: `0`, Test-Memberships: `0` |
+| Lokaler Smoke gegen Staging | **PASS** — `company_count = 1`, `membership_count = 1`, `membership_role = owner` |
+
+### Ausdrücklich nicht im Scope
+
+- keine RLS-Policy-Änderungen
+- keine `audit_log`-Schema-Änderungen
+- keine Änderung der Helper aus Migration 0057
+- kein SettingsProvider-Fix
+- keine Charge-22- oder Charge-23-Arbeit
+- keine Server-seitige Slug-Generierung
+- keine Slug-Format-Regex- oder Längen-Limits
+
+### Folgepunkt
+
+Beim lokalen Smoke wurde unabhängig vom Bootstrap-Pfad eine Robustheits-Lücke im `SettingsProvider` beobachtet: Der initiale Lade-Spinner kann unter bestimmten Timing-Bedingungen verharren. Diese Beobachtung ist nicht durch Charge 0058 verursacht — `src/contexts/SettingsContext.tsx` und `src/api/settings.ts` wurden in 0058 weder berührt noch erweitert, und die DB-Inserts der RPC sind unabhängig vom Settings-Lade-Pfad. Eine separate Charge soll die Provider-Initialisierung mit einem defensiven Timeout härten und ist nicht Teil von 0058.
+
+### Closure-Statement
+
+Mit dem Merge von PR #57 ist die in §30 als separate Folgearbeit ausgewiesene Erst-Mandanten-Bootstrap-Lücke auf Backend- und Frontend-Aufrufebene geschlossen. Authentifizierte Nutzer ohne Mitgliedschaft können ihre erste Company und die zugehörige `owner`-Mitgliedschaft jetzt atomar über `public.bootstrap_first_company` anlegen, ohne dass dafür RLS-Policies geändert, Helper-Verträge gebrochen oder zusätzliche Identitätsparameter eingeführt werden.
+

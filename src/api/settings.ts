@@ -33,11 +33,15 @@ export type SettingsPayload = Record<string, unknown>;
 // Backend-Erkennung
 // ---------------------------------------------------------------------------
 
-async function getCurrentUserId(): Promise<string | null> {
+export async function getCurrentUserId(): Promise<string | null> {
   if (DEMO_MODE) return null;
-  const { data, error } = await supabase.auth.getUser();
-  if (error) return null;
-  return data.user?.id ?? null;
+  try {
+    const { data, error } = await supabase.auth.getSession();
+    if (error) return null;
+    return data.session?.user?.id ?? null;
+  } catch {
+    return null;
+  }
 }
 
 /**

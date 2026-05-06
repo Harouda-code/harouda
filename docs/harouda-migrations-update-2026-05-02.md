@@ -1721,3 +1721,83 @@ Beim lokalen Smoke wurde unabhängig vom Bootstrap-Pfad eine Robustheits-Lücke 
 
 Mit dem Merge von PR #57 ist die in §30 als separate Folgearbeit ausgewiesene Erst-Mandanten-Bootstrap-Lücke auf Backend- und Frontend-Aufrufebene geschlossen. Authentifizierte Nutzer ohne Mitgliedschaft können ihre erste Company und die zugehörige `owner`-Mitgliedschaft jetzt atomar über `public.bootstrap_first_company` anlegen, ohne dass dafür RLS-Policies geändert, Helper-Verträge gebrochen oder zusätzliche Identitätsparameter eingeführt werden.
 
+## §32 — Charge 0059: SettingsProvider Loading-Robustheit
+
+### Merge-Fakten
+
+- Pull Request: **#58**
+- Squash-Merge-Commit: **`693dfab`**
+- Feature-Branch-Commit (vor Squash): **`bf7c423`**
+- Branch: **`fix/settings-provider-loading-timeout`**
+- Geänderte Dateien:
+  - **`src/api/settings.ts`**
+  - **`src/contexts/SettingsContext.tsx`**
+  - **`src/api/__tests__/settings.test.ts`**
+  - **`src/contexts/__tests__/SettingsContext.test.tsx`**
+
+### Scope-Zusammenfassung
+
+Charge 0059 schließt den in §31 ausgewiesenen Folgepunkt zur Robustheit der initialen Settings-Ladephase. Der `SettingsProvider` blockierte bisher die UI mit dem Lade-Indikator `Einstellungen werden geladen...`, solange weder Promise-Auflösung noch Promise-Ablehnung der internen `await`-Aufrufe eintraten. Es gab keinen defensiven Fallback-Pfad und keinen Timeout, sodass eine nicht auflösende Auth-Anfrage den Spinner dauerhaft stehen lassen konnte.
+
+Die Charge ist ausschließlich Frontend- bzw. State-Management-bezogen. Es werden keine Datenbank-Schemas, RLS-Policies, Grants, Audit-Pfade, Migrationen oder Provider-Reihenfolgen verändert.
+
+### Frontend-Änderung
+
+`src/api/settings.ts`:
+
+```ts
+// vorher
+const { data, error } = await supabase.auth.getUser();
+
+// nachher
+const { data, error } = await supabase.auth.getSession();
+return data.session?.user?.id ?? null;
+```
+
+- `getCurrentUserId()` nutzt jetzt `supabase.auth.getSession()` statt `supabase.auth.getUser()`. Die lokal-zuerst-Strategie spiegelt das in `UserContext` etablierte Muster.
+- Der bestehende Vertrag bleibt erhalten: Rückgabewert `Promise<string | null>`, Fehler werden zu `null` neutralisiert, kein Throw an Aufrufer.
+- `fetchSettings()`, `saveSettings()`, die `mandant_id IS NULL`-Semantik und das `onConflict`-Verhalten bleiben unverändert.
+
+`src/contexts/SettingsContext.tsx`:
+
+- Defensiver Sicherheits-Timeout von 5000 ms im initialen Lade-Effekt: Wenn weder `fetchSettings()` noch `saveSettings()` innerhalb von 5 Sekunden auflöst, entsperrt die UI mit `DEFAULTS`, statt den Ladebildschirm dauerhaft anzuzeigen.
+- Idempotenter Abschluss-Pfad über einen Ref-basierten Wächter (`initialLoadCompletedRef`): sowohl der reguläre `finally`-Pfad als auch der Timeout-Fallback laufen über genau eine zentrale `completeInitialLoad()`-Funktion. Späte Promise-Auflösungen nach dem Timeout setzen weder Settings noch `loading=false` erneut.
+- `clearTimeout` wird sowohl im Abschluss-Pfad als auch in der Effekt-Cleanup-Funktion ausgeführt; State-Updates nach Unmount sind durch das bestehende `cancelled`-Flag und den neuen Wächter verhindert.
+- DEMO_MODE-Verhalten, localStorage-Migration, Debounce-Save und Unmount-Flush bleiben unverändert.
+- Der UI-Text `Einstellungen werden geladen...` ist exakt erhalten.
+
+### Tests und Verifikation
+
+| Prüfbereich | Ergebnis |
+|-------------|----------|
+| Neue `SettingsContext`-Tests (6 Fälle: erfolgreiche Cloud-Ladung, Timeout-Fallback nach 5 s bei hängendem `fetchSettings`, Timeout-Fallback bei hängendem Migrations-`saveSettings`, Reject → DEFAULTS, Idempotenz bei spätem Settlement, `clearTimeout` bei Unmount) | **PASS** |
+| Neue `settings.ts`-API-Tests (4 Fälle: `getSession` statt `getUser`, `null` ohne Session, `null` bei Session-Fehler, `null` bei geworfenem `getSession`) | **PASS** |
+| Targeted-Tests | **PASS** — 2 Dateien / 10 Tests / 0 Fehler |
+| Vollständige Test-Suite | **PASS** — 207 Dateien / 2053 Tests / 1 todo / 0 Fehler |
+| `git diff --check` (Whitespace-Hygiene) | **PASS** |
+| ESLint auf geänderten Dateien | **PASS** — 0 Fehler |
+| `npx tsc -b` (Composite-Typecheck) | **PASS** |
+| Pre-Push-Hook (Vitest-Gate) | **PASS** — 207 Dateien / 2053 Tests / 0 Fehler |
+| CI / Coverage Gate | **PASS** |
+| CI / Quality Checks | **PASS** |
+| Post-Merge-Verifikation auf `main` | **PASS** — Targeted 10/10, Full Suite 207/2053 |
+
+### Ausdrücklich nicht im Scope
+
+- keine Migrationen
+- keine RLS-Policy-Änderungen
+- keine `audit_log`-Schema-Änderungen
+- keine Grant-Änderungen
+- keine SQL- oder Datenbank-Anpassungen
+- keine Änderung an `CompanyContext` oder dessen Tests
+- keine Änderung an `UserContext`
+- keine Änderung an `src/main.tsx` oder der Provider-Reihenfolge
+- keine Änderung an `SettingsPage`
+- kein Settings-UI-Redesign
+- keine mandantenspezifischen Settings (`mandant_id IS NULL`-Semantik bleibt erhalten)
+- keine neue gemeinsame Abstraktion (z. B. `useDeadlineLoading`)
+
+### Closure-Statement
+
+Mit dem Merge von PR #58 ist der in §31 explizit ausgewiesene Folgepunkt zur Settings-Ladephase geschlossen. Der `SettingsProvider` verlässt jetzt unter allen drei Hang-Profilen (auth-Aufruf, Migrations-Upsert, Settings-Read) innerhalb von 5 Sekunden die initiale Ladephase und entsperrt die UI mit den Settings-DEFAULTS. Die Idempotenz des Abschluss-Pfads stellt sicher, dass spätere Promise-Settlements nach dem Fallback weder den UI-Status noch die Logs erneut beeinflussen.
+

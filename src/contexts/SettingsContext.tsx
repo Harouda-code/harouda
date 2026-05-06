@@ -178,8 +178,26 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }
 
   // ----- Initial Load + One-Time-Migration --------------------------------
+  const initialLoadCompletedRef = useRef<boolean>(false);
+  const remoteAppliedRef = useRef<boolean>(false);
+
   useEffect(() => {
     let cancelled = false;
+    let safetyTimeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    function completeInitialLoad(applyDefaultsIfMissing: boolean): void {
+      if (cancelled) return;
+      if (initialLoadCompletedRef.current) return;
+      initialLoadCompletedRef.current = true;
+      if (safetyTimeoutId !== null) {
+        clearTimeout(safetyTimeoutId);
+        safetyTimeoutId = null;
+      }
+      if (applyDefaultsIfMissing && !remoteAppliedRef.current) {
+        setSettings(DEFAULTS);
+      }
+      setLoading(false);
+    }
 
     async function load() {
       // Im DEMO-Modus ist der Initial-State synchron aus localStorage
@@ -197,7 +215,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
             } catch (err) {
               // Migration nicht moeglich (z. B. nicht eingeloggt) — wir
               // lassen die Daten in localStorage und versuchen es spaeter.
-               
+
               console.warn(
                 "[SettingsContext] Migration aus localStorage zurueckgestellt:",
                 err
@@ -209,21 +227,43 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         // 2) Aktuelle Settings laden.
         const remote = await fetchSettings();
         if (cancelled) return;
+        if (initialLoadCompletedRef.current) return;
         setSettings(mergeWithDefaults(remote));
+        remoteAppliedRef.current = true;
       } catch (err) {
-         
         console.error("[SettingsContext] Initial load failed:", err);
         if (cancelled) return;
-        setSettings(DEFAULTS);
+        if (initialLoadCompletedRef.current) return;
+        if (!remoteAppliedRef.current) {
+          setSettings(DEFAULTS);
+          remoteAppliedRef.current = true;
+        }
       } finally {
-        if (!cancelled) setLoading(false);
+        completeInitialLoad(false);
       }
+    }
+
+    if (!DEMO_MODE) {
+      // Defensiver Sicherheits-Timeout: Falls fetchSettings() oder saveSettings()
+      // nicht innerhalb von 5 Sekunden aufloest, entsperren wir die UI mit
+      // DEFAULTS, anstatt den Ladebildschirm dauerhaft anzuzeigen.
+      safetyTimeoutId = setTimeout(() => {
+        if (initialLoadCompletedRef.current) return;
+        console.warn(
+          "[SettingsContext] Initial load did not settle within 5s — falling back to defaults."
+        );
+        completeInitialLoad(true);
+      }, 5000);
     }
 
     void load();
 
     return () => {
       cancelled = true;
+      if (safetyTimeoutId !== null) {
+        clearTimeout(safetyTimeoutId);
+        safetyTimeoutId = null;
+      }
     };
   }, []);
 

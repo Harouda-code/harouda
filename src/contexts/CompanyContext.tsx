@@ -114,34 +114,39 @@ export function CompanyProvider({ children }: { children: ReactNode }) {
     // Wenn ein neuer User sich einloggt und noch keiner Firma angehört:
     // automatisch eine „Meine Kanzlei" anlegen und als Owner eintragen.
     const slug = `kanzlei-${user.id.slice(0, 8)}-${Date.now()}`;
-    const { data: company, error: companyErr } = await supabase
-      .from("companies")
-      .insert({
-        name: user.email?.split("@")[0]
-          ? `${user.email.split("@")[0]}s Kanzlei`
-          : "Meine Kanzlei",
-        slug,
-        created_by: user.id,
-      })
-      .select("id, name")
-      .single();
-    if (companyErr || !company) {
-      console.error("Failed to bootstrap company:", companyErr);
+    const fallbackName = user.email?.split("@")[0]
+      ? `${user.email.split("@")[0]}s Kanzlei`
+      : "Meine Kanzlei";
+
+    const { data, error } = await supabase.rpc("bootstrap_first_company", {
+      p_name: fallbackName,
+      p_slug: slug,
+    });
+
+    if (error) {
+      if (
+        error.code === "P0001" &&
+        /already has memberships/i.test(error.message ?? "")
+      ) {
+        const recovered = await loadMemberships();
+        return recovered[0] ?? null;
+      }
+      console.error("Failed to bootstrap company:", error);
       return null;
     }
-    const { error: memErr } = await supabase
-      .from("company_members")
-      .insert({ company_id: company.id, user_id: user.id, role: "owner" });
-    if (memErr) {
-      console.error("Failed to add owner membership:", memErr);
+
+    const row = (data as { id: string; name: string }[] | null)?.[0];
+    if (!row) {
+      console.error("Bootstrap RPC returned no row");
       return null;
     }
+
     return {
-      companyId: company.id,
-      companyName: company.name,
-      role: "owner",
+      companyId: row.id,
+      companyName: row.name,
+      role: "owner" as CompanyRole,
     };
-  }, [user]);
+  }, [user, loadMemberships]);
 
   const reload = useCallback(async () => {
     setLoading(true);

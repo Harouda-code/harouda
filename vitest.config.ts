@@ -13,6 +13,7 @@ export default defineConfig({
       "src/**/__tests__/**/*.test.tsx",
       "src/**/*.test.ts",
       "src/**/*.test.tsx",
+      "scripts/**/__tests__/**/*.test.mjs",
     ],
     exclude: ["node_modules", "dist", ".git"],
     coverage: {

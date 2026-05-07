@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "categories": {
+    "superseded_reference": [
+      "d2FjaHN0dW1zY2hhbmNlbmdlc2V0eg==",
+      "Z29iZCByei4gNzM=",
+      "Z29iZCByei4gNzQ=",
+      "c3RiZXJnIMKnIDY0YQ=="
+    ],
+    "forbidden_public_claim": [
+      "Z29iZC16ZXJ0aWZpemllcnQ=",
+      "Z29iZCBjZXJ0aWZpZWQ=",
+      "ZGF0ZXYtemVydGlmaXppZXJ0",
+      "ZGF0ZXYgY2VydGlmaWVk",
+      "ZWxzdGVyLXplcnRpZml6aWVydA==",
+      "ZWxzdGVyIGNlcnRpZmllZA==",
+      "aWR3LXplcnRpZml6aWVydA==",
+      "aWR3IGNlcnRpZmllZA=="
+    ],
+    "project_forbidden_term": [
+      "Y2hhdGdwdA==",
+      "b3BlbmFp",
+      "YW50aHJvcGlj",
+      "Y2xhdWRl",
+      "Z2VtaW5p"
+    ],
+    "disallowed_language_context": [
+      "2KfZhNiw2YPYp9ih"
+    ],
+    "risky_positioning_language": [
+      "emVydGlmaXppZXJ1bmdzcGZhZGU=",
+      "emVydGlmaXppZXJ1bmdzc3RlbGxlbg=="
+    ]
+  }
+}

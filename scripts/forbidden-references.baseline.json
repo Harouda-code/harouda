@@ -1,0 +1,1342 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "category": "forbidden_public_claim",
+      "file_path_hash": "192b6eff919c6cebeecfb085a300c6584a3dbbf335130c9f05d03c877d065596",
+      "file_path_redacted": "docs/verfahrensdokumentation/07-pruefpfade-und-protokollierung.md",
+      "line_number": 285,
+      "context_hash": "3e29f8168760be55c92c633948692a6949d3475c24ebbeb0cad7b539bd0fb68e"
+    },
+    {
+      "category": "forbidden_public_claim",
+      "file_path_hash": "2233a8985832ef8e867f92512ef26483dbfdda96239736ccc954067c17cb0bd1",
+      "file_path_redacted": "docs/demo-script.md",
+      "line_number": 62,
+      "context_hash": "0add8302ed300bd0b5aaae242abbc86d9160072b5a7f3476d0b991538bf40398"
+    },
+    {
+      "category": "forbidden_public_claim",
+      "file_path_hash": "4950ec9f5816d61267221faf0e365b1ffb8b56b244f81e8e8049d20dc19a65ec",
+      "file_path_redacted": "docs/architecture/phase-1-final-closure-decision.md",
+      "line_number": 128,
+      "context_hash": "eaa579ae6bdea5d7aa9fb57113c8bc0787032d992760cbed49deb19a3bf323b6"
+    },
+    {
+      "category": "forbidden_public_claim",
+      "file_path_hash": "4950ec9f5816d61267221faf0e365b1ffb8b56b244f81e8e8049d20dc19a65ec",
+      "file_path_redacted": "docs/architecture/phase-1-final-closure-decision.md",
+      "line_number": 130,
+      "context_hash": "a56b055b053b5e2eab15880904e588dd91727003bb165b29468d574981d98995"
+    },
+    {
+      "category": "forbidden_public_claim",
+      "file_path_hash": "4950ec9f5816d61267221faf0e365b1ffb8b56b244f81e8e8049d20dc19a65ec",
+      "file_path_redacted": "docs/architecture/phase-1-final-closure-decision.md",
+      "line_number": 132,
+      "context_hash": "2555afad52a2ceae98cc61668e077641f3cbaafadfcb9444d8323e8c4e19541d"
+    },
+    {
+      "category": "forbidden_public_claim",
+      "file_path_hash": "d4188a8c98b2788e8b68ad13cdd228c7fcad54e0fcc16d6b77884b9f038292d8",
+      "file_path_redacted": "src/utils/datev.ts",
+      "line_number": 10,
+      "context_hash": "5c85fb46444f5d8f86d3c94f8ea942fa6a0a8109d74eeea009caceb0fee6fbcc"
+    },
+    {
+      "category": "forbidden_public_claim",
+      "file_path_hash": "d62ffbbc005291f5f939f190337a246cd15c94371373980e22f3098913f10489",
+      "file_path_redacted": "docs/glossary/04-steuer-meldungen.md",
+      "line_number": 706,
+      "context_hash": "d724e86e011c29ee62a5bbb729f7bf350848c1f2817795b969840c62f1de7324"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "0cc2094687f0910bcef91a0e3872090cb4b30e461c7beaf46b5ed35f4ed236f7",
+      "file_path_redacted": "docs/ELSTER-SCHEMA-UPDATE-GUIDE.md",
+      "line_number": 111,
+      "context_hash": "2d51bf7fe88a4831ef551a7747dcbdfa0aee1e8b5bf53674787495b56fb68b25"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "0fff940b3a8ba03ae05133a7b714c65a20f780d12c45651e1c5353051c4bde9c",
+      "file_path_redacted": "docs/SPRINT-7-5-VERIFIKATION.md",
+      "line_number": 226,
+      "context_hash": "f8bdccb3023c3408b841fc41016ea6104ef9b60cdbb0b1243eae10959eeabb17"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "0fff940b3a8ba03ae05133a7b714c65a20f780d12c45651e1c5353051c4bde9c",
+      "file_path_redacted": "docs/SPRINT-7-5-VERIFIKATION.md",
+      "line_number": 245,
+      "context_hash": "22f1ff50daaf4a4b81239dd2a89533a6bd5fd51dd372e12ef458bb9b643e5e75"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "12ad23add4bce29e579510c716341fb06fb7419e7b8b01d0261afcfd75bd4db7",
+      "file_path_redacted": "docs/SPRINT-JAHRESABSCHLUSS-E1-ABSCHLUSS.md",
+      "line_number": 103,
+      "context_hash": "ceeb5b31749ddf97432adea43d22b760b12dac6678e3b4dd9e7d25b280e1b02a"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "13ed04ca9086cd6738a7d6702a54e14d396ce695664872f5c49f3672b0b462b0",
+      "file_path_redacted": "docs/SPRINT-16-BANK-RECON-PERSISTENZ-ABSCHLUSS.md",
+      "line_number": 203,
+      "context_hash": "435292fdab04f54e45f41624e50bc8350ce1e2c07a4afb9ec865f93c95970133"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "1541481e2e2c80cffcb080c71597d4762db50ebceeb81d9b33da2cd0ee614a73",
+      "file_path_redacted": "docs/JAHRESABSCHLUSS-BESTANDSAUFNAHME-2026-04-21.md",
+      "line_number": 168,
+      "context_hash": "78a5ea8a4570bab9b4e3e2e01968ccb4420950c04387aa031392c0418ac85e5d"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "1541481e2e2c80cffcb080c71597d4762db50ebceeb81d9b33da2cd0ee614a73",
+      "file_path_redacted": "docs/JAHRESABSCHLUSS-BESTANDSAUFNAHME-2026-04-21.md",
+      "line_number": 234,
+      "context_hash": "8df5edc587c445b71f34d5c9bc9595b642eb8748831162de2fe0f90176d42df3"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "192b6eff919c6cebeecfb085a300c6584a3dbbf335130c9f05d03c877d065596",
+      "file_path_redacted": "docs/verfahrensdokumentation/07-pruefpfade-und-protokollierung.md",
+      "line_number": 310,
+      "context_hash": "cb1ceb417668c573af42549e218d1e74f39a63de7eb0fe80aa593785fdba2f65"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "192b6eff919c6cebeecfb085a300c6584a3dbbf335130c9f05d03c877d065596",
+      "file_path_redacted": "docs/verfahrensdokumentation/07-pruefpfade-und-protokollierung.md",
+      "line_number": 412,
+      "context_hash": "ef98ba8f7b01eb508693d86304e3a175d4ce578b837e9129e5d86c639e9f5e43"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "1a98fbe7d821871cee44c35a474ca1c941ef763e30506b71c05ed7ff77195b98",
+      "file_path_redacted": "docs/DEPLOYMENT-VERAPDF-VALIDATION.md",
+      "line_number": 59,
+      "context_hash": "cd29324ffe0914a0e3f8547790a67e9dd2c7dca3b172b347b028688bb326c47e"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "28620d60add16bd93f6e22e53241ef3557583e29832173033e2a700e98ced785",
+      "file_path_redacted": "docs/verfahrensdokumentation/05-datensicherheits-und-datenschutzkonzept.md",
+      "line_number": 46,
+      "context_hash": "12a849fde82919bbcafa7681c9f564f7bc6c232ae93480e3232d07b55a9bbcb8"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "28620d60add16bd93f6e22e53241ef3557583e29832173033e2a700e98ced785",
+      "file_path_redacted": "docs/verfahrensdokumentation/05-datensicherheits-und-datenschutzkonzept.md",
+      "line_number": 67,
+      "context_hash": "ffd119aa043ea2abe1e92dd19e11ff6e1eed683b5e4c52f5dfcb050e3cc47a1e"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "2ace80e9b34abde4a3f688625f4e3cd810a814003ac9f13b3468c6e6e2208517",
+      "file_path_redacted": "docs/SPRINT-MULTITENANCY-PHASE-2-ABSCHLUSS.md",
+      "line_number": 76,
+      "context_hash": "22ccc3665967361b550f4c4392ed9b0cc4c228d6405d2e6ffa34b2ddb023ecbb"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "2ace80e9b34abde4a3f688625f4e3cd810a814003ac9f13b3468c6e6e2208517",
+      "file_path_redacted": "docs/SPRINT-MULTITENANCY-PHASE-2-ABSCHLUSS.md",
+      "line_number": 191,
+      "context_hash": "69e30803492a85f1f20641a624f56e32324092a7e89f500fc2195e2db6fd22bb"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "2ace80e9b34abde4a3f688625f4e3cd810a814003ac9f13b3468c6e6e2208517",
+      "file_path_redacted": "docs/SPRINT-MULTITENANCY-PHASE-2-ABSCHLUSS.md",
+      "line_number": 193,
+      "context_hash": "a9c968e8eba7a9b20a6a97f8ab603997373fd4d8cd9c39bb4a945649a2b36b2b"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "2ace80e9b34abde4a3f688625f4e3cd810a814003ac9f13b3468c6e6e2208517",
+      "file_path_redacted": "docs/SPRINT-MULTITENANCY-PHASE-2-ABSCHLUSS.md",
+      "line_number": 225,
+      "context_hash": "1c69f9ae45af4e62caf4d32252bf7843f23968aa7d0b8122fbac6662163dc588"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "2ee5e17b3722a3ea316a16ec397d130d8751a19ab550bcb3923d1bce607113d4",
+      "file_path_redacted": "docs/DSUV-SCHEMA-UPDATE-GUIDE.md",
+      "line_number": 117,
+      "context_hash": "f555a9d3d1f5d7bb67da7d47c8cea3e3a40f52ee92834da19cf1afed49a29ec6"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "2f755fb86cdd5e57e747a782f0c6e971f008bc6ea48b5bb3d6b2b34c3495185d",
+      "file_path_redacted": "src/pages/__tests__/ArbeitsplatzPage.test.tsx",
+      "line_number": 10,
+      "context_hash": "039ab74074fc2d090c451b2731ef88c3325600dc0ef68ed5e988f3b3edf00055"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "3de7655f81edd50188a6b285732dddece6841f50c827a311e5875e6a8e1951e3",
+      "file_path_redacted": "docs/SESSION-ABSCHLUSS-2026-04-20.md",
+      "line_number": 3,
+      "context_hash": "844fa4105bdf651fd0f03ef577464cd1942d0ae22271e400ba9f6580a5ef2782"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "3de7655f81edd50188a6b285732dddece6841f50c827a311e5875e6a8e1951e3",
+      "file_path_redacted": "docs/SESSION-ABSCHLUSS-2026-04-20.md",
+      "line_number": 101,
+      "context_hash": "237a0f08a62daab21118d36acc5ca0b35b51142992c773baf1e44179110e6287"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "3de7655f81edd50188a6b285732dddece6841f50c827a311e5875e6a8e1951e3",
+      "file_path_redacted": "docs/SESSION-ABSCHLUSS-2026-04-20.md",
+      "line_number": 110,
+      "context_hash": "cb2ea35d97b28d256ec6392b9429478532f5764875839eebbdd0a9c986f018f6"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "3de7655f81edd50188a6b285732dddece6841f50c827a311e5875e6a8e1951e3",
+      "file_path_redacted": "docs/SESSION-ABSCHLUSS-2026-04-20.md",
+      "line_number": 133,
+      "context_hash": "2f35dc209e16590a90f5e0bfb5e06176b800d40735578dfbc742250b95a2e598"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "3de7655f81edd50188a6b285732dddece6841f50c827a311e5875e6a8e1951e3",
+      "file_path_redacted": "docs/SESSION-ABSCHLUSS-2026-04-20.md",
+      "line_number": 135,
+      "context_hash": "a30198a7d6bb4b6396a407af8c5a5e37e7c1fd2f27abdcca5c36966e4ed38917"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "4424b8acc81f3a4f6ac853937c6712dfb19242816b68c1f2baae0436e88d9d85",
+      "file_path_redacted": "docs/SPRINT-BUGFIX-DECISIONS.md",
+      "line_number": 36,
+      "context_hash": "d4060aad98bc6703c86f0f9bd3a50db0d4f40ecd12d87e826932587babb94bc2"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "443d5732790f47d78502f78a2387fcce82c9b09401060bda9c0a96d115e2ea89",
+      "file_path_redacted": "docs/glossary/08-technik-architektur.md",
+      "line_number": 1208,
+      "context_hash": "e998b29f029ea59ce0d3b11be2a0f84e416ef4f795da6a46d2506e3befc7bf29"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "443d5732790f47d78502f78a2387fcce82c9b09401060bda9c0a96d115e2ea89",
+      "file_path_redacted": "docs/glossary/08-technik-architektur.md",
+      "line_number": 1221,
+      "context_hash": "c6b663381c8525175ac418907f4dce46cbfd25f4d899c113d3ae3fddb8288c5e"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "443d5732790f47d78502f78a2387fcce82c9b09401060bda9c0a96d115e2ea89",
+      "file_path_redacted": "docs/glossary/08-technik-architektur.md",
+      "line_number": 1452,
+      "context_hash": "738e1c1ce483c88a029969079e5babbc4febe15376f2cbaa674262edf3271d8b"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "44bb450f0a5ec8d9fc87ea3efc7deb2bd351a7141be36a2ec0a8f8cfbdc85bf7",
+      "file_path_redacted": "docs/SPRINT-6-TEIL-2B-PLAN.md",
+      "line_number": 316,
+      "context_hash": "727bae3b08d67f4947dab11331c30dda04e175f03dbf2c5da2a47946a883352f"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "44fec9bc0e502ceb6f37dda0d228cd123731df9e273527c1719a76738d60b7fa",
+      "file_path_redacted": "src/domain/elster/LstAnmeldungXmlBuilder.ts",
+      "line_number": 9,
+      "context_hash": "a3f1c146505b00688db254d1ec687876404a264a41f4cd9402e26bdbcd6afaab"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "658436eb94c74a2134b61d137b3f3f0e630fa25431caa04ed0f0d93b3548b172",
+      "file_path_redacted": "docs/SPRINT-F42-MANDANT-URL-ABSCHLUSS.md",
+      "line_number": 11,
+      "context_hash": "6f80955fce9cc85bb9921ae4813f94cb3a13aa4f266feefba6e733e007cb73be"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "75c5da59d411619835cda870b69734a84b006b85c8ff95827fbd4f20462e169c",
+      "file_path_redacted": "docs/SPRINT-DEMO-PRE-CHECK.md",
+      "line_number": 228,
+      "context_hash": "c16b3887e3cef1fd07261e0c962350c04e3c1de687e0241f452875f9e64d5268"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "7c76e9f312902050dbbf237eed56f60789bce900e44d585261f6ba2cc4a2b91c",
+      "file_path_redacted": "docs/POST-BUGFIX-FRAGEN.md",
+      "line_number": 94,
+      "context_hash": "123534a60f0f3451f2e28dd0c72e81976e9a5db723487dad89b7bba585c346b8"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "7d121eccf9df337c0010ab3c59992cef9dc1604299984ddea4f2cf6337b3e49d",
+      "file_path_redacted": "docs/SPRINT-17-INVENTUR-MODUL-ABSCHLUSS.md",
+      "line_number": 210,
+      "context_hash": "bf1668d071a1e43e0cad767bd5f357a7dddb68f4da31f5dd6e6c2566652d875c"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "7df1ad605ef6d366e5ceff52be0496b173cce2ec2a6b5dc9ffad575e87d81df4",
+      "file_path_redacted": "docs/HASH-CHAIN-VS-ERASURE.md",
+      "line_number": 559,
+      "context_hash": "9b360ae73310eb39ffac0ee670b8f1a2bb97f4e5bfd3e6b740529b351a281571"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "86c97b519b3536110d1002de1e268750f4c741aa02e438aece968d9f65177873",
+      "file_path_redacted": "docs/JAHRESABSCHLUSS-SERIE-GESAMT-ABSCHLUSS.md",
+      "line_number": 139,
+      "context_hash": "e68d78f99b38fa5589867c4fa022d3628dfcda692c9c89f16290684f4b9126e9"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "86c97b519b3536110d1002de1e268750f4c741aa02e438aece968d9f65177873",
+      "file_path_redacted": "docs/JAHRESABSCHLUSS-SERIE-GESAMT-ABSCHLUSS.md",
+      "line_number": 204,
+      "context_hash": "7f5138f5a1cd2e1d48b36a4cefe9866d48bec3f1e5588374d9cdc0c11670c90a"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8a5fe29da4fec7a9415f1f6375ea29d4f6e765b5736e70adc2dbd0f33a1e3db7",
+      "file_path_redacted": "docs/NEXT-***-HANDOFF.md",
+      "line_number": 1,
+      "context_hash": "2186f4cb1267209e446d13c382fa4a58dd1da78612011dcd6d953eb653604463"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8a5fe29da4fec7a9415f1f6375ea29d4f6e765b5736e70adc2dbd0f33a1e3db7",
+      "file_path_redacted": "docs/NEXT-***-HANDOFF.md",
+      "line_number": 103,
+      "context_hash": "ae6290f747c5a150cd7d41795711caa60a7b266fcc21c5141351258d7818be9f"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8a5fe29da4fec7a9415f1f6375ea29d4f6e765b5736e70adc2dbd0f33a1e3db7",
+      "file_path_redacted": "docs/NEXT-***-HANDOFF.md",
+      "line_number": 123,
+      "context_hash": "d5d7c0f1f5d86ecd3bd02ca1587abb738e020dcabd3377a7bceebcfb8a934502"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8a5fe29da4fec7a9415f1f6375ea29d4f6e765b5736e70adc2dbd0f33a1e3db7",
+      "file_path_redacted": "docs/NEXT-***-HANDOFF.md",
+      "line_number": 149,
+      "context_hash": "2328920f18e6dece2a467d804a947cb3c7e85bf6dbaf106d0e24329ec9f5dabf"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8a5fe29da4fec7a9415f1f6375ea29d4f6e765b5736e70adc2dbd0f33a1e3db7",
+      "file_path_redacted": "docs/NEXT-***-HANDOFF.md",
+      "line_number": 150,
+      "context_hash": "373c9918c1687e50f736e734d35140486f19b7e1d68babb0a86eba1ca5c1c670"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8a5fe29da4fec7a9415f1f6375ea29d4f6e765b5736e70adc2dbd0f33a1e3db7",
+      "file_path_redacted": "docs/NEXT-***-HANDOFF.md",
+      "line_number": 156,
+      "context_hash": "4bd9bdf02c3ac38b1217f0edec50bbfdb1eaa7af98fb1b4cf2be475b9e18a332"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8a5fe29da4fec7a9415f1f6375ea29d4f6e765b5736e70adc2dbd0f33a1e3db7",
+      "file_path_redacted": "docs/NEXT-***-HANDOFF.md",
+      "line_number": 239,
+      "context_hash": "26c6ccb4a2714a77faddf6b5ea4e68982f528d07cb01a5a0a9ec8df81b2ea80d"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8a5fe29da4fec7a9415f1f6375ea29d4f6e765b5736e70adc2dbd0f33a1e3db7",
+      "file_path_redacted": "docs/NEXT-***-HANDOFF.md",
+      "line_number": 247,
+      "context_hash": "f5b94a603b6d1e249dc80eb82abcd18be44f056c4efc79cc05157ce106a663c6"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8a5fe29da4fec7a9415f1f6375ea29d4f6e765b5736e70adc2dbd0f33a1e3db7",
+      "file_path_redacted": "docs/NEXT-***-HANDOFF.md",
+      "line_number": 303,
+      "context_hash": "fc42fd537edad2603eca3eaa49660b7a1146813052f07366e5c33cd8b8742679"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8ce4c20613987a4a632f9941f86af64bd01b51388edccef65d8b454dd8464216",
+      "file_path_redacted": "docs/SPRINT-7-PLAN-DETAIL.md",
+      "line_number": 261,
+      "context_hash": "96d81eddd97a5a02f35f73f6c810768ce537685f45121242ed77689331a453eb"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8ce4c20613987a4a632f9941f86af64bd01b51388edccef65d8b454dd8464216",
+      "file_path_redacted": "docs/SPRINT-7-PLAN-DETAIL.md",
+      "line_number": 281,
+      "context_hash": "c039d111cc7f88259e748012d542683a0ac48f9bfd6c216018ba91d3764d1bde"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8d188980df686cc54883c11e0b1528f7eb3cf640e4e632414bf4d97a807a336f",
+      "file_path_redacted": "docs/SPRINT-7-DECISIONS.md",
+      "line_number": 43,
+      "context_hash": "83eaf345bd86f68f9510a4f64582d5ef746c8736df09586bc148cb864354425f"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "8d188980df686cc54883c11e0b1528f7eb3cf640e4e632414bf4d97a807a336f",
+      "file_path_redacted": "docs/SPRINT-7-DECISIONS.md",
+      "line_number": 155,
+      "context_hash": "51451b48bd480a34c4d8c92a210b9ab9deed54a259e6134c8868ab16ca550149"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "927660276599a701b0b9b1a5a725adfb5dcad944c74c05d3aa18b472d515c152",
+      "file_path_redacted": "docs/SPRINT-4-DECISIONS.md",
+      "line_number": 101,
+      "context_hash": "f22b9a01a18e22261a9c59cfe56d5d28534e46c55ccf9c09f00bc2325c61c3d4"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "9526fd924ada5c05d674319224bee392d2c8ad130c99ea35053d7876c00d5ec4",
+      "file_path_redacted": "docs/SPRINT-ARBEITSPLATZ-ABSCHLUSS.md",
+      "line_number": 158,
+      "context_hash": "e5059a5869086dec9f092b465d6f5b56269851dedb7fbc7870aacac1b9f8a2ea"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "9614b47369aee8111e6371394c43f476943c1a24d3d0b18a73ca9d34ca20468b",
+      "file_path_redacted": "docs/SPRINT-14-LST-ZM-ABSCHLUSS.md",
+      "line_number": 18,
+      "context_hash": "40364df4b594d8e6fe9948ac0ec705799962a9ad46d522a722b29509e7200f3a"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "9614b47369aee8111e6371394c43f476943c1a24d3d0b18a73ca9d34ca20468b",
+      "file_path_redacted": "docs/SPRINT-14-LST-ZM-ABSCHLUSS.md",
+      "line_number": 166,
+      "context_hash": "86437322a0afe6b99ef4798a716252d3903f27a568eddb5f8587f6558493b316"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "9bc03a6928bd8cb966a9ded1f8f7ba8eaf561002a8c6c78387769eed38c980f3",
+      "file_path_redacted": "docs/AUDIT-REPORT-2026-04-20.md",
+      "line_number": 169,
+      "context_hash": "eb7c9f4953e72ce25909d73034d126779b73103f16474c2a62b3cb5274b47de4"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "9bc03a6928bd8cb966a9ded1f8f7ba8eaf561002a8c6c78387769eed38c980f3",
+      "file_path_redacted": "docs/AUDIT-REPORT-2026-04-20.md",
+      "line_number": 271,
+      "context_hash": "7ac838ecd52eb6d4130bcb809b36e76d4fa14738a6257de39388407e696f5bd2"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "9bc03a6928bd8cb966a9ded1f8f7ba8eaf561002a8c6c78387769eed38c980f3",
+      "file_path_redacted": "docs/AUDIT-REPORT-2026-04-20.md",
+      "line_number": 274,
+      "context_hash": "7caba6a7ae9a10408b43ff27caff90928cf503705d669fc66218bf403a871b55"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "9bc03a6928bd8cb966a9ded1f8f7ba8eaf561002a8c6c78387769eed38c980f3",
+      "file_path_redacted": "docs/AUDIT-REPORT-2026-04-20.md",
+      "line_number": 315,
+      "context_hash": "2bdeaf4d10ef786279f03ded7e4196f4ea27333bf3b04941d1f2a6332b4c5e80"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "9bc03a6928bd8cb966a9ded1f8f7ba8eaf561002a8c6c78387769eed38c980f3",
+      "file_path_redacted": "docs/AUDIT-REPORT-2026-04-20.md",
+      "line_number": 340,
+      "context_hash": "c5c91c62784696cca1289587a9029a49bf493ce975fbc049bdcb8edd2da555ce"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "9bc03a6928bd8cb966a9ded1f8f7ba8eaf561002a8c6c78387769eed38c980f3",
+      "file_path_redacted": "docs/AUDIT-REPORT-2026-04-20.md",
+      "line_number": 466,
+      "context_hash": "926e6294fed99258842c8eb12af60df5d46a1f012fa89cf53f211c96008899ad"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "a6608b42ea436a8f1d87a4073e7bbfe1492ee839dcb3d518004be7575311e870",
+      "file_path_redacted": "docs/SPRINT-MULTITENANCY-PHASE-3-ABSCHLUSS.md",
+      "line_number": 88,
+      "context_hash": "704df5d18a2fa32089903abb4a89f96a0c440c570028830b1abf68786476992b"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "a6608b42ea436a8f1d87a4073e7bbfe1492ee839dcb3d518004be7575311e870",
+      "file_path_redacted": "docs/SPRINT-MULTITENANCY-PHASE-3-ABSCHLUSS.md",
+      "line_number": 200,
+      "context_hash": "f9f2032b02f76094f2a5c0cf697fa22f6c7f80912830b1192f5b1e7760506038"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "a6608b42ea436a8f1d87a4073e7bbfe1492ee839dcb3d518004be7575311e870",
+      "file_path_redacted": "docs/SPRINT-MULTITENANCY-PHASE-3-ABSCHLUSS.md",
+      "line_number": 202,
+      "context_hash": "cc84db68a5b9a2a48d297bd10290bbaeef956471d994f00d0382da14dbcbca6a"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "a6608b42ea436a8f1d87a4073e7bbfe1492ee839dcb3d518004be7575311e870",
+      "file_path_redacted": "docs/SPRINT-MULTITENANCY-PHASE-3-ABSCHLUSS.md",
+      "line_number": 234,
+      "context_hash": "7df208afdbc93c41f8b4e6a5dc9594cac13e13d14383284495b07d73ea7e9c5e"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "b1d65714c4574190b650f115744fa5e59cbfffb8fd1d8fa24206e7e7c4d3a594",
+      "file_path_redacted": "docs/glossary/01-grundlagen.md",
+      "line_number": 436,
+      "context_hash": "9d23ea51391ed732d413fcf3f39f674890e549df4cb73fdceabbd568259a878e"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ba4d84c91fc40a941af75e98293ad3b2ac7d05fd95a606a6bc947bda49e2b9c0",
+      "file_path_redacted": "docs/SPRINT-7-PLAN.md",
+      "line_number": 1,
+      "context_hash": "17d7f769c175f8bdc89f65281cfd5b2c432320d08324c8bf391351037adffbcd"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ba4d84c91fc40a941af75e98293ad3b2ac7d05fd95a606a6bc947bda49e2b9c0",
+      "file_path_redacted": "docs/SPRINT-7-PLAN.md",
+      "line_number": 313,
+      "context_hash": "70ecb688cb3fce706ee04ca8748b407dee3ce114b9144e2a720f9db59eb99ff9"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "bbec43ca7cf03b616bf56723e0380e51487ce8fc2e389b61901fbf4886356f52",
+      "file_path_redacted": "docs/SESSION-2026-04-20-SUMMARY.md",
+      "line_number": 12,
+      "context_hash": "40444b8ca9355d23e1d606546325c0c3ca4f1d7599a50ff531066a67a260cd44"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "bbec43ca7cf03b616bf56723e0380e51487ce8fc2e389b61901fbf4886356f52",
+      "file_path_redacted": "docs/SESSION-2026-04-20-SUMMARY.md",
+      "line_number": 93,
+      "context_hash": "b38156e46fff0ca38680698f95cd66a4249d2b2d14d170fc7c52039589f35607"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "c5405dcacdee190a8ef28ae7287a1b1cb515b744fd08f35377bc93fb859b4a5d",
+      "file_path_redacted": "docs/PROJEKT-GESAMTBERICHT-2026-04-27.md",
+      "line_number": 308,
+      "context_hash": "81bafb516db7e5f03a79d21853b3a8200ad2d2f095c9595acadffa68779b191f"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "c5405dcacdee190a8ef28ae7287a1b1cb515b744fd08f35377bc93fb859b4a5d",
+      "file_path_redacted": "docs/PROJEKT-GESAMTBERICHT-2026-04-27.md",
+      "line_number": 359,
+      "context_hash": "2f8da36d06c844081f43c8a30fb7b7279082bd2653a05b69e3820512a59af55b"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "c74b7c0772583d894feb3b808ea791f3eb40cbd4db3f934299b3a7f267770c2c",
+      "file_path_redacted": "docs/SPRINT-ARBEITSPLATZ-TREE-ABSCHLUSS.md",
+      "line_number": 32,
+      "context_hash": "06ab1e1c18e75acb80e82f1f058f326db852ca60a8b3b7983fdc4a39a535b7cb"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "c74b7c0772583d894feb3b808ea791f3eb40cbd4db3f934299b3a7f267770c2c",
+      "file_path_redacted": "docs/SPRINT-ARBEITSPLATZ-TREE-ABSCHLUSS.md",
+      "line_number": 158,
+      "context_hash": "27a1b60f09cba642122130fc659b2a354003fc568e3b97e187a480707eca1495"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "c88fb64fd67e65648db82b09b723bf7595e7c0a29e43078bb8b1c27ad206183b",
+      "file_path_redacted": "docs/SPRINT-3-STOPP.md",
+      "line_number": 116,
+      "context_hash": "43c61a91181fb7a61118e98f2a52e60360d9eaab52e38364817ac6fa69025180"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "c88fb64fd67e65648db82b09b723bf7595e7c0a29e43078bb8b1c27ad206183b",
+      "file_path_redacted": "docs/SPRINT-3-STOPP.md",
+      "line_number": 118,
+      "context_hash": "efbe119dc8fc6cefa4f3e91c76e3ddb0c7659ff2ae4512149d7ca443e2a9c858"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "c9cef1203a31ace3989acc95c0ed8cbcd3720ae28d0eb9f2b4cbf82e1b09f37f",
+      "file_path_redacted": "docs/harouda-migrations-update-2026-05-02.md",
+      "line_number": 1032,
+      "context_hash": "9b8acdc8f3c6aad7a3788e9410ec24fc8198f4073bf26972c75fc59e501d201c"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ca42e0561aaae1ee6b578a5056b2063e92a572fef563f5509daa271be0ed6282",
+      "file_path_redacted": "src/domain/ustva/ZmXmlBuilder.ts",
+      "line_number": 8,
+      "context_hash": "67ac8cb99c03df9e96f941eeffb57ea5e2c6cc012cab74979089b7ba52ecc7f6"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "d86c544d00d6c06e93b185ed52ba0c2288c913f77976633c3e4ac0b6af546f1f",
+      "file_path_redacted": "docs/SPRINT-7-5-DECISIONS.md",
+      "line_number": 131,
+      "context_hash": "e19537cc2d2488f408d4568c4e0150cd468236039a579c040cf482b8faae7c6c"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "d86c544d00d6c06e93b185ed52ba0c2288c913f77976633c3e4ac0b6af546f1f",
+      "file_path_redacted": "docs/SPRINT-7-5-DECISIONS.md",
+      "line_number": 273,
+      "context_hash": "9974b2686353991bf41b4f6454da9b7c21144c93184e14c89ea29a40cc656ec9"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "d8b1abf8a19cd5ca7109f5113b28ada805376208913fc3833855d355ae5d4b95",
+      "file_path_redacted": "docs/TEXTBAUSTEINE-UPDATE-GUIDE.md",
+      "line_number": 87,
+      "context_hash": "e1f649cb19a1d97fab52a1b5363391669922c910b3e5373bface45a8f8057cbb"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "d90c1848bc1609b4f3a4ccf25d99d4986c824b1dc44cb0bdfc293beb3fe264d4",
+      "file_path_redacted": "docs/verfahrensdokumentation/03-technische-systemdokumentation.md",
+      "line_number": 248,
+      "context_hash": "bd67e173be1b393bde6b9a792edc2521aeddd7cd62f946e0a27dca93a34df683"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "d90c1848bc1609b4f3a4ccf25d99d4986c824b1dc44cb0bdfc293beb3fe264d4",
+      "file_path_redacted": "docs/verfahrensdokumentation/03-technische-systemdokumentation.md",
+      "line_number": 307,
+      "context_hash": "a5a70b037733370360479292529610cc1ddbeb4169be168b889e0cc1c74f6136"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "d90c1848bc1609b4f3a4ccf25d99d4986c824b1dc44cb0bdfc293beb3fe264d4",
+      "file_path_redacted": "docs/verfahrensdokumentation/03-technische-systemdokumentation.md",
+      "line_number": 339,
+      "context_hash": "96395476bc560fa372eb696b199d892de2ca3247f3fc26ae484acca9ad9a5344"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "d90c1848bc1609b4f3a4ccf25d99d4986c824b1dc44cb0bdfc293beb3fe264d4",
+      "file_path_redacted": "docs/verfahrensdokumentation/03-technische-systemdokumentation.md",
+      "line_number": 386,
+      "context_hash": "4509b933d5681a273f390fb27e918f78e2d5b91518b1eee5a773ddaa36bce3ca"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "dba616f1309cf7b963bf60ed5c60720639c4d800ea5120a458613ded84fdb35c",
+      "file_path_redacted": "docs/SPRINT-NACHT-2026-04-21-ABSCHLUSS.md",
+      "line_number": 89,
+      "context_hash": "94820644daa08880da949b0d2111efa7acc2e7a7c5a58227eed841777342b6c9"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "dba616f1309cf7b963bf60ed5c60720639c4d800ea5120a458613ded84fdb35c",
+      "file_path_redacted": "docs/SPRINT-NACHT-2026-04-21-ABSCHLUSS.md",
+      "line_number": 91,
+      "context_hash": "3d77a77d2b67a649c8d749751140c0a1eaf2b4f1040a4e21ed47c66e61578e5b"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ddaac8bcb187ada96a658cad30e3bf78b8f2a250e70f85216c0b183a4dabaf88",
+      "file_path_redacted": "docs/SPRINT-MULTITENANCY-FOUNDATION-ABSCHLUSS.md",
+      "line_number": 45,
+      "context_hash": "91d4d1e89da934fc8615ab601b80d66ea25f8f35654b2a5a3b7f6f9df025611c"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ddaac8bcb187ada96a658cad30e3bf78b8f2a250e70f85216c0b183a4dabaf88",
+      "file_path_redacted": "docs/SPRINT-MULTITENANCY-FOUNDATION-ABSCHLUSS.md",
+      "line_number": 335,
+      "context_hash": "534fca13c46b5a8623887a2326dae1d0d334a2afd9e86b6215aa72010476d9cf"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ddd99ee2b2047da2d7cd2b289dd1ca63b755e0996f831cd075dbfa0c1f083cb2",
+      "file_path_redacted": "docs/verfahrensdokumentation/04-betriebsdokumentation.md",
+      "line_number": 36,
+      "context_hash": "3b9ff48bca8dc6676f99bc4989a090ea63023855a93c9d05e50ba6ede9db0545"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ddd99ee2b2047da2d7cd2b289dd1ca63b755e0996f831cd075dbfa0c1f083cb2",
+      "file_path_redacted": "docs/verfahrensdokumentation/04-betriebsdokumentation.md",
+      "line_number": 69,
+      "context_hash": "f12a3a181dfc9f1fc51e61861f53d6afb186e9f4188e72e593ebca32cc8f07ed"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ddd99ee2b2047da2d7cd2b289dd1ca63b755e0996f831cd075dbfa0c1f083cb2",
+      "file_path_redacted": "docs/verfahrensdokumentation/04-betriebsdokumentation.md",
+      "line_number": 116,
+      "context_hash": "7e7cfc66b9c0e9b13d4a7849aaec64ec7c012159b7f14d0e902011d78f1df2e5"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ddd99ee2b2047da2d7cd2b289dd1ca63b755e0996f831cd075dbfa0c1f083cb2",
+      "file_path_redacted": "docs/verfahrensdokumentation/04-betriebsdokumentation.md",
+      "line_number": 146,
+      "context_hash": "531cf9d3caa27b7900b2fec4d05b0a6c0b58188895a998b8a7cbaef56aeec08c"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ddd99ee2b2047da2d7cd2b289dd1ca63b755e0996f831cd075dbfa0c1f083cb2",
+      "file_path_redacted": "docs/verfahrensdokumentation/04-betriebsdokumentation.md",
+      "line_number": 193,
+      "context_hash": "34292112916e6932fd1fd1cfa4f3a9270c4dd128df50768a9018c39c5b0e7efc"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ddd99ee2b2047da2d7cd2b289dd1ca63b755e0996f831cd075dbfa0c1f083cb2",
+      "file_path_redacted": "docs/verfahrensdokumentation/04-betriebsdokumentation.md",
+      "line_number": 215,
+      "context_hash": "87dc8aa8737f9ae4548cf6ab923542ac537d29847451ee3a735d7828bc1c896f"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ddd99ee2b2047da2d7cd2b289dd1ca63b755e0996f831cd075dbfa0c1f083cb2",
+      "file_path_redacted": "docs/verfahrensdokumentation/04-betriebsdokumentation.md",
+      "line_number": 230,
+      "context_hash": "d579cbf792ba2dd724266413cf6e1ce9aa33296efc07319b626f1a8c443a02ff"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "ddd99ee2b2047da2d7cd2b289dd1ca63b755e0996f831cd075dbfa0c1f083cb2",
+      "file_path_redacted": "docs/verfahrensdokumentation/04-betriebsdokumentation.md",
+      "line_number": 421,
+      "context_hash": "f6104a5486ecb5e92949aa6bf89c2ec801499421fcad0ba01df7c7f40bcde7cf"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "e212be4abcf3829c1d6168c6fd22356ed364e82d754556c59394c30e87866da7",
+      "file_path_redacted": "docs/verfahrensdokumentation/01-allgemeine-beschreibung.md",
+      "line_number": 373,
+      "context_hash": "3eb25ac76ba6f6b1ea510cebec4af9eab81a52b91fc5d234d7c1645e6668b7cf"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "e74dcc27d78e4427395a5f3fc7f68e97882caeffe196ccec391999d94f5ae076",
+      "file_path_redacted": "docs/SPRINT-15-SV-MELDUNGEN-ABSCHLUSS.md",
+      "line_number": 190,
+      "context_hash": "6db64e862132ad62f06dba34bb84befdbb0360d84ad2341b9c8d5bf30b329526"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "e92751dffef05f49150de086b6383f248ff17e0f64768b4d5db4ed98b2a78d33",
+      "file_path_redacted": "docs/SPRINT-6-DECISIONS.md",
+      "line_number": 263,
+      "context_hash": "21b2f692a8054da6be0be9d4f4b9d5d74f9df28cb3f0441261f12e633d156a8c"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f2b12c0556d391bda1db458ec4ad73ca482d09875540f1b6241bb3705ef3fdda",
+      "file_path_redacted": "docs/SPRINT-7-5-PLAN-DETAIL.md",
+      "line_number": 420,
+      "context_hash": "d86a2ab4653b17c0b00485f5c3013f0a7d12b488500ef8da75b60f71510d76ad"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f2b12c0556d391bda1db458ec4ad73ca482d09875540f1b6241bb3705ef3fdda",
+      "file_path_redacted": "docs/SPRINT-7-5-PLAN-DETAIL.md",
+      "line_number": 421,
+      "context_hash": "1af7fd1967dc51e4c49abfe018a2214c4e79d8019bcd0676378ab449cf434c28"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 26,
+      "context_hash": "a10f45797ce658e4b13c8de847cc1ff1cf80ea3b8314d802f73a860bd40bc95e"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 88,
+      "context_hash": "eaeb43be3cb0eb2768228f0251f07aa7413843cbdd2610e88cc8e403d17a678a"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 102,
+      "context_hash": "775bd48c70cb02ab50ec88b1af8f8c1ae67352abe01ae25b29c66458b90ab328"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 557,
+      "context_hash": "712918247c81066241630a43504ffce2ee5575571873d2790d597f4502a89a94"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 573,
+      "context_hash": "d743ce76e00f88239c2f92042c56d9eb7b4c42c9d00fcf6512ecef3392f53826"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 585,
+      "context_hash": "4405a1907e13cda5076c15ca9bfa695cd0e2fee3c948dafe448ec2194ff58d37"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 653,
+      "context_hash": "7de56494131b1e864544c45e762e8a49a819626084c6d5e37d93af1953f0a0e9"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 667,
+      "context_hash": "57cf1d19f1cde095b93a1b3c5ad27838b574db0df78646c6c740b75c9f5ef778"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 932,
+      "context_hash": "d96ac355fb9dcaac503f2e59965ba80264e26c966a666a4262971dc9373caac7"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 937,
+      "context_hash": "2b4f1f517aecbd5b8a1f846fd1f13447f78db829f576d470ab9a2d588339503f"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 953,
+      "context_hash": "ea38993323f8ec3e3030f3c2b77af076bb44a87404149ffd765cdfa6832b41b8"
+    },
+    {
+      "category": "project_forbidden_term",
+      "file_path_hash": "fa10d42f4a372be34b8f74b42ed2b62404dfb0402285c5d40578b0a9dfd14ab0",
+      "file_path_redacted": "docs/SPRINT-JAHRESABSCHLUSS-E4-ABSCHLUSS.md",
+      "line_number": 163,
+      "context_hash": "112e5a5cf89286d352aec2d1f8e7e9b101f1a240ade22f3df86034589575c0ae"
+    },
+    {
+      "category": "risky_positioning_language",
+      "file_path_hash": "0babbef40c5f911bc5a10bc9a77e74cce0554780c29f7e5a37ef29885d6ef4ae",
+      "file_path_redacted": "docs/compliance-roadmap.md",
+      "line_number": 4,
+      "context_hash": "913369cccb0601234a33d1c1d396421457ac5ef2ee64e625cbc37171fbbf2529"
+    },
+    {
+      "category": "risky_positioning_language",
+      "file_path_hash": "0babbef40c5f911bc5a10bc9a77e74cce0554780c29f7e5a37ef29885d6ef4ae",
+      "file_path_redacted": "docs/compliance-roadmap.md",
+      "line_number": 6,
+      "context_hash": "01c6339297fe51a36c2afaf20f34c168d19a9d5c5a38ccd6a1e64675887c0bf4"
+    },
+    {
+      "category": "risky_positioning_language",
+      "file_path_hash": "0babbef40c5f911bc5a10bc9a77e74cce0554780c29f7e5a37ef29885d6ef4ae",
+      "file_path_redacted": "docs/compliance-roadmap.md",
+      "line_number": 11,
+      "context_hash": "9432201071fe06e7400793b9348859cde6704b0baf97508e10e7c3d625a64f53"
+    },
+    {
+      "category": "risky_positioning_language",
+      "file_path_hash": "57b0c342594514118fee6b05b73fbff3070eb84cf246bbf585d9c0ee7a661d16",
+      "file_path_redacted": "src/pages/KontaktPage.tsx",
+      "line_number": 139,
+      "context_hash": "c5608976d8694b05303268985c5bbd6b7b4a395b5367c6cdb0e52b96aa8d41db"
+    },
+    {
+      "category": "risky_positioning_language",
+      "file_path_hash": "b4ceefa882546036cbf64893d03f8e00c806bb679384b5572ddf0537b7f11708",
+      "file_path_redacted": "docs/README-DEMO.md",
+      "line_number": 6,
+      "context_hash": "55e5fd72b8e629f55f37d897a2acf732a5201473d1db386c811f884342adabec"
+    },
+    {
+      "category": "risky_positioning_language",
+      "file_path_hash": "b4ceefa882546036cbf64893d03f8e00c806bb679384b5572ddf0537b7f11708",
+      "file_path_redacted": "docs/README-DEMO.md",
+      "line_number": 20,
+      "context_hash": "d11a351fa1972a94ac559d1b57729661b25a51ded4e610fbc9521ad1f588f309"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "0431255128d25dafd2ea3e65722564963be14692861f705da5db5e6fca03a4e4",
+      "file_path_redacted": "docs/glossary/07-anlagen-inventur.md",
+      "line_number": 233,
+      "context_hash": "3adec336ebbec2503a4ef8939e09d73f7953990d181d306c813599fe7465cf77"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "0431255128d25dafd2ea3e65722564963be14692861f705da5db5e6fca03a4e4",
+      "file_path_redacted": "docs/glossary/07-anlagen-inventur.md",
+      "line_number": 443,
+      "context_hash": "a18fd61aea9143e45d30c468ef21e4aedb50bff711648f720fb45099b4982839"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "0431255128d25dafd2ea3e65722564963be14692861f705da5db5e6fca03a4e4",
+      "file_path_redacted": "docs/glossary/07-anlagen-inventur.md",
+      "line_number": 471,
+      "context_hash": "0193657908b49e99dd71dd233ff7b69094a5fe5f5f344031a0d6cd45cfc6fb26"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "0431255128d25dafd2ea3e65722564963be14692861f705da5db5e6fca03a4e4",
+      "file_path_redacted": "docs/glossary/07-anlagen-inventur.md",
+      "line_number": 472,
+      "context_hash": "026e10d738f20a973ec55187304ea10bbe8f4341dba3753631e021f0a3f764e1"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "0431255128d25dafd2ea3e65722564963be14692861f705da5db5e6fca03a4e4",
+      "file_path_redacted": "docs/glossary/07-anlagen-inventur.md",
+      "line_number": 498,
+      "context_hash": "b734198c562536f42c7913fb3e08fbe7c164f7bc314af87e3562704ef3925049"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "0431255128d25dafd2ea3e65722564963be14692861f705da5db5e6fca03a4e4",
+      "file_path_redacted": "docs/glossary/07-anlagen-inventur.md",
+      "line_number": 540,
+      "context_hash": "9345af1f5f6d93075b6e97457b7a895efbbb65e2a822f528664d452e358f0542"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "0431255128d25dafd2ea3e65722564963be14692861f705da5db5e6fca03a4e4",
+      "file_path_redacted": "docs/glossary/07-anlagen-inventur.md",
+      "line_number": 554,
+      "context_hash": "5488926f87d3ab1e290e322054053f086aea1bebc3c278383cc67fa3e7b09595"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "0431255128d25dafd2ea3e65722564963be14692861f705da5db5e6fca03a4e4",
+      "file_path_redacted": "docs/glossary/07-anlagen-inventur.md",
+      "line_number": 592,
+      "context_hash": "df32216c0a47df4288a5dc8f9c40bfa7f0d86e6ba33b0e16edcc22a57da5d621"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "0431255128d25dafd2ea3e65722564963be14692861f705da5db5e6fca03a4e4",
+      "file_path_redacted": "docs/glossary/07-anlagen-inventur.md",
+      "line_number": 612,
+      "context_hash": "2e7bf8911238a48492695b2b2c2b40d2f9bf4756ed5a5b244a00f957e6d13c0b"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "0431255128d25dafd2ea3e65722564963be14692861f705da5db5e6fca03a4e4",
+      "file_path_redacted": "docs/glossary/07-anlagen-inventur.md",
+      "line_number": 660,
+      "context_hash": "b10928be7409b06d4770f65bf4733317e4759a45405cc8231860206ae76aed9a"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "12eeb1f863e2ced07a975b35a7bc1fffaac2d21e56ed990be3b22ecab06d21e8",
+      "file_path_redacted": "docs/verfahrensdokumentation.md",
+      "line_number": 161,
+      "context_hash": "8b0331c216820f1980ec1daca2b50fe2d9cd5edae5fdc4bc5b4214fb45ca5cea"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "192b6eff919c6cebeecfb085a300c6584a3dbbf335130c9f05d03c877d065596",
+      "file_path_redacted": "docs/verfahrensdokumentation/07-pruefpfade-und-protokollierung.md",
+      "line_number": 249,
+      "context_hash": "61b9394f7ff895748ccb4df03f70ef6e6e9233e1da5814282551709b56b6b088"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "192b6eff919c6cebeecfb085a300c6584a3dbbf335130c9f05d03c877d065596",
+      "file_path_redacted": "docs/verfahrensdokumentation/07-pruefpfade-und-protokollierung.md",
+      "line_number": 383,
+      "context_hash": "7704f89dbff0ff150e01439e76d4146e693dc75b24bc4f83313af8d9b16af1e5"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "23bb0dd46412f49117f27f28c6e91dd731be1f2c654652bd29118958f7dde128",
+      "file_path_redacted": "src/domain/privacy/retention.test.ts",
+      "line_number": 22,
+      "context_hash": "7e8f32478636000f34199a680483ed78b72737727e0c3b2a1c2258d7083a0aa8"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "2d5df16e0c5a3d5dc8c4d8ef7d90dc9bc9ed60ea8a611c454853f0ea30c9d13d",
+      "file_path_redacted": "src/utils/zugferd.ts",
+      "line_number": 9,
+      "context_hash": "cd64d77e136c3bee6f1760204f6318d1030b611dc2d2134bb0bd1e81c326bfb4"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "443d5732790f47d78502f78a2387fcce82c9b09401060bda9c0a96d115e2ea89",
+      "file_path_redacted": "docs/glossary/08-technik-architektur.md",
+      "line_number": 1549,
+      "context_hash": "0b8d55944c7a3c471aee360adfae25255626c29bdcdfdf247400746a7b810fe0"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "443d5732790f47d78502f78a2387fcce82c9b09401060bda9c0a96d115e2ea89",
+      "file_path_redacted": "docs/glossary/08-technik-architektur.md",
+      "line_number": 1564,
+      "context_hash": "9f474a0102980a0abbf76090b42440919e31824886c8c9dd27d98b485c745138"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "44bb450f0a5ec8d9fc87ea3efc7deb2bd351a7141be36a2ec0a8f8cfbdc85bf7",
+      "file_path_redacted": "docs/SPRINT-6-TEIL-2B-PLAN.md",
+      "line_number": 115,
+      "context_hash": "3cd28fbeb11a63b9fb24d83e3930c7e051f3cfa56fe2b3ccb31d9996e1bfee4b"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "44bb450f0a5ec8d9fc87ea3efc7deb2bd351a7141be36a2ec0a8f8cfbdc85bf7",
+      "file_path_redacted": "docs/SPRINT-6-TEIL-2B-PLAN.md",
+      "line_number": 436,
+      "context_hash": "7362add458d6b0ed081bce6ec9f6281e3a8228224ead50d769fe883209f2b9f6"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "4950ec9f5816d61267221faf0e365b1ffb8b56b244f81e8e8049d20dc19a65ec",
+      "file_path_redacted": "docs/architecture/phase-1-final-closure-decision.md",
+      "line_number": 92,
+      "context_hash": "9e7718fccca79408a04b3316953bafb88bdb0090a2b34a062828eeb4f3e3af7c"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "4950ec9f5816d61267221faf0e365b1ffb8b56b244f81e8e8049d20dc19a65ec",
+      "file_path_redacted": "docs/architecture/phase-1-final-closure-decision.md",
+      "line_number": 93,
+      "context_hash": "e20e772098f597ef6f713bfa4868714833af0ee149c18b5f290d14e677909b91"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "4950ec9f5816d61267221faf0e365b1ffb8b56b244f81e8e8049d20dc19a65ec",
+      "file_path_redacted": "docs/architecture/phase-1-final-closure-decision.md",
+      "line_number": 94,
+      "context_hash": "4929178862dfcfe4f58834cc785558567658bf8f6d34091eda64e90d049c6328"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "4950ec9f5816d61267221faf0e365b1ffb8b56b244f81e8e8049d20dc19a65ec",
+      "file_path_redacted": "docs/architecture/phase-1-final-closure-decision.md",
+      "line_number": 125,
+      "context_hash": "b18713c3672c605e3382813fa4ed13072badd421f734aba21fb3e39e6304abec"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "4950ec9f5816d61267221faf0e365b1ffb8b56b244f81e8e8049d20dc19a65ec",
+      "file_path_redacted": "docs/architecture/phase-1-final-closure-decision.md",
+      "line_number": 126,
+      "context_hash": "475a2b26e06158f4ea42182b40f4ae5fa90ba83aef0368016f416768288690fc"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "4950ec9f5816d61267221faf0e365b1ffb8b56b244f81e8e8049d20dc19a65ec",
+      "file_path_redacted": "docs/architecture/phase-1-final-closure-decision.md",
+      "line_number": 127,
+      "context_hash": "f6118b554317ee42bff2702e12ab46c3ecffd27967e7ab91aec2bbbbbdc5ef4e"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "5ac52d71a20073dbe49fe9013f1e08326f5e3ac231adf8f1544ed2b2195b59a4",
+      "file_path_redacted": "src/data/steuerParameter/types.ts",
+      "line_number": 14,
+      "context_hash": "def4193d1e917e2336ac1b10effd53a220c9b628ba6759f24de8b2b3a2092e24"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "5fdff029e8abf48cc6ad88757f17edd68f89ca1993c45e041e4c1ca3431ea558",
+      "file_path_redacted": "docs/glossary/INDEX.md",
+      "line_number": 62,
+      "context_hash": "d0957f34d38dbbc5eb510d7c636fe37d68b372f8ab7b27197097375abbc95f59"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "5fdff029e8abf48cc6ad88757f17edd68f89ca1993c45e041e4c1ca3431ea558",
+      "file_path_redacted": "docs/glossary/INDEX.md",
+      "line_number": 426,
+      "context_hash": "74fb7201376461e36f370462f6f93528ebf85e2f7791586d209b609059ac65af"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "5fdff029e8abf48cc6ad88757f17edd68f89ca1993c45e041e4c1ca3431ea558",
+      "file_path_redacted": "docs/glossary/INDEX.md",
+      "line_number": 428,
+      "context_hash": "022d29b05cd200df689b14a8fef67f7658e66e4953abd81a15cded036d5f88e6"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "7df1ad605ef6d366e5ceff52be0496b173cce2ec2a6b5dc9ffad575e87d81df4",
+      "file_path_redacted": "docs/HASH-CHAIN-VS-ERASURE.md",
+      "line_number": 28,
+      "context_hash": "a15cc5d4538857c2cb74fd24057f3559384f58e665c777a89096fa79a514fb3b"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "7df1ad605ef6d366e5ceff52be0496b173cce2ec2a6b5dc9ffad575e87d81df4",
+      "file_path_redacted": "docs/HASH-CHAIN-VS-ERASURE.md",
+      "line_number": 589,
+      "context_hash": "e7b73e3372cb3db1b7fc949e857b828f9b4fcea8b2a24ccd0af6e0168616a084"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "808ca5ff8dd7c180480d495fd89e3200329db4706825d4dedf0d293c4fdf6f08",
+      "file_path_redacted": "src/data/steuerParameter/2025.ts",
+      "line_number": 6,
+      "context_hash": "8db8d8c8f6acf975771f323b07cbe04c9fd81959a9ca8a3f7643acf787d9126d"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "808ca5ff8dd7c180480d495fd89e3200329db4706825d4dedf0d293c4fdf6f08",
+      "file_path_redacted": "src/data/steuerParameter/2025.ts",
+      "line_number": 40,
+      "context_hash": "562afe408039471f59fa59515462b9ba5515b4970510ccf6637495ad0883bb11"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "87ff38f9c6ad35af9625c2325acc614b510f90c6662ea81afead8978f7d18122",
+      "file_path_redacted": "docs/steuer-parameter-changelog.md",
+      "line_number": 27,
+      "context_hash": "50349285cc422e9ee921c8081ac72176fa81a9772a823dffb577ec54e9d75e4e"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "87ff38f9c6ad35af9625c2325acc614b510f90c6662ea81afead8978f7d18122",
+      "file_path_redacted": "docs/steuer-parameter-changelog.md",
+      "line_number": 28,
+      "context_hash": "a88e34553112217e8d4514ab3efb1bc549a5e5829df991dda53b8622ba97ee1e"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "9ca780913620a78780320cef6acf732e68e6f541970a0b9b1d89b7cd7a7e9746",
+      "file_path_redacted": "docs/verfahrensdokumentation/06-aufbewahrungs-und-loeschkonzept.md",
+      "line_number": 21,
+      "context_hash": "e5c334945337be2941064e784529bc64e424a497921004699eb08e467faefe1e"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "9ca780913620a78780320cef6acf732e68e6f541970a0b9b1d89b7cd7a7e9746",
+      "file_path_redacted": "docs/verfahrensdokumentation/06-aufbewahrungs-und-loeschkonzept.md",
+      "line_number": 50,
+      "context_hash": "03546b87e6b5a41ee42f04bbbc988bdbd98c579286a9557f853593f1c8c6f491"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "9ca780913620a78780320cef6acf732e68e6f541970a0b9b1d89b7cd7a7e9746",
+      "file_path_redacted": "docs/verfahrensdokumentation/06-aufbewahrungs-und-loeschkonzept.md",
+      "line_number": 62,
+      "context_hash": "5907bd48e0014b501a8d317ad33a14128df9d4abea56bce4ee24ee490887238b"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "bbec43ca7cf03b616bf56723e0380e51487ce8fc2e389b61901fbf4886356f52",
+      "file_path_redacted": "docs/SESSION-2026-04-20-SUMMARY.md",
+      "line_number": 73,
+      "context_hash": "d585aa15af4c9eb59884afe18ded000718a3b6cdacf6cd8a657eeeb5ce3ecc0d"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "d27451531e6962c627cf2c75d495753dd0e167a58b13f9908cd10e26882d7072",
+      "file_path_redacted": "src/data/steuerParameter/besteuerungsanteil.ts",
+      "line_number": 5,
+      "context_hash": "3c090f8999869ca8d33a6a12a010308bc1ab66c3c6e2be5b0139656d4c3f1f65"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "d62ffbbc005291f5f939f190337a246cd15c94371373980e22f3098913f10489",
+      "file_path_redacted": "docs/glossary/04-steuer-meldungen.md",
+      "line_number": 540,
+      "context_hash": "7543cdc1beefe997eca4de5fd1ca96265d521ff27bc3386b03d6665e22143171"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "d62ffbbc005291f5f939f190337a246cd15c94371373980e22f3098913f10489",
+      "file_path_redacted": "docs/glossary/04-steuer-meldungen.md",
+      "line_number": 550,
+      "context_hash": "2e9fa28687cb6bba673f168b86578d03f7ccff921ab2b993cf1349a02bda2343"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "ddd99ee2b2047da2d7cd2b289dd1ca63b755e0996f831cd075dbfa0c1f083cb2",
+      "file_path_redacted": "docs/verfahrensdokumentation/04-betriebsdokumentation.md",
+      "line_number": 411,
+      "context_hash": "43ddb1eec032f498c295b41a63d5bb1d2caa5a6e6a8d8d836652dff1b0f64fb5"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e212be4abcf3829c1d6168c6fd22356ed364e82d754556c59394c30e87866da7",
+      "file_path_redacted": "docs/verfahrensdokumentation/01-allgemeine-beschreibung.md",
+      "line_number": 112,
+      "context_hash": "2109c47dcdfa9fb300412d414d8a4dec1cee32d4761dd80b4bf895dcd36aa6a0"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e212be4abcf3829c1d6168c6fd22356ed364e82d754556c59394c30e87866da7",
+      "file_path_redacted": "docs/verfahrensdokumentation/01-allgemeine-beschreibung.md",
+      "line_number": 368,
+      "context_hash": "d8176c1d6e88775109cde79c999a47bd71b546d4a4158c8f89f6d4ebbfa0fb94"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 3,
+      "context_hash": "99941b6a8e637c27df143624597967d77620ec44ffff5e77605abc8b3e43599e"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 24,
+      "context_hash": "f87136bc50194b01dee813df798a64ef229f29fa84b75edac31a438cd3f69bfb"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 229,
+      "context_hash": "e1a5140aa073a29ab38fa72eb91b922c2e0a3890a0f227807199bad65ebed624"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 249,
+      "context_hash": "3aaf8d67d0bf05acb3ba6ac5a128576110172b0a4d8c023b66f5676c97d86b11"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 404,
+      "context_hash": "510103a2c076c1f85d930b6db4923ee4bfa709bf2e3f938091c749ebe436a2de"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 411,
+      "context_hash": "abdcde16447d51ce89abf4908ca83d2d67fd1a8269c83fe479d8a5493e7eed5d"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 417,
+      "context_hash": "1f142d3388c1e0f3b61c14412970d953adeb703ee1e901518230acc09c8ab4ce"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 440,
+      "context_hash": "21dd64b4552fae227534d2350e98839a2f15cf3fa197e375b66cff53744a8e70"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 445,
+      "context_hash": "5cad0ebc25706e805873e32cc3132f7b15dd209cc063e9d3d957e68f0422fa79"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 492,
+      "context_hash": "226ef7579cf92705db8c94684d47ad138ace0cab3ae5330e507398c2d41d0bba"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 496,
+      "context_hash": "71edb22441dacca07410f06677879a766b7670b006b99e119dd7119b2fedb603"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 527,
+      "context_hash": "e4df7599d72e769acbc94f0daf2df70f0f3f3adcc4cd7f3d797c93676969ad51"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 620,
+      "context_hash": "77347ca66aa1771304ee104ef9243567903e52db85a523c0e50bdb7beef99da7"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 626,
+      "context_hash": "abd9c2678b4a573e8b2c60225844a548fdc063b35d0c0436e5bc7defc82717dd"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 705,
+      "context_hash": "e52421ba5f414ec8d9229609af6a5085f5871b2eae90ed10fcbb1690cc3a2ba3"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 711,
+      "context_hash": "bc9909b3397766cf58b8d6c2fc69618f2772c123839bf17e13abe7748ae7665b"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e77239104840c778544452bcc0d5ea259ab0412273c333c92f492fb943e5d84d",
+      "file_path_redacted": "docs/glossary/06-belege-rechnung.md",
+      "line_number": 792,
+      "context_hash": "6e1829c8c3232d1ef25e927e69ff173156279318ef2ebec48482cb7af3f47d3c"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "e92751dffef05f49150de086b6383f248ff17e0f64768b4d5db4ed98b2a78d33",
+      "file_path_redacted": "docs/SPRINT-6-DECISIONS.md",
+      "line_number": 464,
+      "context_hash": "e1e8bc50186361cc55c298db35eeb8fbd4eb223c17d2bfc91bc494e01c73f351"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
+      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
+      "line_number": 296,
+      "context_hash": "ac286e6bde1311e397eb38fff686d8d7e31d7181cde719438ccf150b017e07ec"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "fd975890a2460b8f033431c98a281546749a476cd8022042a3485e7aa4819059",
+      "file_path_redacted": "src/data/retention.ts",
+      "line_number": 3,
+      "context_hash": "275876bdb5d0a399e68ab1c506973b9e1937c50a97ce7da3b910afd5b5cde92c"
+    },
+    {
+      "category": "superseded_reference",
+      "file_path_hash": "fd975890a2460b8f033431c98a281546749a476cd8022042a3485e7aa4819059",
+      "file_path_redacted": "src/data/retention.ts",
+      "line_number": 47,
+      "context_hash": "d4f6b2d8f2eeb266d96662c7e0df8e6d14111b8ac48e18d0171f524b606d463d"
+    }
+  ]
+}

@@ -115,3 +115,23 @@ jobs:
           echo "Coverage summary: $LINES_PCT"
           # Thresholds — gate logic is also enforced by vitest.config.ts coverage.thresholds
           # if configured. This step mainly surfaces the numbers in logs.
+
+  forbidden-references:
+    name: Forbidden Reference Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run forbidden-reference quality gate
+        run: npm run check:forbidden-references

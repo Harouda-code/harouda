@@ -12,6 +12,7 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
+    "check:forbidden-references": "node scripts/check-forbidden-references.mjs",
     "seed:jahresabschluss": "tsx scripts/seedJahresabschlussTest.ts",
     "prepare": "husky"
   },

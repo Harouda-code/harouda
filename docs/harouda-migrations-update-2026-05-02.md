@@ -1801,3 +1801,154 @@ return data.session?.user?.id ?? null;
 
 Mit dem Merge von PR #58 ist der in §31 explizit ausgewiesene Folgepunkt zur Settings-Ladephase geschlossen. Der `SettingsProvider` verlässt jetzt unter allen drei Hang-Profilen (auth-Aufruf, Migrations-Upsert, Settings-Read) innerhalb von 5 Sekunden die initiale Ladephase und entsperrt die UI mit den Settings-DEFAULTS. Die Idempotenz des Abschluss-Pfads stellt sicher, dass spätere Promise-Settlements nach dem Fallback weder den UI-Status noch die Logs erneut beeinflussen.
 
+## §33 — Charge 0061-B V1: Migration 0059 REVOKE MAINTAIN auf public-Anwendungsrollen
+
+### Merge-Fakten
+
+- Pull Request: **#59**
+- Squash-Merge-Commit: **`455557e`**
+- Feature-Branch-Commit (vor Squash): **`6249c4a`**
+- Branch: **`fix/revoke-maintain-public-relations`**
+- Migration: **`supabase/migrations/0059_revoke_maintain_public_relations.sql`**
+
+### Scope-Zusammenfassung
+
+Migration 0059 schließt die in §28.10 als Schuld **20-aleph** registrierte MAINTAIN-Privileg-Drift in V1-Form. Charge 0060 hatte die Charge-20-Baseline auf 42 öffentliche Relationen (41 ordinary tables + View `public.health_check`) ausgeweitet und 168 direkte MAINTAIN-Grants über die vier Rollen `anon`, `authenticated`, `service_role`, `postgres` empirisch bestätigt. Charge 0061-A hatte unabhängig vom Bootstrap-Pfad bestätigt, dass kein Anwendungspfad MAINTAIN unter den drei Ziel-Rollen benötigt: `pg_cron` ist nicht installiert, keine Materialized Views in `public`, keine Public-Function-Bodies enthalten `VACUUM`/`ANALYZE`/`REINDEX`/`CLUSTER`/`LOCK TABLE`/`REFRESH MATERIALIZED VIEW`/`MAINTAIN`, keine Non-Aggregate-Function-Bodies referenzieren `service_role` in MAINTAIN-relevantem Kontext.
+
+Migration 0059 entzieht in genau sechs aktiven Statements:
+
+- drei `ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public REVOKE MAINTAIN ON TABLES FROM …` Klauseln (für `anon`, `authenticated`, `service_role`)
+- drei `REVOKE MAINTAIN ON ALL TABLES IN SCHEMA public FROM …` Klauseln (für `anon`, `authenticated`, `service_role`); die Klausel `ALL TABLES IN SCHEMA public` umfasst auch Views und betrifft damit alle 42 Relationen einschließlich `public.health_check`
+
+Die Reihenfolge ist defensiv: Default-Privilege-Cleanup zuerst, anschließend Object-Level-REVOKE. So werden Relationen, die während der Migration unter `postgres`-Ownership entstehen, bereits ohne MAINTAIN geboren.
+
+### Push-Verlauf und einmalige `--no-verify`-Ausnahme
+
+Der Branch wurde mit einer einmaligen, ausdrücklich genehmigten `--no-verify`-Ausnahme nach origin gepusht. Hintergrund: Der lokale Husky-Pre-Push-Hook (`.husky/pre-push`) führt `NODE_OPTIONS="--max-old-space-size=4096" npx vitest run --bail=1 --no-coverage --maxWorkers=2` aus und schlug zweimal fehl — zuerst mit einem unerwarteten Vitest-Worker-Fork-Crash (Exit 1), dann mit einem Node-Heap-OOM (`MarkCompactCollector: young object promotion failed`, Exit 134). Die Branch enthält ausschließlich eine SQL-Migration und keine Änderungen an `src/`, Tests, Konfiguration oder Hooks; der Push wurde daher nach Inspektion und expliziter Freigabe einmalig per `git push --no-verify -u origin fix/revoke-maintain-public-relations` durchgeführt. CI bleibt das verbindliche Merge-Gate; der Squash-Merge erfolgte erst nach grünem CI-Lauf. Diese Ausnahme autorisiert keine künftigen `--no-verify`-Pushes.
+
+### Apply-Verlauf
+
+Apply erfolgte nach separater ausdrücklicher Freigabe **manuell im Supabase Studio SQL Editor** (entsprechend dem dokumentierten Projekt-Pattern „manuelle Anwendung via Supabase Studio SQL Editor" aus Charge 19/20/21). Es wurde kein Migration-Runner verwendet. Apply-Ergebnis: **`Success. No rows returned.`**.
+
+### Tests und Verifikation
+
+- **V0** PASS — Pre-Apply-Capability-Check (postgres-only V1-Scope; `supabase_admin` als blockiert dokumentiert).
+- **V1** PASS — Object-Level: 0 Zeilen; keine MAINTAIN-Grants mehr für `anon`/`authenticated`/`service_role` auf `public`-Relationen.
+- **V2** PASS — `postgres`-MAINTAIN unverändert auf `public`-Relationen; `postgres_maintain_relation_count = 42`.
+- **V3** PASS — `pg_maintain`-Berechtigungen unverändert: `anon`/`authenticated`/`service_role` weder direkte Mitglieder noch mit `pg_maintain`-Usage; `supabase_admin` weiterhin mit effektiver `pg_maintain`-Usage (`is_member_of_pg_maintain = false`, `has_pg_maintain_usage = true`, Klassifikation `EXPECTED_ADMIN_MEMBER`); `postgres` als Referenz-Rolle.
+- **V4** PASS — 0 Zeilen; Default-Privileges unter Owner `postgres` gewähren MAINTAIN nicht mehr an `anon`/`authenticated`/`service_role`.
+- **V5** PASS (erwarteter Residual gemäß V0) — Owner-Discovery zeigt exakt 3 Zeilen unter Owner `supabase_admin` für `anon`/`authenticated`/`service_role` mit Klassifikation `KNOWN_BLOCKED_RESIDUAL_SUPABASE_ADMIN`.
+- **V6** PASS — 0 Zeilen; `public.health_check` ohne MAINTAIN für `anon`/`authenticated`/`service_role`.
+- **V7** PASS — `public.health_check` SELECT-Privileg für `anon`/`authenticated`/`service_role` erhalten.
+- **V8** PASS — Non-MAINTAIN-Privilegien identisch zur Pre-Apply-Baseline (Charge 0060 Q10): `authenticated` ordinary table DELETE 33, INSERT 40, SELECT 41, UPDATE 33; View SELECT 1; `service_role` ordinary table DELETE/INSERT/REFERENCES/SELECT/TRIGGER/TRUNCATE/UPDATE jeweils 41; View DELETE/INSERT/REFERENCES/SELECT/TRIGGER/TRUNCATE/UPDATE jeweils 1.
+- **V9** PASS — `information_schema`-Cross-Check (NICHT KANONISCH); 0 Zeilen, V1 bleibt maßgeblich.
+
+### Ausdrücklich nicht im Scope
+
+- keine Änderung an `postgres` object-level MAINTAIN
+- keine Änderung an `supabase_admin`-Rolle oder ihren Default-Privileges (siehe Folgepunkt §28.11-bet)
+- keine Änderung der Mitgliedschaft oder der `USAGE`-Berechtigung in `pg_maintain`
+- keine Änderung an `TRUNCATE` / `TRIGGER` / `REFERENCES` (object-level oder default-level — bleibt Schuld §19-he)
+- keine RLS-Policy-Änderungen
+- keine `audit_log`-Schema-Änderungen
+- keine Function-EXECUTE-Hardening (Schuld §19-gimel)
+- keine Änderungen an `CompanyContext`, `UserContext`, `SettingsProvider`, `SettingsPage`, `main.tsx`, Provider-Reihenfolge oder anderen Frontend-Komponenten
+- keine Compliance-Replay-Ausführung (Schuld 10-aleph; bleibt downstream)
+
+### Folgepunkte und neu eröffnete Schulden
+
+- **Schuld §28.11-bet (NEU, OPEN)** — Titel: „Default-Privilege-MAINTAIN-Residual unter Owner `supabase_admin` für `anon`/`authenticated`/`service_role`."
+  Begründung: Charge 0061-B V1 hat den `FOR ROLE supabase_admin`-Anteil bewusst aus dem V1-Scope ausgeschlossen, weil der Pre-Apply-Capability-Check (V0) ergab, dass der aktuell verfügbare Apply-Kontext (`current_user = postgres`) nicht für die Rolle `supabase_admin` handeln kann. Restrisiko: künftige `public`-Relationen, die unter Ownership `supabase_admin` angelegt werden, können MAINTAIN über den noch verschmutzten `supabase_admin`-Default-ACL-Eintrag erneut erben, bis eine separate Migration unter einem Apply-Kontext läuft, der für `supabase_admin` handeln kann. Empirische Evidenz: V5 zeigt exakt 3 Zeilen mit Klassifikation `KNOWN_BLOCKED_RESIDUAL_SUPABASE_ADMIN` (für die drei Ziel-Rollen).
+- **Schuld §35-aleph (NEU, OPEN)** — Titel: „Husky-Pre-Push-Hook Memory-Härtung."
+  Begründung: `.husky/pre-push` codiert `NODE_OPTIONS="--max-old-space-size=4096"` hart und kann durch parent-shell-Inheritance nicht überschrieben werden. Der Wert von 4096 MB ist für die aktuelle Vitest-Suite unter happy-dom auf der lokalen Windows-Umgebung zu eng dimensioniert; der Hook scheiterte zweimal in Folge mit Worker-Fork-Crash bzw. Node-Heap-OOM. Folgepunkt: Hook-Memory-Cap (z. B. auf 8192 MB) anheben und ggf. zusätzliche Vitest-Pool-Optionen aufnehmen, damit künftige Pushes den Hook ohne `--no-verify`-Ausnahme passieren können.
+- **Schuld §19-he** — bleibt unverändert offen: Default-Privilege-Cleanup für `TRUNCATE`/`TRIGGER`/`REFERENCES` unter den relevanten Owner-Rollen ist weiterhin separater Folgepunkt und nicht Bestandteil dieser Charge.
+- **Schuld §19-gimel** — bleibt unverändert offen: Helper-Function-EXECUTE-Hardening; separate Charge.
+- **Schuld §19-aleph** — bleibt unverändert offen: `protect_update`-Whitelist-Erweiterung; separate Charge.
+
+### Schulden-Statusupdate
+
+- **Schuld 20-aleph** — TEILGESCHLOSSEN (V1-Teilabbau): Object-Level MAINTAIN für `anon`/`authenticated`/`service_role` über alle 42 `public`-Relationen entfernt; Default-Privileges unter Owner `postgres` ebenfalls bereinigt. Verbleibender Anteil: Default-Privileges unter Owner `supabase_admin` (siehe §28.11-bet). Volle Schließung erfordert §28.11-bet-Closure.
+- **Schuld §28.11-bet** — OPEN (NEU): Default-Privilege-MAINTAIN-Residual unter Owner `supabase_admin` für `anon`/`authenticated`/`service_role`; aktueller Apply-Kontext kann nicht für `supabase_admin` handeln.
+- **Schuld §35-aleph** — OPEN (NEU): Husky-Pre-Push-Hook Memory-Härtung; lokaler `.husky/pre-push`-Speicher-Cap zu eng für aktuelle Vitest-Suite.
+- **Schuld 10-aleph** — OPEN / DOWNSTREAM: Compliance-Verifikation-Replay; bleibt downstream und sollte erst nach Commit dieses Tracker-Eintrags und nach Schließung von §28.11-bet eröffnet werden, damit der Replay auf einer vollständig MAINTAIN-bereinigten Default-ACL-Baseline läuft.
+- **Schuld §19-he** — OPEN, unverändert: Default-Privilege-Cleanup für `TRUNCATE`/`TRIGGER`/`REFERENCES`; separate Charge.
+- **Schuld §19-gimel** — OPEN, unverändert: Helper-Function-EXECUTE-Hardening; separate Charge.
+- **Schuld §19-aleph** — OPEN, unverändert: `protect_update`-Whitelist-Erweiterung; separate Charge.
+
+### Closure-Statement
+
+Mit dem Merge von PR #59 und dem manuellen Apply von Migration 0059 ist die in §28.10 als **20-aleph** eingetragene MAINTAIN-Privileg-Drift in der V1-Form als Teilabbau geschlossen: keine MAINTAIN-Grants mehr für `anon`, `authenticated`, `service_role` auf den 42 öffentlichen Relationen, und Default-Privileges unter Owner `postgres` reproduzieren MAINTAIN nicht mehr. Die V0-Capability-Beschränkung führte zur kontrollierten V1-Trennung; der `supabase_admin`-Default-Privilege-Anteil ist als **§28.11-bet** explizit als ausstehender Folgepunkt registriert und blockiert die volle Schließung von 20-aleph. Die Compliance-Verifikation-Replay (Schuld 10-aleph) bleibt downstream und sollte erst nach Commit dieses Tracker-Eintrags — und vorzugsweise erst nach Schließung von §28.11-bet — eröffnet werden, um den Replay auf einer vollständig bereinigten Default-ACL-Baseline auszuführen.
+
+## §34 — Charge 0062: Forbidden Reference Quality Gate V1
+
+### Merge-Fakten
+
+- Pull Request: **#60**
+- Squash-Merge-Commit: **`7d7f240`**
+- Feature-Branch-Commit (vor Squash): **`1373f05`**
+- Branch: **`feat/forbidden-reference-gate`**
+- Geänderte Dateien (4 hinzugefügt + 3 geändert):
+  - **`scripts/check-forbidden-references.mjs`** (neu)
+  - **`scripts/forbidden-references.data.json`** (neu, base64-kodiert)
+  - **`scripts/forbidden-references.baseline.json`** (neu, deterministisch)
+  - **`scripts/__tests__/check-forbidden-references.test.mjs`** (neu)
+  - **`package.json`** (neuer npm-Script `check:forbidden-references`)
+  - **`.github/workflows/ci.yml`** (neuer Job `Forbidden Reference Gate`)
+  - **`vitest.config.ts`** (Include-Pfad für Scanner-Tests)
+
+### Scope-Zusammenfassung
+
+Charge 0062 implementiert die in `docs/architecture/phase-1-final-closure-decision.md` §6 Zeile 110 verbindlich geforderte Voraussetzung („Forbidden Reference Linter muss eingerichtet sein, bevor breite Phase-2/3-Dokumentation und Code-Arbeit anlaufen") als V1-Quality-Gate. Der Scanner durchläuft die Phase-1-§6-Zeile-111-Oberflächen (Code, Dokumentation, Spezifikationen, Migrationen, UI-Texte, Tests), klassifiziert Treffer in fünf neutrale Kategorien (`superseded_reference`, `forbidden_public_claim`, `project_forbidden_term`, `disallowed_language_context`, `risky_positioning_language`), vergleicht gegen eine deterministische Baseline und blockiert alle neu auftretenden Treffer in CI.
+
+Die Charge nimmt **keine Remediation** an bestehenden Legacy-Treffern vor; die existierenden 191 Findings werden ausschließlich über die initiale Baseline grandfathered. Die Reduktion der Baseline durch kontrollierte Remediation ist eine separate Folge-Charge.
+
+### Sicherheitseigenschaften
+
+- **Kodierte Pattern-Daten**: `scripts/forbidden-references.data.json` speichert Pattern ausschließlich in kodierter Form.
+- **Neu hinzugefügte Gate-Dateien**: enthalten keine dekodierten restringierten Werte als Klartext.
+- **Bestehende Legacy-Befunde**: bleiben über die initiale Baseline grandfathered und werden in dieser Charge nicht remediiert.
+- **Deterministische Baseline**: LF-normalisiert, UTF-8, sortiert nach `(category, file_path_hash, line_number, context_hash)`, ohne flüchtige Felder; byte-identisch über Windows/Linux reproduzierbar.
+- **Pfad-Hash statt Rohpfad**: Baseline-Einträge speichern `file_path_hash` (SHA-256 des POSIX-Pfads) und `file_path_redacted`; **kein Roh-`file_path`** wird persistiert (Pfade selbst können restringierte Begriffe enthalten).
+- **Output-Redaktion**: stdout/JSON-Output verwendet ausschließlich neutrale Kategorienamen und maskierten Kontext (`***`); zusätzlich werden Unicode-Zeichen aus den dokumentierten verbotenen Script-Blöcken (Arabic-Familie U+0600–U+06FF, U+0750–U+077F, U+08A0–U+08FF, U+FB50–U+FDFF, U+FE70–U+FEFF) vor jeder Ausgabe durch `*` ersetzt.
+- **Schmaler Allow-Lock**: V1 unterstützt ausschließlich Baseline-Einträge oder exakte Inline-Allow-Marker auf derselben Zeile bzw. der unmittelbar vorangehenden Zeile (mit `category` + `reason`); **keine Datei-, Verzeichnis- oder Block-weiten Allow-Listen.**
+
+### Tests und Verifikation
+
+- **CI / Quality Checks** — PASS
+- **CI / Coverage Gate** — PASS
+- **CI / Forbidden Reference Gate** (neu) — PASS
+- **Lokaler Pre-Push-Hook (Vitest-Gate)** — PASS bei Branch-Push und bei Remote-Branch-Deletion: 208 Dateien / 2070 Tests / 1 todo / 0 Fehler
+- **`npm run check:forbidden-references` post-merge auf `main`** — PASS (Exit 0): **0 BLOCKED, 194 BASELINE_ALLOWED, 0 ALLOW_MARKED**
+- **Targeted Scanner-Tests** — PASS, **17 Tests / 0 Fehler**
+- **Determinismus-Check** — `--update-baseline` zweifach hintereinander erzeugt byte-identische Datei (`cmp` Exit 0)
+- **Disallowed-Unicode-Scan über geänderte Dateien** — 0 literale Zeichen aus den verbotenen Script-Blöcken
+- **Klartext-Scan über neu hinzugefügte Gate-Dateien** — 0 dekodierte restringierte Begriffe (Pattern-Datei selbst per Design kodiert)
+
+### Baseline-Stand nach Merge
+
+- `superseded_reference`: 66
+- `project_forbidden_term`: 115
+- `forbidden_public_claim`: 7
+- `risky_positioning_language`: 6
+- `disallowed_language_context`: 0
+- **Summe**: **191** Baseline-Einträge (dedupliziert aus 194 Roh-Treffern; drei `(category, file, line, hash)`-Kollisionen entstanden, weil eine Zeile mehrere Pattern derselben Kategorie traf)
+
+### Ausdrücklich nicht im Scope
+
+- keine Remediation an Legacy-Befunden (Existenz-Findings ausschließlich über Baseline grandfathered)
+- keine Änderungen an historischer Dokumentation, Quellcode-Kommentaren, UI-Texten oder Migrationen
+- keine Migrationen
+- keine Husky-Hook-Änderungen
+- keine Operator-/Bedien-Dokumentation
+- keine Datenbankobjekte
+- keine Änderung des Laufzeit-Produktverhaltens
+
+### Folgepunkte
+
+- **Legacy-Baseline-Remediation**: separate kontrollierte Charge soll die 191 Baseline-Einträge in geordneten Tranchen abbauen (Vorschlag: nach Kategorie, beginnend mit `superseded_reference`, da die autoritativen Nachfolger bereits in `docs/architecture/phase-1-final-closure-decision.md` §5 dokumentiert sind). Jede Remediation-PR muss die Baseline schrumpfen, niemals wachsen lassen.
+- **Branch-Schutz / Required Check**: das Hinzufügen des neuen `Forbidden Reference Gate`-Jobs zur Liste der required checks unter `main` ist eine Repository-Settings-Aufgabe und benötigt ggf. Admin-Review; sie ist nicht automatisch durch das Hinzufügen des Workflow-Jobs aktiviert.
+
+### Closure-Statement
+
+Mit dem Merge von PR #60 ist der CI-Workflow um den Job `Forbidden Reference Gate` erweitert. Lokal bleibt `npm run check:forbidden-references` der Pre-Flight-Check; in CI steht der Gate-Job parallel zu `Quality Checks` und `Coverage Gate`. Die Aktivierung dieses Jobs als Required-Branch-Protection-Check unter `main` ist eine separate Repository-Settings-Folgearbeit, falls sie nicht bereits konfiguriert ist. Die initiale Baseline grandfathered exakt 191 historische Befunde; ihre Reduktion ist Aufgabe nachgelagerter, kontrollierter Remediation-Charges. Lokales `main` ist mit `origin/main` bei `7d7f240` synchron; der Feature-Branch wurde lokal und remote entfernt; das Working-Tree ist sauber.
+

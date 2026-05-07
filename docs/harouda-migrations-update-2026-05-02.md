@@ -1952,3 +1952,78 @@ Die Charge nimmt **keine Remediation** an bestehenden Legacy-Treffern vor; die e
 
 Mit dem Merge von PR #60 ist der CI-Workflow um den Job `Forbidden Reference Gate` erweitert. Lokal bleibt `npm run check:forbidden-references` der Pre-Flight-Check; in CI steht der Gate-Job parallel zu `Quality Checks` und `Coverage Gate`. Die Aktivierung dieses Jobs als Required-Branch-Protection-Check unter `main` ist eine separate Repository-Settings-Folgearbeit, falls sie nicht bereits konfiguriert ist. Die initiale Baseline grandfathered exakt 191 historische Befunde; ihre Reduktion ist Aufgabe nachgelagerter, kontrollierter Remediation-Charges. Lokales `main` ist mit `origin/main` bei `7d7f240` synchron; der Feature-Branch wurde lokal und remote entfernt; das Working-Tree ist sauber.
 
+## §35 — Charge 0063: Husky Pre-Push Memory Hardening V1 (Schuld §35-aleph Closure)
+
+### Merge-Fakten
+
+- Pull Request: **#62**
+- Squash-Merge-Commit: **`d2ca087`**
+- Feature-Branch-Commit (vor Squash): **`0202f7b`**
+- Branch: **`fix/husky-prepush-memory-hardening`**
+- Geänderte Datei: **`.husky/pre-push`**
+
+### Scope-Zusammenfassung
+
+Charge 0063 schließt die in §33 neu eröffnete Schuld **§35-aleph** in V1-Form. Hintergrund war, dass der lokale Pre-Push-Hook bei Charge 0061-B mit dem bisherigen Speicher-Cap zweimal scheiterte: zuerst mit einem Vitest-Worker-Fork-Crash und anschließend mit einem Node-Heap-OOM. Dadurch war für den damaligen SQL-only-Branch eine einmalige, ausdrücklich genehmigte `--no-verify`-Ausnahme erforderlich.
+
+Die V1-Härtung ändert ausschließlich den Speicher-Cap im lokalen Pre-Push-Hook:
+
+- vorher: `NODE_OPTIONS="--max-old-space-size=4096" npx tsc --noEmit`
+- nachher: `NODE_OPTIONS="--max-old-space-size=8192" npx tsc --noEmit`
+- vorher: `NODE_OPTIONS="--max-old-space-size=4096" npx vitest run --bail=1 --no-coverage --maxWorkers=2`
+- nachher: `NODE_OPTIONS="--max-old-space-size=8192" npx vitest run --bail=1 --no-coverage --maxWorkers=2`
+
+Der Hook-Ablauf bleibt unverändert: zuerst TypeScript-Check, danach Vitest mit `--bail=1`, `--no-coverage` und `--maxWorkers=2`. Es wurden keine Testkonfigurationen, Package-Skripte, CI-Workflows, Dependencies oder Scanner-Dateien geändert.
+
+### Tests und Verifikation
+
+- **Scope-Verifikation** — PASS: genau eine Datei geändert, `.husky/pre-push`.
+- **Diff-Verifikation** — PASS: genau zwei Wertänderungen, `4096` → `8192`; keine Kommentaränderung, keine Mode-Änderung.
+- **Lokaler Hook-Smoke: TypeScript** — PASS: `NODE_OPTIONS="--max-old-space-size=8192" npx tsc --noEmit` mit Exit 0.
+- **Lokaler Hook-Smoke: Vitest** — PASS: `NODE_OPTIONS="--max-old-space-size=8192" npx vitest run --bail=1 --no-coverage --maxWorkers=2` mit Exit 0; 208 Dateien / 2070 Tests / 1 todo / 0 Fehler; kein Worker-Crash, kein OOM.
+- **Forbidden-Reference Gate** — PASS: `npm run check:forbidden-references` mit Exit 0; 0 BLOCKED, 194 BASELINE_ALLOWED, 0 ALLOW_MARKED.
+- **Branch-Push ohne `--no-verify`** — PASS: `git push -u origin fix/husky-prepush-memory-hardening` lief über den Pre-Push-Hook und bestand ohne `--no-verify`.
+- **CI / Quality Checks** — PASS.
+- **CI / Coverage Gate** — PASS.
+- **CI / Forbidden Reference Gate** — PASS.
+- **Post-Merge-Verifikation auf `main`** — PASS: `main` bei `d2ca087`, Working Tree sauber, Hook-Kommandos mit 8192 MB erneut erfolgreich ausgeführt.
+
+### Branch-Cleanup
+
+Nach dem Squash-Merge wurde der lokale Feature-Branch sicher gelöscht. Der lokale Löschversuch für den Remote-Branch über `git push origin --delete fix/husky-prepush-memory-hardening` wurde durch den lokalen Pre-Push-Hook mit einer Windows-OS-Level-Meldung `Nicht genügend Arbeitsspeicher` blockiert. Diese Meldung unterscheidet sich vom ursprünglichen V8-Heap-OOM aus §35-aleph: sie trat beim delete-only push auf, bevor der Remote-Ref-Delete erfolgreich an origin übertragen wurde.
+
+Die Remote-Branch-Bereinigung wurde deshalb manuell über die GitHub-Oberfläche durchgeführt. Anschließend entfernte `git fetch --prune origin` den lokalen Remote-Tracking-Ref `origin/fix/husky-prepush-memory-hardening`. Es wurde kein `--no-verify` verwendet.
+
+### Ausdrücklich nicht im Scope
+
+- keine Änderungen an `package.json`
+- keine Änderungen an `package-lock.json`
+- keine Änderungen an `vitest.config.ts`
+- keine Änderungen an `.github/workflows/ci.yml`
+- keine Scanner- oder Baseline-Änderungen
+- keine Legacy-Baseline-Remediation
+- keine Migrationen
+- keine Datenbankänderungen
+- keine Tracker-Änderung im Implementierungs-PR
+- keine Änderung am Hook-Ablauf außer dem Speicher-Cap
+- keine `--no-verify`-Verwendung
+
+### Folgepunkte
+
+- **Delete-only Push Handling (optional, OPEN)** — Ein späterer kleiner Hook-Scope-Folgepunkt kann prüfen, ob `.husky/pre-push` delete-only refspecs erkennt und die schweren Prüfungen für reine Remote-Branch-Löschungen überspringt. Hintergrund ist die OS-Level-Speicherfehlermeldung beim lokalen Remote-Branch-Delete nach PR #62. Dieser Punkt ist nicht Teil von §35-aleph, weil §35-aleph den V8-Heap-Cap für normale Pushes betraf.
+- **Legacy-Baseline-Remediation** — bleibt separater Folgepunkt aus §34.
+- **Schuld §28.11-bet** — bleibt unverändert offen: Default-Privilege-MAINTAIN-Residual unter Owner `supabase_admin`.
+- **Schuld 10-aleph** — bleibt downstream: Compliance-Verifikation-Replay.
+
+### Schulden-Statusupdate
+
+- **Schuld §35-aleph** — GESCHLOSSEN: Der lokale Pre-Push-Hook verwendet jetzt 8192 MB für TypeScript und Vitest. Die Hook-Kommandos bestanden lokal, der Feature-Branch wurde ohne `--no-verify` gepusht, CI war grün, und die Post-Merge-Verifikation auf `main` bestätigte den neuen Cap.
+- **Delete-only Push Handling** — OPTIONAL / OPEN: möglicher späterer Hook-Scope-Folgepunkt, um reine Branch-Lösch-Pushes ohne schwere Testausführung zu behandeln.
+- **Schuld §28.11-bet** — OPEN, unverändert.
+- **Schuld 10-aleph** — OPEN / DOWNSTREAM, unverändert.
+- **Legacy-Baseline-Remediation** — OPEN / DOWNSTREAM, unverändert.
+
+### Closure-Statement
+
+Mit dem Merge von PR #62 und der Post-Merge-Verifikation auf `main` ist **Schuld §35-aleph** geschlossen. Der lokale Pre-Push-Hook nutzt für beide schweren Prüfpfade jetzt `NODE_OPTIONS="--max-old-space-size=8192"`. Die Änderung ist bewusst minimal gehalten: eine Datei, zwei Wertänderungen, keine Package-, CI-, Testkonfigurations-, Migrations- oder Scanner-Änderungen. Der Push des Feature-Branches gelang ohne `--no-verify`; die Hook-Kommandos wurden auf dem Feature-Branch und nach dem Merge auf `main` erfolgreich ausgeführt. Der Feature-Branch wurde lokal gelöscht, remote über die GitHub-Oberfläche entfernt und anschließend per `git fetch --prune origin` aus den Remote-Tracking-Refs bereinigt. `main` ist bei `d2ca087` mit `origin/main` synchron und das Working Tree ist sauber.
+

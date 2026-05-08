@@ -104,7 +104,7 @@ describe("Arbeitsplatz · Musterfirma-Smoke (End-to-End)", () => {
   });
 
   it(
-    "autoSeed → /arbeitsplatz → 4 Mandanten → Kühn-Klick → URL + Launcher-Active + /buchfuehrung-Link",
+    "autoSeed → /arbeitsplatz → 4 Mandanten → Kühn-Klick → URL + Launcher-Active + /buchhaltung/buchfuehrung-Link",
     async () => {
       // autoSeedDemoIfNeeded legt Kühn + 3 Bestands-Mandanten an
       // (siehe src/api/__tests__/demoSeed.test.ts).
@@ -184,9 +184,9 @@ describe("Arbeitsplatz · Musterfirma-Smoke (End-to-End)", () => {
       );
       expect(reweLink).not.toBeNull();
       const href = reweLink!.getAttribute("href") ?? "";
-      // Tatsächlicher Zielpfad ist `/buchfuehrung` (siehe Schritt-5-
+      // Tatsächlicher Zielpfad ist `/buchhaltung/buchfuehrung` (siehe Schritt-5-
       // Route-Verifikation gegen App.tsx).
-      expect(href).toBe(`/buchfuehrung?mandantId=${encodeURIComponent(kuehnId)}`);
+      expect(href).toBe(`/buchhaltung/buchfuehrung?mandantId=${encodeURIComponent(kuehnId)}`);
 
       // --- Tree-Schritt-3-Erweiterungen ---------------------------------
 
@@ -203,13 +203,13 @@ describe("Arbeitsplatz · Musterfirma-Smoke (End-to-End)", () => {
         )
       ).not.toBeNull();
 
-      // Sub-Link „Buchungsjournal" hat href=/journal?mandantId=<kuehnId>.
+      // Sub-Link „Buchungsjournal" hat href=/buchhaltung/journal?mandantId=<kuehnId>.
       const journalSub = container.querySelector<HTMLAnchorElement>(
         '[data-testid="arbeitsplatz-tree-rewe-journal"]'
       );
       expect(journalSub).not.toBeNull();
       expect(journalSub!.getAttribute("href")).toBe(
-        `/journal?mandantId=${encodeURIComponent(kuehnId)}`
+        `/buchhaltung/journal?mandantId=${encodeURIComponent(kuehnId)}`
       );
 
       // Sub-Link aus einem anderen Modul: „Anlage N" aus Einkommensteuer.

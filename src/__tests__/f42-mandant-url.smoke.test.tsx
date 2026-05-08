@@ -20,7 +20,7 @@
 //   1. /arbeitsplatz mit 4 Musterfirma-Mandanten (autoSeed).
 //   2. Kühn-Zeile klicken → URL=?mandantId=<kuehn>.
 //   3. Launcher-Link „Kanzlei-Rechnungswesen" klicken → Navigation zu
-//      `/buchfuehrung?mandantId=<kuehn>`.
+//      `/buchhaltung/buchfuehrung?mandantId=<kuehn>`.
 //   4. Ziel-Page liest `useMandant().selectedMandantId` → sieht die
 //      Kühn-ID sofort, ohne Reload. Das ist der F42-Fix-Nachweis.
 //
@@ -111,7 +111,7 @@ function renderAppAt(path: string): {
                   }
                 />
                 <Route
-                  path="/buchfuehrung"
+                  path="/buchhaltung/buchfuehrung"
                   element={
                     <RequireAuth>
                       <BuchfuehrungProbe />
@@ -201,7 +201,7 @@ describe("F42-Smoke · Arbeitsplatz → Launcher → Ziel-Page liest korrekten M
       );
       expect(reweLink).not.toBeNull();
       expect(reweLink!.getAttribute("href")).toBe(
-        `/buchfuehrung?mandantId=${encodeURIComponent(kuehnId)}`
+        `/buchhaltung/buchfuehrung?mandantId=${encodeURIComponent(kuehnId)}`
       );
 
       act(() => {
@@ -221,14 +221,14 @@ describe("F42-Smoke · Arbeitsplatz → Launcher → Ziel-Page liest korrekten M
         { timeout: 2000, interval: 10 }
       );
 
-      // Pfad = /buchfuehrung, Query = ?mandantId=<kuehnId>.
+      // Pfad = /buchhaltung/buchfuehrung, Query = ?mandantId=<kuehnId>.
       const probeUrl = container
         .querySelector('[data-testid="url-probe"]')!
         .getAttribute("data-pathname");
       const probeSearch = container
         .querySelector('[data-testid="url-probe"]')!
         .getAttribute("data-search");
-      expect(probeUrl).toBe("/buchfuehrung");
+      expect(probeUrl).toBe("/buchhaltung/buchfuehrung");
       expect(probeSearch).toContain(`mandantId=${encodeURIComponent(kuehnId)}`);
 
       // KRITISCHER F42-NACHWEIS: die Ziel-Page hat via useMandant() die

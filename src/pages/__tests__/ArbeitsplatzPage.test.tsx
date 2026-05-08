@@ -623,8 +623,8 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     // zeigt jetzt auf den Mantelbogen `/einkommensteuer/est-1a`, nicht mehr auf
     // `/steuer/euer` — siehe TREE_MODULES in ArbeitsplatzPage.tsx.
     const expected: Array<[string, string]> = [
-      ["arbeitsplatz-launcher-rewe", "/buchfuehrung"],
-      ["arbeitsplatz-launcher-anlagen", "/anlagen/verzeichnis"],
+      ["arbeitsplatz-launcher-rewe", "/buchhaltung/buchfuehrung"],
+      ["arbeitsplatz-launcher-anlagen", "/buchhaltung/anlagen/verzeichnis"],
       ["arbeitsplatz-launcher-einkommensteuer", "/einkommensteuer/est-1a"],
       ["arbeitsplatz-launcher-umsatzsteuer", "/umsatzsteuer/ustva"],
       ["arbeitsplatz-launcher-lohn", "/lohn"],
@@ -899,7 +899,7 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     );
     expect(journalLink).not.toBeNull();
     expect(journalLink!.getAttribute("href")).toBe(
-      "/journal?mandantId=c-1"
+      "/buchhaltung/journal?mandantId=c-1"
     );
 
     // Zweite Stichprobe aus einem anderen Modul.

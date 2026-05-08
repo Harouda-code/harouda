@@ -6,7 +6,7 @@
  * WICHTIG — NICHT produktiv: Dies ist kein gueltiger ELSTER-ERiC-
  * Datensatz. Die echte Uebermittlung erfordert die ERiC-Bibliothek
  * (C++ native DLL) des BZSt — nicht Teil dieses Projekts (P1-Blocker
- * in CLAUDE.md §10). Diese XML-Repraesentation dient:
+ * in historischem Kontextdokument, Abschnitt 10). Diese XML-Repraesentation dient:
  *   - strukturierter Voransicht der Kennzahlen im ELSTER-Schema-Format,
  *   - Input fuer eine spaetere ERiC-Integration (gleicher Kz-Mapping),
  *   - Nachvollziehbarkeit fuer den Sachbearbeiter beim BOP-Online-

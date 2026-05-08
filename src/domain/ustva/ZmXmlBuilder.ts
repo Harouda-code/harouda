@@ -5,7 +5,7 @@
  * Die echte Übermittlung an das BZSt erfordert entweder:
  *   - das BOP-Online-Formular (manuelle Eingabe),
  *   - oder ERiC/ELMA5-Client-Integration (außerhalb des Frontend-Scope,
- *     P1-Blocker in `CLAUDE.md` § 10).
+ *     P1-Blocker in historischem Kontextdokument, Abschnitt 10).
  *
  * Dieser Builder dient:
  *   - Prüfung der drei ZM-Kennzahlen (41 IG-Lieferung, 21 IG-sonstige

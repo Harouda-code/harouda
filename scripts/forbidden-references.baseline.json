@@ -52,13 +52,6 @@
     },
     {
       "category": "project_forbidden_term",
-      "file_path_hash": "2f755fb86cdd5e57e747a782f0c6e971f008bc6ea48b5bb3d6b2b34c3495185d",
-      "file_path_redacted": "src/pages/__tests__/ArbeitsplatzPage.test.tsx",
-      "line_number": 10,
-      "context_hash": "039ab74074fc2d090c451b2731ef88c3325600dc0ef68ed5e988f3b3edf00055"
-    },
-    {
-      "category": "project_forbidden_term",
       "file_path_hash": "443d5732790f47d78502f78a2387fcce82c9b09401060bda9c0a96d115e2ea89",
       "file_path_redacted": "docs/glossary/08-technik-architektur.md",
       "line_number": 1208,
@@ -77,13 +70,6 @@
       "file_path_redacted": "docs/glossary/08-technik-architektur.md",
       "line_number": 1452,
       "context_hash": "738e1c1ce483c88a029969079e5babbc4febe15376f2cbaa674262edf3271d8b"
-    },
-    {
-      "category": "project_forbidden_term",
-      "file_path_hash": "44fec9bc0e502ceb6f37dda0d228cd123731df9e273527c1719a76738d60b7fa",
-      "file_path_redacted": "src/domain/elster/LstAnmeldungXmlBuilder.ts",
-      "line_number": 9,
-      "context_hash": "a3f1c146505b00688db254d1ec687876404a264a41f4cd9402e26bdbcd6afaab"
     },
     {
       "category": "project_forbidden_term",
@@ -112,13 +98,6 @@
       "file_path_redacted": "docs/harouda-migrations-update-2026-05-02.md",
       "line_number": 1032,
       "context_hash": "9b8acdc8f3c6aad7a3788e9410ec24fc8198f4073bf26972c75fc59e501d201c"
-    },
-    {
-      "category": "project_forbidden_term",
-      "file_path_hash": "ca42e0561aaae1ee6b578a5056b2063e92a572fef563f5509daa271be0ed6282",
-      "file_path_redacted": "src/domain/ustva/ZmXmlBuilder.ts",
-      "line_number": 8,
-      "context_hash": "67ac8cb99c03df9e96f941eeffb57ea5e2c6cc012cab74979089b7ba52ecc7f6"
     },
     {
       "category": "risky_positioning_language",

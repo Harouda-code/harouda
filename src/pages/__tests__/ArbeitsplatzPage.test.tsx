@@ -7,7 +7,7 @@
 // Schritt 3: linke Spalte mit Kanzlei-Nav (Einstellungen + Mitarbeiter).
 // Schritt 4: mittlere Spalte mit Mandantentabelle, Suche, URL-Binding.
 //
-// DEMO_MODE ist im vitest-Env aktiv (CLAUDE.md §12.18), daher liefert
+// DEMO_MODE ist im vitest-Env aktiv (historisches Kontextdokument, Abschnitt 12.18), daher liefert
 // UserProvider synchron eine Demo-Session → RequireAuth gibt Kinder frei.
 // `fetchClients` läuft über `store` (localStorage); wir seed'en dort.
 

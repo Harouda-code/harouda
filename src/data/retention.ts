@@ -45,7 +45,7 @@ export const RETENTION_RULES: RetentionRule[] = [
     label: "Buchungsbelege",
     years: 8,
     legalBasis:
-      "§ 147 Abs. 3 AO (verkürzt durch Wachstumschancengesetz, gültig ab 1.1.2025)",
+      "§ 147 Abs. 3 AO n.F. (BEG IV; Art. 97 § 19a Abs. 2 EGAO)",
     examples:
       "Rechnungen, Quittungen, Kontoauszüge, Lieferscheine, Kassenberichte",
   },

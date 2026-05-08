@@ -434,13 +434,6 @@
       "file_path_redacted": "docs/SPRINT-6-DECISIONS.md",
       "line_number": 464,
       "context_hash": "e1e8bc50186361cc55c298db35eeb8fbd4eb223c17d2bfc91bc494e01c73f351"
-    },
-    {
-      "category": "superseded_reference",
-      "file_path_hash": "fd975890a2460b8f033431c98a281546749a476cd8022042a3485e7aa4819059",
-      "file_path_redacted": "src/data/retention.ts",
-      "line_number": 48,
-      "context_hash": "d4f6b2d8f2eeb266d96662c7e0df8e6d14111b8ac48e18d0171f524b606d463d"
     }
   ]
 }

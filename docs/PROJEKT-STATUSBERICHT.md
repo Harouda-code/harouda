@@ -293,7 +293,7 @@ befüllt).
 | § 141 | Buchführungspflicht bestimmter Steuerpflichtiger | Anwenderpflicht; Verfahren unterstützt |
 | § 146 Abs. 4 | Unveränderbarkeit | Hash-Kette + Festschreibung + Trigger (tamper-evident) |
 | § 147 Abs. 2 | Ordnungsmäßige Aufbewahrung | Framework vorhanden; Backup-Strategie nicht umgesetzt |
-| § 147 Abs. 3 | Aufbewahrungsfristen | `retention.ts` mit 2025-Wachstumschancengesetz-Regeln |
+| § 147 Abs. 3 | Aufbewahrungsfristen | `retention.ts` mit 8-Jahres-Frist nach BEG IV (Art. 97 § 19a EGAO) |
 | § 147 Abs. 6 | Datenzugriff Z1/Z2/Z3 | **Z3 produktiv** (nachgebildetes Format), 16 Tests; Z1/Z2 fachlicher Kanzleiprozess |
 | § 193 | Außenprüfung | Rolle `tax_auditor`, Prüfer-Dashboard, Z3-Export |
 | § 200 | Mitwirkungspflichten | Anwenderpflicht |

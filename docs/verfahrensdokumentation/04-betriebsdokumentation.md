@@ -408,7 +408,7 @@ und 4-Augen-Prinzip → Kap. 8 Abschnitt 8.7.
   (Drittstaatenübermittlung, Kontext Serverstandort).
 - **Strafgesetzbuch (StGB):** § 203 (Verletzung von
   Privatgeheimnissen, Kontext Logging-Inhalte in Abschnitt 4.5).
-- **Wachstumschancengesetz 2025** — 8-Jahres-Frist für
+- **BEG IV / Art. 97 § 19a EGAO** — 8-Jahres-Frist für
   Buchungsbelege (§ 147 Abs. 3 AO n.F.).
 
 ### Interne Projekt-Referenzen

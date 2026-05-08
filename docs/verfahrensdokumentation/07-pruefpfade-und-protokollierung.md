@@ -246,8 +246,9 @@ Die Admin-Seite `/einstellungen/audit` (verknüpft mit
 
 Die Aufbewahrungsfristen der Audit-Log-Einträge folgen denen der
 fachlich betroffenen Objekte (z. B. Buchungsbelege: 8 Jahre nach
-§ 147 Abs. 3 AO n.F. seit Wachstumschancengesetz 2025; Bücher und
-Jahresabschlüsse: 10 Jahre). Die Einzel-Regeln sind in Kapitel 6
+§ 147 Abs. 3 AO n.F. in der Fassung des BEG IV (Art. 97 § 19a Abs. 2
+EGAO); Bücher und Jahresabschlüsse: 10 Jahre). Die Einzel-Regeln sind
+in Kapitel 6
 dokumentiert und in `src/data/retention.ts` maschinenlesbar
 hinterlegt.
 
@@ -380,7 +381,7 @@ Kontrollsystem und Freigabe-Workflows → Kap. 8 · Aufbewahrungsfristen
   Verarbeitungstätigkeiten); Art. 33 (Meldung von Datenpannen an die
   Aufsichtsbehörde); Art. 34 (Benachrichtigung betroffener Personen).
 - **BMF-Beschreibungsstandard Z3/GDPdU** (Abschnitt 7.5).
-- **Wachstumschancengesetz 2025** — Verkürzung der
+- **BEG IV / Art. 97 § 19a EGAO** — Verkürzung der
   Buchungsbeleg-Aufbewahrung auf 8 Jahre (§ 147 Abs. 3 AO n.F.).
 
 ### Interne Projekt-Referenzen

@@ -18,7 +18,7 @@ durch Fachanwalt + DSB bestätigt ist.
 
 ### 6.1 Aufbewahrungsfristen (Deutschland)
 
-<!-- TODO(verfahrensdoku): Tabelle der Kategorien mit Fristen und Rechtsgrundlage: Bücher / Jahresabschlüsse (10 J.), Buchungsbelege (8 J. seit Wachstumschancengesetz 2025), Handelsbriefe (6 J.), sonstige steuerrelevante Unterlagen (6 J.), Cookie-Consents (3 J. TTDSG), Lohnunterlagen (Frist offen — siehe Kapitel 5 + HASH-CHAIN-VS-ERASURE.md Q2). Anker: Ende des Kalenderjahres der Entstehung. -->
+<!-- TODO(verfahrensdoku): Tabelle der Kategorien mit Fristen und Rechtsgrundlage: Bücher / Jahresabschlüsse (10 J.), Buchungsbelege (8 J. nach § 147 Abs. 3 AO n.F. — BEG IV, Art. 97 § 19a EGAO), Handelsbriefe (6 J.), sonstige steuerrelevante Unterlagen (6 J.), Cookie-Consents (3 J. TTDSG), Lohnunterlagen (Frist offen — siehe Kapitel 5 + HASH-CHAIN-VS-ERASURE.md Q2). Anker: Ende des Kalenderjahres der Entstehung. -->
 
 ### 6.2 Löschung nach Fristablauf
 
@@ -47,8 +47,8 @@ durch Fachanwalt + DSB bestätigt ist.
 ## Verweise auf bestehende Artefakte
 
 - [`../../src/data/retention.ts`](../../src/data/retention.ts)
-  (Retention-Regeln mit Wachstumschancengesetz-2025-Update, `canDelete()`-
-  Helper)
+  (Retention-Regeln mit BEG-IV-Update; § 147 Abs. 3 AO n.F.;
+  `canDelete()`-Helper)
 - [`../../src/pages/RetentionPage.tsx`](../../src/pages/RetentionPage.tsx)
   (UI-Ansicht abgelaufener Fristen unter /einstellungen/aufbewahrung)
 - [`../HASH-CHAIN-VS-ERASURE.md`](../HASH-CHAIN-VS-ERASURE.md)
@@ -59,4 +59,4 @@ durch Fachanwalt + DSB bestätigt ist.
 
 ## Quellen & Referenzen
 
-<!-- TODO(verfahrensdoku): AO § 147 Abs. 3 (Fristen); HGB § 257; § 41 EStG (Lohnunterlagen); Wachstumschancengesetz 2025; DSGVO Art. 5 Abs. 1 lit. e (Speicherbegrenzung), Art. 17; GoBD Rz. 107-110; DSK-Kurzpapier Nr. 11. -->
+<!-- TODO(verfahrensdoku): AO § 147 Abs. 3 (Fristen); HGB § 257; § 41 EStG (Lohnunterlagen); BEG IV / Art. 97 § 19a EGAO (Verkürzung Buchungsbeleg-Aufbewahrung auf 8 Jahre); DSGVO Art. 5 Abs. 1 lit. e (Speicherbegrenzung), Art. 17; GoBD Rz. 107-110; DSK-Kurzpapier Nr. 11. -->

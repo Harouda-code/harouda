@@ -109,8 +109,8 @@ das Verfahren ist das Werkzeug, nicht der Pflichtenträger.
   insbesondere § 146 Abs. 4 zur Unveränderbarkeit.
 - **§ 147 AO** — Aufbewahrungsfristen. Die im Verfahren hinterlegten
   Fristen berücksichtigen die seit 2025 geltende Verkürzung für
-  Buchungsbelege auf 8 Jahre durch das Wachstumschancengesetz (siehe
-  Kapitel 6).
+  Buchungsbelege auf 8 Jahre nach § 147 Abs. 3 AO n.F. (BEG IV,
+  Art. 97 § 19a Abs. 2 EGAO; siehe Kapitel 6).
 - **§ 147 Abs. 6 AO** — Datenzugriff der Außenprüfung; das Verfahren
   stellt hierfür den Z3-Export bereit (Kapitel 7).
 - **§ 193 AO** — Außenprüfung.
@@ -365,8 +365,9 @@ Festschreibung + Z3-Export → Kap. 7 · IKS + Rollentrennung → Kap. 8.
   Rz. 107 ff., Rz. 151-155, Rz. 153-154.
 - Europäische Norm EN 16931 (E-Rechnung, Stammelemente).
 - ISO 19005-3 (PDF/A-3).
-- Wachstumschancengesetz 2025 (Verkürzung Aufbewahrungsfrist für
-  Buchungsbelege auf 8 Jahre, § 147 Abs. 3 AO n.F.).
+- § 147 Abs. 3 AO n.F. in der Fassung des BEG IV (BGBl. 2024 I Nr. 323;
+  Übergangsanwendung Art. 97 § 19a Abs. 2 EGAO) — Verkürzung der
+  Aufbewahrungsfrist für Buchungsbelege auf 8 Jahre.
 
 ### Interne Projekt-Referenzen
 

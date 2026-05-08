@@ -24,8 +24,8 @@ Datensätze:
   in einer Weise verändert werden, dass der ursprüngliche Inhalt nicht
   mehr feststellbar ist."
 - **§ 147 Abs. 3 AO** — Aufbewahrungsfristen: 10 Jahre für Bücher,
-  Jahresabschlüsse, Inventare; 8 Jahre für Buchungsbelege (seit
-  Wachstumschancengesetz 2025); 6 Jahre für Handelsbriefe.
+  Jahresabschlüsse, Inventare; 8 Jahre für Buchungsbelege (BEG IV,
+  Art. 97 § 19a Abs. 2 EGAO); 6 Jahre für Handelsbriefe.
 - **GoBD-Rz. 107 ff.** (BMF-Schreiben vom 28.11.2019) —
   Unveränderbarkeit als zentrales Ordnungsmäßigkeitsprinzip; Änderungen
   müssen so protokolliert werden, dass der ursprüngliche Inhalt
@@ -586,8 +586,8 @@ sind als Anker für die juristische Recherche genannt.
   Einschätzung, welches Vorgehen "marktüblich prüffähig" ist.
 - **§ 41, § 41a EStG + LStDV** — Lohnunterlagen-Aufbewahrung
   (spezifisch zu Q2).
-- **Wachstumschancengesetz 2025** — Herkunft der 8-Jahres-Frist
-  für Buchungsbelege.
+- **BEG IV / Art. 97 § 19a EGAO** — Herkunft der 8-Jahres-Frist
+  für Buchungsbelege (§ 147 Abs. 3 AO n.F.).
 - **Projekt-interne Referenzen:**
   `supabase/migrations/0003_audit_hash_chain.sql`,
   `supabase/migrations/0010_journal_hash_chain.sql`,

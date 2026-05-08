@@ -158,8 +158,8 @@ Daten zugreifen können:
 ## 6. Aufbewahrung
 
 - Bücher, Jahresabschlüsse, Inventare: 10 Jahre (§ 147 Abs. 3 AO).
-- **Buchungsbelege: 8 Jahre** (ab 1.1.2025 durch Wachstumschancengesetz,
-  zuvor 10 Jahre).
+- **Buchungsbelege: 8 Jahre** (§ 147 Abs. 3 AO n.F.; BEG IV,
+  Art. 97 § 19a EGAO; ab 1.1.2025, zuvor 10 Jahre).
 - Handelsbriefe: 6 Jahre.
 - Fristbeginn: Ende des Kalenderjahres, in dem das Dokument erstellt /
   empfangen wurde.

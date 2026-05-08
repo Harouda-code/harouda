@@ -5,7 +5,7 @@
       "category": "forbidden_public_claim",
       "file_path_hash": "192b6eff919c6cebeecfb085a300c6584a3dbbf335130c9f05d03c877d065596",
       "file_path_redacted": "docs/verfahrensdokumentation/07-pruefpfade-und-protokollierung.md",
-      "line_number": 285,
+      "line_number": 286,
       "context_hash": "3e29f8168760be55c92c633948692a6949d3475c24ebbeb0cad7b539bd0fb68e"
     },
     {
@@ -150,27 +150,6 @@
     },
     {
       "category": "superseded_reference",
-      "file_path_hash": "12eeb1f863e2ced07a975b35a7bc1fffaac2d21e56ed990be3b22ecab06d21e8",
-      "file_path_redacted": "docs/verfahrensdokumentation.md",
-      "line_number": 161,
-      "context_hash": "8b0331c216820f1980ec1daca2b50fe2d9cd5edae5fdc4bc5b4214fb45ca5cea"
-    },
-    {
-      "category": "superseded_reference",
-      "file_path_hash": "192b6eff919c6cebeecfb085a300c6584a3dbbf335130c9f05d03c877d065596",
-      "file_path_redacted": "docs/verfahrensdokumentation/07-pruefpfade-und-protokollierung.md",
-      "line_number": 249,
-      "context_hash": "61b9394f7ff895748ccb4df03f70ef6e6e9233e1da5814282551709b56b6b088"
-    },
-    {
-      "category": "superseded_reference",
-      "file_path_hash": "192b6eff919c6cebeecfb085a300c6584a3dbbf335130c9f05d03c877d065596",
-      "file_path_redacted": "docs/verfahrensdokumentation/07-pruefpfade-und-protokollierung.md",
-      "line_number": 383,
-      "context_hash": "7704f89dbff0ff150e01439e76d4146e693dc75b24bc4f83313af8d9b16af1e5"
-    },
-    {
-      "category": "superseded_reference",
       "file_path_hash": "23bb0dd46412f49117f27f28c6e91dd731be1f2c654652bd29118958f7dde128",
       "file_path_redacted": "src/domain/privacy/retention.test.ts",
       "line_number": 22,
@@ -283,20 +262,6 @@
     },
     {
       "category": "superseded_reference",
-      "file_path_hash": "7df1ad605ef6d366e5ceff52be0496b173cce2ec2a6b5dc9ffad575e87d81df4",
-      "file_path_redacted": "docs/HASH-CHAIN-VS-ERASURE.md",
-      "line_number": 28,
-      "context_hash": "a15cc5d4538857c2cb74fd24057f3559384f58e665c777a89096fa79a514fb3b"
-    },
-    {
-      "category": "superseded_reference",
-      "file_path_hash": "7df1ad605ef6d366e5ceff52be0496b173cce2ec2a6b5dc9ffad575e87d81df4",
-      "file_path_redacted": "docs/HASH-CHAIN-VS-ERASURE.md",
-      "line_number": 589,
-      "context_hash": "e7b73e3372cb3db1b7fc949e857b828f9b4fcea8b2a24ccd0af6e0168616a084"
-    },
-    {
-      "category": "superseded_reference",
       "file_path_hash": "808ca5ff8dd7c180480d495fd89e3200329db4706825d4dedf0d293c4fdf6f08",
       "file_path_redacted": "src/data/steuerParameter/2025.ts",
       "line_number": 6,
@@ -325,27 +290,6 @@
     },
     {
       "category": "superseded_reference",
-      "file_path_hash": "9ca780913620a78780320cef6acf732e68e6f541970a0b9b1d89b7cd7a7e9746",
-      "file_path_redacted": "docs/verfahrensdokumentation/06-aufbewahrungs-und-loeschkonzept.md",
-      "line_number": 21,
-      "context_hash": "e5c334945337be2941064e784529bc64e424a497921004699eb08e467faefe1e"
-    },
-    {
-      "category": "superseded_reference",
-      "file_path_hash": "9ca780913620a78780320cef6acf732e68e6f541970a0b9b1d89b7cd7a7e9746",
-      "file_path_redacted": "docs/verfahrensdokumentation/06-aufbewahrungs-und-loeschkonzept.md",
-      "line_number": 50,
-      "context_hash": "03546b87e6b5a41ee42f04bbbc988bdbd98c579286a9557f853593f1c8c6f491"
-    },
-    {
-      "category": "superseded_reference",
-      "file_path_hash": "9ca780913620a78780320cef6acf732e68e6f541970a0b9b1d89b7cd7a7e9746",
-      "file_path_redacted": "docs/verfahrensdokumentation/06-aufbewahrungs-und-loeschkonzept.md",
-      "line_number": 62,
-      "context_hash": "5907bd48e0014b501a8d317ad33a14128df9d4abea56bce4ee24ee490887238b"
-    },
-    {
-      "category": "superseded_reference",
       "file_path_hash": "bbec43ca7cf03b616bf56723e0380e51487ce8fc2e389b61901fbf4886356f52",
       "file_path_redacted": "docs/SESSION-2026-04-20-SUMMARY.md",
       "line_number": 73,
@@ -371,27 +315,6 @@
       "file_path_redacted": "docs/glossary/04-steuer-meldungen.md",
       "line_number": 550,
       "context_hash": "2e9fa28687cb6bba673f168b86578d03f7ccff921ab2b993cf1349a02bda2343"
-    },
-    {
-      "category": "superseded_reference",
-      "file_path_hash": "ddd99ee2b2047da2d7cd2b289dd1ca63b755e0996f831cd075dbfa0c1f083cb2",
-      "file_path_redacted": "docs/verfahrensdokumentation/04-betriebsdokumentation.md",
-      "line_number": 411,
-      "context_hash": "43ddb1eec032f498c295b41a63d5bb1d2caa5a6e6a8d8d836652dff1b0f64fb5"
-    },
-    {
-      "category": "superseded_reference",
-      "file_path_hash": "e212be4abcf3829c1d6168c6fd22356ed364e82d754556c59394c30e87866da7",
-      "file_path_redacted": "docs/verfahrensdokumentation/01-allgemeine-beschreibung.md",
-      "line_number": 112,
-      "context_hash": "2109c47dcdfa9fb300412d414d8a4dec1cee32d4761dd80b4bf895dcd36aa6a0"
-    },
-    {
-      "category": "superseded_reference",
-      "file_path_hash": "e212be4abcf3829c1d6168c6fd22356ed364e82d754556c59394c30e87866da7",
-      "file_path_redacted": "docs/verfahrensdokumentation/01-allgemeine-beschreibung.md",
-      "line_number": 368,
-      "context_hash": "d8176c1d6e88775109cde79c999a47bd71b546d4a4158c8f89f6d4ebbfa0fb94"
     },
     {
       "category": "superseded_reference",
@@ -518,13 +441,6 @@
       "file_path_redacted": "docs/SPRINT-6-DECISIONS.md",
       "line_number": 464,
       "context_hash": "e1e8bc50186361cc55c298db35eeb8fbd4eb223c17d2bfc91bc494e01c73f351"
-    },
-    {
-      "category": "superseded_reference",
-      "file_path_hash": "f5b925b989ee92df8b714298028a260a2bda5d07a58b0eb870b41b70388e86da",
-      "file_path_redacted": "docs/PROJEKT-STATUSBERICHT.md",
-      "line_number": 296,
-      "context_hash": "ac286e6bde1311e397eb38fff686d8d7e31d7181cde719438ccf150b017e07ec"
     },
     {
       "category": "superseded_reference",

@@ -115,8 +115,8 @@ tsc und vitest bleiben im selben Stand wie Ende Sprint 2:
 
 ## Für den nächsten Claude
 
-Beim Lesen von `NEXT-CLAUDE-HANDOFF.md` sieht die nächste Session
-den Stopp-Status unter „Last completed" und kann gezielt eine der
-Optionen A/B/C anstoßen, ohne die Bestandsaufnahme aus Phase 1 neu
-machen zu müssen. `SPRINT-3-DECISIONS.md` enthält die vollständige
+Im historischen Handoff-Backlog ist unter „Last completed" der
+Stopp-Status verzeichnet — die nächste Session konnte gezielt eine
+der Optionen A/B/C anstoßen, ohne die Bestandsaufnahme aus Phase 1
+neu machen zu müssen. `SPRINT-3-DECISIONS.md` enthält die vollständige
 Inventarliste der KST-Artefakte mit Dateipfaden.

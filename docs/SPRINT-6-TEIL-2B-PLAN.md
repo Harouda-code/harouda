@@ -313,7 +313,6 @@ Auflösung der kumulierten Wertberichtigung.
   Methoden-Tabelle + Buchungs-Schema für indirekte Methode
 - `docs/SPRINT-6-DECISIONS.md` — Nachtrag mit 4 Entscheidungen
   (10-13)
-- `docs/NEXT-CLAUDE-HANDOFF.md` — Last completed + Next Task Sprint 7
 
 **Tests:** 0 (nur Doku + Demo).
 

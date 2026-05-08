@@ -155,7 +155,7 @@ den Query-Parameter in den Context kopiert (falls gesetzt).
 
 ### 6.3 Sprint-8 wie gehabt
 
-Die Post-Bugfix-Follow-Ups aus `docs/NEXT-CLAUDE-HANDOFF.md` (AfA-
+Die Post-Bugfix-Follow-Ups aus dem historischen Handoff-Backlog (AfA-
 Doppelung, UStVA-Drift, README-Sollwerte) sind vom Arbeitsplatz-
 Sprint unberührt und stehen weiterhin an.
 

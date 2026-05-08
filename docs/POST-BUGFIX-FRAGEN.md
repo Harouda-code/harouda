@@ -91,7 +91,7 @@ Klasse wie Bug B.
 - Fix wäre analog (Range-Split), erfordert aber separate Analyse welche
   Rückstellungs-Ranges wirklich zu welcher Bilanz-Position müssen.
 
-**Follow-Up:** P3 in `NEXT-CLAUDE-HANDOFF.md` hinzufügen. Fix bei
+**Follow-Up:** P3 in den historischen Handoff-Backlog aufnehmen. Fix bei
 nächstem Demo-Szenario mit Rückstellungen.
 
 ---

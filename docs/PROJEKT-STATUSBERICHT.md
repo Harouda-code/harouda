@@ -582,7 +582,6 @@ Aus `.github/workflows/ci.yml`:
 | `docs/PRODUCTION-READINESS.md` | Selbsteinschätzung Security/Performance/Reliability/Compliance/Operational |
 | `docs/ROADMAP.md` | P1/P2/P3-Gaps und Deprecation-Beobachtung |
 | `docs/GO-LIVE-CHECKLIST.md` | T-4W → Launch → Post-Launch-Liste |
-| `docs/NEXT-CLAUDE-HANDOFF.md` (132 Zeilen) | Handoff-Dokument für KI-Session-Übergabe; aktueller Stand, nächste Aufgabe, Design-Offenstellen |
 | `docs/SESSION-2026-04-20-SUMMARY.md` | Session-Zusammenfassung |
 | `docs/verfahrensdokumentation/README.md` | Index der acht Verfahrensdoku-Kapitel mit Abhängigkeits-Übersicht |
 | `docs/verfahrensdokumentation/01-allgemeine-beschreibung.md` (380 Zeilen, v0.1 BEFÜLLT) | Produkt-Scope, Rechtsrahmen, Rollen, Prozess-Landkarte |
@@ -934,7 +933,6 @@ Stundensatz der Entwicklungs-Ressource ab.
 - `docs/PROJEKT-INVENTAR.md`
 - `docs/BACKUP-STRATEGY.md`
 - `docs/HASH-CHAIN-VS-ERASURE.md`
-- `docs/NEXT-CLAUDE-HANDOFF.md`
 - `docs/SESSION-2026-04-20-SUMMARY.md`
 - `docs/USER-GUIDE-DE.md`
 - `docs/BERATER-LEITFADEN.md`

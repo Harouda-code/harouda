@@ -98,7 +98,7 @@ Drift strukturell erklärbar; Konvergenz auf README-Werte ist nächster Mini-Spr
 | 3 | **README-Sollwerte-Update** nach Fix 1+2 — entweder Musterfirma-Snapshot-Test auf README umstellen (wenn Werte endlich konvergieren) oder README auf aktuelle Ist-Werte aktualisieren. | P2 | 30 min |
 | 4 | **F52 P3** — 2600-2649 Rückstellungs-Range-Konflikt (latent, aktuell keine Musterfirma-Auswirkung). | P3 | 30 min |
 | 5 | **F42 P2** — MandantContext-Staleness (2-Reload-Worst-Case beim ersten Login). | P2 | mittel |
-| 6 | **Sprint-8-Kandidaten-Pool** aus `NEXT-CLAUDE-HANDOFF.md` (a/b/c/e/f/g/h): nach User-Auswahl mit **Pflicht-Bestandsaufnahme** (> 70-80 % vorhanden → Gap-Closure statt Neubau). | — | — |
+| 6 | **Sprint-8-Kandidaten-Pool** aus historischem Handoff-Backlog (a/b/c/e/f/g/h): nach User-Auswahl mit **Pflicht-Bestandsaufnahme** (> 70-80 % vorhanden → Gap-Closure statt Neubau). | — | — |
 | 7 | **P0-03 DSGVO Art. 17 Löschrecht** bleibt geparkt bis zur Fachanwalt-Rückmeldung auf Q1-Q8 in `docs/HASH-CHAIN-VS-ERASURE.md`. | P0 | blockiert |
 
 **Empfehlung ohne User-Signal:** Kurzer Folge-Sprint (~2 h) für Issues 1+2+3 (schließt die Musterfirma-Demo-Qualität komplett ab), danach Sprint 8 mit **Kandidat (h) 1572/1575-Mapping-Refactor** oder **(a) Anlagen-CSV-Import**.
@@ -132,7 +132,7 @@ Empfohlen beim nächsten Öffnen:
 ```
 1. Lies CLAUDE.md vollständig (Kanonischer Projekt-Kontext).
 2. Lies docs/SESSION-ABSCHLUSS-2026-04-20.md (dieses Dokument).
-3. Lies docs/NEXT-CLAUDE-HANDOFF.md Abschnitt "Immediate Next Action".
+3. Konsultiere den historischen Handoff-Backlog (Abschnitt „Immediate Next Action").
 4. Frage den User:
    Option A: "Sollen wir die 3 offenen Musterfirma-Drift-Issues
              (AfA-Doppelung + UStVA-Drift + README-Update) in einem

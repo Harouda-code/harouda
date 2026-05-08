@@ -97,8 +97,8 @@ Kanzleien ist es akzeptabel.
   auf Beleg-Nr-Ebene erfüllt; Personenkonten sind eine spätere
   Erweiterung, keine Voraussetzung.
 
-**Auswirkung:** Keine Code-Änderung. Vermerk im
-`NEXT-CLAUDE-HANDOFF.md` unter den offenen Sprint-Kandidaten.
+**Auswirkung:** Keine Code-Änderung. Vermerk im historischen
+Handoff-Backlog unter den offenen Sprint-Kandidaten.
 
 **Reversibilität:** Trivial — ein späterer Sprint kann
 Personenkonten einführen, ohne das Derived-OPOS-Modell zu berühren

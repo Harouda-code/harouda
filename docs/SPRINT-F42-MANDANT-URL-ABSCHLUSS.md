@@ -7,8 +7,8 @@
 
 ## 1. Ausgangslage — der F42-Bug
 
-Seit Sprint 7.5 (Musterfirma-Auto-Seed) bekannt, dokumentiert in
-`docs/NEXT-CLAUDE-HANDOFF.md` als **„F42 P2 — MandantContext-Staleness"**:
+Seit Sprint 7.5 (Musterfirma-Auto-Seed) bekannt, im historischen
+Handoff-Backlog als **„F42 P2 — MandantContext-Staleness"** geführt:
 
 - Der Arbeitsplatz (`/arbeitsplatz`, eingeführt im Arbeitsplatz-Sprint)
   setzte den aktiven Mandanten per `?mandantId=<id>` in die URL.

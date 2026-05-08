@@ -1,4 +1,4 @@
-# Sprint 7 — Planung (6 Kandidaten aus NEXT-CLAUDE-HANDOFF)
+# Sprint 7 — Planung (6 Kandidaten aus historischem Handoff-Backlog)
 
 Baseline: **932 Tests / 61 Dateien**, Stand 2026-04-20 (Sprint 6 Teil 2b
 abgeschlossen). Der Plan bewertet alle 6 Kandidaten, priorisiert und

@@ -166,7 +166,7 @@ Migration 0023 legt `pii_erasures`-Tabelle an. Es gibt keinen Service-Layer, der
 
 **Wirkung:** Bei Mandanten-Kündigung mit Löschforderung: keine legitime technische Möglichkeit.
 
-**Fix-Skizze:** Warten auf Rechts-Freigabe. Siehe `NEXT-CLAUDE-HANDOFF.md` „Option A". Kein Sprint-7/8-Scope.
+**Fix-Skizze:** Warten auf Rechts-Freigabe (historischer Handoff-Backlog, Option A). Kein Sprint-7/8-Scope.
 
 ---
 
@@ -463,7 +463,7 @@ Nicht-kritisch, in kleinere Sprints einstreuen oder als „Refactor-Friday"-Aufg
 
 ### 6.4 DSGVO-Sprint (Go-Live-Voraussetzung, aber blockiert auf Fachanwalt)
 
-P0-03 + P2-22 (AVV). Start erst nach Q1-Q8-Rechts-Rückmeldung. Siehe `NEXT-CLAUDE-HANDOFF.md` Option A.
+P0-03 + P2-22 (AVV). Start erst nach Q1-Q8-Rechts-Rückmeldung (historischer Handoff-Backlog, Option A).
 
 ---
 

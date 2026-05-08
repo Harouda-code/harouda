@@ -260,7 +260,7 @@ buchwert_ende == ak_ende − abschreibungen_kumuliert
 7. **14 AnlagenService-Tests grün** (Stop 2)
 8. UI `AnlagenVerzeichnisPage.tsx` + `AfaLaufPage.tsx` (+ Routes + AppShell-Menü)
 9. Demo-CSV `anlagegueter.csv` + README-Abschnitt 14d
-10. SPRINT-6-DECISIONS.md + NEXT-CLAUDE-HANDOFF.md + CLAUDE.md
+10. SPRINT-6-DECISIONS.md + CLAUDE.md
 
 - tsc clean
 - **888 Tests grün** (853 → +35)

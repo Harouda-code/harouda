@@ -310,7 +310,7 @@ Unterstützung).
 - **Keine neuen npm-Dependencies**
 - **TypeScript strict + Decimal.js durchgängig**
 - **Nicht in Scope:**
-  - ERiC-Backend-Direktübermittlung (P1 Blocker aus CLAUDE.md §10)
+  - ERiC-Backend-Direktübermittlung (P1 Blocker aus historischem Kontextdokument, Abschnitt 10)
   - Dreiecksgeschäfte § 25b UStG (Kz 42 existiert, komplexer Rechts-
     fall separater Sprint)
   - OSS / IOSS / MOSS (Fernverkauf an Endverbraucher)

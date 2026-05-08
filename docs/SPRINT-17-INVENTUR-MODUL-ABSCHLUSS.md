@@ -207,7 +207,7 @@ Kandidaten sind in §5 transparent aufgeführt.
 - `src/api/journal.ts` — `createEntry` für Abgangs- und
   Bestandsveränderungs-Buchungen.
 - `src/api/documents.ts` — `uploadDocument` für Inventurlisten.
-- `CLAUDE.md` §7 — GoBD-Compliance-Status: § 240 HGB Inventur-Pflicht
+- historisches Kontextdokument, Abschnitt 7 — GoBD-Compliance-Status: § 240 HGB Inventur-Pflicht
   jetzt prozessunterstützend in der App verankert.
 
 ---

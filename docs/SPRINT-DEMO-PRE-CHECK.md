@@ -225,7 +225,7 @@ bestehende Dateien unverändert):
 | Eröffnungsbilanz-Splits | im Journal-Bulk | — |
 | Bank-MT940 | — (nicht seedbar) | entfällt |
 | Integration in `autoSeedDemoIfNeeded` | ~30 | niedrig |
-| Dokumentations-Update (CLAUDE.md, README-Hinweise) | ~40 | niedrig |
+| Dokumentations-Update (historisches Kontextdokument, README-Hinweise) | ~40 | niedrig |
 | **Summe neue LOC** | **~590** | **mittel** |
 | **Summe modifizierte Bestandszeilen** | ~30 in `demoSeed.ts` + `dashboard.ts` | niedrig |
 

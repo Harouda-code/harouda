@@ -187,7 +187,7 @@ transparent festgehalten.
 - `docs/DSUV-SCHEMA-UPDATE-GUIDE.md` — jaehrlicher Wartungs-Cycle.
 - `docs/ELSTER-SCHEMA-UPDATE-GUIDE.md` — analoger Zyklus fuer
   ELSTER-XML (Sprint 14).
-- `CLAUDE.md` §10 — DEUeV-Meldungen war P2-Roadmap-Eintrag;
+- historisches Kontextdokument, Abschnitt 10 — DEUeV-Meldungen war P2-Roadmap-Eintrag;
   dieser Sprint implementiert die XML/CSV-Export-Ebene, die
   Schema-Erweiterung bleibt offen.
 - `src/domain/ustva/UstvaXmlBuilder.ts` + `src/domain/elster/*` —

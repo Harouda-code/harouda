@@ -268,10 +268,10 @@ Weder manuell noch via Smoke-Test verifiziert. P0-01 garantiert bereits eine Abw
 
 ---
 
-### P1-07 Diskrepanz README „47 Buchungen" vs. CLAUDE.md „52 Buchungen"
+### P1-07 Diskrepanz README „47 Buchungen" vs. historisches Kontextdokument „52 Buchungen"
 
 **Bereich:** Dokumentation / Konsistenz
-**Datei:** `demo-input/musterfirma-2025/README.md:25` vs. `CLAUDE.md:6`
+**Datei:** `demo-input/musterfirma-2025/README.md:25` vs. historisches Kontextdokument, Zeile 6
 **Schwere:** **P1 (Dokumentations-Drift)**
 
 Die CSV enthält tatsächlich 52 Buchungen (8 EB + 40 Basis + 7 OPOS + 5 RC/IG-Sprint-7-Szenarien – bitte nachzählen). README sagt noch „47". Wer die README liest, wird mit tatsächlicher Anzahl verwirrt.
@@ -312,7 +312,7 @@ Die CSV enthält tatsächlich 52 Buchungen (8 EB + 40 Basis + 7 OPOS + 5 RC/IG-S
 
 - **P2-11** DATEV-Encoding-Validierung fehlt: `toLatin1Bytes()` kippt €/… auf `?` ohne Warnung. Der Buchhalter bemerkt den Datenverlust erst in DATEV-Empfänger-Software.
 - **P2-12** `buSchluesselForUstSatz` deckt nur 0/7/19 % ab. Bei ermäßigt 5 % (Lebensmittel, Bücher) oder Kleinunternehmer 0 %-Variante wird leer zurückgeliefert → kein BU-Schlüssel → DATEV-Empfänger muss manuell klassifizieren.
-- **P2-13** DATEV KOST2 wird still ignoriert (CLAUDE.md dokumentiert, UI schweigt). Fix: Parser-Warning im Import-UI anzeigen.
+- **P2-13** DATEV KOST2 wird still ignoriert (historisches Kontextdokument dokumentiert, UI schweigt). Fix: Parser-Warning im Import-UI anzeigen.
 - **P2-14** ZM-XML Struktur wird nicht gegen ELMA5-Spec validiert. Preview-Disclaimer vorhanden, aber beim BZSt-Upload könnte abgelehnt werden.
 - **P2-15** PDF/A-3 Disclaimer fehlt im ERechnungPage-Export-Flow. ZUGFeRD-PDFs sind nicht veraPDF-zertifiziert, User erfährt das erst im Archiv-System.
 - **P2-16** XRechnung BR-Coverage nicht als UI-Warning sichtbar. KoSIT-Validator zeigt später Fehler, die intern hätten gemeldet werden können.
@@ -337,7 +337,7 @@ Die CSV enthält tatsächlich 52 Buchungen (8 EB + 40 Basis + 7 OPOS + 5 RC/IG-S
 
 ### 3.9 Dokumentation
 
-- **P2-23** Konsistenz-Drift zwischen `CLAUDE.md` („52 Buchungen") und `README.md` („47") — siehe P1-07 (identischer Befund, hier zur Vollständigkeit aufgeführt).
+- **P2-23** Konsistenz-Drift zwischen historischem Kontextdokument („52 Buchungen") und `README.md` („47") — siehe P1-07 (identischer Befund, hier zur Vollständigkeit aufgeführt).
 
 ### 3.10 Sonstige
 

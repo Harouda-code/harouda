@@ -305,7 +305,6 @@ versioniert.
 ## 11. Kritische Datei-Lokationen (Quick-Referenz)
 
 ### Core / Foundation
-- `CLAUDE.md` — Session-Kontext + Architektur-Prinzipien.
 - `src/App.tsx` — Route-Registrierung.
 - `src/api/db.ts` — Dual-Mode-Branching (`shouldUseSupabase`,
   `requireCompanyId`).

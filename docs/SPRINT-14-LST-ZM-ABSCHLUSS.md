@@ -15,7 +15,7 @@ deutsche Finanzverwaltung bekommen eine konsistente ELSTER-XML-Preview:
 - **LSt-Anmeldung** (§ 41a EStG) — monatlich/quartalsweise.
 - **ZM** (§ 18a UStG) — monatlich/quartalsweise fuer EU-B2B-Umsaetze.
 
-Kein ERiC-Integration (P1-Blocker im Gesamtprojekt, CLAUDE.md §10).
+Kein ERiC-Integration (P1-Blocker im Gesamtprojekt, historisches Kontextdokument, Abschnitt 10).
 Der User exportiert die XML und laedt sie ins ELSTER-Portal oder das
 BZSt-BOP-Portal hoch.
 
@@ -163,6 +163,6 @@ dokumentiert.
 - `docs/ELSTER-SCHEMA-UPDATE-GUIDE.md` — jaehrlicher Wartungs-Cycle.
 - `docs/TECH-DEBT-XBRL-MULTI-VERSION.md` — E-Bilanz-Taxonomie
   (verwandter Update-Prozess).
-- `CLAUDE.md` §10 — ELSTER-ERiC-Transmission bleibt P1-Blocker.
+- historisches Kontextdokument, Abschnitt 10 — ELSTER-ERiC-Transmission bleibt P1-Blocker.
 - `src/domain/ustva/UstvaXmlBuilder.ts` — Referenz-Muster fuer alle
   ELSTER-XML-Generatoren.

@@ -9,7 +9,7 @@
 - Husky + lint-staged git hooks
 - Belegerfassung persistence (localStorage → Supabase via Migration 0022)
 
-### CLAUDE.md Creation
+### Erstellung des historischen Kontextdokuments
 - Canonical project context for future AI sessions, 13 sections
 - Covers: overview, tech stack, architecture, features, compliance, limitations
 - Follow-up edits: npm scripts polish, demo login, git-dormant notes
@@ -90,7 +90,7 @@
 
 ## Ready for Next Session
 
-- `/init` will read the updated CLAUDE.md — tests 712, readiness 74 %,
+- `/init` will read the updated historisches Kontextdokument — tests 712, readiness 74 %,
   Sprint-2 Chunk 1 done.
 - Next suggested steps, in order of leverage:
   - **Hash-chain design discussion** (45 min, unblocks Sprint-2 Chunk 2).

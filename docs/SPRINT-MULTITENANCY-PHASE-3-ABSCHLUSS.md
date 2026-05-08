@@ -85,7 +85,7 @@ eigenständig interpretiert):
 | 8 | **DrillDownModal + correctEntry** | `fetchEntriesForAccountsInRange` (PostgREST `or()`, DEMO filter) · `DrillDownModal` mit Tabelle + Inline-Korrektur-Form · `correctEntry`-Integration · 7 Tests (mit `vi.restoreAllMocks`-Isolation) | +7 |
 | 9 | **Page-Integration G/S** | `FieldSpec.source`/`glField` · `TaxFormBuilderProps.glValues`/`onDrillDown` · `GlDerivedRow` (readOnly-Input + „Aus Buchhaltung"-Badge) · AnlageGPage + AnlageSPage als volle Component mit useQuery + Builder + Modal-State + UnmappedAccounts-Panel | +6 |
 | 10 | **AnlageN-Archiv-Import** | `ArchivImportModal` (Employee-Dropdown + Warning-Banner) · AnlageNPage um Import-Button + Banner erweitert · 4-Feld-Mapping Vorschlag→Page-State · SV-AN/Netto verworfen (kein AnlageN-Zielfeld) | +7 |
-| 11 | **Abschluss + Regression-Gate** | Dieses Dokument · CLAUDE.md / README konsistenz-geprüft · 23 Spot-Check-Dateien · Sprint-Signatur | 0 |
+| 11 | **Abschluss + Regression-Gate** | Dieses Dokument · historisches Kontextdokument / README konsistenz-geprüft · 23 Spot-Check-Dateien · Sprint-Signatur | 0 |
 
 ## 4. Was wurde gelöst — Kompakt-Übersicht je Layer
 
@@ -197,9 +197,9 @@ Phase 3).
 | `src/components/ArchivImportModal.tsx` | Employee-Dropdown + Warning + Submit | ~180 |
 | **Migration 0029** | Backfill 35 ESt-Tags auf `accounts.tags` | 180 |
 
-## 9. Konsistenz-Check CLAUDE.md + README
+## 9. Konsistenz-Check historisches Kontextdokument + README
 
-- **CLAUDE.md** — grep auf `Anlage G / S / N / V / Kap`, `domain/est`,
+- **Historisches Kontextdokument** — grep auf `Anlage G / S / N / V / Kap`, `domain/est`,
   `tax_tag`, `skr03AnlagenMapping`, `AnlageGBuilder`, `archivEstImport`,
   `Drill-down`, `Korrekturbuchung`, `Steuer.*manuell`: **0 Treffer**.
   §5 Repo-Tree erwähnt `domain/` generisch; §6 Feature-Map nennt Lohn
@@ -231,5 +231,5 @@ Phase 3).
 | **Abschluss-Doku** | `docs/SPRINT-MULTITENANCY-PHASE-3-ABSCHLUSS.md` (dieses Dokument) |
 | **Phase-1-Doku** | `docs/SPRINT-MULTITENANCY-FOUNDATION-ABSCHLUSS.md` |
 | **Phase-2-Doku** | `docs/SPRINT-MULTITENANCY-PHASE-2-ABSCHLUSS.md` |
-| **Konsistenz-Check CLAUDE.md / README** | geprüft, keine Phase-3-Widersprüche, keine Änderung |
+| **Konsistenz-Check historisches Kontextdokument / README** | geprüft, keine Phase-3-Widersprüche, keine Änderung |
 | **Offen + geparkt** | siehe §6 (AnlageV/Kap/Sonder/AGB/ESt1A bewusst verschoben, DB-UNIQUE-Constraint aus Phase 2, Supabase-OR-Filter Staging-Smoke) |

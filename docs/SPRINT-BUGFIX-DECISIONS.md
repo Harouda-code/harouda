@@ -33,7 +33,7 @@ Der User hat nach dem Audit-Report 8 Fragen explizit freigegeben:
 - `demo-input/musterfirma-2025/buchungen.csv:6` — `EB-005;9000;0800;50000,00` → `EB-005;9000;2300;50000,00`.
 - `src/api/demoSeed.ts` — neue `FLAG_KEY_V3`-Konstante, `FLAG_KEY_V2` zu `FLAG_KEY_V2_LEGACY` umbenannt. Orchestrator behandelt v1 UND v2 als Legacy, räumt beide und setzt v3.
 - `src/api/__tests__/demoSeed.test.ts` — 7 alte Assertions auf v3 umgestellt, 1 neuer Test „P1-01 v2-Legacy-Migration".
-- `CLAUDE.md` Quick-Start §13.3 — FLAG-v3 + Audit-Ursache dokumentiert.
+- Historisches Kontextdokument Quick-Start, Abschnitt 13.3 — FLAG-v3 + Audit-Ursache dokumentiert.
 
 **Effekt:** Altbestand-User (FLAG-v1 oder -v2) bekommen beim nächsten DEMO-Load die korrigierte CSV. EB-005 bucht jetzt `9000 Soll / 2300 Haben 50.000 €` — korrekt für Gezeichnetes Kapital.
 

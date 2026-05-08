@@ -43,7 +43,7 @@ Fachanwalt + DSB bestätigt ist.
 
 ### 5.7 Auftragsverarbeitung (Art. 28 DSGVO)
 
-<!-- TODO(verfahrensdoku): Liste eingesetzter Auftragsverarbeiter: Supabase (Hosting + DB + Auth), Sentry (optional, Error-Tracking), Hosting-Provider (noch offen), ggf. OCR / E-Mail. AVV-Status pro Anbieter. Eigener AVV-Muster für Kanzlei↔Mandant steht aus (P2-Blocker, siehe CLAUDE.md §10). -->
+<!-- TODO(verfahrensdoku): Liste eingesetzter Auftragsverarbeiter: Supabase (Hosting + DB + Auth), Sentry (optional, Error-Tracking), Hosting-Provider (noch offen), ggf. OCR / E-Mail. AVV-Status pro Anbieter. Eigener AVV-Muster für Kanzlei↔Mandant steht aus (P2-Blocker, siehe historisches Kontextdokument, Abschnitt 10). -->
 
 ### 5.8 Datenpannen-Meldeprozess (Art. 33/34)
 
@@ -64,7 +64,7 @@ Fachanwalt + DSB bestätigt ist.
   (Aufbewahrungsfristen inkl. Cookie-Consent 3 Jahre TTDSG)
 - [`../../src/pages/DatenExportPage.tsx`](../../src/pages/DatenExportPage.tsx)
   (Art. 20 Portabilität)
-- [`../../CLAUDE.md`](../../CLAUDE.md) §12 (Limitations) Nummern 13-17
+- Historisches Kontextdokument, Abschnitt 12 (Limitations) Nummern 13-17
 
 ## Quellen & Referenzen
 

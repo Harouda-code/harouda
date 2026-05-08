@@ -417,7 +417,6 @@ idempotent".
 **Betroffene Dateien:**
 - `docs/SPRINT-7-5-DECISIONS.md` (neu) — Entscheidungen 21-30 +
   Sub-Entscheidungen aus Matrix unten
-- `CLAUDE.md` (Test-Count + neuer Demo-Stand)
 - `demo-input/musterfirma-2025/README.md` — Hinweis „automatisch
   geseedet seit Sprint 7.5, manuelle CSV-Import-Route optional"
 

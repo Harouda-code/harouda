@@ -114,4 +114,4 @@ Zeitraum des neuen Jahres):
 - `docs/SPRINT-15-SV-MELDUNGEN-ABSCHLUSS.md` — Sprint-Kontext.
 - `docs/ELSTER-SCHEMA-UPDATE-GUIDE.md` — analoger Wartungszyklus fuer
   ELSTER-XML-Generatoren.
-- `CLAUDE.md` §10 — DEUeV-Meldungen als P2-Roadmap-Item.
+- historisches Kontextdokument, Abschnitt 10 — DEUeV-Meldungen als P2-Roadmap-Item.

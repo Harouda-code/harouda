@@ -29,7 +29,7 @@ Platzhalter, keine ausgegrauten Einträge.
 | Umsatzsteuer | Umsatzsteuererklärung (Jahres-UStE) | FEHLT |
 | Umsatzsteuer | Umsatzsteuerverprobung | FEHLT |
 | Lohn | Beitragsnachweise (Krankenkassen) | FEHLT |
-| Lohn | DEÜV-Meldungen / Sofortmeldungen | FEHLT — CLAUDE.md §7 explizit „nicht produktionsreif" |
+| Lohn | DEÜV-Meldungen / Sofortmeldungen | FEHLT — historisches Kontextdokument, Abschnitt 7 explizit „nicht produktionsreif" |
 | Lohn | Fehlzeiten / eAU-Abruf | FEHLT |
 | Lohn | Buchungsbeleg-Übergabe Lohn → FIBU | FEHLT — PayrollRun + Lohn haben keinen `createEntry`-Call; `Lohnbuchung`-Typ nur für PDF-Archiv |
 
@@ -155,7 +155,7 @@ eine Page gebaut ist, wandert das Sub-Item in den Tree:
    GuV-Umsatzerlöse abgleicht.
 4. **Beitragsnachweise (Krankenkassen)** — keine Stammdaten-Pflege
    + Nachweisgenerierung.
-5. **DEÜV-Meldungen / Sofortmeldungen** — CLAUDE.md §7 explizit als
+5. **DEÜV-Meldungen / Sofortmeldungen** — historisches Kontextdokument, Abschnitt 7 explizit als
    „nicht produktionsreif" gelistet.
 6. **Fehlzeiten / eAU-Abruf** — keine Krankschreibungs-Integration
    (GKV-ITSG-Schnittstelle).

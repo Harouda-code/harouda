@@ -42,7 +42,7 @@ mischten in einer Kanzlei sämtliche Mandanten.
 | 3b | **ESt-Forms Rest-Migration + Wiring** | 23 weitere Form-Pages migriert (3 Parallel-Agenten) · HauptvorduckESt1APage mit Cross-Form-Badge-Fix · `FormSpec.storageKey` entfernt · `migrateEstFormsV1ToV2()` in `main.tsx` verdrahtet · 4 Page-Integration-Tests | +4 |
 | 4 | **Tanstack-Query-Keys Audit** | 14 Pages: `["journal_entries", "all"]` → `[..., selectedMandantId]` · AfaLaufPage: `["afa_buchungen", "all", selectedMandantId]` · 2 Cache-Switch-Regression-Tests | +2 |
 | 5 | **Smoke-Tests + Abschluss-Doku** | 3 neue Test-Dateien (Cross-Module-Leak, ESt-Form-Isolation, Migration-0026-Struktur) · dieses Dokument | +9 |
-| 6 | **Sprint-Abschluss + Regression-Gate** | Doku-Polish (Übersicht-Tabellen, Altlasten-Box, Sprint-Signatur) · CLAUDE.md / README konsistenz-geprüft · Regression-Spot-Check | 0 |
+| 6 | **Sprint-Abschluss + Regression-Gate** | Doku-Polish (Übersicht-Tabellen, Altlasten-Box, Sprint-Signatur) · historisches Kontextdokument / README konsistenz-geprüft · Regression-Spot-Check | 0 |
 
 ## 3. Was wurde gelöst — Kompakt-Übersicht je Layer
 
@@ -332,6 +332,6 @@ npx vitest run                                              # 1088 / 81 grün
 | **Schritt-Berichte** | Schritt 1 (Migration 0026) · Schritt 2a (Rot-API) · Schritt 2b (Gelb-API) · Schritt 3 (ESt-Infrastruktur) · Schritt 3b (ESt-Rest-Migration) · Schritt 4 (Query-Keys-Audit) · Schritt 5 (Smoke-Tests) — alle als Chat-Berichte übermittelt, aggregiert in diesem Dokument |
 | **Abschluss-Doku** | `docs/SPRINT-MULTITENANCY-FOUNDATION-ABSCHLUSS.md` (dieses Dokument) |
 | **Migration-Doku** | `docs/MULTITENANCY-MIGRATION-0026.md` |
-| **Konsistenz-Check CLAUDE.md** | geprüft, keine inhaltliche Abweichung (RLS-Erwähnungen in §2 Tech Stack + §9 Style Guidelines bleiben korrekt) |
+| **Konsistenz-Check historisches Kontextdokument** | geprüft, keine inhaltliche Abweichung (RLS-Erwähnungen in Abschnitt 2 Tech Stack + Abschnitt 9 Style Guidelines bleiben korrekt) |
 | **Konsistenz-Check README.md** | geprüft, keine Aussagen die mit Phase 1 kollidieren |
 | **Offen + geparkt** | siehe §13 Bekannte verbleibende Altlasten |

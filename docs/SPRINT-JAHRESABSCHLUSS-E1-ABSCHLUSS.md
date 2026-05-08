@@ -100,7 +100,7 @@ trägt alle GmbH-Felder; UI-Conditional kommt in E2.
 | **UI für Mandant-Stammdaten-Erfassung** | Kommt in E2 als Teil des Wizards. Datenbank ist jetzt vollständig. |
 | **Mehrperioden-§-267-Regel** | Zwei aufeinanderfolgende Stichtage. E2-Scope (Rules-Engine). |
 | **`Groessenklasse`/`SizeClass`-Harmonisierung** | Beide Enums koexistieren; E2 entscheidet die Konsolidierung. |
-| **UKV-Verfahren (§ 275 Abs. 3)** | CLAUDE.md §10 P3. Für GmbH-Default (GKV) kein Blocker. |
+| **UKV-Verfahren (§ 275 Abs. 3)** | historisches Kontextdokument, Abschnitt 10 P3. Für GmbH-Default (GKV) kein Blocker. |
 | **Bank-Reconciliation-Persistenz** | Folge-Sprint. OPEN-QUESTIONS Frage #1. |
 | **EÜR↔GuV-Cross-Check rechtsform-abhängig** | E2-Scope. OPEN-QUESTIONS Frage #2. |
 | **Closing-Lifecycle-State (wer/wann abgeschlossen)** | Bestand: `periodClosedBefore` in Settings. Vollständiger Audit-State kommt später. |

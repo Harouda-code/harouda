@@ -223,7 +223,7 @@ join companies c on c.id = cm.company_id;
 
 | # | Bug | Priorität | Fix-Skizze |
 |---|-----|-----------|-----------|
-| **B1** | `autoSeedDemoIfNeeded` ist hinter `if (DEMO_MODE)` gated; ohne `VITE_DEMO_MODE=1` im Environment wird der Seed nie ausgeführt. Kein Hinweis in der UI. | **P1** | Dokumentation in `CLAUDE.md` §13.3 + Quick-Start-README präziser: „autoSeed setzt `VITE_DEMO_MODE=1` voraus". Kein Code-Fix nötig, aber klare User-Anleitung. |
+| **B1** | `autoSeedDemoIfNeeded` ist hinter `if (DEMO_MODE)` gated; ohne `VITE_DEMO_MODE=1` im Environment wird der Seed nie ausgeführt. Kein Hinweis in der UI. | **P1** | Dokumentation in historischem Kontextdokument, Abschnitt 13.3 + Quick-Start-README präziser: „autoSeed setzt `VITE_DEMO_MODE=1` voraus". Kein Code-Fix nötig, aber klare User-Anleitung. |
 | **B2** | Default `selectedYear = new Date().getFullYear()` → 2026. Musterfirma-Daten sind hart 2025 (Entscheidung 29). Seed bleibt unsichtbar selbst wenn er läuft. | **P1** | `autoSeedDemoIfNeeded()` schreibt nach erfolgreichem Seed `localStorage.setItem("harouda:selectedYear", "2025")` — analog zum Kühn-Default-Mandanten-Setzen (Entscheidung 36). |
 | **B3** | `setKuehnAsDefaultMandant` setzt `harouda:selectedMandantId`. Der Mandanten-Umschalter liest diesen Key erst bei Browser-Reload, weil `MandantContext` ihn im Init-State ausliest. Wenn autoSeed asynchron nach Context-Init läuft, wird der Default erst beim 2. Reload aktiv. | **P2** | `MandantContext` auf Key-Change lauschen (`storage`-Event oder Re-Read nach Seed-Promise-Resolve). Nicht in Sprint-7.5-Test-Abdeckung. |
 | **B4** | 15 vermutlich 2026-datierte Einträge in localStorage oder Supabase aus prior-Sprint-Runs. `clearLegacyDemoData()` läuft nur, wenn FLAG-v1 gesetzt ist — bei „Altbestand ohne FLAG" bleiben die Einträge. | **P2** | Erweitern: wenn der User mit FLAG-v2=undefined + Entries im Store startet und Einträge vor einem Cutoff-Datum liegen, Opt-in-Dialog statt silent skip. Oder Doku-Hinweis für DevTools-Clear. |
@@ -242,7 +242,7 @@ join companies c on c.id = cm.company_id;
    gelöscht werden?** Vor dem Sprint-Fix: Screenshot des
    localStorage + ein `select * from journal_entries` der Cloud-DB
    bestätigen die Quelle.
-3. **Ist die CLAUDE.md-Anleitung für Demo-Login korrekt?** Sie
+3. **Ist die Anleitung im historischen Kontextdokument für Demo-Login korrekt?** Sie
    erwähnt autoSeed beim ersten DEMO-Login — impliziert aber nicht,
    dass `VITE_DEMO_MODE=1` Voraussetzung ist. Soll der Satz
    ergänzt werden?

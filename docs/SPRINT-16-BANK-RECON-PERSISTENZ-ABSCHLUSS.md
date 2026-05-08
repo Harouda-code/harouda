@@ -200,4 +200,4 @@ transparent festgehalten und entspricht dem etablierten Projekt-Muster.
 - `src/lib/crypto/payrollHash.ts` — wiederverwendeter `sha256Hex`.
 - `src/domain/accounting/ClosingValidation.ts` — neue Finding-Codes
   `CLOSING_BANK_RECON_PENDING` + `CLOSING_BANK_RECON_INSUFFICIENT`.
-- `CLAUDE.md` §10 — GoBD-Compliance-Status (Rz. 45 geschlossen).
+- historisches Kontextdokument, Abschnitt 10 — GoBD-Compliance-Status (Rz. 45 geschlossen).

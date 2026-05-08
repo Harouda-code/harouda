@@ -84,7 +84,7 @@ Bibliothek durchgehen:
 
 Ergebnis des Review-Zyklus: neue oder aktualisierte Bausteine;
 `version_stand` aller angefassten Einträge auf aktuellen Monat gesetzt;
-`CLAUDE.md` Drift-Notiz aktualisiert.
+Historisches Kontextdokument Drift-Notiz aktualisiert.
 
 ## Checkliste pro Änderung (Pull-Request-Template)
 

@@ -307,7 +307,7 @@ Das Z3-Paket ist formatseitig nachgebildet, nicht durch das
 IDEA-Testtool oder eine vergleichbare Zertifizierungsstelle geprüft.
 Eine Prüfer:in kann das Paket mit Standard-Werkzeugen öffnen; eine
 formelle Zertifizierungs-Bestätigung liegt nicht vor. Diese
-Einschränkung ist in `CLAUDE.md` §12 Note 8 vermerkt.
+Einschränkung ist in historischem Kontextdokument, Abschnitt 12, Anmerkung 8 vermerkt.
 
 ---
 
@@ -409,6 +409,6 @@ Kontrollsystem und Freigabe-Workflows → Kap. 8 · Aufbewahrungsfristen
   Design-Entscheidung zur Art.-17-Erasure auf hashed Feldern.
 - [`../BACKUP-STRATEGY.md`](../BACKUP-STRATEGY.md) — externe
   Absicherung der Hash-Kette als Teil der offenen Ops-Arbeit.
-- [`../../CLAUDE.md`](../../CLAUDE.md) §7 (Compliance-Status), §12
-  Note 6 (*tamper-evident, nicht WORM*), §12 Note 8 (Z3 nicht
+- Historisches Kontextdokument, Abschnitt 7 (Compliance-Status), Abschnitt 12
+  Anmerkung 6 (*tamper-evident, nicht WORM*), Abschnitt 12 Anmerkung 8 (Z3 nicht
   IDEA-Testtool-zertifiziert).

@@ -258,7 +258,7 @@ Freigabe beim Sprint-Start oder nach Phase 2 vorgesehen.
 | Nr. | Frage | Optionen | Vorschlag | Reversibilität |
 |---:|---|---|---|---|
 | 14 | Reverse-Charge: automatisch 2 Buchungen generieren (Selbstbesteuerung) oder nur 1 zusammengefasst? | **A**: 1 Buchung 3100/1600 + Validator erzeugt „fiktive" 1577/1774-Gegenbuchung beim UStVA-Lauf · **B**: 2 Buchungen physisch im Journal (3100/1600 Bemessung + 1577/1774 Steuer) · **C**: optional konfigurierbar pro Firma | **A** — weniger Redundanz, näher an DATEV-Praxis; UStVA-Builder rechnet USt aus Bemessungsgrundlage mal 19 % | mittel — Umschaltung auf B würde bestehende Journal-Einträge migrieren |
-| 15 | ELMA5-XML-Format — voll spec-konform oder Preview? | **A**: DFÜ-Format spec-konform (fixed-width Fields nach BZSt-Handbuch) · **B**: XML-Preview analog UstvaXmlBuilder, „nicht für Echt-Übermittlung" · **C**: beides exportieren | **B** — konsistent mit existierendem UStVA-XML-Ansatz; Echt-ELMA5 ist ERiC-Backend-Aufgabe (P1-Blocker in CLAUDE.md § 10) | leicht |
+| 15 | ELMA5-XML-Format — voll spec-konform oder Preview? | **A**: DFÜ-Format spec-konform (fixed-width Fields nach BZSt-Handbuch) · **B**: XML-Preview analog UstvaXmlBuilder, „nicht für Echt-Übermittlung" · **C**: beides exportieren | **B** — konsistent mit existierendem UStVA-XML-Ansatz; Echt-ELMA5 ist ERiC-Backend-Aufgabe (P1-Blocker in historischem Kontextdokument, Abschnitt 10) | leicht |
 | 16 | SKR03-Seed-Umfang — minimal (4 Konten) oder erweitert (8-10 Konten)? | **A**: Minimal — nur Konten die im Demo referenziert werden · **B**: Erweitert — alle SKR03-Standard-§-13b-Konten plus EUSt 1588 · **C**: Vollständig — 3100-3159 alle Einzel-Einträge | **A** — Minimal, YAGNI. Weitere Konten kann ein Kanzlei-Admin manuell ergänzen. | trivial |
 | 17 | BelegValidierungsService-Severity für RC-Verstöße | **A**: alle neuen RC-Regeln als WARNING · **B**: USt-ID-fehlend = ERROR, Rest WARNING · **C**: alle als ERROR | **B** — USt-ID ist gesetzliche Pflicht (§ 6a UStG); ohne die ist die IG-Lieferung ungültig. Rest WARNING. | leicht |
 | 18 | BelegerfassungPage — fein-granularer § 13b-Selektor oder Boolean-Checkbox belassen? | **A**: Dropdown „Reverse-Charge-Variante": Abs. 1, Abs. 2 Nr. 1, Nr. 2 Bau, Nr. 3 Reinigung, Nr. 4/5b/6-11 · **B**: Boolean-Checkbox wie bisher; Kennzahl-Auflösung über Konto · **C**: Boolean + Info-Hinweis auf Konto-Auswahl | **B** — Konto-basierte Auflösung ist präzise und DATEV-konform; UI-Komplexität vermeiden | trivial |
@@ -278,7 +278,7 @@ Design fixieren.
 - **TypeScript strict + Decimal.js durchgängig**
 
 **Explizit NICHT in Sprint 7:**
-- ERiC-Backend-Direktübermittlung (P1 Blocker aus CLAUDE.md § 10)
+- ERiC-Backend-Direktübermittlung (P1 Blocker aus historischem Kontextdokument, Abschnitt 10)
 - Dreiecksgeschäfte § 25b UStG mit Kz 42-Detail-Logik (Konto 8338
   wird geseedet, aber komplexe Dreiecks-Validierung separater Sprint)
 - OSS / IOSS / MOSS (Fernverkauf an Endverbraucher)

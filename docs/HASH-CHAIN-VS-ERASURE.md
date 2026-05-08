@@ -556,7 +556,7 @@ muss beibehalten werden.
 
 - Update `docs/COMPLIANCE-GUIDE.md` mit neuer DSGVO-Art.-17-Sektion
 - Update `docs/ARCHITECTURE.md` mit "Decision 10: PII-Split"
-- Update `CLAUDE.md §10` mit geschlossenem Art.-17-Punkt
+- Update historisches Kontextdokument, Abschnitt 10 mit geschlossenem Art.-17-Punkt
 - Update `docs/ROADMAP.md` mit tatsächlich geschlossenen P1-Items
 
 ---

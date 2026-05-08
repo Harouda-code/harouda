@@ -108,6 +108,6 @@ Zeitraum des neuen Jahres):
 ## Siehe auch
 
 - `docs/TECH-DEBT-XBRL-MULTI-VERSION.md` — HGB-E-Bilanz-Taxonomie.
-- `CLAUDE.md` §10 — ELSTER-Transmission (P1-Blocker).
+- historisches Kontextdokument, Abschnitt 10 — ELSTER-Transmission (P1-Blocker).
 - `src/domain/elster/xmlHelpers.ts` — gemeinsame Helper (xmlEscape,
   germanDecimal, zeitraumCode).

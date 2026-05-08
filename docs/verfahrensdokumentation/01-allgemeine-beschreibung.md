@@ -370,8 +370,8 @@ Festschreibung + Z3-Export → Kap. 7 · IKS + Rollentrennung → Kap. 8.
 
 ### Interne Projekt-Referenzen
 
-- [`../../CLAUDE.md`](../../CLAUDE.md) §1 (Projekt-Übersicht), §6
-  (Feature-Map), §7 (Compliance-Status).
+- Historisches Kontextdokument, Abschnitt 1 (Projekt-Übersicht), Abschnitt 6
+  (Feature-Map), Abschnitt 7 (Compliance-Status).
 - [`../PROJEKT-INVENTAR.md`](../PROJEKT-INVENTAR.md) (Feature-Matrix,
   Test-Statistiken, Compliance-Landschaft).
 - [`../HASH-CHAIN-VS-ERASURE.md`](../HASH-CHAIN-VS-ERASURE.md)

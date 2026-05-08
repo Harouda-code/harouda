@@ -40,7 +40,7 @@ ist aber **kein BZSt-konformer ELMA5-Datensatz**.
 
 **Begründung:** Konsistenz mit dem Preview-Ansatz im bestehenden
 UStVA-XML-Builder. Echt-ELMA5-DFÜ braucht ERiC-Backend, ist in
-`CLAUDE.md` § 10 als P1-Blocker dokumentiert.
+historisches Kontextdokument, Abschnitt 10 als P1-Blocker dokumentiert.
 
 **Umsetzungs-Detail:** XML-Kommentar am Ende des Dokuments:
 `<!-- HINWEIS: Preview-XML, kein ELMA5-DFÜ-Datensatz. -->` — plus
@@ -152,7 +152,7 @@ Zielbereich 945-960 getroffen. Keine Regression in den bestehenden
 
 ## Offen für spätere Sprints
 
-- ERiC-/BOP-Direkt-Übermittlung (P1-Blocker, CLAUDE.md § 10)
+- ERiC-/BOP-Direkt-Übermittlung (P1-Blocker, historisches Kontextdokument, Abschnitt 10)
 - Dreiecksgeschäfte-Detail-Logik (Kz 42, Konto 8338)
 - 1572/1575-Label-Korrektur (FRAGEN 20)
 - OSS / IOSS / MOSS

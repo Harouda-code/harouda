@@ -160,7 +160,7 @@ Scope E4).
 5. **UKV-GuV** — Struktur nach § 275 Abs. 3 HGB; in E4 als Fallback-
    Warning im Adapter, aber nicht implementiert.
 6. **ELSTER-Transmission für E-Bilanz** — XBRL wird erzeugt, aber
-   nicht übermittelt (siehe CLAUDE.md §10 P1-Blocker).
+   nicht übermittelt (siehe historisches Kontextdokument, Abschnitt 10 P1-Blocker).
 7. **ICC-Profil im Repository** — die Datei ist als Placeholder im
    `assets/README.md` dokumentiert, aber nicht eingecheckt (Lizenz-
    Review erforderlich vor Release-Build).

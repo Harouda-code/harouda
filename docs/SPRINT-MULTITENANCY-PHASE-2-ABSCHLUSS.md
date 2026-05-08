@@ -73,7 +73,7 @@ Abrechnung nur als JSON-Download, nicht persistent in
 | 3 | **Atomarer Journal-Batch** | `createEntriesBatch(entries, opts)` in `api/journal.ts` · Migration 0027 (`journal_entries.batch_id` + partieller Index) · `JournalEntry.batch_id?: string \| null` · Hash-Kette einmal-gelesen-dann-iterativ · DEMO-Rollback via Snapshot+Restore · 1 Audit-Log pro Batch | +12 |
 | 4 | **postPayrollAsJournal → Batch** | Schleife als Sammel-Phase, dann **ein** Batch-Aufruf · Row-Skip-Pre-Flight für fehlende Settings-Konten · `PayrollPostingResult.batchId`-Feld · Duplicate-Audit-Log entfernt | +6 |
 | 5 | **Archiv-Write + E2E-Smoke** | Migration 0028 (`lohnabrechnungen_archiv.batch_id`) · `AbrechnungArchivRepo.save` nimmt `batchId` · DEMO-Pfad persistiert jetzt echt (`store.getLohnArchiv()`) · `buildArchivAbrechnungFromRow` Helper · `PayrollRunPage.handlePostGL` erweitert um Archiv-Write · `payrollRun.smoke.test.tsx` (Single-E2E-Test) | +11 |
-| 6 | **Abschluss + Regression-Gate** | Dieses Dokument · CLAUDE.md / README konsistenz-geprüft · 10 Spot-Checks + Voll-Gate | 0 |
+| 6 | **Abschluss + Regression-Gate** | Dieses Dokument · historisches Kontextdokument / README konsistenz-geprüft · 10 Spot-Checks + Voll-Gate | 0 |
 
 ## 4. Was wurde gelöst — Kompakt-Übersicht je Layer
 
@@ -188,9 +188,9 @@ React-Mount:
 | Neg: keine Archiv-Row mit `client_id === OTHER` | ✓ |
 | Neg: OTHER-Mitarbeiter bleibt unverändert (Mandant-Isolation) | ✓ |
 
-## 10. Konsistenz-Check CLAUDE.md + README
+## 10. Konsistenz-Check historisches Kontextdokument + README
 
-- **CLAUDE.md** — grep auf `sequenziell`, `Mid-Loop`, `postPayrollAsJournal`,
+- **Historisches Kontextdokument** — grep auf `sequenziell`, `Mid-Loop`, `postPayrollAsJournal`,
   `Batch-Insert`, `batch_id`, `createEntriesBatch`: **keine**
   Phase-2-Widerspruchs-Aussagen. Die §5-Feature-Map nennt `LohnPage`
   und `PayrollRunPage` → `lohn/LohnabrechnungsEngine.ts`; die
@@ -222,6 +222,6 @@ React-Mount:
 | **Schritt-Berichte** | Schritt 1 (Bestandsaufnahme) · Schritt 2 (lohnRepos `clientId`) · Schritt 3 (Batch-API + 0027) · Schritt 4 (postPayrollAsJournal → Batch) · Schritt 5 (Archiv-Write + E2E + 0028) · Schritt 6 (Abschluss + Regression) — alle als Chat-Berichte übermittelt, aggregiert in diesem Dokument |
 | **Abschluss-Doku** | `docs/SPRINT-MULTITENANCY-PHASE-2-ABSCHLUSS.md` (dieses Dokument) |
 | **Phase-1-Doku** | `docs/SPRINT-MULTITENANCY-FOUNDATION-ABSCHLUSS.md` (ergänzt, nicht ersetzt) |
-| **Konsistenz-Check CLAUDE.md** | geprüft, keine Phase-2-Widersprüche |
+| **Konsistenz-Check historisches Kontextdokument** | geprüft, keine Phase-2-Widersprüche |
 | **Konsistenz-Check README.md** | geprüft, keine Phase-2-Widersprüche (Altlast in §„Nicht enthalten" Z. 62 pre-existing, nicht angepasst) |
 | **Offen + geparkt** | siehe §6 Offene Folge-Sprints / Altlasten |

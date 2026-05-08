@@ -33,7 +33,7 @@ ist das **explizit markiert** — Ehrlichkeit ist hier prüfrelevant.
   Die Migrationen unter `supabase/migrations/` halten das Schema.
 - **Optional Fehlerprotokollierung:** Sentry, ausschließlich wenn
   `VITE_SENTRY_DSN` gesetzt ist; ohne DSN ist die Initialisierung ein
-  No-Op (siehe `src/lib/monitoring/sentry.ts` und CLAUDE.md §12 Note 12).
+  No-Op (siehe `src/lib/monitoring/sentry.ts` und historisches Kontextdokument, Abschnitt 12, Anmerkung 12).
 
 <!-- TODO(verfahrensdoku): Nach Produktiv-Entscheidung der Kanzlei ergänzen: tatsächlicher Hosting-Provider, Region (Frankfurt für DSGVO-Drittstaatenfrage nach Art. 44 ff. DSGVO), Domains, TLS-Zertifikatsverwaltung. Dieses TODO ist identisch mit dem in Kap. 1 Abschnitt 1.3 und Kap. 3 Abschnitt 3.5 — gemeinsame Auflösung sinnvoll. -->
 
@@ -66,7 +66,7 @@ ist das **explizit markiert** — Ehrlichkeit ist hier prüfrelevant.
 ### Erstinstallation
 
 1. Repository bezogen (Git, noch zu initialisieren — siehe
-   CLAUDE.md §12 Note 11).
+   historisches Kontextdokument, Abschnitt 12, Anmerkung 11).
 2. Abhängigkeiten installieren: `npm install`.
 3. Konfiguration über `.env.local`:
    - `VITE_SUPABASE_URL` — Projekt-URL.
@@ -113,7 +113,7 @@ Vor Freigabe für produktive Nutzung mindestens folgendes durchlaufen:
 
 **Transparenz-Hinweis:** Eine produktive Server-seitige
 Datensicherung ist zum Dokumentationszeitpunkt **NICHT
-implementiert**. Sie ist als **P1-Blocker** in CLAUDE.md §10 und
+implementiert**. Sie ist als **P1-Blocker** in historischem Kontextdokument, Abschnitt 10 und
 detailliert in [`../BACKUP-STRATEGY.md`](../BACKUP-STRATEGY.md)
 dokumentiert. Ohne Umsetzung der dort genannten Maßnahmen ist der
 Produktivbetrieb weder GoBD- noch DSGVO-konform.
@@ -143,7 +143,7 @@ Produktivbetrieb weder GoBD- noch DSGVO-konform.
 - **Legacy-JSON-Export** für den Demo-Modus (`src/api/backup.ts`):
   nur für Demo-Sitzungen vorgesehen, schreibt beim Restore direkt in
   `localStorage` ohne GoBD-Prüfung — für den Produktivbetrieb **nicht
-  zu verwenden** (siehe CLAUDE.md §12 Note 17).
+  zu verwenden** (siehe historisches Kontextdokument, Abschnitt 12, Anmerkung 17).
 
 ### Was zwingend vor Go-Live umzusetzen ist
 
@@ -190,7 +190,7 @@ DSGVO-Art.-17-Löschanträgen: Kap. 6 Abschnitt 6.3 und
 verschärftes Review — siehe Kap. 8 Abschnitt 8.7. Die CI-Konfiguration
 unter `.github/workflows/ci.yml` ist vorhanden, aber bis zur
 Initialisierung des Arbeitsverzeichnisses als Git-Repository dormant
-(siehe CLAUDE.md §12 Note 10-11). Die Pipeline umfasst:
+(siehe historisches Kontextdokument, Abschnitt 12, Anmerkungen 10-11). Die Pipeline umfasst:
 
 - TypeScript-Strict-Check (`tsc --noEmit`),
 - ESLint (`npm run lint`),
@@ -212,7 +212,7 @@ Vor einer Commit- bzw. Push-Operation werden lokal geprüft:
 - `pre-push`: TypeScript-Check und Vitest-Run.
 
 Die Hooks sind ebenfalls bis zum ersten `git init` + `npm run prepare`
-dormant (CLAUDE.md §12 Note 11).
+dormant (historisches Kontextdokument, Abschnitt 12, Anmerkung 11).
 
 ### Abhängigkeits-Management
 
@@ -227,8 +227,8 @@ Dependabot-Konfiguration unter `.github/dependabot.yml`:
 
 - Migrationen werden als aufsteigend nummerierte SQL-Dateien unter
   `supabase/migrations/` hinzugefügt. **Alte Dateien werden nicht
-  verändert** — jede Schema-Änderung ist eine neue Datei (CLAUDE.md
-  §13, "Common mistakes").
+  verändert** — jede Schema-Änderung ist eine neue Datei (historisches
+  Kontextdokument, Abschnitt 13, "Common mistakes").
 - Migrations-Freigabe erfolgt in der Staging-Umgebung vor Übernahme
   in Produktion.
 - Ein Migration-Rollback ist nicht automatisiert; umgekehrte
@@ -418,10 +418,10 @@ und 4-Augen-Prinzip → Kap. 8 Abschnitt 8.7.
 - [`../GO-LIVE-CHECKLIST.md`](../GO-LIVE-CHECKLIST.md) — T-4W → Launch
   → Post-Launch; Abnahmekriterien für die in diesem Kapitel als offen
   markierten Punkte.
-- [`../../CLAUDE.md`](../../CLAUDE.md) §10 (Outstanding Blockers,
-  insb. P1.3 Backup), §12 (Known Limitations, insb. Note 6
-  *tamper-evident/nicht WORM*, Note 10-11 CI/Husky dormant, Note 12
-  Sentry opt-in, Note 17 Legacy-Backup nicht extensio-fähig).
+- Historisches Kontextdokument, Abschnitt 10 (Outstanding Blockers,
+  insb. P1.3 Backup), Abschnitt 12 (Known Limitations, insb. Anmerkung 6
+  *tamper-evident/nicht WORM*, Anmerkungen 10-11 CI/Husky dormant, Anmerkung 12
+  Sentry opt-in, Anmerkung 17 Legacy-Backup nicht extensio-fähig).
 - [`../../.github/workflows/ci.yml`](../../.github/workflows/ci.yml),
   [`deploy-staging.yml`](../../.github/workflows/deploy-staging.yml),
   [`deploy-production.yml`](../../.github/workflows/deploy-production.yml)

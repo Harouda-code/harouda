@@ -165,7 +165,7 @@ GuV-Jahresergebnis, cent-tolerant).
 | **Hash-Chain-Concurrency-Härtung** (Phase-2 Schritt 3) | Nicht-blocker. Single-User-Jahresabschluss-Flow ist race-frei. |
 | **AV-Verträge Supabase-Migration** (`TECH-DEBT-AV-VERTRAEGE-SUPABASE.md`) | Nicht-relevant. Private AV-Daten, kein HGB-Abschluss. |
 | **DB-UNIQUE-Constraint auf `lohnabrechnungen_archiv`** (Phase-2 Schritt 2 offen) | Nicht-blocker. Betrifft Archiv-Upsert-Kollisionen, nicht Abschluss-Pipeline. |
-| **UKV (§ 275 Abs. 3 HGB)** (CLAUDE.md §10 P3) | Wenn Jahresabschluss-Sprint UKV benötigt: `GuvBuilder.ts:156` wirft. Vorher muss UKV-Verfahren implementiert werden. Für GmbH-Default (GKV) kein Blocker. |
+| **UKV (§ 275 Abs. 3 HGB)** (historisches Kontextdokument, Abschnitt 10 P3) | Wenn Jahresabschluss-Sprint UKV benötigt: `GuvBuilder.ts:156` wirft. Vorher muss UKV-Verfahren implementiert werden. Für GmbH-Default (GKV) kein Blocker. |
 | **EuerGuvCrossCheck** existiert bereits | Wiederverwendbar als Baustein für Pre-Closing-Validation-Engine. |
 | **`draftCount`-Signal aus Smart-Banner-Sprint** | Wiederverwendbar für Pre-Closing-Gate („keine Entwürfe mehr offen"). |
 | **`periodClosedBefore` in Settings** | Existiert, aber nur Runtime-Schutz; kein Closing-Lifecycle-State (wer hat wann abgeschlossen, Audit-Trail dazu). |
@@ -231,7 +231,7 @@ Legende: ✅ exists · 🟡 partial · ❌ missing
 | XBRL-Validator | ✅ | `src/domain/ebilanz/EbilanzValidator.ts` | Validation-Severities |
 | GCD-Stammdaten-Pipeline | 🟡 | `EbilanzUnternehmen`-Type lokal in `EbilanzPage` | Stamm-Pipeline aus `Client`-Type fehlt (weil `Client` die Felder nicht hat) |
 | Mehrversions-Taxonomie | ❌ | — | Hart-kodiert auf 6.8 |
-| ELSTER-Transmission für E-Bilanz | ❌ | — | UStVA/EÜR-Muster in `src/utils/elster.ts`, aber keine E-Bilanz-Adaption (Bestands-CLAUDE.md §10 nennt das P1) |
+| ELSTER-Transmission für E-Bilanz | ❌ | — | UStVA/EÜR-Muster in `src/utils/elster.ts`, aber keine E-Bilanz-Adaption (historisches Kontextdokument, Abschnitt 10 nennt das P1) |
 | PDF/A-3 (langzeitarchiv) | 🟡 | `pdf-lib` 1.17 + `ZugferdBuilder.ts` | Nur für Ausgangs-Rechnungen (ZUGFeRD); nicht für Jahresabschluss-Dokumente |
 | PDF-Watermark „Entwurf" | ❌ | — | Smart-Banner-Sprint-Altlast: Simulation-Mode disabled den Button, aber kein PDF-Overlay, wenn Export doch via Browser-Druck läuft |
 | Dokumentenarchivierung nach Export | ❌ | — | Keine `signed-off-year-end-report`-Persistenz |

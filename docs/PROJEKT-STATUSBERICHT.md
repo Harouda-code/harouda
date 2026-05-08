@@ -23,7 +23,7 @@ und überträgt weder an ELSTER noch an das BZSt direkt.
 
 **Reifegrad:** ca. **75 %** Produktionsreife (Security 67 ·
 Performance 70 · Reliability 75 · Compliance 76 · Operational 75),
-basierend auf eigener Einschätzung in `CLAUDE.md §3`. **Die
+basierend auf eigener Einschätzung in historischem Kontextdokument, Abschnitt 3. **Die
 Einschätzung ist nicht durch einen externen Prüfer validiert.**
 
 **Kritischster offener Punkt:** Es existiert **keine produktive,
@@ -85,7 +85,7 @@ Supabase-Migrationen als RLS-Policies, Trigger und PL/pgSQL-Funktionen).
 
 - **Anzahl Tests:** 727, aufgeteilt auf 51 Dateien.
 - **Zeilenabdeckung:** 91 %, **Verzweigungsabdeckung:** 77 %,
-  **Funktionsabdeckung:** 93 % (laut `CLAUDE.md §3`).
+  **Funktionsabdeckung:** 93 % (laut historischem Kontextdokument, Abschnitt 3).
 
 Aufschlüsselung der Test-Dateien nach Schicht:
 
@@ -99,7 +99,7 @@ Aufschlüsselung der Test-Dateien nach Schicht:
 ### Repository-Status
 
 - Kein aktives Git-Repository (Arbeitsverzeichnis noch nicht per
-  `git init` initialisiert — `CLAUDE.md §12 Note 11`).
+  `git init` initialisiert — historisches Kontextdokument, Abschnitt 12, Anmerkung 11).
 - CI-Workflows (`.github/workflows/ci.yml`,
   `deploy-staging.yml`, `deploy-production.yml`) sind vorhanden,
   aber **dormant**, solange kein Git-Repository existiert.
@@ -554,7 +554,7 @@ Aus `.github/workflows/ci.yml`:
 - Pre-Commit (`husky` + `lint-staged`): `eslint --fix` auf geänderten
   TypeScript-Dateien.
 - **Kein Prettier** im Einsatz; Team-Entscheidung über Format-Konvention
-  steht aus (`CLAUDE.md §2`).
+  steht aus (historisches Kontextdokument, Abschnitt 2).
 
 ### Husky-Hooks
 
@@ -570,7 +570,6 @@ Aus `.github/workflows/ci.yml`:
 
 | Datei | Zweck |
 |---|---|
-| `CLAUDE.md` (422 Zeilen) | Kanonischer Kontext für KI-Sitzungen; Tech-Stack, Architektur-Entscheidungen, Feature-Map, bekannte Beschränkungen, Quick-Start |
 | `docs/ARCHITECTURE.md` (185 Zeilen) | Neun Architektur-Entscheidungen mit Kontext/Entscheidung/Konsequenzen |
 | `docs/PROJEKT-INVENTAR.md` (199 Zeilen) | Feature-Matrix, Test-Statistiken, Compliance-Landschaft, Datenbank-Schema-Übersicht |
 | `docs/USER-GUIDE-DE.md` | Kurzes Benutzerhandbuch für Kanzlei-Mitarbeiter:innen; veraltet in Details (Migrationen 0001-0016 genannt, Routen fehlen) |
@@ -649,7 +648,7 @@ oder sind Design-Fragen mit dokumentierter Wartelinie.
 - SKR04 / SKR49 / SKR51
 - Bilanz nach Umsatzkostenverfahren (§ 275 Abs. 3 HGB)
 
-### Deprecation-Fenster (aus `CLAUDE.md §10`)
+### Deprecation-Fenster (aus historischem Kontextdokument, Abschnitt 10)
 
 - **HGB-Taxonomie 6.9** (April 2026 — aktuell fällig).
 - **Lohn-Tarif- und SV-Parameter 2026** (BMF veröffentlicht
@@ -663,7 +662,7 @@ oder sind Design-Fragen mit dokumentierter Wartelinie.
 
 Eine formale Ticket-Historie liegt nicht vor, weil das Repository
 noch nicht als Git-Repository initialisiert ist. Die nachfolgende
-Übersicht basiert auf `CLAUDE.md §3`, `docs/SESSION-2026-04-20-SUMMARY.md`
+Übersicht basiert auf historischem Kontextdokument, Abschnitt 3, `docs/SESSION-2026-04-20-SUMMARY.md`
 und den Migrationen.
 
 ### Vor Sprint-1 — Ausgangsstand
@@ -928,7 +927,6 @@ Stundensatz der Entwicklungs-Ressource ab.
 
 ## Quellen — für dieses Dokument konsultiert
 
-- `CLAUDE.md` (422 Zeilen)
 - `docs/ARCHITECTURE.md`
 - `docs/PROJEKT-INVENTAR.md`
 - `docs/BACKUP-STRATEGY.md`
@@ -948,5 +946,5 @@ Stundensatz der Entwicklungs-Ressource ab.
 
 Alle darüber hinausgehenden Zahlen (Coverage 91/77/93 %, Test-Gesamt
 727, Bundle 6,9 MB / 2,4 MB gzipped, Readiness 75 %) stammen aus
-`CLAUDE.md §3` bzw. `PROJEKT-INVENTAR.md §2`. Finanzschätzungen in
+historischem Kontextdokument, Abschnitt 3 bzw. `PROJEKT-INVENTAR.md §2`. Finanzschätzungen in
 Abschnitt 15 sind marktübliche Richtwerte, **keine Angebote**.

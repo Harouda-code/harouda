@@ -56,7 +56,7 @@ docker run --rm -v "$PWD:/work" verapdf/verapdf-rest \
 ## CI-Integration (Folge-Sprint-Kandidat)
 
 Noch nicht eingebunden. Vorschlag fuer einen CI-Schritt in
-`.github/workflows/ci.yml` (siehe §12 CLAUDE.md, aktuell noch
+`.github/workflows/ci.yml` (siehe historisches Kontextdokument, Abschnitt 12, aktuell noch
 dormant bis das Projekt ein echtes Git-Repo ist):
 
 ```yaml

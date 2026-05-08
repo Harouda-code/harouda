@@ -136,7 +136,7 @@ lesen zu müssen.
 
 ### 3.2 Out-of-Scope für die komplette Serie
 - **ELSTER-Transmission** für E-Bilanz (bleibt P1-Blocker im
-  Gesamtprojekt, siehe CLAUDE.md §10).
+  Gesamtprojekt, siehe historisches Kontextdokument, Abschnitt 10).
 - **veraPDF-Validator** im Code (bleibt externes Deployment-Tool).
 - **Persistenz der Wizard-Session in Supabase** (weiterhin
   localStorage — Team-Sharing nicht möglich).
@@ -201,7 +201,7 @@ Siehe `docs/TEXTBAUSTEINE-UPDATE-GUIDE.md`. Jährlich zum Jahreswechsel:
 - Lagebericht-Textbausteine (§ 289) auf BMF-Schreiben prüfen.
 - XBRL-Taxonomie-Register aktualisieren (neue BMF-Veröffentlichung
   eintragen mit Status "future" → später "stable").
-- `CLAUDE.md` Deprecation-Watch in `docs/ROADMAP.md` synchronisieren.
+- Historisches Kontextdokument Deprecation-Watch in `docs/ROADMAP.md` synchronisieren.
 
 ## 8. Navigations-Index zu den Einzel-Sprint-Dokus
 

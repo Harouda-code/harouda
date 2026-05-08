@@ -1,6 +1,6 @@
 # Session-Abschluss 2026-04-20
 
-**Status am Ende der Session:** 995 Tests grün / 65 Dateien · tsc clean · kein Git-Repo (Working Dir nicht initialisiert, siehe `CLAUDE.md` §5).
+**Status am Ende der Session:** 995 Tests grün / 65 Dateien · tsc clean · kein Git-Repo (Working Dir nicht initialisiert, siehe historisches Kontextdokument, Abschnitt 5).
 
 ---
 
@@ -107,7 +107,7 @@ Drift strukturell erklärbar; Konvergenz auf README-Werte ist nächster Mini-Spr
 
 ## 5. Git-Status
 
-Working Directory ist **kein Git-Repository** (CLAUDE.md §5, §12 Punkt 11):
+Working Directory ist **kein Git-Repository** (historisches Kontextdokument, Abschnitt 5 und Abschnitt 12 Punkt 11):
 
 ```
 $ git status
@@ -130,7 +130,7 @@ aber dormant bis zum `git init`.
 Empfohlen beim nächsten Öffnen:
 
 ```
-1. Lies CLAUDE.md vollständig (Kanonischer Projekt-Kontext).
+1. Lies das historische Kontextdokument vollständig (Kanonischer Projekt-Kontext).
 2. Lies docs/SESSION-ABSCHLUSS-2026-04-20.md (dieses Dokument).
 3. Konsultiere den historischen Handoff-Backlog (Abschnitt „Immediate Next Action").
 4. Frage den User:

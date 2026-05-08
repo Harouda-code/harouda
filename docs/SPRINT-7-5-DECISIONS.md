@@ -128,7 +128,7 @@ offen). Eine Lieferanten-Tabelle einzuziehen wäre Sprint-8-Scope.
 (Sprint 5). Datums-Konvertierung nutzt vorhandenen `parseGermanDate`.
 Kein `papaparse`, kein `date-fns` etc.
 
-**Begründung:** Bundle-Size-Disziplin + CLAUDE.md §9 „No premature
+**Begründung:** Bundle-Size-Disziplin + historisches Kontextdokument, Abschnitt 9 „No premature
 abstractions". Der existierende Parser deckt den 11-Spalten-Skonto-
 Header + Kostenstelle/Kostenträger ab.
 
@@ -270,7 +270,7 @@ Hash-Chain, Skonto-Felder auf Sprint-5-Belegen, RC/IG-Sprint-7-
 Szenarien, FLAG-v2-Setzen, v1→v2-Legacy-Migration, Respekt vor
 User-Daten.
 
-**Dokumentation:** dieses Dokument, `CLAUDE.md` Quick-Start §13.3
+**Dokumentation:** dieses Dokument, historisches Kontextdokument Quick-Start, Abschnitt 13.3
 erweitert um autoSeed-Beschreibung + FLAG-v2-Hinweis.
 
 **Test-Stand:** 951 → **968** (+17) / 62 → 63 Dateien.

@@ -86,9 +86,9 @@ Beide mit defensiven Default-Annahmen umgesetzt; Review durch Steuerberater empf
 | **AnlageV (Vermietung)** | Phase-3-Altlast. Objekt-Konvention nötig. |
 | **AnlageKap / AnlageSonder / AnlageAgB** | Strukturell MANUELL-PFLICHT (Phase-3-Entscheidung). |
 
-## 9. Konsistenz-Check CLAUDE.md + README
+## 9. Konsistenz-Check historisches Kontextdokument + README
 
-**CLAUDE.md** — Grep auf `avVertraegeStore`, `importAnlageVorsorge`, `AnlageMobilit`, `Cross-Module-Smoke`: **0 Treffer**. §5-Repo-Tree erwähnt `domain/` generisch, §6-Feature-Map ist weiterhin korrekt. **Keine Änderung.**
+**Historisches Kontextdokument** — Grep auf `avVertraegeStore`, `importAnlageVorsorge`, `AnlageMobilit`, `Cross-Module-Smoke`: **0 Treffer**. Abschnitt 5 (Repo-Tree) erwähnt `domain/` generisch, Abschnitt 6 (Feature-Map) ist weiterhin korrekt. **Keine Änderung.**
 
 **README.md** — Grep auf `Anlage AV`, `Anlage Vorsorge`, `Mobilitätsprämie`, `Cross-Module`: **0 Treffer**. Line 3 nennt „Anlage N" im Feature-Text — keine Kollision. **Keine Änderung.**
 

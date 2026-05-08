@@ -245,7 +245,7 @@ durch die Kanzlei außerhalb des Verfahrens (siehe Kap. 1 Abschnitt
   solange das Arbeitsverzeichnis nicht als Git-Repository
   initialisiert ist, laufen sie nicht. Dependabot-Konfiguration ist
   ebenfalls vorhanden aber dormant. Dies ist in
-  [`../../CLAUDE.md`](../../CLAUDE.md) §12 (Notes 10-11) dokumentiert.
+  historischem Kontextdokument, Abschnitt 12 (Anmerkungen 10-11) dokumentiert.
 - Die Aktivierung der Workflows ist Bestandteil der
   Go-Live-Vorbereitung (siehe [`../GO-LIVE-CHECKLIST.md`](../GO-LIVE-CHECKLIST.md)).
 
@@ -304,7 +304,7 @@ definiert.
 - **End-to-End-Tests:** **nicht vorhanden.** Playwright ist als
   Pflichtbestandteil in der Go-Live-Vorbereitung hinterlegt; 10
   kritische Journeys sind festgelegt, aber noch nicht implementiert
-  (P1-Blocker, siehe [`../../CLAUDE.md`](../../CLAUDE.md) §10).
+  (P1-Blocker, siehe historisches Kontextdokument, Abschnitt 10).
 
 ### Bewusst nicht abgedeckt
 
@@ -336,7 +336,7 @@ wird in Kapitel 4 (Betriebsdokumentation, Abschnitt 4.4) ausgeführt.
 - **Schema-Versionierung:** aufsteigend nummerierte Migrationen
   (`0001_*.sql` … `0023_*.sql`). Alte Migrationen werden nicht
   verändert — jede Schema-Änderung ist eine neue Datei. Diese Regel
-  ist in [`../../CLAUDE.md`](../../CLAUDE.md) §13 ("Common mistakes")
+  ist in historischem Kontextdokument, Abschnitt 13 ("Common mistakes")
   ausdrücklich festgehalten.
 - **Release-Versionierung und Release-Notes:** siehe Kapitel 4
   Abschnitt 4.7.
@@ -383,8 +383,8 @@ Verweise zum vertiefenden Lesen:
 
 ### Interne Projekt-Referenzen
 
-- [`../../CLAUDE.md`](../../CLAUDE.md) §2 (Tech Stack), §4
-  (Architectural Decisions), §5 (Repository Structure), §12 (Known
+- Historisches Kontextdokument, Abschnitt 2 (Tech Stack), Abschnitt 4
+  (Architectural Decisions), Abschnitt 5 (Repository Structure), Abschnitt 12 (Known
   Limitations).
 - [`../ARCHITECTURE.md`](../ARCHITECTURE.md).
 - [`../PROJEKT-INVENTAR.md`](../PROJEKT-INVENTAR.md) §4 (Architektur-

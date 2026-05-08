@@ -1029,7 +1029,7 @@ geschlossen (DB und git in Sync auf `0054`).
    Zeilenzahl mit Tool ermitteln, nicht von Hand).
 3. `git commit` mit aussagekraeftiger Message
    (z. B. "feat(db): 0054 GRANT-Repair authenticated + service_role").
-4. **Vor `git push`:** Claude Code (Desktop-App) schliessen
+4. **Vor `git push`:** offene Editor- oder IDE-Desktop-App schliessen
    (HANDOFF §7 Punkt 11).
 5. `git push -u origin fix/charge-19-phase-2-0054`.
 6. PR oeffnen mit Verweis auf Schuld 18-bet und auf §23–§26 dieser Doku.

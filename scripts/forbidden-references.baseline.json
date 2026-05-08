@@ -51,55 +51,6 @@
       "context_hash": "d724e86e011c29ee62a5bbb729f7bf350848c1f2817795b969840c62f1de7324"
     },
     {
-      "category": "project_forbidden_term",
-      "file_path_hash": "443d5732790f47d78502f78a2387fcce82c9b09401060bda9c0a96d115e2ea89",
-      "file_path_redacted": "docs/glossary/08-technik-architektur.md",
-      "line_number": 1208,
-      "context_hash": "e998b29f029ea59ce0d3b11be2a0f84e416ef4f795da6a46d2506e3befc7bf29"
-    },
-    {
-      "category": "project_forbidden_term",
-      "file_path_hash": "443d5732790f47d78502f78a2387fcce82c9b09401060bda9c0a96d115e2ea89",
-      "file_path_redacted": "docs/glossary/08-technik-architektur.md",
-      "line_number": 1221,
-      "context_hash": "c6b663381c8525175ac418907f4dce46cbfd25f4d899c113d3ae3fddb8288c5e"
-    },
-    {
-      "category": "project_forbidden_term",
-      "file_path_hash": "443d5732790f47d78502f78a2387fcce82c9b09401060bda9c0a96d115e2ea89",
-      "file_path_redacted": "docs/glossary/08-technik-architektur.md",
-      "line_number": 1452,
-      "context_hash": "738e1c1ce483c88a029969079e5babbc4febe15376f2cbaa674262edf3271d8b"
-    },
-    {
-      "category": "project_forbidden_term",
-      "file_path_hash": "b1d65714c4574190b650f115744fa5e59cbfffb8fd1d8fa24206e7e7c4d3a594",
-      "file_path_redacted": "docs/glossary/01-grundlagen.md",
-      "line_number": 436,
-      "context_hash": "9d23ea51391ed732d413fcf3f39f674890e549df4cb73fdceabbd568259a878e"
-    },
-    {
-      "category": "project_forbidden_term",
-      "file_path_hash": "c5405dcacdee190a8ef28ae7287a1b1cb515b744fd08f35377bc93fb859b4a5d",
-      "file_path_redacted": "docs/PROJEKT-GESAMTBERICHT-2026-04-27.md",
-      "line_number": 358,
-      "context_hash": "2f8da36d06c844081f43c8a30fb7b7279082bd2653a05b69e3820512a59af55b"
-    },
-    {
-      "category": "project_forbidden_term",
-      "file_path_hash": "c88fb64fd67e65648db82b09b723bf7595e7c0a29e43078bb8b1c27ad206183b",
-      "file_path_redacted": "docs/SPRINT-3-STOPP.md",
-      "line_number": 116,
-      "context_hash": "b80c8e9d962192b08deb50dd90c53d7ea6f085241549e199fbcea077f3f693e8"
-    },
-    {
-      "category": "project_forbidden_term",
-      "file_path_hash": "c9cef1203a31ace3989acc95c0ed8cbcd3720ae28d0eb9f2b4cbf82e1b09f37f",
-      "file_path_redacted": "docs/harouda-migrations-update-2026-05-02.md",
-      "line_number": 1032,
-      "context_hash": "9b8acdc8f3c6aad7a3788e9410ec24fc8198f4073bf26972c75fc59e501d201c"
-    },
-    {
       "category": "risky_positioning_language",
       "file_path_hash": "0babbef40c5f911bc5a10bc9a77e74cce0554780c29f7e5a37ef29885d6ef4ae",
       "file_path_redacted": "docs/compliance-roadmap.md",

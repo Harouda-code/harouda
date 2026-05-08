@@ -113,7 +113,7 @@ ausschließlich dokumentarisch**:
 tsc und vitest bleiben im selben Stand wie Ende Sprint 2:
 **tsc clean, 784 Tests grün, 53 Test-Dateien**.
 
-## Für den nächsten Claude
+## Für die nächste Arbeitssitzung
 
 Im historischen Handoff-Backlog ist unter „Last completed" der
 Stopp-Status verzeichnet — die nächste Session konnte gezielt eine

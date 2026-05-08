@@ -433,7 +433,7 @@ Gesetzliche Pflicht des Steuerberaters, über alle im Rahmen der Berufsausübung
 - [Mandant](#4-mandant) — geschützte Person
 
 **Verwendung im Code:**
-- Relevant für Produkt-Design-Entscheidungen (Telemetrie, Sentry-PII-Scrubbing, Training-Data-Opt-Out bei Claude.ai-Integration)
+- Relevant für Produkt-Design-Entscheidungen (Telemetrie, Sentry-PII-Scrubbing, Training-Data-Opt-Out bei externen Cloud-Diensten)
 - `docs/` Governance-Dokumente verweisen auf § 57 StBerG
 - Keine direkte Code-Repräsentation, da querschnittliche Berufspflicht
 

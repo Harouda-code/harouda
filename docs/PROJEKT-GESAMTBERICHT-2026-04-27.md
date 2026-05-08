@@ -355,5 +355,5 @@ versioniert.
 ---
 
 **Stand 2026-04-27 · 1656 Tests · tsc clean.**
-Erstellt durch Claude Code als Momentaufnahme. Bei jedem größeren
+Erstellt als Momentaufnahme. Bei jedem größeren
 Sprint sollte dieser Bericht neu generiert werden.

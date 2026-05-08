@@ -102,7 +102,7 @@ ein Schulungskurs. Die langen Fassungen liegen unter
 
 1. Button „Buchung erstellen" → springt ins Journal
 2. Pflichtfelder aus OCR vorausgefüllt
-3. Konto Soll/Haben manuell setzen (oder KI-Vorschlag)
+3. Konto Soll/Haben manuell setzen (oder automatischer Konten-Vorschlag)
 4. Speichern → Beleg ist verknüpft
 
 ### Gesetzliche Pflichten

@@ -215,7 +215,7 @@ export default function DocumentScannerPage() {
           <p>
             Lokale Texterkennung mit Tesseract.js (Deutsch + Englisch).
             Regelbasierte Extraktion deutscher Rechnungs-Felder, keine
-            KI-API-Aufrufe.
+            externen Cloud-API-Aufrufe.
           </p>
         </div>
       </header>

@@ -16,6 +16,23 @@ im Dokument erhalten.
 **Environment:** staging
 **Region:** Central EU (Frankfurt)
 
+**Replay-Closure (nachtraeglich):** Schuld-10-aleph-Replay nach Migration
+0059. Replay-Items 5.1-5.11 (11 nummerierte Szenarien) durchgelaufen,
+alle PASS; Reframing-Item 5.8b zusaetzlich PASS-mit-Vorbehalt. Gesamt
+12 Replay-Items: 11 PASS + 1 PASS-mit-Vorbehalt. ACL Re-Check post-0059
+(V1-V6 inkl. V5-aux) PASS. Replay-Outcome entspricht der in Sektion 11
+publizierten Klassifikation 11.B. Schuld-Statusentscheidungen
+(insbesondere die Zurueckstellung von Schuld 10-aleph hinter §28.11-bet gemaess
+Migrations-Update-Doku §33) bleiben im separaten Schuld-Tracker zu
+fuehren und werden durch diese Replay-Closure nicht praejudiziert.
+Schuld 28.11-bet bleibt unveraendert: OPEN / confirmed / future-only /
+support-assisted-only / apply-authority-blocked / not closed / not
+remediated / not tenant-remediable.
+**Replay-HEAD:** 5e84e96
+**Replay-Datum/Zeit:** 2026-05-08, 14:08 Uhr
+**Replay-Charakter:** ergaenzendes Closure des urspruenglich als
+Diagnostic Outcome 11.C dokumentierten Charge-20-Replays.
+
 ---
 
 ## 1 — Zusammenfassung
@@ -796,14 +813,38 @@ returning id, beleg_id, position;
 rollback;
 ```
 
-**Faktisch:**
-- `auth.uid()` = <IST-WERT>
-- Error message: `<IST-ERROR-MESSAGE>`
-- SQLSTATE: <IST-WERT>
-- Match expected pattern? <YES|NO>
+**Faktisch (Replay):**
+- `auth.uid()` = 00000000-0000-0000-0000-000000000a01
+- outcome = RLS_WITH_CHECK_DENIED_AS_EXPECTED
+- decision_layer = RLS_CHAINED_PARENT_WITH_CHECK
+- SQLSTATE = 42501
+- Error message: `new row violates row-level security policy for table "beleg_positionen"`
+- Match expected pattern (enthaelt 'new row violates row-level security
+  policy' und 'beleg_positionen')? YES
+- Block B rollback completed.
+- Block C — B1 + Positionen Persistenz (BYPASSRLS):
+  - id = 00000000-0000-0000-0000-0000000b1001
+  - company_id = 00000000-0000-0000-0000-00000000b100
+  - belegnummer = CHARGE20-B1
+  - status = ENTWURF
+  - b1_position_count = 2
+  - b1_position_99_count = 0
+  - b1_exists = true
+  - id_unchanged / company_id_unchanged / belegnummer_unchanged /
+    status_unchanged = true
+  - b1_position_count_back_to_two = true
+  - scenario11_inserted_row_did_not_persist = true
+  - scenario11_state_did_not_change = true
+  - updated_am_back_to_batch2_value = true
 
-**Status:** <PASS|FAIL>
-**Datum/Zeit:** <EXECUTION-DATE> <EXECUTION-TIME>
+**Replay-Anmerkung:** Das urspruenglich in §5.11 publizierte Two-Batch-
+Snippet wurde durch ein gleichbedeutendes drei-Block-Replacement-Paket
+mit Envelope-Guard, Policy-Guard, Pre-State-Guard, BYPASSRLS-Pre-/Post-
+Probes und PL/pgSQL-Exception-Capture ersetzt; semantisch identisch zur
+publizierten Erwartung.
+
+**Status:** PASS.
+**Datum/Zeit:** 2026-05-08, 14:08 Uhr
 
 ---
 
@@ -1098,6 +1139,62 @@ raw-`relacl`-Cross-Check (Lehre 58) hat es enthuellt. Charge 20 wurde
 unmittelbar nach V5 gestoppt — Setup, RLS-Szenarien und Cleanup wurden
 nicht ausgefuehrt.
 
+### 6.9 — Replay-Closure (post-0059)
+
+**Methodik:** Re-Ausfuehrung von V1-V6 plus eines abgeleiteten
+Aggregat-Counters (V5-aux) ueber `pg_class.relacl + aclexplode()`.
+Source-of-Truth: 0054 (baseline) + 0055 (sequence-UPDATE-revoke) +
+0059 (MAINTAIN-revoke fuer anon, authenticated, service_role auf allen
+public-Tabellen).
+
+**Replay-HEAD:** 5e84e96
+**Replay-Datum/Zeit:** 2026-05-08, 14:08 Uhr
+**Studio-session role:** postgres (BYPASSRLS=true)
+
+**Replay-Resultate:**
+
+| Verification | Replay-Status         |
+|--------------|-----------------------|
+| V1           | PASS                  |
+| V2           | PASS                  |
+| V3           | PASS                  |
+| V4           | PASS                  |
+| V5-base      | informational (raw)   |
+| V5-aux       | PASS                  |
+| V6           | PASS                  |
+| **GESAMT**   | **PASS**              |
+
+**Befunde:**
+- V1 — `authenticated` table grants: 42 Zeilen, baseline-Match (Gruppen
+  A-E + `health_check`). Keine MAINTAIN-Tokens in der `information_schema`-
+  Projektion.
+- V2 — `authenticated` sequence privileges: beide Sequenzen mit
+  `usage=true / select=false / update=false`.
+- V3 — `service_role` table grants: 42 Zeilen, jede mit dem 7-priv-set
+  `DELETE, INSERT, REFERENCES, SELECT, TRIGGER, TRUNCATE, UPDATE`.
+- V4 — `service_role` sequence privileges: beide Sequenzen mit allen
+  drei Flags `true`.
+- V5-base — raw-`relacl`-Snapshot: ausgefuehrt; `postgres`-MAINTAIN-
+  Eintraege erwartungsgemaess sichtbar (Out-of-Scope von 0059 v1).
+- V5-aux — MAINTAIN-Drift-Counter:
+  - `anon`: nicht im Ergebnis (= 0 MAINTAIN-Eintraege).
+  - `authenticated`: nicht im Ergebnis (= 0 MAINTAIN-Eintraege).
+  - `service_role`: nicht im Ergebnis (= 0 MAINTAIN-Eintraege).
+  - `postgres`: 41 MAINTAIN-Eintraege auf den 41 Anwendungstabellen.
+    Out-of-Scope von 0059 v1; nicht Bestandteil von V5-A4 oder V5-A6.
+- V6 — `anon` snapshot: genau eine Zeile, `health_check / SELECT`.
+
+**Wirksamkeits-Aussage:**
+- 0059 wirkt fuer `anon`, `authenticated` und `service_role` auf der
+  Object-Level-ACL aller existierenden public-Tabellen. Die in §6.6.4
+  und §6.6.6 dokumentierten V5-A4- und V5-A6-FAIL-Befunde sind im
+  Replay nicht reproduzierbar.
+- Der in Schuld 28.11-bet dokumentierte Default-Privilege-Residual
+  unter `supabase_admin` (Domain `pg_default_acl`) ist Out-of-Scope
+  fuer §6 Object-Level-Probes und durch dieses Replay nicht beruehrt.
+
+**Status:** PASS — §6 ACL Re-Check post-0059 vollstaendig geschlossen.
+
 ---
 
 ## 7 — Cleanup
@@ -1225,6 +1322,13 @@ commit;
 **Ende:** n/a
 **Dauer:** n/a
 **Findings:** keine.
+
+**Replay-Hinweis (nachtraeglich):** Im Schuld-10-aleph-Replay wurden die
+Batch-2-Fixtures inseriert (users=2, companies=2, memberships=2,
+belege=3, positionen=6, gebucht_check=1). Die Fixtures sind in der
+staging-DB praesent. Cleanup-Ausfuehrung bleibt eine separate
+Autorisierung; das in 7.1 publizierte Cleanup-SQL bleibt unveraenderter
+Replay-Asset.
 
 ---
 
@@ -1520,6 +1624,106 @@ Folge-Schritte:
 (MAINTAIN-Korrektur) sind voneinander unabhaengig. Charge 23 (Replay
 Schuld 10-aleph) setzt den Abschluss von Charge 22 voraus, da sonst V5
 erneut die Drift findet und der Replay wieder vor Setup stoppt.
+
+---
+
+## 14 — Schuld 10-aleph Replay Closure
+
+### 14.1 — Replay-Methodik
+
+Die in den Sektionen 5.1-5.11 publizierten Snippets wurden im Replay
+durch envelope-guarded drei-Block-Replacement-Pakete ersetzt:
+
+- **Block A:** begin / set_config-JWT / set local role authenticated /
+  Envelope Guard / Policy- bzw. Trigger- bzw. FK-Guard / Pre-State-
+  Hard-Guard / Action-Wrapper mit Exception-Capture / Post-State-
+  Probe / Attestation-SELECT (kein rollback).
+- **Block B:** rollback only.
+- **Block C:** Post-Rollback-Persistenz-Probe unter Studio-Default-
+  Rolle (BYPASSRLS).
+
+Studio-Default-Rolle: `postgres` (BYPASSRLS=true). JWT-Claim
+transaktionslokal via `set_config('request.jwt.claims', ..., true)`;
+Rollenwechsel transaktionslokal via `set local role authenticated`;
+Cross-Tenant-Pre-/Post-Probes ausserhalb des Rollenwechsels.
+Mutationen wurden ausschliesslich transaktionslokal ausgefuehrt und
+durch `rollback` verworfen; persistente DB-Aenderungen sind nicht
+entstanden.
+
+### 14.2 — Replay-Items
+
+Gesamt: **12 Replay-Items** — 11 nummerierte Szenarien 5.1-5.11 plus
+1 Reframing-Item 5.8b.
+
+| Replay-Item | Klassifikation | Decision Layer / Outcome           |
+|-------------|----------------|-------------------------------------|
+| 5.1         | PASS           | RLS-Visibility (Eigentenant-Lese)   |
+| 5.2         | PASS (D8-resolved, im Aggregat als PASS gezaehlt) | RLS-Visibility (Cross-Tenant) — siehe Schuld-10-aleph Batch-5 / D8-Closure |
+| 5.3         | PASS           | RLS-WITH-CHECK admit (Eigentenant)  |
+| 5.4         | PASS           | RLS-WITH-CHECK denial (Cross-Tenant), SQLSTATE 42501 |
+| 5.5         | PASS           | RLS-Update admit (Eigentenant); Trigger advances `updated_am` |
+| 5.6         | PASS           | RLS-USING-Filter (Cross-Tenant Update, silent) |
+| 5.7         | PASS           | RLS-Delete admit (Eigentenant ENTWURF); FK-Cascade verifiziert |
+| 5.8         | PASS           | belege_immutability Trigger-Denial (P0001) |
+| 5.8b        | PASS-mit-Vorbehalt | RLS-Status-Policy (Charge-20-Reframing); 0056-Trigger-Verteidigungslinie fuer non-authenticated Bypass-Pfade nicht empirisch verifiziert |
+| 5.9         | PASS           | RLS-Tenant-Policy (Cross-Tenant Delete, silent) |
+| 5.10        | PASS           | RLS-Chained-Parent-Visibility       |
+| 5.11        | PASS           | RLS-Chained-Parent-WITH-CHECK (P42501) |
+
+**Aggregat:**
+- Numbered Szenarien 5.1-5.11: **11 PASS**.
+- Reframing-Item 5.8b: **1 PASS-mit-Vorbehalt**.
+- **12 Replay-Items gesamt: 11 PASS + 1 PASS-mit-Vorbehalt.**
+- Keine STOP/FAIL-Klassifikation in den Replay-Items.
+- Replay-Outcome entspricht der in Sektion 11 publizierten
+  Klassifikation **11.B** (Verifikation mit dokumentierten Findings;
+  PASS-mit-Vorbehalt fuer 5.8b).
+
+### 14.3 — ACL Re-Check Replay-Status
+
+Siehe Sektion 6.9. Aggregat: PASS.
+
+### 14.4 — Schuld-Statusbezuege (scope-safe)
+
+Diese Closure trifft keine absoluten projektweiten Schuld-Statusaussagen.
+Die nachfolgenden Eintraege geben ausschliesslich die Beruehrung dieser
+Replay-Closure mit den jeweiligen Schulden wieder; die endgueltige
+Schuld-Statusfuehrung erfolgt im separaten Schuld-Tracker bzw. in der
+Migrations-Update-Doku.
+
+| Schuld    | Beruehrung durch dieses Replay |
+|-----------|---------------------------------|
+| 10-aleph  | Replay-Items 5.1-5.11 (11 PASS) und Reframing-Item 5.8b (PASS-mit-Vorbehalt) sowie ACL Re-Check post-0059 (V1-V6 inkl. V5-aux) durchgelaufen. Die finale Schuld-Statusentscheidung (insbesondere die in `docs/harouda-migrations-update-2026-05-02.md` §33 dokumentierte Zurueckstellung von Schuld 10-aleph hinter §28.11-bet) bleibt im separaten Schuld-Tracker zu fuehren; sie wird durch dieses Replay-Closure **nicht praejudiziert**. |
+| 18-aleph  | Durch dieses Charge-20-Replay **nicht geschlossen**. Die in Sektion 5.8b skizzierte 0056-Trigger-Verteidigungslinie fuer non-authenticated Bypass-Pfade (postgres-Owner / `service_role` / BYPASSRLS / FK-CASCADE) ist nicht empirisch durch Scenario 8b verifiziert. Status separat zu tracken; siehe §9.1 dieser Doku und Charge-21-Closure-Eintraege. |
+| 20-aleph  | Per `docs/harouda-migrations-update-2026-05-02.md` §33 als **TEILGESCHLOSSEN (V1-Teilabbau)** dokumentiert. Object-Level MAINTAIN fuer `anon`/`authenticated`/`service_role` auf allen 42 public-Relationen entfernt; Default-Privileges unter Owner `postgres` bereinigt. Verbleibender Anteil: Default-Privileges unter Owner `supabase_admin` (siehe §28.11-bet). Volle Schliessung erfordert §28.11-bet-Closure. Dieses Charge-20-Replay-Closure aendert den Schuld-20-aleph-Status **nicht**. |
+| 28.11-bet | Bleibt unveraendert: **OPEN / confirmed / future-only / support-assisted-only / apply-authority-blocked / not closed / not remediated / not tenant-remediable**. Domain `pg_default_acl` unter `supabase_admin`; out-of-scope fuer §6 Object-Level-Probes; Replay nicht beruehrt. |
+
+### 14.5 — Persistenz-Hinweis (Fixtures)
+
+Batch-2-Fixtures aus dem Replay sind in der staging-DB praesent
+(siehe §7.5 Replay-Hinweis). Cleanup verbleibt als separate
+Autorisierung; das in §7.1 publizierte Cleanup-SQL ist unveraendert
+verfuegbar.
+
+### 14.6 — Test-Baseline
+
+**Test-Baseline gehalten:** ja — keine persistenten Aenderungen
+ausserhalb der dokumentierten Batch-2-Fixtures; alle Szenario-
+Mutationen transaktionslokal verworfen; Block-C-Persistenz-Proben
+bestaetigen Pre-Mutation-State.
+
+### 14.7 — Out-of-Scope dieser Closure
+
+- Kein Cleanup ausgefuehrt; Cleanup-Autorisierung separat.
+- Keine Remediation gegen Schuld 18-aleph (Defense-in-Depth fuer
+  Bypass-Pfade).
+- Keine Remediation gegen Schuld 28.11-bet.
+- Keine Aenderung des Schuld-20-aleph-Status; volle Schliessung
+  erfordert §28.11-bet-Closure (siehe Migrations-Update-Doku §33).
+- Keine Migrations-Aenderungen; Replay-HEAD unveraendert.
+- Keine Repository-Aenderungen ausserhalb der Dokumentations-Updates
+  in dieser Closure (Header-Addition + §5.11 Faktisch-Replacement +
+  §6.9 Insertion + §7.5 Addendum + §14 Insertion).
 
 ---
 

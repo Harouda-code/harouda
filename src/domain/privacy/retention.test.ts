@@ -19,7 +19,7 @@ function assertBlocked(
 }
 
 describe("retention.canDelete", () => {
-  it("blockiert Buchungsbelege während der 8-Jahres-Frist (Wachstumschancengesetz)", () => {
+  it("blockiert Buchungsbelege während der 8-Jahres-Frist (BEG IV)", () => {
     // Beleg entstand am 2023-06-15 → Frist läuft 31.12.2023 + 8 Jahre = 31.12.2031.
     const created = "2023-06-15T10:00:00Z";
     const now = new Date("2025-04-20T00:00:00Z");

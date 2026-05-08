@@ -1,7 +1,8 @@
 // Aufbewahrungsfristen nach § 147 AO.
 //
-// Stand 2025: Das Wachstumschancengesetz verkürzt die Aufbewahrungsfrist für
-// Buchungsbelege (Rechnungen, Quittungen, Kontoauszüge) von 10 auf 8 Jahre.
+// Stand 2025: § 147 Abs. 3 AO n.F. (BEG IV; Art. 97 § 19a Abs. 2 EGAO)
+// verkürzt die Aufbewahrungsfrist für Buchungsbelege (Rechnungen,
+// Quittungen, Kontoauszüge) von 10 auf 8 Jahre.
 // Bücher, Jahresabschlüsse, Inventare usw. bleiben bei 10 Jahren.
 // Handelsbriefe: 6 Jahre. Fristbeginn ist das Ende des Kalenderjahres,
 // in dem das Dokument zuletzt bearbeitet / empfangen / erstellt wurde.

@@ -3,7 +3,7 @@
 **Kapazitäts-Demonstration** einer Kanzlei-Software für Steuerberater:innen.
 **Nicht zur produktiven Nutzung.** Nicht zertifiziert. Kein Ersatz für DATEV,
 Lexoffice, WISO oder ELSTER-Clients. Das vorliegende Paket ist für Gespräche
-mit Zertifizierungsstellen, Behörden und potenziellen Lizenzgebern gedacht.
+mit regulatorischen Stellen, Behörden und potenziellen Lizenzgebern gedacht.
 
 ---
 

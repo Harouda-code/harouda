@@ -135,8 +135,8 @@ export default function KontaktPage() {
             <p>
               Die Verfahrensdokumentations-Vorlage in{" "}
               <code>docs/verfahrensdokumentation.md</code> ist ein guter
-              Einstiegspunkt. Die Compliance-Roadmap listet alle offenen
-              Zertifizierungspfade.
+              Einstiegspunkt. Die Compliance-Roadmap dokumentiert die offenen
+              Compliance-Themen.
             </p>
           </article>
           <article className="card info__card">

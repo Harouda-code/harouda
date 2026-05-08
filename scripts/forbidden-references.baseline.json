@@ -73,20 +73,6 @@
     },
     {
       "category": "risky_positioning_language",
-      "file_path_hash": "57b0c342594514118fee6b05b73fbff3070eb84cf246bbf585d9c0ee7a661d16",
-      "file_path_redacted": "src/pages/KontaktPage.tsx",
-      "line_number": 139,
-      "context_hash": "c5608976d8694b05303268985c5bbd6b7b4a395b5367c6cdb0e52b96aa8d41db"
-    },
-    {
-      "category": "risky_positioning_language",
-      "file_path_hash": "b4ceefa882546036cbf64893d03f8e00c806bb679384b5572ddf0537b7f11708",
-      "file_path_redacted": "docs/README-DEMO.md",
-      "line_number": 6,
-      "context_hash": "55e5fd72b8e629f55f37d897a2acf732a5201473d1db386c811f884342adabec"
-    },
-    {
-      "category": "risky_positioning_language",
       "file_path_hash": "b4ceefa882546036cbf64893d03f8e00c806bb679384b5572ddf0537b7f11708",
       "file_path_redacted": "docs/README-DEMO.md",
       "line_number": 20,

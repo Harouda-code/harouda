@@ -61,7 +61,7 @@ Demo-Banner oben.
 ## 2. Anmeldung
 
 1. Navigation zu `/login`.
-2. Demo-Zugangsdaten (aus `CLAUDE.md`): `admin@harouda.de` /
+2. Demo-Zugangsdaten (aus historischer Demo-Dokumentation): `admin@harouda.de` /
    `password123`.
 
 **Sprint 7.5 — Auto-Seed (seit 2026-04-20):** Beim ersten DEMO-Login
@@ -172,7 +172,7 @@ pro Zeile:
 - Buchungstext
 
 Tastenkürzel: `Strg + N` öffnet das Neuerfassungs-Modal
-(siehe `CLAUDE.md` / `USER-GUIDE-DE.md`).
+(siehe historischen Projektkontext / `USER-GUIDE-DE.md`).
 
 **Hinweis zur Erfassungs-Reihenfolge:**
 
@@ -708,7 +708,7 @@ trägt pro Schritt in `BEOBACHTUNGEN.md` ein:
 Das Protokoll dient als Input für spätere UX- und
 Funktions-Verbesserungs-Sprints. Es ist ausdrücklich **nicht** die
 Bug-Dokumentation — Bugs werden bei Bedarf separat erfasst (Issues,
-`docs/NEXT-CLAUDE-HANDOFF.md`-Anmerkungen).
+Anmerkungen im historischen Handoff-Backlog).
 
 ---
 

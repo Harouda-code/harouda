@@ -105,5 +105,5 @@ Pro Schritt aus `README.md`:
 Nach Ausfüllen dieser Datei: `BEOBACHTUNGEN.md` kann als Input-Grundlage
 für den nächsten UX-/Funktions-Sprint dienen. Konkrete Bugs
 (z. B. Falschberechnung von Konten-Salden, fehlende Routen) sollten
-zusätzlich in `docs/NEXT-CLAUDE-HANDOFF.md` unter "Open Design Questions"
+zusätzlich im historischen Handoff-Backlog unter "Open Design Questions"
 oder als separater Issue protokolliert werden.

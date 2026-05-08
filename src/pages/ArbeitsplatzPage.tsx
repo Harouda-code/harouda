@@ -134,12 +134,12 @@ const TREE_MODULES: TreeModule[] = [
     id: "rechnungswesen",
     title: "Kanzlei-Rechnungswesen",
     icon: BookOpen,
-    mainPath: "/buchfuehrung",
+    mainPath: "/buchhaltung/buchfuehrung",
     headerTestId: "arbeitsplatz-launcher-rewe",
     subItems: [
       {
         label: "Buchungsjournal",
-        path: "/journal",
+        path: "/buchhaltung/journal",
         testId: "arbeitsplatz-tree-rewe-journal",
       },
       {
@@ -178,7 +178,7 @@ const TREE_MODULES: TreeModule[] = [
     id: "anlagen",
     title: "Anlagenbuchführung",
     icon: FileBarChart,
-    mainPath: "/anlagen/verzeichnis",
+    mainPath: "/buchhaltung/anlagen/verzeichnis",
     headerTestId: "arbeitsplatz-launcher-anlagen",
     subItems: [
       {
@@ -188,19 +188,19 @@ const TREE_MODULES: TreeModule[] = [
       },
       {
         label: "Inventarübersicht",
-        path: "/anlagen/verzeichnis",
+        path: "/buchhaltung/anlagen/verzeichnis",
         testId: "arbeitsplatz-tree-anlagen-inventar",
       },
       // Zugänge + Abgänge sind in AnlagenVerzeichnisPage integriert;
       // Umbuchungen (FEHLT) bewusst weggelassen (TEILWEISE-Fix).
       {
         label: "Zugänge / Abgänge",
-        path: "/anlagen/verzeichnis",
+        path: "/buchhaltung/anlagen/verzeichnis",
         testId: "arbeitsplatz-tree-anlagen-bewegungen",
       },
       {
         label: "Abschreibungen (AfA)",
-        path: "/anlagen/afa-lauf",
+        path: "/buchhaltung/anlagen/afa-lauf",
         testId: "arbeitsplatz-tree-anlagen-afa",
       },
     ],

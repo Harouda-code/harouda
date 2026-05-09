@@ -177,7 +177,6 @@ const GROUPS: NavGroup[] = [
       { label: "E-Rechnung (ZUGFeRD)", to: "/zugferd", icon: BadgeCheck },
       { label: "E-Rechnung-Archiv", to: "/e-rechnung/archiv", icon: BadgeCheck },
       { label: "Dokument-Scanner (OCR)", to: "/ai/scanner", icon: FileText },
-      { label: "DATEV-Export", to: "/export/datev", icon: FileText },
       { label: "PDF-Werkzeuge", to: "/werkzeuge/pdf", icon: FileText },
     ],
   },

@@ -78,7 +78,7 @@ const GROUPS: NavGroup[] = [
     icon: BookOpen,
     items: [
       { label: "Journal", to: "/buchhaltung/journal", icon: ListOrdered, shortcut: "Strg+J" },
-      { label: "Kontenplan", to: "/buchhaltung/konten", icon: Hash, shortcut: "Strg+K" },
+      { label: "Kontenplan", to: "/buchhaltung/konten", icon: Hash },
       { label: "Offene Posten", to: "/buchhaltung/opos", icon: Wallet, shortcut: "Strg+O" },
       { label: "Liquiditätsvorschau", to: "/buchhaltung/liquiditaet", icon: TrendingUp },
       { label: "Mahnwesen", to: "/buchhaltung/mahnwesen", icon: AlertTriangle },

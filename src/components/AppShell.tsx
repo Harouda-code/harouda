@@ -122,7 +122,6 @@ const GROUPS: NavGroup[] = [
       { label: "UStVA (§ 18 UStG)", to: "/steuer/ustva" },
       { label: "ZM (§ 18a UStG)", to: "/steuer/zm" },
       { label: "E-Bilanz (§ 5b EStG)", to: "/steuer/ebilanz" },
-      { label: "Z3-Datenexport (§ 147 AO)", to: "/admin/z3-export" },
       { label: "ELSTER-Übertragung", to: "/steuern/elster", icon: Landmark },
     ],
   },

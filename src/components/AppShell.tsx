@@ -161,7 +161,7 @@ const GROUPS: NavGroup[] = [
   },
   {
     id: "personal",
-    title: "Lohn & Gehalt",
+    title: "Personal",
     icon: UserCircle2,
     items: [
       { label: "Mitarbeiter", to: "/personal/mitarbeiter", icon: UserCircle2 },

@@ -101,7 +101,7 @@ Kontenplan hier überschreiben.
 
 ## 3. Kontenplan & Mandanten
 
-### 3.1 Kontenplan (`/konten`)
+### 3.1 Kontenplan (`/buchhaltung/konten`)
 
 - Beim ersten Start kann der **SKR03-Seed** (>500 Konten) importiert
   werden.
@@ -123,7 +123,7 @@ valid / invalid), IBAN.
 
 ## 4. Buchführung (Journal)
 
-Route: **Journal** (`/journal`).
+Route: **Journal** (`/buchhaltung/journal`).
 
 ### 4.1 Buchung anlegen
 
@@ -184,7 +184,7 @@ Zeichen, im Audit-Log protokolliert).
 
 ## 5. Offene Posten & Mahnwesen
 
-### 5.1 OPOS (`/opos`)
+### 5.1 OPOS (`/buchhaltung/opos`)
 
 Aus dem Journal werden automatisch offene Posten abgeleitet:
 
@@ -194,7 +194,7 @@ Aus dem Journal werden automatisch offene Posten abgeleitet:
 Aging-Buckets: 0–30 / 31–60 / 61–90 / 91+ Tage. Filter nach Mandant,
 Bucket, nur überfällig.
 
-### 5.2 Mahnwesen (`/mahnwesen`)
+### 5.2 Mahnwesen (`/buchhaltung/mahnwesen`)
 
 - Automatische Einteilung in Mahnstufen 1–3 nach Tagen Verzug
   (konfigurierbar in Einstellungen).
@@ -202,7 +202,7 @@ Bucket, nur überfällig.
   (B2B +9 Pp., B2C +5 Pp. über Basiszinssatz).
 - PDF-Mahnschreiben mit Bankverbindung generierbar.
 
-### 5.3 Liquiditätsvorschau (`/liquiditaet`)
+### 5.3 Liquiditätsvorschau (`/buchhaltung/liquiditaet`)
 
 90-Tage-Heuristik (keine ML):
 
@@ -219,7 +219,7 @@ Bucket, nur überfällig.
 
 ## 6. Bank-Import & Bank-Abstimmung
 
-### 6.1 Bank-Import (`/bankimport`)
+### 6.1 Bank-Import (`/buchhaltung/bankimport`)
 
 Unterstützt:
 
@@ -231,7 +231,7 @@ Unterstützt:
 Pro Zeile erhält die Transaktion einen Konto-Vorschlag (1200 Bank als
 Default auf einer Seite; die andere Seite aus Heuristik).
 
-### 6.2 Bank-Abstimmung (`/banking/reconciliation`)
+### 6.2 Bank-Abstimmung (`/buchhaltung/banking/reconciliation`)
 
 Zwei-Wege-Match **Bank ↔ OPOS**:
 

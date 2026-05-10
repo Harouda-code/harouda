@@ -46,7 +46,7 @@ während der gesamten Demo sichtbar. Sagen Sie ausdrücklich am Anfang:
 
 ## 2. Buchungsjournal (2 min)
 
-**Screen**: `/journal`
+**Screen**: `/buchhaltung/journal`
 
 **Zeigen**:
 - Liste mit 15 Buchungen
@@ -66,12 +66,12 @@ während der gesamten Demo sichtbar. Sagen Sie ausdrücklich am Anfang:
 
 ## 3. Offene Posten → Mahnwesen (2,5 min)
 
-**Screen**: `/opos`
+**Screen**: `/buchhaltung/opos`
 
 **Zeigen**:
 - Aging-Buckets, drei Mahnfälle sichtbar (Bauer 14 T., Krüger 46 T.,
   Roth 74 T.)
-- Wechsel auf `/mahnwesen`
+- Wechsel auf `/buchhaltung/mahnwesen`
 - Mahnvorschläge: Zahlungserinnerung, 1. Mahnung, 2. Mahnung je nach
   Überfälligkeit
 - „Mahnung erstellen" für Roth GmbH anklicken → PDF wird erzeugt
@@ -88,7 +88,7 @@ während der gesamten Demo sichtbar. Sagen Sie ausdrücklich am Anfang:
 
 ## 4. Buchführung-Modul → EÜR (2,5 min)
 
-**Screen**: `/buchfuehrung`
+**Screen**: `/buchhaltung/buchfuehrung`
 
 **Zeigen**:
 - Vier Kacheln im Hub

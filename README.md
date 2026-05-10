@@ -93,7 +93,7 @@ Ohne Deployment liefert die Funktion einen klaren Fehler statt einer Fake-Antwor
 
 ## Bankimport
 
-Die Seite `/bankimport` liest **MT940**- und **CAMT.053**-Dateien, die die Bank über das Online-Banking exportiert. Eine **direkte Bank-Anbindung** (PSD2, Open Banking) ist bewusst nicht enthalten: das erfordert entweder einen eigenen TPP-Vertrag mit BaFin-Registrierung oder einen Aggregator-Vertrag (finAPI, Klarna Kosma, Tink, FinTecSystems) — beides mit laufenden Kosten und rechtlichem Rahmen, nicht in Code lösbar.
+Die Seite `/buchhaltung/bankimport` liest **MT940**- und **CAMT.053**-Dateien, die die Bank über das Online-Banking exportiert. Eine **direkte Bank-Anbindung** (PSD2, Open Banking) ist bewusst nicht enthalten: das erfordert entweder einen eigenen TPP-Vertrag mit BaFin-Registrierung oder einen Aggregator-Vertrag (finAPI, Klarna Kosma, Tink, FinTecSystems) — beides mit laufenden Kosten und rechtlichem Rahmen, nicht in Code lösbar.
 
 ## GoBD / Aufbewahrung / Prüfung
 

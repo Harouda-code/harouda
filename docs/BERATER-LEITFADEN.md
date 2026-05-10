@@ -94,7 +94,7 @@ Forderungen, Total überfällig, Total Verbindlichkeiten, Total Entwürfe).
 ## 4. Beraternotizen (Kollaboration)
 
 Jede Journal-Buchung hat ein Sprechblasen-Icon mit Zähler-Badge
-(`/journal`). Klicken öffnet ein Modal:
+(`/buchhaltung/journal`). Klicken öffnet ein Modal:
 
 - **Append-only** — einmal geschrieben, nicht editierbar. Korrekturen
   werden als neue Notiz hinzugefügt; alte Notizen bleiben sichtbar.
@@ -228,7 +228,7 @@ Für ein neues Mandat, das die App selbst nutzen soll:
    (`/einstellungen`).
 2. **Mandant in der Kanzlei-Firma anlegen** (`/mandanten`) — für
    Filter- und Reporting-Zwecke.
-3. **Kontenplan importieren** (`/konten`) — SKR03-Seed.
+3. **Kontenplan importieren** (`/buchhaltung/konten`) — SKR03-Seed.
 4. **Supabase-Migrationen** einspielen (0001–0016), Supabase-Projekt für
    die Mandant:in einrichten.
 5. In dieser neuen Firma:

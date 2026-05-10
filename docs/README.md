@@ -12,7 +12,7 @@ Drei Dokumente in Deutsch, auf den aktuellen Stand der App abgestimmt:
 
 ## Was in diesen Dokumenten steht
 
-- **Konkrete Routen** (z. B. `/journal`, `/personal/abrechnung`) statt
+- **Konkrete Routen** (z. B. `/buchhaltung/journal`, `/personal/abrechnung`) statt
   allgemeiner Feature-Namen
 - **Reale Migrations- und Modulverweise** (Dateien + Zeilen stimmen)
 - **Ehrliche Grenzen** in jedem Abschnitt — was die App nicht tut und

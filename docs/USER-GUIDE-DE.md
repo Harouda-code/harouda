@@ -11,8 +11,8 @@ ein Schulungskurs. Die langen Fassungen liegen unter
 | Bereich | Wo? | Worum geht's? |
 |---------|-----|---------------|
 | Dashboard | `/dashboard` | Umsatz-, Ausgaben-, Ergebnis-KPIs pro Quartal |
-| Buchungsjournal | `/journal` | Doppelte Buchführung, Festschreibung, DATEV-Export |
-| Konten | `/konten` | SKR03-Kontenplan (~150 Konten), aktiv/inaktiv |
+| Buchungsjournal | `/buchhaltung/journal` | Doppelte Buchführung, Festschreibung, DATEV-Export |
+| Konten | `/buchhaltung/konten` | SKR03-Kontenplan (~150 Konten), aktiv/inaktiv |
 | Berichte | `/berichte` | GuV, BWA, Bilanz, SuSa, Vorjahresvergleich |
 | Steuer | `/steuer` | UStVA, ZM, EÜR, E-Bilanz, Anlagen N/S/G/V/… |
 | Lohn | `/lohn` | Kalkulator + Lohnsteuer-Anmeldung + Archiv |
@@ -28,7 +28,7 @@ ein Schulungskurs. Die langen Fassungen liegen unter
 ### 2.1 Monatsabschluss (Umsatzsteuer + Lohn)
 
 1. **Journal abschließen**
-   - `/journal` → Monat filtern
+   - `/buchhaltung/journal` → Monat filtern
    - Plausi prüfen (Soll = Haben aggregiert)
    - Button „Monat festschreiben" → GoBD-Sperre aktiv
 2. **UStVA erzeugen**

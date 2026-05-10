@@ -20,20 +20,20 @@ Playwright (~5 min nach Setup).
 | # | Route                                 | Framing-Hinweis                                                |
 |---|---------------------------------------|-----------------------------------------------------------------|
 | 01 | `/dashboard`                          | KPIs + „Letzte Buchungen" sichtbar                              |
-| 02 | `/journal`                            | Tabelle mit mind. 10 Einträgen                                  |
-| 03 | `/journal` Formular (Strg+N)          | Gefülltes „Neue Buchung"-Formular                                |
-| 04 | `/konten`                             | Kontenplan mit eingeklappten Sektionen                          |
+| 02 | `/buchhaltung/journal`                            | Tabelle mit mind. 10 Einträgen                                  |
+| 03 | `/buchhaltung/journal` Formular (Strg+N)          | Gefülltes „Neue Buchung"-Formular                                |
+| 04 | `/buchhaltung/konten`                             | Kontenplan mit eingeklappten Sektionen                          |
 | 05 | `/mandanten`                          | Drei Demo-Mandanten als Karten                                  |
-| 06 | `/opos` — Tab „Debitoren"             | Aging-Tabelle mit überfälligen Einträgen sichtbar                |
-| 07 | `/mahnwesen`                          | Mahnvorschläge für die drei Demo-Debitoren                      |
-| 08 | `/mahnwesen` (nach Mahnungs-Erstellung)| Mahnhistorie mit einem Eintrag                                   |
+| 06 | `/buchhaltung/opos` — Tab „Debitoren"             | Aging-Tabelle mit überfälligen Einträgen sichtbar                |
+| 07 | `/buchhaltung/mahnwesen`                          | Mahnvorschläge für die drei Demo-Debitoren                      |
+| 08 | `/buchhaltung/mahnwesen` (nach Mahnungs-Erstellung)| Mahnhistorie mit einem Eintrag                                   |
 | 09 | `/berichte`                           | GuV / BWA / SuSa Kacheln                                         |
 | 10 | `/berichte/guv`                       | GuV mit Zahlen                                                  |
 | 11 | `/steuer`                             | 10 Formular-Kacheln mit Badge-Modi                              |
 | 12 | `/steuer/ustva`                       | UStVA mit Zahlen, FormMetaBadge oben sichtbar                    |
 | 13 | `/steuer/euer`                        | EÜR mit expandierten Quell-Konten                                |
 | 14 | `/steuer/anlage-n`                    | Anlage N mit ausgefülltem SV-Rechner                             |
-| 15 | `/buchfuehrung`                       | Vier Kacheln des Buchführung-Hubs                                |
+| 15 | `/buchhaltung/buchfuehrung`                       | Vier Kacheln des Buchführung-Hubs                                |
 | 16 | `/buchfuehrung/plausi`                | KPIs + Liste mit grün/orangen Checks                             |
 | 17 | `/einstellungen/audit`                | Audit-Log mit „Kette prüfen"-Bestätigung grün                    |
 | 18 | `/einstellungen/fristen`              | Fristenkalender mit Buckets                                     |

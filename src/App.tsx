@@ -2,10 +2,8 @@ import {
   BrowserRouter,
   HashRouter,
   Navigate,
-  Outlet,
   Route,
   Routes,
-  useLocation,
 } from "react-router-dom";
 import { DEMO_MODE } from "./api/supabase";
 import AppShell from "./components/AppShell";
@@ -135,21 +133,6 @@ import "./App.css";
 
 const Router = DEMO_MODE ? HashRouter : BrowserRouter;
 
-// Redirect-Helper fuer die Steuer-Shell-Migration: leitet auf den Ziel-Pfad
-// um und uebernimmt search + hash der aktuellen Location, damit Query-Strings
-// wie ?mandantId=... durch den Redirect erhalten bleiben. Bare <Navigate to="/x" />
-// laesst search/hash fallen, weil React Router den string-form `to` als
-// vollstaendige Ziel-Location interpretiert.
-function NavigateWithSearch({ to }: { to: string }) {
-  const location = useLocation();
-  return (
-    <Navigate
-      to={{ pathname: to, search: location.search, hash: location.hash }}
-      replace
-    />
-  );
-}
-
 export default function App() {
   return (
     <Router>
@@ -212,7 +195,6 @@ export default function App() {
         </Route>
 
         {/* Phase 2 Patch 2.1 — Module-Shell SteuernShell. */}
-        {/* Erste parallele Steuern-Route; alte /steuer/* bleiben unveraendert. */}
         <Route
           element={
             <RequireAuth>
@@ -269,56 +251,6 @@ export default function App() {
           </Route>
         </Route>
 
-        {/* ============================================================
-            Layout-Route #2 — Legacy Steuer-Redirects
-            Alte /steuer/* Pfade leiten auf die Module-Shell-Pfade
-            /einkommensteuer/* bzw. /umsatzsteuer/* um.
-            Kein Shell-Mount: <Navigate> rendert keine UI.
-            Auth + ErrorBoundary bleiben erhalten für Konsistenz.
-        ============================================================ */}
-        <Route
-          element={
-            <RequireAuth>
-              <ErrorBoundary context="LegacyRedirect" level="page">
-                <Outlet />
-              </ErrorBoundary>
-            </RequireAuth>
-          }
-        >
-
-          {/* Steuer-Shell-Migration: Legacy /steuer/* (Einkommensteuer + Umsatzsteuer)
-              leitet auf die neuen Module-Shell-Pfade /einkommensteuer/* bzw. /umsatzsteuer/* um.
-              NavigateWithSearch uebernimmt search + hash der aktuellen Location, damit
-              Query-Strings wie ?mandantId=... durch den Redirect erhalten bleiben. */}
-          <Route path="/steuer/est-1a" element={<NavigateWithSearch to="/einkommensteuer/est-1a" />} />
-          <Route path="/steuer/est-1c" element={<NavigateWithSearch to="/einkommensteuer/est-1c" />} />
-          <Route path="/steuer/anlage-n" element={<NavigateWithSearch to="/einkommensteuer/anlage-n" />} />
-          <Route path="/steuer/anlage-s" element={<NavigateWithSearch to="/einkommensteuer/anlage-s" />} />
-          <Route path="/steuer/anlage-g" element={<NavigateWithSearch to="/einkommensteuer/anlage-g" />} />
-          <Route path="/steuer/anlage-v" element={<NavigateWithSearch to="/einkommensteuer/anlage-v" />} />
-          <Route path="/steuer/anlage-so" element={<NavigateWithSearch to="/einkommensteuer/anlage-so" />} />
-          <Route path="/steuer/anlage-aus" element={<NavigateWithSearch to="/einkommensteuer/anlage-aus" />} />
-          <Route path="/steuer/anlage-kind" element={<NavigateWithSearch to="/einkommensteuer/anlage-kind" />} />
-          <Route path="/steuer/anlage-vorsorge" element={<NavigateWithSearch to="/einkommensteuer/anlage-vorsorge" />} />
-          <Route path="/steuer/anlage-r" element={<NavigateWithSearch to="/einkommensteuer/anlage-r" />} />
-          <Route path="/steuer/anlage-kap" element={<NavigateWithSearch to="/einkommensteuer/anlage-kap" />} />
-          <Route path="/steuer/anlage-mobility" element={<NavigateWithSearch to="/einkommensteuer/anlage-mobility" />} />
-          <Route path="/steuer/anlage-v-sonstige" element={<NavigateWithSearch to="/einkommensteuer/anlage-v-sonstige" />} />
-          <Route path="/steuer/anlage-v-fewo" element={<NavigateWithSearch to="/einkommensteuer/anlage-v-fewo" />} />
-          <Route path="/steuer/anlage-unterhalt" element={<NavigateWithSearch to="/einkommensteuer/anlage-unterhalt" />} />
-          <Route path="/steuer/anlage-u" element={<NavigateWithSearch to="/einkommensteuer/anlage-u" />} />
-          <Route path="/steuer/anlage-rav-bav" element={<NavigateWithSearch to="/einkommensteuer/anlage-rav-bav" />} />
-          <Route path="/steuer/anlage-n-aus" element={<NavigateWithSearch to="/einkommensteuer/anlage-n-aus" />} />
-          <Route path="/steuer/anlage-n-dhf" element={<NavigateWithSearch to="/einkommensteuer/anlage-n-dhf" />} />
-          <Route path="/steuer/anlage-av" element={<NavigateWithSearch to="/einkommensteuer/anlage-av" />} />
-          <Route path="/steuer/anlage-em" element={<NavigateWithSearch to="/einkommensteuer/anlage-em" />} />
-          <Route path="/steuer/anlage-haa" element={<NavigateWithSearch to="/einkommensteuer/anlage-haa" />} />
-          <Route path="/steuer/anlage-sonder" element={<NavigateWithSearch to="/einkommensteuer/anlage-sonder" />} />
-          <Route path="/steuer/anlage-agb" element={<NavigateWithSearch to="/einkommensteuer/anlage-agb" />} />
-          <Route path="/steuer/ustva" element={<NavigateWithSearch to="/umsatzsteuer/ustva" />} />
-          <Route path="/steuer/zm" element={<NavigateWithSearch to="/umsatzsteuer/zm" />} />
-        </Route>
-
         <Route
           element={
             <RequireAuth>
@@ -349,12 +281,10 @@ export default function App() {
           />
           <Route path="/berichte/vorjahresvergleich" element={<VorjahresvergleichPage />} />
           <Route path="/berichte/susa" element={<SuSaPage />} />
-          <Route path="/steuer" element={<TaxFormsPage />} />
           <Route path="/lohn" element={<LohnPage />} />
           <Route path="/lohn/lohnsteueranmeldung" element={<LohnsteuerAnmeldungPage />} />
           <Route path="/lohn/sv-meldungen" element={<SvMeldungenPage />} />
           <Route path="/lohn/archiv" element={<AbrechnungsArchivPage />} />
-          <Route path="/steuer/ebilanz" element={<EbilanzPage />} />
           <Route path="/admin/z3-export" element={<Z3ExportPage />} />
           <Route path="/admin/datenexport" element={<DatenExportPage />} />
           <Route path="/admin/audit" element={<AuditTrailPage />} />
@@ -363,9 +293,6 @@ export default function App() {
             element={<IntegrityDashboardPage />}
           />
           <Route path="/kanzlei-dashboard" element={<KanzleiDashboardPage />} />
-          <Route path="/steuer/euer" element={<Navigate to="/buchhaltung/euer" replace />} />
-          <Route path="/steuer/gewerbesteuer" element={<GewerbesteuerPage />} />
-          <Route path="/steuer/kst" element={<KoerperschaftsteuerPage />} />
           <Route path="/belege" element={<DocumentsPage />} />
           <Route path="/einstellungen" element={<SettingsPage />} />
           <Route path="/einstellungen/audit" element={<AuditLogPage />} />

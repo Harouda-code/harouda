@@ -87,7 +87,7 @@ export const FORM_CATEGORIES: Record<FormCategoryId, FormCategory> = {
 };
 
 /** Map jedes Form-Routen-Targets auf die primäre Kategorie. Schlüssel ist
- *  der URL-Pfad ohne führendes /steuer (z. B. "anlage-n", "est-1a",
+ *  der URL-Pfad ohne führendes Routen-Präfix (z. B. "anlage-n", "est-1a",
  *  "ustva"). Damit bleibt das Mapping unabhängig von FormId-Strings. */
 export const FORM_PATH_TO_CATEGORY: Record<string, FormCategoryId> = {
   // Hauptvordrucke
@@ -151,14 +151,14 @@ export const FORM_SECONDARY_CATEGORIES: Record<string, FormCategoryId[]> = {
   "anlage-mobility": ["abzuege"],
 };
 
-/** Strip a leading legacy or canonical tax-form route prefix and leave the
+/** Strip a leading canonical tax-form route prefix and leave the
  *  bare slug used by FORM_PATH_TO_CATEGORY / FORM_SECONDARY_CATEGORIES.
- *  Supported prefixes: /steuer/, /einkommensteuer/, /umsatzsteuer/,
+ *  Supported prefixes: /einkommensteuer/, /umsatzsteuer/,
  *  /jahresabschluss/, /buchhaltung/, /steuern/. Bare slugs and slugs with
  *  a leading slash but no recognized prefix pass through unchanged
  *  (after stripping any leading slashes). */
 const ROUTE_PREFIX_RE =
-  /^\/+(?:steuer|einkommensteuer|umsatzsteuer|jahresabschluss|buchhaltung|steuern)\/+/;
+  /^\/+(?:einkommensteuer|umsatzsteuer|jahresabschluss|buchhaltung|steuern)\/+/;
 
 export function normalizeFormRoutePath(path: string): string {
   return path.replace(ROUTE_PREFIX_RE, "").replace(/^\/+/, "");

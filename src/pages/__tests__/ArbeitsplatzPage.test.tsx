@@ -621,7 +621,7 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
 
     // Right-Column-Tree: die 5 Modul-Header-Haupt-Links. Einkommensteuer
     // zeigt jetzt auf den Mantelbogen `/einkommensteuer/est-1a`, nicht mehr auf
-    // `/steuer/euer` — siehe TREE_MODULES in ArbeitsplatzPage.tsx.
+    // `/buchhaltung/euer` — siehe TREE_MODULES in ArbeitsplatzPage.tsx.
     const expected: Array<[string, string]> = [
       ["arbeitsplatz-launcher-rewe", "/buchhaltung/buchfuehrung"],
       ["arbeitsplatz-launcher-anlagen", "/buchhaltung/anlagen/verzeichnis"],

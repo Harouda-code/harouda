@@ -29,35 +29,34 @@ describe("steuerFormsCatalog", () => {
   });
 
   describe("categoryForPath", () => {
-    it("maps /steuer/anlage-n to einkuenfte", () => {
-      expect(categoryForPath("/steuer/anlage-n")).toBe("einkuenfte");
+    it("maps /einkommensteuer/anlage-n to einkuenfte", () => {
+      expect(categoryForPath("/einkommensteuer/anlage-n")).toBe("einkuenfte");
     });
 
-    it("maps /steuer/est-1a to hauptvordrucke", () => {
-      expect(categoryForPath("/steuer/est-1a")).toBe("hauptvordrucke");
+    it("maps /einkommensteuer/est-1a to hauptvordrucke", () => {
+      expect(categoryForPath("/einkommensteuer/est-1a")).toBe("hauptvordrucke");
     });
 
-    it("maps /steuer/anlage-aus to auslandsbezug", () => {
-      expect(categoryForPath("/steuer/anlage-aus")).toBe("auslandsbezug");
+    it("maps /einkommensteuer/anlage-aus to auslandsbezug", () => {
+      expect(categoryForPath("/einkommensteuer/anlage-aus")).toBe("auslandsbezug");
     });
 
-    it("maps /steuer/anlage-em to immobilien", () => {
-      expect(categoryForPath("/steuer/anlage-em")).toBe("immobilien");
+    it("maps /einkommensteuer/anlage-em to immobilien", () => {
+      expect(categoryForPath("/einkommensteuer/anlage-em")).toBe("immobilien");
     });
 
-    it("maps /steuer/ustva to sonstige", () => {
-      expect(categoryForPath("/steuer/ustva")).toBe("sonstige");
+    it("maps /umsatzsteuer/ustva to sonstige", () => {
+      expect(categoryForPath("/umsatzsteuer/ustva")).toBe("sonstige");
     });
 
     it("falls back to sonstige for unknown path", () => {
-      expect(categoryForPath("/steuer/anlage-unknown")).toBe("sonstige");
-      expect(categoryForPath("/steuer/random")).toBe("sonstige");
+      expect(categoryForPath("/einkommensteuer/anlage-unknown")).toBe("sonstige");
+      expect(categoryForPath("/einkommensteuer/random")).toBe("sonstige");
     });
 
-    it("handles path with or without leading /steuer/", () => {
+    it("handles bare slug with or without leading slash", () => {
       expect(categoryForPath("anlage-n")).toBe("einkuenfte");
       expect(categoryForPath("/anlage-n")).toBe("einkuenfte");
-      expect(categoryForPath("/steuer/anlage-n")).toBe("einkuenfte");
     });
 
     it("maps /einkommensteuer/anlage-n to einkuenfte", () => {
@@ -87,17 +86,17 @@ describe("steuerFormsCatalog", () => {
 
   describe("secondaryCategoriesForPath", () => {
     it("returns cross-listings for anlage-n-aus", () => {
-      const secondary = secondaryCategoriesForPath("/steuer/anlage-n-aus");
+      const secondary = secondaryCategoriesForPath("/einkommensteuer/anlage-n-aus");
       expect(secondary).toContain("einkuenfte");
     });
 
     it("returns empty for forms without secondary categories", () => {
-      expect(secondaryCategoriesForPath("/steuer/est-1a")).toEqual([]);
+      expect(secondaryCategoriesForPath("/einkommensteuer/est-1a")).toEqual([]);
     });
 
     it("returns cross-listings for anlage-u (primary=abzuege, secondary=familie)", () => {
-      const primary = categoryForPath("/steuer/anlage-u");
-      const secondary = secondaryCategoriesForPath("/steuer/anlage-u");
+      const primary = categoryForPath("/einkommensteuer/anlage-u");
+      const secondary = secondaryCategoriesForPath("/einkommensteuer/anlage-u");
       expect(primary).toBe("abzuege");
       expect(secondary).toContain("familie");
     });

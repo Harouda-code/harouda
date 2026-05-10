@@ -270,12 +270,11 @@ export default function App() {
         </Route>
 
         {/* ============================================================
-            Layout-Route #2 — Legacy Redirects (Phase 1 — Patch 1.9)
-            13 alte Pfade leiten auf /buchhaltung/* um.
+            Layout-Route #2 — Legacy Steuer-Redirects
+            Alte /steuer/* Pfade leiten auf die Module-Shell-Pfade
+            /einkommensteuer/* bzw. /umsatzsteuer/* um.
             Kein Shell-Mount: <Navigate> rendert keine UI.
             Auth + ErrorBoundary bleiben erhalten für Konsistenz.
-            Bei vollständiger Entfernung der legacy paths kann dieser
-            gesamte Block in einem Patch gelöscht werden.
         ============================================================ */}
         <Route
           element={

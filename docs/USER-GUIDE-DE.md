@@ -14,7 +14,7 @@ ein Schulungskurs. Die langen Fassungen liegen unter
 | Buchungsjournal | `/buchhaltung/journal` | Doppelte Buchführung, Festschreibung, DATEV-Export |
 | Konten | `/buchhaltung/konten` | SKR03-Kontenplan (~150 Konten), aktiv/inaktiv |
 | Berichte | `/berichte` | GuV, BWA, Bilanz, SuSa, Vorjahresvergleich |
-| Steuer | `/steuer` | UStVA, ZM, EÜR, E-Bilanz, Anlagen N/S/G/V/… |
+| Steuer | `/steuern` | UStVA, ZM, EÜR, E-Bilanz, Anlagen N/S/G/V/… |
 | Lohn | `/lohn` | Kalkulator + Lohnsteuer-Anmeldung + Archiv |
 | Belege | `/belege` | Beleg-Upload + OCR + Verknüpfung mit Buchung |
 | E-Rechnung | `/buchungen/e-rechnung` | XRechnung & ZUGFeRD erstellen und empfangen |
@@ -32,7 +32,7 @@ ein Schulungskurs. Die langen Fassungen liegen unter
    - Plausi prüfen (Soll = Haben aggregiert)
    - Button „Monat festschreiben" → GoBD-Sperre aktiv
 2. **UStVA erzeugen**
-   - `/steuer/ustva` → Monat wählen → „XML generieren"
+   - `/umsatzsteuer/ustva` → Monat wählen → „XML generieren"
    - XML in ELSTER-Online-Portal hochladen **oder** an DATEV übergeben
 3. **Lohnsteuer-Anmeldung**
    - `/lohn/lohnsteueranmeldung` → Monat → XML generieren → ELSTER
@@ -46,7 +46,7 @@ ein Schulungskurs. Die langen Fassungen liegen unter
 1. **Bilanz prüfen** — `/berichte/bilanz`
 2. **GuV prüfen** — `/berichte/guv`
 3. **Vorjahresvergleich** — `/berichte/vorjahresvergleich`
-4. **E-Bilanz erzeugen** — `/steuer/ebilanz`
+4. **E-Bilanz erzeugen** — `/jahresabschluss/ebilanz`
 5. **Jahresabschluss-PDF** — `/berichte/jahresabschluss` → druckfertiges PDF
 6. **Optional DATEV-Export** — `/export/datev`
 

@@ -92,7 +92,7 @@ während der gesamten Demo sichtbar. Sagen Sie ausdrücklich am Anfang:
 
 **Zeigen**:
 - Vier Kacheln im Hub
-- Klick auf „EÜR vorbereiten" → `/steuer/euer`
+- Klick auf „EÜR vorbereiten" → `/buchhaltung/euer`
 - EÜR mit allen Zeilen (12, 23–47), pro Zeile aufklappbar zu den
   Quell-Konten
 - Zurück zu `/buchfuehrung/zuordnung` — ein Konto umhängen, Toast
@@ -113,7 +113,7 @@ während der gesamten Demo sichtbar. Sagen Sie ausdrücklich am Anfang:
 
 ## 5. Steuerformulare (2 min)
 
-**Screen**: `/steuer`
+**Screen**: `/steuern`
 
 **Zeigen**:
 - 10 Formular-Kacheln: UStVA, EÜR, GewSt, KSt, Anlagen N/S/G/V/SO/AUS/

@@ -29,10 +29,10 @@ Playwright (~5 min nach Setup).
 | 08 | `/buchhaltung/mahnwesen` (nach Mahnungs-Erstellung)| Mahnhistorie mit einem Eintrag                                   |
 | 09 | `/berichte`                           | GuV / BWA / SuSa Kacheln                                         |
 | 10 | `/berichte/guv`                       | GuV mit Zahlen                                                  |
-| 11 | `/steuer`                             | 10 Formular-Kacheln mit Badge-Modi                              |
-| 12 | `/steuer/ustva`                       | UStVA mit Zahlen, FormMetaBadge oben sichtbar                    |
-| 13 | `/steuer/euer`                        | EÜR mit expandierten Quell-Konten                                |
-| 14 | `/steuer/anlage-n`                    | Anlage N mit ausgefülltem SV-Rechner                             |
+| 11 | `/steuern`                            | 10 Formular-Kacheln mit Badge-Modi                              |
+| 12 | `/umsatzsteuer/ustva`                 | UStVA mit Zahlen, FormMetaBadge oben sichtbar                    |
+| 13 | `/buchhaltung/euer`                   | EÜR mit expandierten Quell-Konten                                |
+| 14 | `/einkommensteuer/anlage-n`           | Anlage N mit ausgefülltem SV-Rechner                             |
 | 15 | `/buchhaltung/buchfuehrung`                       | Vier Kacheln des Buchführung-Hubs                                |
 | 16 | `/buchfuehrung/plausi`                | KPIs + Liste mit grün/orangen Checks                             |
 | 17 | `/einstellungen/audit`                | Audit-Log mit „Kette prüfen"-Bestätigung grün                    |

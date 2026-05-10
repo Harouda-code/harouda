@@ -106,7 +106,7 @@ Beispiel: „Anlage X".
    Vorlage).
 2. Route in `src/App.tsx` eintragen:
    ```tsx
-   <Route path="/steuer/anlage-x" element={<AnlageXPage />} />
+   <Route path="/einkommensteuer/anlage-x" element={<AnlageXPage />} />
    ```
 3. Menü-Eintrag in `src/components/AppShell.tsx` unter `steuer`-Gruppe.
 4. Falls Berechnungen nötig → **`src/domain/anlageX/AnlageXBuilder.ts`**

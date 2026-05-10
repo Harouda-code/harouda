@@ -302,7 +302,7 @@ Route: `/berichte/jahresabschluss`.
 
 ### Schritt 14 — UStVA Dezember 2025
 
-Route: `/steuer/ustva` → Zeitraum Dezember 2025.
+Route: `/umsatzsteuer/ustva` → Zeitraum Dezember 2025.
 
 **Erwartete Kennzahlen:**
 
@@ -636,11 +636,11 @@ Beiträge, reguläre Umsätze aus den Basis-Buchungen ungeachtet):
 | 89 | IG-Erwerb Bemessungsgrundlage 19 % | 7.500,00 | 1.425,00 |
 | 61 | Vorsteuer IG-Erwerb | — | 1.425,00 |
 
-**Neue ZM-Ausgabe** (`/steuer/zm`): nach Erfassen des IG-2025-001
+**Neue ZM-Ausgabe** (`/umsatzsteuer/zm`): nach Erfassen des IG-2025-001
 erscheint eine ZM-Meldung Kz 41 = 15.000 € für FR SARL (USt-ID
 einzutragen über den Empfänger-Stammdaten-Block auf der Page).
 
-**Neuer XML-Export** (`/steuer/zm` Button „XML"): ELMA5-ähnliches
+**Neuer XML-Export** (`/umsatzsteuer/zm` Button „XML"): ELMA5-ähnliches
 Preview-XML zum Kopieren in das BOP-Online-Formular des BZSt. Der
 Button ist explizit als *Preview* gekennzeichnet — keine
 direkte Übermittlung.
@@ -663,7 +663,7 @@ fall begründet abweichen; sie dienen als Plausi-Hinweis bei der
 
 Für eine GmbH ist die Einnahmen-Überschuss-Rechnung nach § 4 Abs. 3
 EStG **fachlich nicht einschlägig**; eine GmbH bilanziert nach § 242
-HGB. Der Aufruf `/steuer/euer` wird in dieser Demo daher **bewusst
+HGB. Der Aufruf `/buchhaltung/euer` wird in dieser Demo daher **bewusst
 ausgelassen**. Falls versehentlich aufgerufen: Ergebnis notieren, aber
 nicht als Teil des Musterlaufs werten.
 

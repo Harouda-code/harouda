@@ -443,9 +443,9 @@ Besonderheiten:
 - **BWA** (`/berichte/bwa`) — klassische Betriebswirtschaftliche
   Auswertung
 - **SuSa** (`/berichte/susa`) — Summen- und Saldenliste
-- **EÜR** (`/steuer/euer`) — Einnahmen-Überschuss-Rechnung mit
+- **EÜR** (`/buchhaltung/euer`) — Einnahmen-Überschuss-Rechnung mit
   SKR03-Zeilen-Mapping
-- **Steuer-Formulare** (`/steuer`) — Anlage N / S / G / V / SO / AUS /
+- **Steuer-Formulare** (`/steuern`) — Anlage N / S / G / V / SO / AUS /
   Kind / Vorsorge / R / KAP / Gewerbesteuer / KSt (Vorbereitungs-
   Oberflächen, keine ELSTER-Abgabe)
 

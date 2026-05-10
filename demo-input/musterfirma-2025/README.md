@@ -103,7 +103,7 @@ bleiben nach Neuladen erhalten.
 
 ### Schritt 2 — Kontenplan SKR03 laden
 
-Route: `/konten`.
+Route: `/buchhaltung/konten`.
 
 Button *"SKR03-Standard laden"* (falls nicht bereits geladen).
 
@@ -157,7 +157,7 @@ vorgeschlagen.
 
 ### Schritt 6 — 40 Journal-Einträge eintragen
 
-Route: `/journal`.
+Route: `/buchhaltung/journal`.
 
 Jede Zeile aus `buchungen.csv` als eigene Buchung erfassen. Pflichtfelder
 pro Zeile:
@@ -190,7 +190,7 @@ Tastenkürzel: `Strg + N` öffnet das Neuerfassungs-Modal
 
 **Geschätzter Zeitaufwand:** 30-45 Minuten bei manueller Eingabe
 (40 × ~45 Sekunden). Falls eine CSV-Import-Funktion existiert
-(häufig in `/buchungen/erfassung` oder via DATEV-Import), kann
+(häufig in `/buchhaltung/buchungen/erfassung` oder via DATEV-Import), kann
 `buchungen.csv` nach Anpassung des Trennzeichens und Kopfzeilen-Mappings
 importiert werden — das **reduziert den Aufwand auf ~5 Minuten**, ist
 aber implementierungsabhängig. Beobachtung notieren.
@@ -213,7 +213,7 @@ Route: `/buchfuehrung/plausi`.
 
 ### Schritt 8 — Monats-Festschreibung Dezember 2025
 
-Route: `/journal` → Monatsfilter Dezember 2025 → Button *"Monat
+Route: `/buchhaltung/journal` → Monatsfilter Dezember 2025 → Button *"Monat
 festschreiben"* (oder vergleichbare UI-Aktion).
 
 **Erwartung:**
@@ -317,10 +317,10 @@ Button *"XML generieren"*. **Erwartung:** Datei-Download mit Datei
 `ustva-2025-12.xml` (genauer Dateiname kann abweichen). XML enthält
 die oben genannten Kennzahlen und das ELSTER-Schema.
 
-### Schritt 14b — OPOS-Szenarien (`/opos`)
+### Schritt 14b — OPOS-Szenarien (`/buchhaltung/opos`)
 
 Nach dem Import enthält das Journal **7 OPOS-Szenarien**, die sich im
-Offene-Posten-Bericht (`/opos`) prüfen lassen:
+Offene-Posten-Bericht (`/buchhaltung/opos`) prüfen lassen:
 
 | Beleg-Nr. | Typ | Datum | Status | Offener Rest |
 |---|---|---|---|---:|
@@ -338,7 +338,7 @@ Offene-Posten-Bericht (`/opos`) prüfen lassen:
 | ER-2025-005 | Verbindlichkeit | 22.12. | offen | 7.000,00 |
 | ER-2025-006 | Verbindlichkeit | 05.08. | **bezahlt** (erscheint NICHT in OPOS) | 0,00 |
 
-**Erwartete Beobachtungen unter `/opos`:**
+**Erwartete Beobachtungen unter `/buchhaltung/opos`:**
 
 1. **Forderungen-Tab:** 7 offene Posten (nicht 8 — AR-2025-008 ist
    bezahlt und verschwindet durch Netting per Beleg-Nr.). AR-2025-009
@@ -355,11 +355,11 @@ Offene-Posten-Bericht (`/opos`) prüfen lassen:
 
 Das Derived-Modell leitet OPOS automatisch aus dem Journal ab — es
 gibt keine separate OPOS-Tabelle zu pflegen. Eine **Korrektur durch
-Stornobuchung** wird sofort reflektiert (nächster Aufruf von `/opos`).
+Stornobuchung** wird sofort reflektiert (nächster Aufruf von `/buchhaltung/opos`).
 
 ### Schritt 14c — Bank-Ausziffern mit Skonto-Automatik (Sprint 5)
 
-Route: `/banking/reconciliation`. Datei `bankauszug.mt940` hochladen.
+Route: `/buchhaltung/banking/reconciliation`. Datei `bankauszug.mt940` hochladen.
 
 Die MT940-Datei enthält **7 Bank-Transaktionen**, die die vollen
 Fähigkeiten des Fuzzy-Matchers + der Skonto-Automatik zeigen:
@@ -395,9 +395,9 @@ Fähigkeiten des Fuzzy-Matchers + der Skonto-Automatik zeigen:
 
 ### Schritt 14d — Anlagenverzeichnis + AfA-Lauf (Sprint 6 Teil 1)
 
-Route: `/anlagen/verzeichnis`. Datei `anlagegueter.csv` als
+Route: `/buchhaltung/anlagen/verzeichnis`. Datei `anlagegueter.csv` als
 Eingabe-Referenz — die 6 Anlagen werden **manuell** über „Neue Anlage"
-im Verzeichnis angelegt. Danach `/anlagen/afa-lauf` für den
+im Verzeichnis angelegt. Danach `/buchhaltung/anlagen/afa-lauf` für den
 jahresbezogenen AfA-Lauf 2025.
 
 **Eingabe-Tabelle (pro Zeile aus `anlagegueter.csv`):**
@@ -646,7 +646,7 @@ Button ist explizit als *Preview* gekennzeichnet — keine
 direkte Übermittlung.
 
 **Reverse-Charge-Validierung:** Wenn im Belegerfassungs-Formular
-(`/buchungen/erfassung`) die „Reverse Charge"-Checkbox aktiv ist,
+(`/buchhaltung/buchungen/erfassung`) die „Reverse Charge"-Checkbox aktiv ist,
 aber ein falsches Aufwandskonto gewählt wurde (z. B. 4100 statt
 3100-3159), erscheinen die neuen Warnings W105/W106/W107:
 

@@ -211,7 +211,7 @@ export function UniversalSearchModal({
         id: e.id,
         title: `${e.beleg_nr} — ${e.beschreibung}`,
         subtitle: `${new Date(e.datum).toLocaleDateString("de-DE")} · ${e.soll_konto}/${e.haben_konto} · ${Number(e.betrag).toFixed(2)} €`,
-        to: "/journal",
+        to: "/buchhaltung/journal",
         score: s,
       });
     }
@@ -242,7 +242,7 @@ export function UniversalSearchModal({
           id: a.id,
           title: `${a.konto_nr} — ${a.bezeichnung}`,
           subtitle: `${a.kategorie}${a.ust_satz != null ? ` · ${a.ust_satz} %` : ""}${a.is_active ? "" : " · inaktiv"}`,
-          to: "/konten",
+          to: "/buchhaltung/konten",
           score: s,
         });
       }

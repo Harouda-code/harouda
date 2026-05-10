@@ -41,7 +41,7 @@ export function deriveNotifications(): Notification[] {
           currency: "EUR",
         })}`,
         severity: "warn",
-        to: "/mahnwesen",
+        to: "/buchhaltung/mahnwesen",
       });
     }
   }

@@ -101,7 +101,7 @@ export function DashboardInsights({
           style: "currency",
           currency: "EUR",
         }).format(sum)} — älteste ${overdue[0].ueberfaellig_tage} Tage`,
-        to: "/mahnwesen",
+        to: "/buchhaltung/mahnwesen",
         actionLabel: "Zum Mahnwesen",
       });
     }
@@ -118,7 +118,7 @@ export function DashboardInsights({
             drafts.length > 10
               ? "Bitte prüfen und festschreiben — Entwürfe zählen nicht in Reports."
               : "Gehen nicht in Reports ein, bis sie festgeschrieben sind.",
-          to: "/journal",
+          to: "/buchhaltung/journal",
           actionLabel: "Zum Journal",
         });
       }
@@ -152,7 +152,7 @@ export function DashboardInsights({
         severity: daysOut <= 7 ? "critical" : "warn",
         title: `Liquidität kritisch ab ${d.toLocaleDateString("de-DE")}`,
         hint: `${daysOut === 0 ? "heute" : `in ${daysOut} Tagen`} rutscht der Saldo unter 0 — Projektion auf 30 Tage.`,
-        to: "/liquiditaet",
+        to: "/buchhaltung/liquiditaet",
         actionLabel: "Vorschau öffnen",
       });
     }

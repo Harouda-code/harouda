@@ -52,7 +52,7 @@ export function QuickActions() {
       </button>
       {open && (
         <div className="shell__dd-menu">
-          <Link to="/journal" className="shell__dd-item" onClick={() => setOpen(false)}>
+          <Link to="/buchhaltung/journal" className="shell__dd-item" onClick={() => setOpen(false)}>
             <ListOrdered size={14} />
             <div>
               <strong>Neue Buchung</strong>
@@ -74,7 +74,7 @@ export function QuickActions() {
               <small>PDF oder Bild mit OCR</small>
             </div>
           </Link>
-          <Link to="/bankimport" className="shell__dd-item" onClick={() => setOpen(false)}>
+          <Link to="/buchhaltung/bankimport" className="shell__dd-item" onClick={() => setOpen(false)}>
             <Landmark size={14} />
             <div>
               <strong>Bankauszug importieren</strong>

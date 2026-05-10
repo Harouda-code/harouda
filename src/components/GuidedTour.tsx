@@ -47,7 +47,7 @@ const STEPS: Step[] = [
       "Eintrag über Gegenseite + Fälligkeit speist OPOS",
       "Tastatur: Strg+N neue Buchung · Esc schließen",
     ],
-    route: "/journal",
+    route: "/buchhaltung/journal",
   },
   {
     title: "Offene Posten & Mahnwesen",
@@ -58,7 +58,7 @@ const STEPS: Step[] = [
       "Verzugszinsen nach § 288 BGB + Mahngebühren",
       "PDF-Mahnung mit Kanzlei-Header + Bankverbindung",
     ],
-    route: "/opos",
+    route: "/buchhaltung/opos",
   },
   {
     title: "Buchführung: EÜR, Plausi, Mapping",
@@ -69,7 +69,7 @@ const STEPS: Step[] = [
       "Plausibilitätsprüfung (USt-Mismatch, Privatkonten, …)",
       "EÜR als PDF, Excel und ELSTER-XML",
     ],
-    route: "/buchfuehrung",
+    route: "/buchhaltung/buchfuehrung",
   },
   {
     title: "Steuerformulare",

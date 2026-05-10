@@ -165,6 +165,17 @@ export default function App() {
           }
         />
 
+        <Route
+          path="/jahresabschluss/wizard"
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="JahresabschlussWizard">
+                <JahresabschlussWizardPage />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        />
+
         {/* Phase 1 Patch 1.7 — Module-Shell BuchhaltungShell. */}
         {/* Routes parallel zu AppShell-Routes; Migration in Patch 1.8/1.9. */}
         <Route
@@ -275,10 +286,6 @@ export default function App() {
           <Route path="/berichte/bwa" element={<BwaPage />} />
           <Route path="/berichte/bilanz" element={<BilanzPage />} />
           <Route path="/berichte/jahresabschluss" element={<JahresabschlussPage />} />
-          <Route
-            path="/jahresabschluss/wizard"
-            element={<JahresabschlussWizardPage />}
-          />
           <Route path="/berichte/vorjahresvergleich" element={<VorjahresvergleichPage />} />
           <Route path="/berichte/susa" element={<SuSaPage />} />
           <Route path="/lohn" element={<LohnPage />} />

@@ -614,16 +614,17 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     unmount();
   });
 
-  it("Active-State: alle fünf Launcher-Links vorhanden, jeder trägt mandantId-Query", async () => {
+  it("Active-State: alle sechs Launcher-Links vorhanden, jeder trägt mandantId-Query", async () => {
     const { container, unmount } = await renderAtWithClients(
       "/arbeitsplatz?mandantId=c-1"
     );
 
-    // Right-Column-Tree: die 5 Modul-Header-Haupt-Links. Einkommensteuer
+    // Right-Column-Tree: die 6 Modul-Header-Haupt-Links. Einkommensteuer
     // zeigt jetzt auf den Mantelbogen `/einkommensteuer/est-1a`, nicht mehr auf
     // `/buchhaltung/euer` — siehe TREE_MODULES in ArbeitsplatzPage.tsx.
     const expected: Array<[string, string]> = [
       ["arbeitsplatz-launcher-rewe", "/buchhaltung/buchfuehrung"],
+      ["arbeitsplatz-launcher-jahresabschluss-wizard", "/jahresabschluss/wizard"],
       ["arbeitsplatz-launcher-anlagen", "/buchhaltung/anlagen/verzeichnis"],
       ["arbeitsplatz-launcher-einkommensteuer", "/einkommensteuer/est-1a"],
       ["arbeitsplatz-launcher-umsatzsteuer", "/umsatzsteuer/ustva"],
@@ -643,13 +644,14 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     unmount();
   });
 
-  it("Active-State: alle fünf Baum-Module werden gerendert (Modul-Header-Texte)", async () => {
+  it("Active-State: alle sechs Baum-Module werden gerendert (Modul-Header-Texte)", async () => {
     const { container, unmount } = await renderAtWithClients(
       "/arbeitsplatz?mandantId=c-2"
     );
 
     const expected: Array<[string, string]> = [
       ["arbeitsplatz-tree-module-rechnungswesen", "Kanzlei-Rechnungswesen"],
+      ["arbeitsplatz-tree-module-jahresabschluss-wizard", "Jahresabschluss-Wizard"],
       ["arbeitsplatz-tree-module-anlagen", "Anlagenbuchführung"],
       ["arbeitsplatz-tree-module-einkommensteuer", "Einkommensteuer"],
       ["arbeitsplatz-tree-module-umsatzsteuer", "Umsatzsteuer"],

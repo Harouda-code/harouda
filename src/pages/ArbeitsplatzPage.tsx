@@ -22,6 +22,7 @@ import {
   ChevronDown,
   ChevronRight,
   FileBarChart,
+  FileCheck2,
   FileText,
   Inbox,
   MousePointer2,
@@ -167,12 +168,15 @@ const TREE_MODULES: TreeModule[] = [
         path: "/berichte/jahresabschluss",
         testId: "arbeitsplatz-tree-rewe-jahresabschluss",
       },
-      {
-        label: "Jahresabschluss-Wizard",
-        path: "/jahresabschluss/wizard",
-        testId: "arbeitsplatz-tree-rewe-jahresabschluss-wizard",
-      },
     ],
+  },
+  {
+    id: "jahresabschluss-wizard",
+    title: "Jahresabschluss-Wizard",
+    icon: FileCheck2,
+    mainPath: "/jahresabschluss/wizard",
+    headerTestId: "arbeitsplatz-launcher-jahresabschluss-wizard",
+    subItems: [],
   },
   {
     id: "anlagen",

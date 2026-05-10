@@ -14,7 +14,7 @@ import SteuernShell from "./SteuernShell";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
 
-function mount(entry: string = "/steuer") {
+function mount(entry: string = "/steuern") {
   const container = document.createElement("div");
   document.body.appendChild(container);
   const root: Root = createRoot(container);
@@ -57,12 +57,8 @@ describe("SteuernShell", () => {
 
   it("#2 Hauptformulare hat 5 <li>", () => {
     const r = mount();
-    // Gruppe ist initial gefaltet — Items werden erst nach Expand
-    // gerendert. Also den Header per Klick oeffnen.
-    const head = document.querySelector<HTMLButtonElement>(
-      ".steuern-shell__group-head"
-    )!;
-    act(() => head.click());
+    // Gruppe ist via Auto-Expand offen, weil `/steuern` als initialEntry
+    // den Übersicht-NavLink matcht. Items werden direkt gerendert.
     const groups = document.querySelectorAll(".steuern-shell__sidebar .steuern-shell__group");
     expect(groups.length).toBe(1);
     const hauptformulareLis = groups[0].querySelectorAll("ul > li");

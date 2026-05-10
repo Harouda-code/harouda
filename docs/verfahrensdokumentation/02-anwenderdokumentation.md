@@ -202,7 +202,7 @@ Jeder Bericht bietet Druckfunktion (`Strg + P`) und PDF-Export.
 
 ### 2.3.4 UStVA-Vorbereitung (§ 18 UStG)
 
-1. `/steuer/ustva` öffnen.
+1. `/umsatzsteuer/ustva` öffnen.
 2. Zeitraum (Monat oder Quartal) wählen.
 3. Ergebnis-Kennzahlen prüfen (81, 86, 35, 48, 66, 83 und weitere).
    Kleinunternehmer-Hinweis erscheint, falls in den Einstellungen
@@ -215,7 +215,7 @@ Jeder Bericht bietet Druckfunktion (`Strg + P`) und PDF-Export.
 6. Nach Bestätigung durch die Finanzverwaltung: Status im Abgabe-
    Register auf *"Bestätigt"* setzen, Transfer-Ticket eintragen.
 
-Analoge Abläufe für ZM (`/steuer/zm`) und LStA (`/lohn/lohnsteueranmeldung`).
+Analoge Abläufe für ZM (`/umsatzsteuer/zm`) und LStA (`/lohn/lohnsteueranmeldung`).
 
 ### 2.3.5 Z3-Export für die Betriebsprüfung (§ 147 Abs. 6 AO)
 

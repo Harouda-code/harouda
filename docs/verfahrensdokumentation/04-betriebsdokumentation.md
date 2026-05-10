@@ -82,7 +82,7 @@ ist das **explizit markiert** — Ehrlichkeit ist hier prüfrelevant.
 
 ### Initial-Datenimport
 
-- **Kontenrahmen SKR03** kann über `/konten` importiert werden
+- **Kontenrahmen SKR03** kann über `/buchhaltung/konten` importiert werden
   (Button *"SKR03-Standard laden"*, ~150 Konten). Alternativ wird
   der Plan pro Mandant manuell gepflegt.
 - **Eröffnungsbilanz / Vorperioden-Salden** werden als reguläre

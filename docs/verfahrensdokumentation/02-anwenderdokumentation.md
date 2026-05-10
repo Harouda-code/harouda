@@ -145,7 +145,7 @@ beschrieben):
 
 ### 2.3.1 Belegerfassung
 
-1. `/belege` öffnen (oder direkt `/buchungen/erfassung`).
+1. `/belege` öffnen (oder direkt `/buchhaltung/buchungen/erfassung`).
 2. Beleg hochladen per Drag-&-Drop oder Button
    *"Beleg hochladen"*; akzeptiert werden PDF, JPG, PNG, HEIC.
 3. OCR läuft automatisch (lokal im Browser via Tesseract, bis zu
@@ -167,7 +167,7 @@ erkannt — manuelle Erfassung erforderlich.
 
 ### 2.3.2 Buchung und Festschreibung
 
-1. `/journal` öffnen. Gewünschten Monat filtern.
+1. `/buchhaltung/journal` öffnen. Gewünschten Monat filtern.
 2. Neue Buchung per Button oder `Strg + N`: Datum, Beleg-Nr.,
    Soll-Konto, Haben-Konto, Betrag, Buchungstext.
 3. Plausibilitätsprüfung unter `/buchfuehrung/plausi`

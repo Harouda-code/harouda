@@ -286,19 +286,6 @@ export default function App() {
             </RequireAuth>
           }
         >
-          <Route path="/journal" element={<Navigate to="/buchhaltung/journal" replace />} />
-          <Route path="/konten" element={<Navigate to="/buchhaltung/konten" replace />} />
-          <Route path="/buchfuehrung" element={<Navigate to="/buchhaltung/buchfuehrung" replace />} />
-          <Route path="/buchungen/erfassung" element={<Navigate to="/buchhaltung/buchungen/erfassung" replace />} />
-          <Route path="/opos" element={<Navigate to="/buchhaltung/opos" replace />} />
-          <Route path="/liquiditaet" element={<Navigate to="/buchhaltung/liquiditaet" replace />} />
-          <Route path="/mahnwesen" element={<Navigate to="/buchhaltung/mahnwesen" replace />} />
-          <Route path="/bankimport" element={<Navigate to="/buchhaltung/bankimport" replace />} />
-          <Route path="/buchungen/belege" element={<Navigate to="/buchhaltung/buchungen/belege" replace />} />
-          <Route path="/banking/reconciliation" element={<Navigate to="/buchhaltung/banking/reconciliation" replace />} />
-          <Route path="/anlagen/verzeichnis" element={<Navigate to="/buchhaltung/anlagen/verzeichnis" replace />} />
-          <Route path="/anlagen/afa-lauf" element={<Navigate to="/buchhaltung/anlagen/afa-lauf" replace />} />
-          <Route path="/banking/belegabfragen" element={<Navigate to="/buchhaltung/banking/belegabfragen" replace />} />
 
           {/* Steuer-Shell-Migration: Legacy /steuer/* (Einkommensteuer + Umsatzsteuer)
               leitet auf die neuen Module-Shell-Pfade /einkommensteuer/* bzw. /umsatzsteuer/* um.

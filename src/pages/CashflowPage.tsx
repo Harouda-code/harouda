@@ -143,7 +143,7 @@ export default function CashflowPage() {
   return (
     <div className="report cashflow">
       <header className="report__head">
-        <Link to="/opos" className="report__back">
+        <Link to="/buchhaltung/opos" className="report__back">
           <ArrowLeft size={16} />
           Zurück zu Offene Posten
         </Link>

@@ -119,7 +119,7 @@ export default function MahnwesenPage() {
   return (
     <div className="mahn">
       <header className="mahn__head">
-        <Link to="/opos" className="report__back">
+        <Link to="/buchhaltung/opos" className="report__back">
           <ArrowLeft size={16} />
           Zurück zu den offenen Posten
         </Link>

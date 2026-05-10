@@ -92,7 +92,7 @@ export default function AfaLaufPage() {
   return (
     <div className="report kst">
       <header className="report__head">
-        <Link to="/anlagen/verzeichnis" className="report__back">
+        <Link to="/buchhaltung/anlagen/verzeichnis" className="report__back">
           <ArrowLeft size={16} />
           Zurück zum Anlagenverzeichnis
         </Link>

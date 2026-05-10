@@ -432,7 +432,7 @@ export default function SettingsPage() {
           <strong>Hinweis zu Umsatzsteuersaetzen:</strong> Die in Deutschland
           geltenden USt-Saetze (0 %, 7 %, 19 %) sind gesetzlich vorgegeben und
           nicht konfigurierbar. Konto-bezogene Saetze verwalten Sie im{" "}
-          <a href="/konten">Kontenplan</a>.
+          <a href="/buchhaltung/konten">Kontenplan</a>.
         </aside>
 
         <aside className="settings__note settings__note--warn">

@@ -368,7 +368,7 @@ export default function AnlagenVerzeichnisPage() {
           </p>
         </div>
         <div className="period">
-          <Link to="/anlagen/afa-lauf" className="btn btn-outline">
+          <Link to="/buchhaltung/anlagen/afa-lauf" className="btn btn-outline">
             AfA-Lauf
           </Link>
           <button

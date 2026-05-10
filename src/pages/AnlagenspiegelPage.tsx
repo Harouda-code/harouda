@@ -190,7 +190,7 @@ export default function AnlagenspiegelPage() {
         <section className="card kst__list">
           <p className="kst__empty">
             Keine Anlagen für {jahr} im Bestand. Anlagen können unter{" "}
-            <Link to="/anlagen/verzeichnis">Anlagenverzeichnis</Link>{" "}
+            <Link to="/buchhaltung/anlagen/verzeichnis">Anlagenverzeichnis</Link>{" "}
             erfasst werden.
           </p>
         </section>

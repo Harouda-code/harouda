@@ -270,12 +270,12 @@ export default function PrueferDashboardPage() {
         <h2>Zugriffe &amp; Navigation</h2>
         <ul className="pruefer__nav">
           <li>
-            <Link to="/journal">
+            <Link to="/buchhaltung/journal">
               <FileSearch size={14} /> Journal (vollständig, inkl. Stornos und Korrekturen)
             </Link>
           </li>
           <li>
-            <Link to="/konten">
+            <Link to="/buchhaltung/konten">
               <Database size={14} /> Kontenplan (SKR03)
             </Link>
           </li>

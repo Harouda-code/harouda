@@ -522,7 +522,7 @@ export default function BankReconciliationPage() {
   return (
     <div className="report reconc">
       <header className="report__head">
-        <Link to="/bankimport" className="report__back">
+        <Link to="/buchhaltung/bankimport" className="report__back">
           <ArrowLeft size={16} />
           Zurück zu Bank-Import
         </Link>
@@ -1002,7 +1002,7 @@ function ActiveRowPanel({
       {row.status === "requested" && (
         <div className="reconc__active-info is-warn">
           <Receipt size={14} /> Beleg-Anforderung angelegt.{" "}
-          <Link to="/banking/belegabfragen">
+          <Link to="/buchhaltung/banking/belegabfragen">
             Zur Liste der offenen Anforderungen →
           </Link>
         </div>

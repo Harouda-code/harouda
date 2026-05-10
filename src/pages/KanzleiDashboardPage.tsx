@@ -300,7 +300,7 @@ export default function KanzleiDashboardPage() {
               Schnellzugriffe
             </h2>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <Link to="/journal" className="btn btn-primary">
+              <Link to="/buchhaltung/journal" className="btn btn-primary">
                 <FilePlus size={14} /> Neue Buchung
               </Link>
               <Link to="/steuer/ustva" className="btn btn-outline">

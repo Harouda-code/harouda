@@ -248,7 +248,7 @@ export default function BuchfuehrungPlausiPage() {
   return (
     <div className="report taxcalc">
       <header className="report__head no-print">
-        <Link to="/buchfuehrung" className="report__back">
+        <Link to="/buchhaltung/buchfuehrung" className="report__back">
           <ArrowLeft size={16} />
           Zurück zur Buchführung
         </Link>

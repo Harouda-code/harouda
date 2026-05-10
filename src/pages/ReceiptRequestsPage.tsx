@@ -145,7 +145,7 @@ export default function ReceiptRequestsPage() {
   return (
     <div className="report rcpt">
       <header className="report__head">
-        <Link to="/banking/reconciliation" className="report__back">
+        <Link to="/buchhaltung/banking/reconciliation" className="report__back">
           <ArrowLeft size={16} />
           Zurück zur Bank-Abstimmung
         </Link>
@@ -194,7 +194,7 @@ export default function ReceiptRequestsPage() {
         <div className="card rcpt__empty">
           <p>
             Keine Beleg-Anforderungen angelegt. Fehlende Belege markieren Sie
-            auf der <Link to="/banking/reconciliation">Bank-Abstimmung</Link>
+            auf der <Link to="/buchhaltung/banking/reconciliation">Bank-Abstimmung</Link>
             mit „Beleg anfordern".
           </p>
         </div>

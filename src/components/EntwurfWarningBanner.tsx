@@ -95,7 +95,7 @@ export function EntwurfWarningBanner({
           }}
         >
           <Link
-            to="/journal"
+            to="/buchhaltung/journal"
             onClick={writeJournalHint}
             data-testid="entwurf-journal-link"
             style={{ fontSize: "0.82rem" }}

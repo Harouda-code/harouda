@@ -317,7 +317,7 @@ export default function OposPage() {
           Excel
         </button>
         {tab === "forderung" && summary.totals.forderung_ueberfaellig > 0 && (
-          <Link to="/mahnwesen" className="btn btn-primary">
+          <Link to="/buchhaltung/mahnwesen" className="btn btn-primary">
             <AlertCircle size={16} />
             Mahnwesen öffnen
             <ArrowRight size={14} />

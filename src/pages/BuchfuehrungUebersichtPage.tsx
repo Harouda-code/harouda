@@ -144,7 +144,7 @@ export default function BuchfuehrungUebersichtPage() {
   return (
     <div className="report">
       <header className="report__head no-print">
-        <Link to="/buchfuehrung" className="report__back">
+        <Link to="/buchhaltung/buchfuehrung" className="report__back">
           <ArrowLeft size={16} />
           Zurück zur Buchführung
         </Link>

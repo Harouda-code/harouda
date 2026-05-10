@@ -177,7 +177,7 @@ export default function DocumentScannerPage() {
     } catch {
       /* ignore */
     }
-    navigate("/journal");
+    navigate("/buchhaltung/journal");
     toast.info(
       "Die extrahierten Werte stehen beim nächsten 'Neue Buchung' im Journal zur Verfügung."
     );

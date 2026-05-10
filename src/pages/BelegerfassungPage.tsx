@@ -198,7 +198,7 @@ export default function BelegerfassungPage() {
           {
             action: {
               label: "Zur Liste",
-              onClick: () => navigate("/buchungen/belege"),
+              onClick: () => navigate("/buchhaltung/buchungen/belege"),
             },
           }
         );
@@ -675,7 +675,7 @@ export default function BelegerfassungPage() {
               </button>
             </div>
             <Link
-              to="/buchungen/belege"
+              to="/buchhaltung/buchungen/belege"
               className="btn btn-outline"
               style={{ marginTop: 6, width: "100%", justifyContent: "center" }}
             >

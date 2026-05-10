@@ -236,7 +236,7 @@ export default function BelegeListePage() {
       </div>
 
       <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-        <Link to="/buchungen/erfassung" className="btn btn-primary">
+        <Link to="/buchhaltung/buchungen/erfassung" className="btn btn-primary">
           <Plus size={14} /> Neuer Beleg
         </Link>
       </div>

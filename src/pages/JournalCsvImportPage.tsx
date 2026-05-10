@@ -250,7 +250,7 @@ export default function JournalCsvImportPage() {
   return (
     <div className="container" style={{ padding: "24px 16px" }}>
       <Link
-        to="/journal"
+        to="/buchhaltung/journal"
         className="report__back"
         style={{ display: "inline-flex", gap: 6, alignItems: "center" }}
       >
@@ -549,7 +549,7 @@ export default function JournalCsvImportPage() {
             </ul>
           )}
           <p>
-            <Link to="/journal">Zurück zum Journal →</Link>
+            <Link to="/buchhaltung/journal">Zurück zum Journal →</Link>
           </p>
         </section>
       )}

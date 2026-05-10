@@ -52,7 +52,7 @@ function renderPage(): RenderResult {
     root.render(
       <QueryClientProvider client={client}>
         <MemoryRouter
-          initialEntries={[`/steuer/anlage-mobility?mandantId=${MANDANT_ID}`]}
+          initialEntries={[`/einkommensteuer/anlage-mobility?mandantId=${MANDANT_ID}`]}
         >
           <SettingsProvider>
             <YearProvider>

@@ -26,6 +26,7 @@ import { toast } from "sonner";
 import {
   FORM_CATEGORIES,
   categoryForPath,
+  normalizeFormRoutePath,
   type FormCategoryId,
 } from "../lib/steuerFormsCatalog";
 import {
@@ -464,8 +465,7 @@ const FORMS: FormCard[] = [
 ];
 
 function storageKeyForPath(to: string): string {
-  const slug = to.replace(/^\/+steuer\/+/, "").replace(/^\/+/, "");
-  return `harouda:${slug}`;
+  return `harouda:${normalizeFormRoutePath(to)}`;
 }
 
 const ALL_CATEGORIES = Object.values(FORM_CATEGORIES).sort(

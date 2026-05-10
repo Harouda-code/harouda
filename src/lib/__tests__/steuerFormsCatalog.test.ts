@@ -59,6 +59,30 @@ describe("steuerFormsCatalog", () => {
       expect(categoryForPath("/anlage-n")).toBe("einkuenfte");
       expect(categoryForPath("/steuer/anlage-n")).toBe("einkuenfte");
     });
+
+    it("maps /einkommensteuer/anlage-n to einkuenfte", () => {
+      expect(categoryForPath("/einkommensteuer/anlage-n")).toBe("einkuenfte");
+    });
+
+    it("maps /einkommensteuer/est-1a to hauptvordrucke", () => {
+      expect(categoryForPath("/einkommensteuer/est-1a")).toBe("hauptvordrucke");
+    });
+
+    it("maps /umsatzsteuer/ustva to sonstige", () => {
+      expect(categoryForPath("/umsatzsteuer/ustva")).toBe("sonstige");
+    });
+
+    it("maps /buchhaltung/euer to sonstige", () => {
+      expect(categoryForPath("/buchhaltung/euer")).toBe("sonstige");
+    });
+
+    it("maps /steuern/kst to sonstige", () => {
+      expect(categoryForPath("/steuern/kst")).toBe("sonstige");
+    });
+
+    it("maps /jahresabschluss/ebilanz to sonstige (fallback)", () => {
+      expect(categoryForPath("/jahresabschluss/ebilanz")).toBe("sonstige");
+    });
   });
 
   describe("secondaryCategoriesForPath", () => {
@@ -74,6 +98,22 @@ describe("steuerFormsCatalog", () => {
     it("returns cross-listings for anlage-u (primary=abzuege, secondary=familie)", () => {
       const primary = categoryForPath("/steuer/anlage-u");
       const secondary = secondaryCategoriesForPath("/steuer/anlage-u");
+      expect(primary).toBe("abzuege");
+      expect(secondary).toContain("familie");
+    });
+
+    it("returns cross-listings for /einkommensteuer/anlage-n-aus", () => {
+      const secondary = secondaryCategoriesForPath(
+        "/einkommensteuer/anlage-n-aus"
+      );
+      expect(secondary).toContain("einkuenfte");
+    });
+
+    it("returns cross-listings for /einkommensteuer/anlage-u (primary=abzuege, secondary=familie)", () => {
+      const primary = categoryForPath("/einkommensteuer/anlage-u");
+      const secondary = secondaryCategoriesForPath(
+        "/einkommensteuer/anlage-u"
+      );
       expect(primary).toBe("abzuege");
       expect(secondary).toContain("familie");
     });

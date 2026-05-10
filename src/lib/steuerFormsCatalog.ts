@@ -151,13 +151,25 @@ export const FORM_SECONDARY_CATEGORIES: Record<string, FormCategoryId[]> = {
   "anlage-mobility": ["abzuege"],
 };
 
+/** Strip a leading legacy or canonical tax-form route prefix and leave the
+ *  bare slug used by FORM_PATH_TO_CATEGORY / FORM_SECONDARY_CATEGORIES.
+ *  Supported prefixes: /steuer/, /einkommensteuer/, /umsatzsteuer/,
+ *  /jahresabschluss/, /buchhaltung/, /steuern/. Bare slugs and slugs with
+ *  a leading slash but no recognized prefix pass through unchanged
+ *  (after stripping any leading slashes). */
+const ROUTE_PREFIX_RE =
+  /^\/+(?:steuer|einkommensteuer|umsatzsteuer|jahresabschluss|buchhaltung|steuern)\/+/;
+
+export function normalizeFormRoutePath(path: string): string {
+  return path.replace(ROUTE_PREFIX_RE, "").replace(/^\/+/, "");
+}
+
 export function categoryForPath(path: string): FormCategoryId {
-  // strip leading slashes and "/steuer/"
-  const clean = path.replace(/^\/+steuer\/+/, "").replace(/^\/+/, "");
+  const clean = normalizeFormRoutePath(path);
   return FORM_PATH_TO_CATEGORY[clean] ?? "sonstige";
 }
 
 export function secondaryCategoriesForPath(path: string): FormCategoryId[] {
-  const clean = path.replace(/^\/+steuer\/+/, "").replace(/^\/+/, "");
+  const clean = normalizeFormRoutePath(path);
   return FORM_SECONDARY_CATEGORIES[clean] ?? [];
 }

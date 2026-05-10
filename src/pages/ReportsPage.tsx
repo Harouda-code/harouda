@@ -24,7 +24,7 @@ type ReportCard = {
 
 const PFLICHT: ReportCard[] = [
   {
-    to: "/steuer/zm",
+    to: "/umsatzsteuer/zm",
     icon: Clock,
     tag: "ZM",
     title: "Zusammenfassende Meldung (§ 18a UStG)",
@@ -37,7 +37,7 @@ const PFLICHT: ReportCard[] = [
     ],
   },
   {
-    to: "/steuer/euer",
+    to: "/buchhaltung/euer",
     icon: FileText,
     tag: "EÜR",
     title: "Anlage EÜR (§ 4 Abs. 3 EStG)",
@@ -50,7 +50,7 @@ const PFLICHT: ReportCard[] = [
     ],
   },
   {
-    to: "/steuer/ustva",
+    to: "/umsatzsteuer/ustva",
     icon: Clock,
     tag: "UStVA",
     title: "Umsatzsteuer-Voranmeldung (§ 18 UStG)",

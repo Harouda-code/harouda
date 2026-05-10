@@ -421,7 +421,7 @@ function AnlageRPageInner() {
           Anlage R erfasst Renten aus <strong>inländischen</strong> Quellen
           (gesetzl. RV, private RV, sonstige Verpflichtungen). Für
           Riester/Rürup/bAV siehe{" "}
-          <Link to="/steuer/anlage-rav-bav">Anlage R-AV/bAV</Link>. Pro Person
+          <Link to="/einkommensteuer/anlage-rav-bav">Anlage R-AV/bAV</Link>. Pro Person
           ein Formular.
         </p>
         <div className="form-grid">

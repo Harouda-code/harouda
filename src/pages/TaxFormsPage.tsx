@@ -57,7 +57,7 @@ const MODE_LABEL: Record<FormCard["mode"], string> = {
 
 const FORMS: FormCard[] = [
   {
-    to: "/steuer/ustva",
+    to: "/umsatzsteuer/ustva",
     icon: Landmark,
     title: "Umsatzsteuer-Voranmeldung",
     tag: "UStVA",
@@ -71,7 +71,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/euer",
+    to: "/buchhaltung/euer",
     icon: FileText,
     title: "Einnahmenüberschussrechnung",
     tag: "EÜR",
@@ -113,7 +113,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-n",
+    to: "/einkommensteuer/anlage-n",
     icon: Receipt,
     title: "Anlage N",
     tag: "Anlage N",
@@ -127,7 +127,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-s",
+    to: "/einkommensteuer/anlage-s",
     icon: User,
     title: "Anlage S",
     tag: "Anlage S",
@@ -141,7 +141,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-g",
+    to: "/einkommensteuer/anlage-g",
     icon: Users,
     title: "Anlage G",
     tag: "Anlage G",
@@ -155,7 +155,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-v",
+    to: "/einkommensteuer/anlage-v",
     icon: Home,
     title: "Anlage V",
     tag: "Anlage V",
@@ -169,7 +169,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-so",
+    to: "/einkommensteuer/anlage-so",
     icon: FileText,
     title: "Anlage SO",
     tag: "Anlage SO",
@@ -183,7 +183,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-aus",
+    to: "/einkommensteuer/anlage-aus",
     icon: Globe,
     title: "Anlage AUS",
     tag: "Anlage AUS",
@@ -197,7 +197,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-kind",
+    to: "/einkommensteuer/anlage-kind",
     icon: Baby,
     title: "Anlage Kind",
     tag: "Anlage Kind",
@@ -211,7 +211,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-vorsorge",
+    to: "/einkommensteuer/anlage-vorsorge",
     icon: HeartPulse,
     title: "Anlage Vorsorgeaufwand",
     tag: "Vorsorge",
@@ -225,7 +225,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-r",
+    to: "/einkommensteuer/anlage-r",
     icon: PiggyBank,
     title: "Anlage R",
     tag: "Anlage R",
@@ -239,7 +239,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-kap",
+    to: "/einkommensteuer/anlage-kap",
     icon: Coins,
     title: "Anlage KAP",
     tag: "Anlage KAP",
@@ -253,7 +253,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-mobility",
+    to: "/einkommensteuer/anlage-mobility",
     icon: Car,
     title: "Anlage Mobilitätsprämie",
     tag: "Mobilitätsprämie",
@@ -267,7 +267,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-v-sonstige",
+    to: "/einkommensteuer/anlage-v-sonstige",
     icon: Home,
     title: "Anlage V-Sonstige",
     tag: "V-Sonstige",
@@ -281,7 +281,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-v-fewo",
+    to: "/einkommensteuer/anlage-v-fewo",
     icon: Home,
     title: "Anlage V-FeWo",
     tag: "V-FeWo",
@@ -295,7 +295,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-unterhalt",
+    to: "/einkommensteuer/anlage-unterhalt",
     icon: HandHeart,
     title: "Anlage Unterhalt",
     tag: "Unterhalt",
@@ -309,7 +309,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-u",
+    to: "/einkommensteuer/anlage-u",
     icon: Scale,
     title: "Anlage U",
     tag: "Realsplitting",
@@ -323,7 +323,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-rav-bav",
+    to: "/einkommensteuer/anlage-rav-bav",
     icon: PiggyBank,
     title: "Anlage R-AV / bAV",
     tag: "R-AV/bAV",
@@ -337,7 +337,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-n-aus",
+    to: "/einkommensteuer/anlage-n-aus",
     icon: Globe,
     title: "Anlage N-AUS",
     tag: "N-AUS",
@@ -351,7 +351,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-n-dhf",
+    to: "/einkommensteuer/anlage-n-dhf",
     icon: Home,
     title: "Anlage N-DHF",
     tag: "N-DHF",
@@ -365,7 +365,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-av",
+    to: "/einkommensteuer/anlage-av",
     icon: PiggyBank,
     title: "Anlage AV",
     tag: "Riester",
@@ -379,7 +379,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-em",
+    to: "/einkommensteuer/anlage-em",
     icon: Home,
     title: "Anlage Energetische Maßnahmen",
     tag: "§ 35c",
@@ -393,7 +393,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-haa",
+    to: "/einkommensteuer/anlage-haa",
     icon: HeartPulse,
     title: "Anlage Haushaltsnahe Aufwendungen",
     tag: "§ 35a",
@@ -407,7 +407,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-sonder",
+    to: "/einkommensteuer/anlage-sonder",
     icon: FileText,
     title: "Anlage Sonderausgaben",
     tag: "§ 10/10b/10c",
@@ -421,7 +421,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/anlage-agb",
+    to: "/einkommensteuer/anlage-agb",
     icon: HeartPulse,
     title: "Anlage Außergewöhnliche Belastungen",
     tag: "§§ 33/33a/33b",
@@ -435,7 +435,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/est-1a",
+    to: "/einkommensteuer/est-1a",
     icon: Landmark,
     title: "Hauptvordruck ESt 1 A",
     tag: "Hauptvordruck",
@@ -449,7 +449,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/est-1c",
+    to: "/einkommensteuer/est-1c",
     icon: Globe,
     title: "Hauptvordruck ESt 1 C",
     tag: "beschr. StPfl.",

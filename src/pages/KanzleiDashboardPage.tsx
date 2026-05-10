@@ -303,7 +303,7 @@ export default function KanzleiDashboardPage() {
               <Link to="/buchhaltung/journal" className="btn btn-primary">
                 <FilePlus size={14} /> Neue Buchung
               </Link>
-              <Link to="/steuer/ustva" className="btn btn-outline">
+              <Link to="/umsatzsteuer/ustva" className="btn btn-outline">
                 UStVA
               </Link>
               <Link to="/lohn" className="btn btn-outline">

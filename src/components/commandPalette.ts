@@ -192,7 +192,7 @@ export const COMMANDS: CommandEntry[] = [
   { id: "cmd.rep.guv", label: "GuV", keywords: ["gewinn", "verlust"], category: "report", to: "/berichte/guv" },
   { id: "cmd.rep.bwa", label: "BWA", keywords: ["bwa"], category: "report", to: "/berichte/bwa" },
   { id: "cmd.rep.susa", label: "Summen- und Saldenliste", keywords: ["susa", "salden"], category: "report", to: "/berichte/susa" },
-  { id: "cmd.rep.euer", label: "EÜR", keywords: ["einnahmen", "überschuss"], category: "report", to: "/steuer/euer" },
+  { id: "cmd.rep.euer", label: "EÜR", keywords: ["einnahmen", "überschuss"], category: "report", to: "/buchhaltung/euer" },
   { id: "cmd.rep.gewst", label: "Gewerbesteuer", keywords: ["gewerbe"], category: "report", to: "/steuer/gewerbesteuer" },
   { id: "cmd.rep.kst", label: "Körperschaftsteuer", keywords: ["körperschaft"], category: "report", to: "/steuer/kst" },
   { id: "cmd.rep.payroll", label: "Lohn-Vorschau", keywords: ["gehalt", "lohn", "abrechnung"], category: "report", to: "/personal/abrechnung" },

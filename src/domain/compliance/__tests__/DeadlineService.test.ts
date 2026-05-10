@@ -138,15 +138,15 @@ describe("DeadlineService", () => {
         expect(d.label.length).toBeGreaterThan(0);
       }
     });
-    it("UStVA → /steuer/ustva, ZM → /steuer/zm, E-Bilanz → /steuer/ebilanz", () => {
+    it("UStVA → /umsatzsteuer/ustva, ZM → /umsatzsteuer/zm, E-Bilanz → /jahresabschluss/ebilanz", () => {
       const now = new Date(2025, 9, 15);
       const ds = service.getUpcomingDeadlines(now);
       const ustva = ds.find((d) => d.type === "USTVA");
       const zm = ds.find((d) => d.type === "ZM");
       const eb = ds.find((d) => d.type === "EBILANZ");
-      expect(ustva!.route).toBe("/steuer/ustva");
-      expect(zm!.route).toBe("/steuer/zm");
-      expect(eb!.route).toBe("/steuer/ebilanz");
+      expect(ustva!.route).toBe("/umsatzsteuer/ustva");
+      expect(zm!.route).toBe("/umsatzsteuer/zm");
+      expect(eb!.route).toBe("/jahresabschluss/ebilanz");
     });
   });
 

@@ -70,7 +70,7 @@ function ustvaDeadlineFor(year: number, month1: number, now: Date): UpcomingDead
     frist,
     daysRemaining: daysBetween(frist, now),
     status: statusFor(frist, now),
-    route: "/steuer/ustva",
+    route: "/umsatzsteuer/ustva",
     label: "UStVA",
   };
 }
@@ -117,7 +117,7 @@ function zmDeadlineForQuarter(
     frist,
     daysRemaining: daysBetween(frist, now),
     status: statusFor(frist, now),
-    route: "/steuer/zm",
+    route: "/umsatzsteuer/zm",
     label: "Zusammenfassende Meldung",
   };
 }
@@ -132,7 +132,7 @@ function ebilanzDeadlineFor(wjEndYear: number, now: Date): UpcomingDeadline {
     frist,
     daysRemaining: daysBetween(frist, now),
     status: statusFor(frist, now),
-    route: "/steuer/ebilanz",
+    route: "/jahresabschluss/ebilanz",
     label: "E-Bilanz",
     hinweis: "Verlängerung auf bis zu 14 Monate per § 109 AO möglich",
   };

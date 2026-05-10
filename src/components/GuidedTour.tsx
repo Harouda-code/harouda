@@ -80,7 +80,7 @@ const STEPS: Step[] = [
       "Jahresversionierte Steuerparameter (2024/2025/2026)",
       "Kein Ersatz für zertifizierte Abgabesoftware",
     ],
-    route: "/steuer",
+    route: "/steuern",
   },
   {
     title: "Transparenz & Grenzen",

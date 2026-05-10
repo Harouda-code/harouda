@@ -85,7 +85,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/gewerbesteuer",
+    to: "/steuern/gewerbesteuer",
     icon: Building,
     title: "Gewerbesteuer",
     tag: "GewSt",
@@ -99,7 +99,7 @@ const FORMS: FormCard[] = [
     ],
   },
   {
-    to: "/steuer/kst",
+    to: "/steuern/kst",
     icon: Scale,
     title: "Körperschaftsteuer",
     tag: "KSt",

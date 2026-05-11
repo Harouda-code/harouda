@@ -210,6 +210,7 @@ export default function App() {
             <Route path="/buchfuehrung/uebersicht" element={<BuchfuehrungUebersichtPage />} />
             <Route path="/buchfuehrung/zuordnung" element={<BuchfuehrungMappingPage />} />
             <Route path="/buchfuehrung/plausi" element={<BuchfuehrungPlausiPage />} />
+            <Route path="/journal/import" element={<JournalCsvImportPage />} />
           </Route>
         </Route>
 
@@ -282,7 +283,6 @@ export default function App() {
         >
           <Route path="/mandanten" element={<ClientsPage />} />
           <Route path="/mandanten/neu" element={<MandantAnlagePage />} />
-          <Route path="/journal/import" element={<JournalCsvImportPage />} />
           <Route path="/berichte" element={<ReportsPage />} />
           <Route path="/berichte/guv" element={<GuvPage />} />
           <Route path="/berichte/bwa" element={<BwaPage />} />

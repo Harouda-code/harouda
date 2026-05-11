@@ -9,7 +9,6 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import {
   BadgeCheck,
-  BarChart3,
   Calendar,
   ChevronDown,
   ChevronRight,
@@ -61,21 +60,6 @@ const GROUPS: NavGroup[] = [
     items: [
       { label: "Arbeitsplatz", to: "/arbeitsplatz" },
       { label: "Berater (alle Firmen)", to: "/berater/dashboard" },
-    ],
-  },
-  {
-    id: "berichte",
-    title: "Berichte",
-    icon: BarChart3,
-    items: [
-      { label: "Bilanz", to: "/berichte/bilanz" },
-      { label: "GuV", to: "/berichte/guv" },
-      { label: "Jahresabschluss", to: "/berichte/jahresabschluss" },
-      { label: "Vorjahresvergleich", to: "/berichte/vorjahresvergleich" },
-      { label: "BWA", to: "/berichte/bwa" },
-      { label: "SuSa", to: "/berichte/susa" },
-      { label: "Dimensionen (KST/KTR)", to: "/berichte/dimensionen" },
-      { label: "Anlagenspiegel (§ 284 HGB)", to: "/berichte/anlagenspiegel" },
     ],
   },
   {

@@ -12,6 +12,7 @@ import BuchhaltungShell from "./components/shell/BuchhaltungShell";
 import SteuernShell from "./components/shell/SteuernShell";
 import UmsatzsteuerShell from "./components/shell/UmsatzsteuerShell";
 import JahresabschlussShell from "./components/shell/JahresabschlussShell";
+import BerichteShell from "./components/shell/BerichteShell";
 import EinkommensteuerShell from "./components/shell/EinkommensteuerShell";
 import EinstellungenShell from "./components/shell/EinstellungenShell";
 import DemoBanner from "./components/DemoBanner";
@@ -308,6 +309,29 @@ export default function App() {
           </Route>
         </Route>
 
+        {/* Module-Shell BerichteShell. */}
+        <Route
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="BerichteShell">
+                <BaseShell />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        >
+          <Route element={<BerichteShell />}>
+            <Route path="/berichte" element={<ReportsPage />} />
+            <Route path="/berichte/guv" element={<GuvPage />} />
+            <Route path="/berichte/bwa" element={<BwaPage />} />
+            <Route path="/berichte/bilanz" element={<BilanzPage />} />
+            <Route path="/berichte/jahresabschluss" element={<JahresabschlussPage />} />
+            <Route path="/berichte/vorjahresvergleich" element={<VorjahresvergleichPage />} />
+            <Route path="/berichte/susa" element={<SuSaPage />} />
+            <Route path="/berichte/anlagenspiegel" element={<AnlagenspiegelPage />} />
+            <Route path="/berichte/dimensionen" element={<DimensionReportPage />} />
+          </Route>
+        </Route>
+
         <Route
           element={
             <RequireAuth>
@@ -319,13 +343,6 @@ export default function App() {
         >
           <Route path="/mandanten" element={<ClientsPage />} />
           <Route path="/mandanten/neu" element={<MandantAnlagePage />} />
-          <Route path="/berichte" element={<ReportsPage />} />
-          <Route path="/berichte/guv" element={<GuvPage />} />
-          <Route path="/berichte/bwa" element={<BwaPage />} />
-          <Route path="/berichte/bilanz" element={<BilanzPage />} />
-          <Route path="/berichte/jahresabschluss" element={<JahresabschlussPage />} />
-          <Route path="/berichte/vorjahresvergleich" element={<VorjahresvergleichPage />} />
-          <Route path="/berichte/susa" element={<SuSaPage />} />
           <Route path="/lohn" element={<LohnPage />} />
           <Route path="/lohn/lohnsteueranmeldung" element={<LohnsteuerAnmeldungPage />} />
           <Route path="/lohn/sv-meldungen" element={<SvMeldungenPage />} />
@@ -349,8 +366,6 @@ export default function App() {
           <Route path="/berater/dashboard" element={<AdvisorDashboardPage />} />
           <Route path="/personal/mitarbeiter" element={<EmployeesPage />} />
           <Route path="/personal/abrechnung" element={<PayrollRunPage />} />
-          <Route path="/berichte/anlagenspiegel" element={<AnlagenspiegelPage />} />
-          <Route path="/berichte/dimensionen" element={<DimensionReportPage />} />
           <Route path="/werkzeuge/pdf" element={<PdfToolsPage />} />
           <Route path="/debitoren" element={<DebitorenPage />} />
           <Route path="/kreditoren" element={<KreditorenPage />} />

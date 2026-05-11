@@ -207,6 +207,9 @@ export default function App() {
             <Route path="/buchhaltung/liquiditaet" element={<CashflowPage />} />
             <Route path="/buchhaltung/buchungen/erfassung" element={<BelegerfassungPage />} />
             <Route path="/buchhaltung/buchungen/belege" element={<BelegeListePage />} />
+            <Route path="/buchfuehrung/uebersicht" element={<BuchfuehrungUebersichtPage />} />
+            <Route path="/buchfuehrung/zuordnung" element={<BuchfuehrungMappingPage />} />
+            <Route path="/buchfuehrung/plausi" element={<BuchfuehrungPlausiPage />} />
           </Route>
         </Route>
 
@@ -280,9 +283,6 @@ export default function App() {
           <Route path="/mandanten" element={<ClientsPage />} />
           <Route path="/mandanten/neu" element={<MandantAnlagePage />} />
           <Route path="/journal/import" element={<JournalCsvImportPage />} />
-          <Route path="/buchfuehrung/uebersicht" element={<BuchfuehrungUebersichtPage />} />
-          <Route path="/buchfuehrung/zuordnung" element={<BuchfuehrungMappingPage />} />
-          <Route path="/buchfuehrung/plausi" element={<BuchfuehrungPlausiPage />} />
           <Route path="/berichte" element={<ReportsPage />} />
           <Route path="/berichte/guv" element={<GuvPage />} />
           <Route path="/berichte/bwa" element={<BwaPage />} />

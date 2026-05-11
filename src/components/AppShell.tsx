@@ -77,7 +77,6 @@ const GROUPS: NavGroup[] = [
       { label: "SuSa", to: "/berichte/susa" },
       { label: "Dimensionen (KST/KTR)", to: "/berichte/dimensionen" },
       { label: "Anlagenspiegel (§ 284 HGB)", to: "/berichte/anlagenspiegel" },
-      { label: "EÜR", to: "/buchhaltung/euer" },
     ],
   },
   {

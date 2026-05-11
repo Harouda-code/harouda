@@ -15,6 +15,7 @@ import JahresabschlussShell from "./components/shell/JahresabschlussShell";
 import BerichteShell from "./components/shell/BerichteShell";
 import EinkommensteuerShell from "./components/shell/EinkommensteuerShell";
 import EinstellungenShell from "./components/shell/EinstellungenShell";
+import LohnShell from "./components/shell/LohnShell";
 import DemoBanner from "./components/DemoBanner";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RequireAuth } from "./components/RequireAuth";
@@ -332,6 +333,24 @@ export default function App() {
           </Route>
         </Route>
 
+        {/* Module-Shell LohnShell. */}
+        <Route
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="LohnShell">
+                <BaseShell />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        >
+          <Route element={<LohnShell />}>
+            <Route path="/lohn" element={<LohnPage />} />
+            <Route path="/lohn/lohnsteueranmeldung" element={<LohnsteuerAnmeldungPage />} />
+            <Route path="/lohn/sv-meldungen" element={<SvMeldungenPage />} />
+            <Route path="/lohn/archiv" element={<AbrechnungsArchivPage />} />
+          </Route>
+        </Route>
+
         <Route
           element={
             <RequireAuth>
@@ -343,10 +362,6 @@ export default function App() {
         >
           <Route path="/mandanten" element={<ClientsPage />} />
           <Route path="/mandanten/neu" element={<MandantAnlagePage />} />
-          <Route path="/lohn" element={<LohnPage />} />
-          <Route path="/lohn/lohnsteueranmeldung" element={<LohnsteuerAnmeldungPage />} />
-          <Route path="/lohn/sv-meldungen" element={<SvMeldungenPage />} />
-          <Route path="/lohn/archiv" element={<AbrechnungsArchivPage />} />
           <Route path="/admin/z3-export" element={<Z3ExportPage />} />
           <Route path="/admin/datenexport" element={<DatenExportPage />} />
           <Route path="/admin/audit" element={<AuditTrailPage />} />

@@ -15,7 +15,6 @@ import {
   FileText,
   Landmark,
   LayoutDashboard,
-  Receipt,
   UserCircle2,
   Users,
 } from "lucide-react";
@@ -60,16 +59,6 @@ const GROUPS: NavGroup[] = [
     items: [
       { label: "Arbeitsplatz", to: "/arbeitsplatz" },
       { label: "Berater (alle Firmen)", to: "/berater/dashboard" },
-    ],
-  },
-  {
-    id: "lohn",
-    title: "Lohn & Gehalt",
-    icon: Receipt,
-    items: [
-      { label: "Kalkulator", to: "/lohn" },
-      { label: "Lohnsteuer-Anmeldung (§ 41a)", to: "/lohn/lohnsteueranmeldung" },
-      { label: "Abrechnungs-Archiv (GoBD)", to: "/lohn/archiv" },
     ],
   },
   {

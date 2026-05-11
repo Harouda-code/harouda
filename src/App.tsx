@@ -13,6 +13,7 @@ import SteuernShell from "./components/shell/SteuernShell";
 import UmsatzsteuerShell from "./components/shell/UmsatzsteuerShell";
 import JahresabschlussShell from "./components/shell/JahresabschlussShell";
 import EinkommensteuerShell from "./components/shell/EinkommensteuerShell";
+import EinstellungenShell from "./components/shell/EinstellungenShell";
 import DemoBanner from "./components/DemoBanner";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RequireAuth } from "./components/RequireAuth";
@@ -283,6 +284,30 @@ export default function App() {
           </Route>
         </Route>
 
+        {/* Module-Shell EinstellungenShell. */}
+        <Route
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="EinstellungenShell">
+                <BaseShell />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        >
+          <Route element={<EinstellungenShell />}>
+            <Route path="/einstellungen" element={<SettingsPage />} />
+            <Route path="/einstellungen/audit" element={<AuditLogPage />} />
+            <Route path="/einstellungen/benutzer" element={<MembersPage />} />
+            <Route path="/einstellungen/fristen" element={<DeadlinesPage />} />
+            <Route path="/einstellungen/aufbewahrung" element={<RetentionPage />} />
+            <Route path="/einstellungen/kostenstellen" element={<CostCentersPage />} />
+            <Route path="/einstellungen/kostentraeger" element={<CostCarriersPage />} />
+            <Route path="/einstellungen/verfahrensdoku" element={<VerfahrensdokuPage />} />
+            <Route path="/einstellungen/systemstatus" element={<SystemStatusPage />} />
+            <Route path="/einstellungen/systemlog" element={<AppLogPage />} />
+          </Route>
+        </Route>
+
         <Route
           element={
             <RequireAuth>
@@ -314,11 +339,6 @@ export default function App() {
           />
           <Route path="/kanzlei-dashboard" element={<KanzleiDashboardPage />} />
           <Route path="/belege" element={<DocumentsPage />} />
-          <Route path="/einstellungen" element={<SettingsPage />} />
-          <Route path="/einstellungen/audit" element={<AuditLogPage />} />
-          <Route path="/einstellungen/benutzer" element={<MembersPage />} />
-          <Route path="/einstellungen/fristen" element={<DeadlinesPage />} />
-          <Route path="/einstellungen/aufbewahrung" element={<RetentionPage />} />
           <Route path="/zugferd" element={<ZugferdPage />} />
           <Route path="/e-rechnung/erstellen" element={<XRechnungErstellenPage />} />
           <Route path="/e-rechnung/archiv" element={<InvoiceArchivePage />} />
@@ -329,13 +349,8 @@ export default function App() {
           <Route path="/berater/dashboard" element={<AdvisorDashboardPage />} />
           <Route path="/personal/mitarbeiter" element={<EmployeesPage />} />
           <Route path="/personal/abrechnung" element={<PayrollRunPage />} />
-          <Route path="/einstellungen/kostenstellen" element={<CostCentersPage />} />
-          <Route path="/einstellungen/kostentraeger" element={<CostCarriersPage />} />
           <Route path="/berichte/anlagenspiegel" element={<AnlagenspiegelPage />} />
           <Route path="/berichte/dimensionen" element={<DimensionReportPage />} />
-          <Route path="/einstellungen/verfahrensdoku" element={<VerfahrensdokuPage />} />
-          <Route path="/einstellungen/systemstatus" element={<SystemStatusPage />} />
-          <Route path="/einstellungen/systemlog" element={<AppLogPage />} />
           <Route path="/werkzeuge/pdf" element={<PdfToolsPage />} />
           <Route path="/debitoren" element={<DebitorenPage />} />
           <Route path="/kreditoren" element={<KreditorenPage />} />

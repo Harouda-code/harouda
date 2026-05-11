@@ -17,7 +17,6 @@ import {
   Landmark,
   LayoutDashboard,
   Receipt,
-  Settings,
   UserCircle2,
   Users,
 } from "lucide-react";
@@ -131,23 +130,6 @@ const GROUPS: NavGroup[] = [
       { label: "E-Rechnung-Archiv", to: "/e-rechnung/archiv", icon: BadgeCheck },
       { label: "Dokument-Scanner (OCR)", to: "/ai/scanner", icon: FileText },
       { label: "PDF-Werkzeuge", to: "/werkzeuge/pdf", icon: FileText },
-    ],
-  },
-  {
-    id: "einstellungen",
-    title: "Einstellungen",
-    icon: Settings,
-    items: [
-      { label: "Firma & Datenhaltung", to: "/einstellungen" },
-      { label: "Kostenstellen", to: "/einstellungen/kostenstellen" },
-      { label: "Kostenträger", to: "/einstellungen/kostentraeger" },
-      { label: "Benutzer & Rollen", to: "/einstellungen/benutzer" },
-      { label: "Verfahrensdokumentation", to: "/einstellungen/verfahrensdoku" },
-      { label: "System-Status", to: "/einstellungen/systemstatus" },
-      { label: "System-Log (Technik)", to: "/einstellungen/systemlog" },
-      { label: "Audit-Log", to: "/einstellungen/audit" },
-      { label: "Fristenkalender", to: "/einstellungen/fristen" },
-      { label: "Aufbewahrungsfristen", to: "/einstellungen/aufbewahrung" },
     ],
   },
 ];

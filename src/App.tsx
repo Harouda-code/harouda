@@ -176,6 +176,11 @@ export default function App() {
           }
         />
 
+        <Route
+          path="/dashboard"
+          element={<Navigate to="/arbeitsplatz" replace />}
+        />
+
         {/* Phase 1 Patch 1.7 — Module-Shell BuchhaltungShell. */}
         {/* Routes parallel zu AppShell-Routes; Migration in Patch 1.8/1.9. */}
         <Route
@@ -271,10 +276,6 @@ export default function App() {
             </RequireAuth>
           }
         >
-          <Route
-            path="/dashboard"
-            element={<Navigate to="/arbeitsplatz" replace />}
-          />
           <Route path="/mandanten" element={<ClientsPage />} />
           <Route path="/mandanten/neu" element={<MandantAnlagePage />} />
           <Route path="/journal/import" element={<JournalCsvImportPage />} />

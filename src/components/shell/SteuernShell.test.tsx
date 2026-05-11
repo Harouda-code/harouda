@@ -55,14 +55,14 @@ describe("SteuernShell", () => {
     r.unmount();
   });
 
-  it("#2 Hauptformulare hat 5 <li>", () => {
+  it("#2 Hauptformulare hat 6 <li>", () => {
     const r = mount();
     // Gruppe ist via Auto-Expand offen, weil `/steuern` als initialEntry
     // den Übersicht-NavLink matcht. Items werden direkt gerendert.
     const groups = document.querySelectorAll(".steuern-shell__sidebar .steuern-shell__group");
     expect(groups.length).toBe(1);
     const hauptformulareLis = groups[0].querySelectorAll("ul > li");
-    expect(hauptformulareLis.length).toBe(5);
+    expect(hauptformulareLis.length).toBe(6);
     const labels = Array.from(hauptformulareLis).map((li) => li.textContent?.trim());
     expect(labels).toEqual([
       expect.stringContaining("\u00dcbersicht"),
@@ -70,6 +70,7 @@ describe("SteuernShell", () => {
       expect.stringContaining("K\u00f6rperschaftsteuer"),
       expect.stringContaining("ESt 1A"),
       expect.stringContaining("ESt 1C"),
+      expect.stringContaining("ELSTER"),
     ]);
     r.unmount();
   });

@@ -9,6 +9,7 @@ import {
   Building,
   FileText,
   FileWarning,
+  Landmark,
   LayoutDashboard,
   Store,
 } from "lucide-react";
@@ -43,6 +44,11 @@ const GROUPS: SidebarNavGroup[] = [
         to: "/steuern/est-1c",
         label: "ESt 1C (Hauptvordruck)",
         icon: FileWarning,
+      },
+      {
+        to: "/steuern/elster",
+        label: "ELSTER-Übertragung",
+        icon: Landmark,
       },
     ],
   },

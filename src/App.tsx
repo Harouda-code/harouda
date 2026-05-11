@@ -227,6 +227,7 @@ export default function App() {
             <Route path="/steuern/kst" element={<KoerperschaftsteuerPage />} />
             <Route path="/steuern/est-1a" element={<HauptvorduckESt1APage />} />
             <Route path="/steuern/est-1c" element={<HauptvorduckESt1CPage />} />
+            <Route path="/steuern/elster" element={<ElsterPage />} />
           </Route>
           <Route element={<UmsatzsteuerShell />}>
             <Route path="/umsatzsteuer" element={<Navigate to="/umsatzsteuer/ustva" replace />} />
@@ -312,7 +313,6 @@ export default function App() {
           <Route path="/e-rechnung/archiv" element={<InvoiceArchivePage />} />
           <Route path="/buchungen/e-rechnung" element={<ERechnungPage />} />
           <Route path="/export/datev" element={<DatevExportPage />} />
-          <Route path="/steuern/elster" element={<ElsterPage />} />
           <Route path="/ai/scanner" element={<DocumentScannerPage />} />
           <Route path="/inventur" element={<InventurPage />} />
           <Route path="/berater/dashboard" element={<AdvisorDashboardPage />} />

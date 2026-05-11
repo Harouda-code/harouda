@@ -81,19 +81,6 @@ const GROUPS: NavGroup[] = [
     ],
   },
   {
-    id: "steuer",
-    title: "Steuerformulare",
-    icon: Receipt,
-    items: [
-      { label: "Belegerfassung (§ 14 UStG)", to: "/buchhaltung/buchungen/erfassung" },
-      { label: "Belege-Liste", to: "/buchhaltung/buchungen/belege" },
-      { label: "Formular-Übersicht", to: "/steuern" },
-      { label: "UStVA (§ 18 UStG)", to: "/umsatzsteuer/ustva" },
-      { label: "ZM (§ 18a UStG)", to: "/umsatzsteuer/zm" },
-      { label: "E-Bilanz (§ 5b EStG)", to: "/jahresabschluss/ebilanz" },
-    ],
-  },
-  {
     id: "lohn",
     title: "Lohn & Gehalt",
     icon: Receipt,

@@ -8,25 +8,18 @@ import {
 } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
-  AlertTriangle,
   BadgeCheck,
   BarChart3,
-  BookOpen,
   Calendar,
   ChevronDown,
   ChevronRight,
-  FileBarChart,
   FileText,
-  Hash,
   Landmark,
   LayoutDashboard,
-  ListOrdered,
   Receipt,
   Settings,
-  TrendingUp,
   UserCircle2,
   Users,
-  Wallet,
 } from "lucide-react";
 import { useUser } from "../contexts/UserContext";
 import { useMandant } from "../contexts/MandantContext";
@@ -69,24 +62,6 @@ const GROUPS: NavGroup[] = [
     items: [
       { label: "Arbeitsplatz", to: "/arbeitsplatz" },
       { label: "Berater (alle Firmen)", to: "/berater/dashboard" },
-    ],
-  },
-  {
-    id: "buchfuehrung",
-    title: "Buchführung",
-    icon: BookOpen,
-    items: [
-      { label: "Journal", to: "/buchhaltung/journal", icon: ListOrdered, shortcut: "Strg+J" },
-      { label: "Kontenplan", to: "/buchhaltung/konten", icon: Hash },
-      { label: "Offene Posten", to: "/buchhaltung/opos", icon: Wallet, shortcut: "Strg+O" },
-      { label: "Liquiditätsvorschau", to: "/buchhaltung/liquiditaet", icon: TrendingUp },
-      { label: "Mahnwesen", to: "/buchhaltung/mahnwesen", icon: AlertTriangle },
-      { label: "Bankimport", to: "/buchhaltung/bankimport", icon: Landmark },
-      { label: "Bank-Abstimmung", to: "/buchhaltung/banking/reconciliation", icon: Landmark },
-      { label: "Beleg-Anforderungen", to: "/buchhaltung/banking/belegabfragen", icon: Landmark },
-      { label: "EÜR-Hub", to: "/buchhaltung/buchfuehrung", icon: FileBarChart },
-      { label: "Anlagenverzeichnis", to: "/buchhaltung/anlagen/verzeichnis", icon: FileBarChart },
-      { label: "AfA-Lauf", to: "/buchhaltung/anlagen/afa-lauf", icon: FileBarChart },
     ],
   },
   {

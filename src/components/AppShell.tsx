@@ -109,7 +109,6 @@ const GROUPS: NavGroup[] = [
       { label: "Mandanten (Kanzlei)", to: "/mandanten" },
       { label: "Debitoren (Kunden)", to: "/debitoren", icon: Users },
       { label: "Kreditoren (Lieferanten)", to: "/kreditoren", icon: Users },
-      { label: "Artikel", to: null, badge: "in Vorbereitung" },
     ],
   },
   {

@@ -142,7 +142,6 @@ const GROUPS: NavGroup[] = [
       { label: "Kostenstellen", to: "/einstellungen/kostenstellen" },
       { label: "Kostenträger", to: "/einstellungen/kostentraeger" },
       { label: "Benutzer & Rollen", to: "/einstellungen/benutzer" },
-      { label: "Prüfer-Dashboard", to: "/pruefer" },
       { label: "Verfahrensdokumentation", to: "/einstellungen/verfahrensdoku" },
       { label: "System-Status", to: "/einstellungen/systemstatus" },
       { label: "System-Log (Technik)", to: "/einstellungen/systemlog" },

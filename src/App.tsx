@@ -177,6 +177,17 @@ export default function App() {
         />
 
         <Route
+          path="/pruefer"
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="PrueferDashboard">
+                <PrueferDashboardPage />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        />
+
+        <Route
           path="/dashboard"
           element={<Navigate to="/arbeitsplatz" replace />}
         />
@@ -322,7 +333,6 @@ export default function App() {
           <Route path="/einstellungen/kostentraeger" element={<CostCarriersPage />} />
           <Route path="/berichte/anlagenspiegel" element={<AnlagenspiegelPage />} />
           <Route path="/berichte/dimensionen" element={<DimensionReportPage />} />
-          <Route path="/pruefer" element={<PrueferDashboardPage />} />
           <Route path="/einstellungen/verfahrensdoku" element={<VerfahrensdokuPage />} />
           <Route path="/einstellungen/systemstatus" element={<SystemStatusPage />} />
           <Route path="/einstellungen/systemlog" element={<AppLogPage />} />

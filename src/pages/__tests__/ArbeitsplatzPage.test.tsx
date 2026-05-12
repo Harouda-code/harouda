@@ -1350,32 +1350,28 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     unmount();
   });
 
-  it("UX v0 · Klienten-Schnellinfo: Liquiditäts-Radar + Erfassungsstatus live, Abschluss-Tracker bleibt Placeholder", async () => {
+  it("UX v0 · Klienten-Schnellinfo: alle drei Karten sind aktiv (kein aria-disabled, keine Placeholder-Label)", async () => {
     const { container, unmount } = await renderAtWithClients(
       "/arbeitsplatz?mandantId=c-1"
     );
 
-    // Liquiditäts-Radar und Erfassungsstatus sind beide live: kein
-    // aria-disabled, kein Placeholder-Status-Label.
+    // Liquiditäts-Radar (OPOS), Erfassungsstatus (Bank-Reconciliation)
+    // und Abschluss-Tracker (Launcher) sind alle aktiv. Sie tragen kein
+    // aria-disabled und kein Placeholder-Status-Label „Geplante
+    // Auswertung". Abschluss-Tracker zeigt nur einen Launcher (CTA), keine
+    // Live-Wizard-Statusdaten — siehe separate Pflicht-Tests weiter unten.
     for (const id of [
       "arbeitsplatz-info-card-liquiditaet",
       "arbeitsplatz-info-card-erfassung",
+      "arbeitsplatz-info-card-abschluss",
     ]) {
       const card = container.querySelector<HTMLElement>(
         `[data-testid="${id}"]`
       );
-      expect(card, `Live-Karte ${id} fehlt`).not.toBeNull();
+      expect(card, `Karte ${id} fehlt`).not.toBeNull();
       expect(card?.getAttribute("aria-disabled")).toBeNull();
       expect(card?.textContent).not.toContain("Geplante Auswertung");
     }
-
-    // Abschluss-Tracker bleibt Placeholder.
-    const abschluss = container.querySelector<HTMLElement>(
-      '[data-testid="arbeitsplatz-info-card-abschluss"]'
-    );
-    expect(abschluss, "Placeholder-Karte abschluss fehlt").not.toBeNull();
-    expect(abschluss?.getAttribute("aria-disabled")).toBe("true");
-    expect(abschluss?.textContent).toContain("Geplante Auswertung");
 
     unmount();
   });
@@ -1477,11 +1473,13 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
         .querySelector('[data-testid="arbeitsplatz-info-card-erfassung"]')
         ?.getAttribute("aria-disabled")
     ).toBeNull();
+    // Abschluss-Tracker ist nicht (mehr) disabled — er ist ein neutraler
+    // Launcher zum Wizard, ohne Wizard-Statusdaten.
     expect(
       container
         .querySelector('[data-testid="arbeitsplatz-info-card-abschluss"]')
         ?.getAttribute("aria-disabled")
-    ).toBe("true");
+    ).toBeNull();
 
     unmount();
   });
@@ -1633,11 +1631,13 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     expect(card?.textContent).toContain("Noch keine Bankabstimmung");
 
     // Abschluss-Tracker bleibt Placeholder.
+    // Abschluss-Tracker ist nicht (mehr) disabled — er ist ein neutraler
+    // Launcher zum Wizard, ohne Wizard-Statusdaten.
     expect(
       container
         .querySelector('[data-testid="arbeitsplatz-info-card-abschluss"]')
         ?.getAttribute("aria-disabled")
-    ).toBe("true");
+    ).toBeNull();
     // Liquiditäts-Radar bleibt live.
     expect(
       container
@@ -1753,6 +1753,97 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     expect(text).toMatch(/Auto-Treffer[^0-9]*0(?:[^0-9]|$)/);
     // Mandant B's Wert „5" darf NICHT im Auto-Treffer-Feld erscheinen.
     expect(text).not.toMatch(/Auto-Treffer[^0-9]*5(?:[^0-9]|$)/);
+
+    unmount();
+  });
+
+  // --- Abschluss-Tracker (Launcher zum Jahresabschluss-Wizard) -----------
+
+  it("Abschluss-Tracker · Karte ist aktiv und bietet Launcher zum Wizard mit Mandant-Scope", async () => {
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-abschluss"]'
+    );
+    expect(card).not.toBeNull();
+    expect(card?.getAttribute("aria-disabled")).toBeNull();
+
+    // Status-Label und Hint sind fachlich neutral.
+    expect(card?.textContent).toContain("Pro Mandant und Jahr");
+    expect(card?.textContent).toContain(
+      "Wirtschaftsjahr wird im Wizard-Kontext übernommen"
+    );
+
+    // CTA-Link „Wizard öffnen" mit aktiver mandantId im Ziel.
+    const cta = container.querySelector<HTMLAnchorElement>(
+      '[data-testid="arbeitsplatz-info-card-abschluss-cta"]'
+    );
+    expect(cta).not.toBeNull();
+    expect(cta?.textContent).toContain("Wizard öffnen");
+    const href = cta?.getAttribute("href") ?? "";
+    expect(href).toContain("/jahresabschluss/wizard");
+    expect(href).toContain("mandantId=c-1");
+
+    unmount();
+  });
+
+  it("Abschluss-Tracker · zeigt keine Wizard-Statusdaten (Negative-Assertions gegen Anti-Pattern-Tokens)", async () => {
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-abschluss"]'
+    );
+    const text = card?.textContent ?? "";
+    // Keine Schritt-Zählung, kein „von 7", kein „erledigt"-Counter.
+    expect(text).not.toMatch(/Schritt\s*\d+/i);
+    expect(text).not.toMatch(/\d+\s*von\s*7/i);
+    expect(text).not.toMatch(/\d+\s*erledigt/i);
+    // Keine completedSteps-/Wizard-State-Aussage.
+    expect(text).not.toContain("currentStep");
+    expect(text).not.toContain("completedSteps");
+    // Keine Wizard-Step-Labels.
+    expect(text).not.toContain("rechtsform");
+    expect(text).not.toContain("groessenklasse");
+    expect(text).not.toContain("bausteine");
+    expect(text).not.toContain("bescheinigung");
+
+    unmount();
+  });
+
+  it("Abschluss-Tracker · Liquiditäts-Radar und Erfassungsstatus bleiben unverändert live; geplante Erweiterungen bleiben Placeholder", async () => {
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+
+    // Liquiditäts-Radar live (nicht disabled).
+    expect(
+      container
+        .querySelector('[data-testid="arbeitsplatz-info-card-liquiditaet"]')
+        ?.getAttribute("aria-disabled")
+    ).toBeNull();
+    // Erfassungsstatus live (nicht disabled).
+    expect(
+      container
+        .querySelector('[data-testid="arbeitsplatz-info-card-erfassung"]')
+        ?.getAttribute("aria-disabled")
+    ).toBeNull();
+    // Geplante Erweiterungen bleiben Placeholder.
+    for (const id of [
+      "arbeitsplatz-info-card-akten-todos",
+      "arbeitsplatz-info-card-steuer-deklaration",
+      "arbeitsplatz-info-card-beleg-pruefstand",
+    ]) {
+      const card = container.querySelector<HTMLElement>(
+        `[data-testid="${id}"]`
+      );
+      expect(card, `Placeholder-Karte ${id} fehlt`).not.toBeNull();
+      expect(card?.getAttribute("aria-disabled")).toBe("true");
+      expect(card?.textContent).toContain("In Vorbereitung");
+    }
 
     unmount();
   });

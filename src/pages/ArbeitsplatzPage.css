@@ -575,6 +575,32 @@
   color: var(--danger, #dc2626);
 }
 
+/* CTA-Link in einer Info-Karte (z. B. Abschluss-Tracker → Wizard öffnen).
+   Neutrale Variante ohne Erfolgs-/Fertig-Semantik. */
+.arbeitsplatz__info-card-cta {
+  align-self: flex-start;
+  margin: 4px 0 0 0;
+  padding: 6px 12px;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--surface, #ffffff);
+  color: var(--ink, #1e293b);
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.arbeitsplatz__info-card-cta:hover {
+  background: var(--ivory-100, #f1f5f9);
+  border-color: var(--navy, #1e3a8a);
+}
+
+.arbeitsplatz__info-card-cta:focus-visible {
+  outline: 2px solid var(--gold, #f59e0b);
+  outline-offset: 2px;
+}
+
 .arbeitsplatz__info-card-title {
   margin: 0;
   font-size: 0.88rem;

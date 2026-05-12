@@ -996,15 +996,20 @@ function LauncherActive({
             )}
           </article>
           <article
-            className="arbeitsplatz__info-card arbeitsplatz__info-card--planned"
+            className="arbeitsplatz__info-card arbeitsplatz__info-card--live"
             data-testid="arbeitsplatz-info-card-abschluss"
-            aria-disabled="true"
           >
             <h4 className="arbeitsplatz__info-card-title">Abschluss-Tracker</h4>
-            <p className="arbeitsplatz__info-card-status">Geplante Auswertung</p>
+            <p className="arbeitsplatz__info-card-status">Pro Mandant und Jahr</p>
+            <Link
+              to={buildMandantLink("/jahresabschluss/wizard", mandantId)}
+              className="arbeitsplatz__info-card-cta"
+              data-testid="arbeitsplatz-info-card-abschluss-cta"
+            >
+              Wizard öffnen
+            </Link>
             <p className="arbeitsplatz__info-card-hint">
-              Wizard-Schritt-Status pro Mandant und Jahr lässt sich
-              später anbinden.
+              Wirtschaftsjahr wird im Wizard-Kontext übernommen.
             </p>
           </article>
         </div>

@@ -100,20 +100,18 @@ const SEARCH_PLACEHOLDER = "Suche nach Name oder Mand.-Nr.";
 // --- Programme-Baum (rechte Spalte) ---------------------------------------
 //
 // Fünf Module mit je einem Haupt-Link + einklappbarer Sub-Item-Liste.
-// Das Accordion-Muster folgt `components/AppShell.tsx:235-253, 303-379`
-// (inline-Copy bewusst, siehe Abschluss-Doku — Tech-Debt-Notiz). Sub-Items
+// Das Accordion-Muster ist lokal in dieser Seite gekapselt. Sub-Items
 // mit Status FEHLT (lt. Bestandsaufnahme Schritt 1) sind nicht enthalten
 // — keine „disabled"-States, keine „Bald verfügbar"-Platzhalter. Sub-Items
 // mit Status TEILWEISE (Zugänge/Abgänge ohne Umbuchungen) verlinken auf
 // die bestehende Shared-Route.
 //
-// Modul-Icons:
-//   BookOpen (Rechnungswesen)   — wie AppShell-Buchführungsgruppe Z.81
-//   FileBarChart (Anlagen)      — wie AppShell-Anlagenverzeichnis Z.91-92
+// Modul-Icons orientieren sich an den fachlichen Modulgruppen:
+//   BookOpen (Rechnungswesen)
+//   FileBarChart (Anlagen)
 //   FileText (Einkommensteuer)  — Tax-Form-Konvention
-//   Receipt (Umsatzsteuer)      — wie AppShell-Steuer-Gruppe Z.113
-//   Users (Lohn)                — AppShell hat beides (Users + UserCircle2);
-//                                 `Users` ist klarer für „Lohn und Gehalt"
+//   Receipt (Umsatzsteuer)
+//   Users (Lohn)                — klarer für „Lohn und Gehalt"
 
 type TreeSubItem = {
   label: string;
@@ -431,9 +429,9 @@ export default function ArbeitsplatzPage() {
                     </li>
                   );
                 }
-                // DATEV-Muster: Wenn ein Mandant in Arbeit ist, wird die
-                // mandantId an die Zielseite mitgegeben — analog zur
-                // rechten Spalte (Programme-Baum). Ohne aktiven Mandanten
+                // Mandant-Scope-Übergabe: Wenn ein Mandant in Arbeit ist,
+                // wird die mandantId an die Zielseite mitgegeben — analog
+                // zur rechten Spalte (Programme-Baum). Ohne aktiven Mandanten
                 // bleibt der Link kanzleiweit. Die Zielseite (DeadlinesPage,
                 // DocumentsPage) entscheidet selbst, ob sie nach mandantId
                 // filtert oder den Parameter ignoriert.
@@ -631,8 +629,9 @@ function LauncherActive({
   mandantId: string;
 }) {
   // Expanded-State pro Modul. localStorage-Persistenz: Key
-  // `harouda:arbeitsplatz-tree-expanded` (eigener Key, nicht geteilt mit
-  // AppShell-Nav). Initial: alle 5 Module expanded.
+  // `harouda:arbeitsplatz-tree-expanded`. Die Baum-Persistenz ist
+  // seitenlokal und unabhängig vom Shell-Layout. Initial: alle 5
+  // Module expanded.
   const [expanded, setExpanded] = useState<Record<string, boolean>>(
     initialTreeExpanded
   );

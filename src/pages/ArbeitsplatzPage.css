@@ -1,8 +1,9 @@
 /*
  * Arbeitsplatz — Fullscreen-Post-Login-Einstieg.
  *
- * Die Route ist parallel zur AppShell registriert (kein Shell-Sidebar,
- * keine Topbar). Darum rechnen wir auf echte 100vh ohne calc().
+ * Die Arbeitsplatz-Seite ist als eigenständige Vollbild-Arbeitsfläche
+ * registriert. Sie verwendet kein zusätzliches Shell-Chrome innerhalb
+ * der Seite. Darum rechnen wir auf echte 100vh ohne calc().
  *
  * Desktop ≥ 1024 px: feste 20/50/30-Grid-Aufteilung.
  * Unter 1024 px behalten wir das 3-Column-Modell per horizontal-scroll
@@ -408,11 +409,10 @@
 }
 
 .arbeitsplatz__tree-sublist {
-  /* Einrückungs-Muster spiegelt AppShell `.shell__nav-sub` (margin-left
-     18px + padding-left 8px) wider → Sub-Links fluchten visuell mit dem
-     Modul-Header-Text (Modul-Icon 16px + gap 10px + padding 12px ≈ 38px
-     vom Tree-Rand → Sub-Text bei 18+8+16 = 42px = 4px tiefer als Modul-
-     Text = sichtbare Hierarchie). */
+  /* Einrückungs-Muster (margin-left 18px + padding-left 8px) → Sub-Links
+     fluchten visuell mit dem Modul-Header-Text (Modul-Icon 16px + gap
+     10px + padding 12px ≈ 38px vom Tree-Rand → Sub-Text bei 18+8+16 =
+     42px = 4px tiefer als Modul-Text = sichtbare Hierarchie). */
   list-style: none;
   margin: 2px 0 6px 18px;
   padding: 0 0 0 8px;

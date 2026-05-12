@@ -9,13 +9,11 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import {
   BadgeCheck,
-  Calendar,
   ChevronDown,
   ChevronRight,
   FileText,
   Landmark,
   LayoutDashboard,
-  UserCircle2,
   Users,
 } from "lucide-react";
 import { useUser } from "../contexts/UserContext";
@@ -81,15 +79,6 @@ const GROUPS: NavGroup[] = [
       { label: "Mandanten (Kanzlei)", to: "/mandanten" },
       { label: "Debitoren (Kunden)", to: "/debitoren", icon: Users },
       { label: "Kreditoren (Lieferanten)", to: "/kreditoren", icon: Users },
-    ],
-  },
-  {
-    id: "personal",
-    title: "Personal",
-    icon: UserCircle2,
-    items: [
-      { label: "Mitarbeiter", to: "/personal/mitarbeiter", icon: UserCircle2 },
-      { label: "Lohn-Vorschau", to: "/personal/abrechnung", icon: Calendar },
     ],
   },
   {

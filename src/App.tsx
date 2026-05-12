@@ -16,6 +16,7 @@ import BerichteShell from "./components/shell/BerichteShell";
 import EinkommensteuerShell from "./components/shell/EinkommensteuerShell";
 import EinstellungenShell from "./components/shell/EinstellungenShell";
 import LohnShell from "./components/shell/LohnShell";
+import PersonalShell from "./components/shell/PersonalShell";
 import DemoBanner from "./components/DemoBanner";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RequireAuth } from "./components/RequireAuth";
@@ -351,6 +352,22 @@ export default function App() {
           </Route>
         </Route>
 
+        {/* Module-Shell PersonalShell. */}
+        <Route
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="PersonalShell">
+                <BaseShell />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        >
+          <Route element={<PersonalShell />}>
+            <Route path="/personal/mitarbeiter" element={<EmployeesPage />} />
+            <Route path="/personal/abrechnung" element={<PayrollRunPage />} />
+          </Route>
+        </Route>
+
         <Route
           element={
             <RequireAuth>
@@ -379,8 +396,6 @@ export default function App() {
           <Route path="/ai/scanner" element={<DocumentScannerPage />} />
           <Route path="/inventur" element={<InventurPage />} />
           <Route path="/berater/dashboard" element={<AdvisorDashboardPage />} />
-          <Route path="/personal/mitarbeiter" element={<EmployeesPage />} />
-          <Route path="/personal/abrechnung" element={<PayrollRunPage />} />
           <Route path="/werkzeuge/pdf" element={<PdfToolsPage />} />
           <Route path="/debitoren" element={<DebitorenPage />} />
           <Route path="/kreditoren" element={<KreditorenPage />} />

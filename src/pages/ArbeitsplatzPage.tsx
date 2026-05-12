@@ -353,6 +353,16 @@ function filterClients(clients: Client[], query: string): Client[] {
   });
 }
 
+// Mandanten-Tabelle: Rechtsform-Spalte. Bindet `Client.rechtsform`
+// (HGB-Taxonomie-6.8-Literal-Union) auf eine UI-taugliche Darstellung.
+// Neun von zehn Werten sind bereits User-facing-Strings; nur der Tech-Key
+// `SonstigerRechtsform` braucht eine Klartext-Variante.
+function displayRechtsform(r: Client["rechtsform"]): string {
+  if (!r) return "—";
+  if (r === "SonstigerRechtsform") return "Sonstige Rechtsform";
+  return r;
+}
+
 export default function ArbeitsplatzPage() {
   const { selectedMandantId, setSelectedMandantId } = useMandant();
   const navigate = useNavigate();
@@ -592,7 +602,7 @@ export default function ArbeitsplatzPage() {
                     >
                       <td>{c.mandant_nr}</td>
                       <td>{c.name}</td>
-                      <td>—</td>
+                      <td>{displayRechtsform(c.rechtsform)}</td>
                     </tr>
                   );
                 })}

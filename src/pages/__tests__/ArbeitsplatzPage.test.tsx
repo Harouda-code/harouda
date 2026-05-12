@@ -570,7 +570,8 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
       expect(row).not.toBeNull();
       expect(row?.textContent).toContain(c.mandant_nr);
       expect(row?.textContent).toContain(c.name);
-      // Rechtsform ist nicht im Datenmodell → „—" als Platzhalter.
+      // DEMO_CLIENTS setzen kein rechtsform-Feld; der Display-Helper
+      // fällt für null/undefined auf „—" zurück.
       expect(row?.textContent).toContain("—");
     }
 
@@ -1845,6 +1846,120 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
       expect(card?.textContent).toContain("In Vorbereitung");
     }
 
+    unmount();
+  });
+
+  // --- Rechtsform-Spalte im Mandantenportfolio ---------------------------
+
+  it("Rechtsform · Mandant mit rechtsform=GmbH zeigt 'GmbH' in der Tabellenzeile", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-rf-gmbh",
+        mandant_nr: "20100",
+        name: "Rechtsform-GmbH-Test",
+        steuernummer: null,
+        ust_id: null,
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        rechtsform: "GmbH",
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz",
+      clients
+    );
+    const row = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-mandant-row-c-rf-gmbh"]'
+    );
+    expect(row).not.toBeNull();
+    expect(row?.textContent).toContain("GmbH");
+    // Kein Fallback-Em-Dash bei gesetztem Wert.
+    expect(row?.textContent).not.toContain("—");
+    unmount();
+  });
+
+  it("Rechtsform · Mandant mit rechtsform=SonstigerRechtsform zeigt Klartext, keinen Tech-Key", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-rf-sonst",
+        mandant_nr: "20200",
+        name: "Sonstige-Rechtsform-Test",
+        steuernummer: null,
+        ust_id: null,
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        rechtsform: "SonstigerRechtsform",
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz",
+      clients
+    );
+    const row = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-mandant-row-c-rf-sonst"]'
+    );
+    expect(row).not.toBeNull();
+    expect(row?.textContent).toContain("Sonstige Rechtsform");
+    // Der Tech-Key darf NICHT user-facing erscheinen.
+    expect(row?.textContent).not.toContain("SonstigerRechtsform");
+    unmount();
+  });
+
+  it("Rechtsform · Mandant mit rechtsform=null fällt auf '—' zurück", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-rf-null",
+        mandant_nr: "20300",
+        name: "Rechtsform-Null-Test",
+        steuernummer: null,
+        ust_id: null,
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        rechtsform: null,
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz",
+      clients
+    );
+    const row = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-mandant-row-c-rf-null"]'
+    );
+    expect(row).not.toBeNull();
+    expect(row?.textContent).toContain("—");
+    unmount();
+  });
+
+  it("Rechtsform · Mandant ohne rechtsform-Feld (undefined) fällt auf '—' zurück", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-rf-undef",
+        mandant_nr: "20400",
+        name: "Rechtsform-Undefined-Test",
+        steuernummer: null,
+        ust_id: null,
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        // rechtsform absichtlich nicht gesetzt → undefined
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz",
+      clients
+    );
+    const row = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-mandant-row-c-rf-undef"]'
+    );
+    expect(row).not.toBeNull();
+    expect(row?.textContent).toContain("—");
     unmount();
   });
 });

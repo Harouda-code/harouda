@@ -14,7 +14,6 @@ import {
   FileText,
   Landmark,
   LayoutDashboard,
-  Users,
 } from "lucide-react";
 import { useUser } from "../contexts/UserContext";
 import { useMandant } from "../contexts/MandantContext";
@@ -69,16 +68,6 @@ const GROUPS: NavGroup[] = [
       { label: "Z3-Datenexport (§ 147 AO)", to: "/admin/z3-export" },
       { label: "Datenexport (DSGVO Art. 20)", to: "/admin/datenexport" },
       { label: "DATEV-Export", to: "/export/datev" },
-    ],
-  },
-  {
-    id: "stammdaten",
-    title: "Stammdaten",
-    icon: Users,
-    items: [
-      { label: "Mandanten (Kanzlei)", to: "/mandanten" },
-      { label: "Debitoren (Kunden)", to: "/debitoren", icon: Users },
-      { label: "Kreditoren (Lieferanten)", to: "/kreditoren", icon: Users },
     ],
   },
   {

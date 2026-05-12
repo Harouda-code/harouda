@@ -17,6 +17,7 @@ import EinkommensteuerShell from "./components/shell/EinkommensteuerShell";
 import EinstellungenShell from "./components/shell/EinstellungenShell";
 import LohnShell from "./components/shell/LohnShell";
 import PersonalShell from "./components/shell/PersonalShell";
+import StammdatenShell from "./components/shell/StammdatenShell";
 import DemoBanner from "./components/DemoBanner";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RequireAuth } from "./components/RequireAuth";
@@ -368,6 +369,28 @@ export default function App() {
           </Route>
         </Route>
 
+        {/* Module-Shell StammdatenShell. */}
+        <Route
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="StammdatenShell">
+                <BaseShell />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        >
+          <Route element={<StammdatenShell />}>
+            <Route path="/mandanten" element={<ClientsPage />} />
+            <Route path="/mandanten/neu" element={<MandantAnlagePage />} />
+            <Route path="/debitoren" element={<DebitorenPage />} />
+            <Route path="/kreditoren" element={<KreditorenPage />} />
+            <Route
+              path="/partners/:id/history"
+              element={<PartnerVersionHistory />}
+            />
+          </Route>
+        </Route>
+
         <Route
           element={
             <RequireAuth>
@@ -377,8 +400,6 @@ export default function App() {
             </RequireAuth>
           }
         >
-          <Route path="/mandanten" element={<ClientsPage />} />
-          <Route path="/mandanten/neu" element={<MandantAnlagePage />} />
           <Route path="/admin/z3-export" element={<Z3ExportPage />} />
           <Route path="/admin/datenexport" element={<DatenExportPage />} />
           <Route path="/admin/audit" element={<AuditTrailPage />} />
@@ -397,12 +418,6 @@ export default function App() {
           <Route path="/inventur" element={<InventurPage />} />
           <Route path="/berater/dashboard" element={<AdvisorDashboardPage />} />
           <Route path="/werkzeuge/pdf" element={<PdfToolsPage />} />
-          <Route path="/debitoren" element={<DebitorenPage />} />
-          <Route path="/kreditoren" element={<KreditorenPage />} />
-          <Route
-            path="/partners/:id/history"
-            element={<PartnerVersionHistory />}
-          />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

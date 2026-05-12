@@ -37,6 +37,7 @@ import { fetchClients } from "../api/clients";
 import { fetchAccounts } from "../api/accounts";
 import { fetchAllEntries } from "../api/dashboard";
 import { summarizeOpenItems } from "../api/opos";
+import { countMatchesByStatus } from "../api/bankReconciliationMatches";
 import type { Client } from "../types/db";
 import "./ArbeitsplatzPage.css";
 
@@ -720,6 +721,28 @@ function LauncherActive({
     liquiditaet.receivablesCount === 0 &&
     liquiditaet.payablesCount === 0;
 
+  // --- Erfassungsstatus (Bank-Reconciliation-Live-Anbindung) -------------
+  //
+  // Eigener Query-Key, weil BankReconciliationPage `listMatches` aktuell
+  // nicht via React-Query nutzt (eigene useState-Flow). Daten-Volumen ist
+  // klein (Match-Records pro Mandant). Aggregation kommt aus dem purpose-
+  // built Helper `countMatchesByStatus` (api/bankReconciliationMatches.ts:
+  // 174–186, Mandant-Filter nativ).
+  const bankReconQ = useQuery({
+    queryKey: ["bank_recon_matches", "status-counts", mandantId],
+    queryFn: () => countMatchesByStatus(mandantId),
+  });
+  const erfassungIsLoading = bankReconQ.isLoading;
+  const erfassungIsError = bankReconQ.isError;
+  const erfassungCounts = bankReconQ.data ?? null;
+  const erfassungTotal = erfassungCounts
+    ? erfassungCounts.matched +
+      erfassungCounts.auto_matched +
+      erfassungCounts.pending_review +
+      erfassungCounts.ignored
+    : 0;
+  const erfassungIsEmpty = !!erfassungCounts && erfassungTotal === 0;
+
   return (
     <div
       className="arbeitsplatz__launcher"
@@ -916,16 +939,61 @@ function LauncherActive({
             )}
           </article>
           <article
-            className="arbeitsplatz__info-card arbeitsplatz__info-card--planned"
+            className="arbeitsplatz__info-card arbeitsplatz__info-card--live"
             data-testid="arbeitsplatz-info-card-erfassung"
-            aria-disabled="true"
           >
             <h4 className="arbeitsplatz__info-card-title">Erfassungsstatus</h4>
-            <p className="arbeitsplatz__info-card-status">Geplante Auswertung</p>
-            <p className="arbeitsplatz__info-card-hint">
-              Belege, Bankabstimmung und Inventur lassen sich später
-              mandantbezogen integrieren.
-            </p>
+            <p className="arbeitsplatz__info-card-status">Aus Bankabstimmung</p>
+            {erfassungIsLoading ? (
+              <p
+                className="arbeitsplatz__info-card-hint"
+                data-testid="arbeitsplatz-info-card-erfassung-loading"
+              >
+                wird geladen…
+              </p>
+            ) : erfassungIsError ? (
+              <p
+                className="arbeitsplatz__info-card-hint arbeitsplatz__info-card-hint--error"
+                role="alert"
+                data-testid="arbeitsplatz-info-card-erfassung-error"
+              >
+                Bankabstimmung aktuell nicht abrufbar.
+              </p>
+            ) : !erfassungCounts || erfassungIsEmpty ? (
+              <p
+                className="arbeitsplatz__info-card-hint"
+                data-testid="arbeitsplatz-info-card-erfassung-empty"
+              >
+                Noch keine Bankabstimmung für diesen Mandanten.
+              </p>
+            ) : (
+              <>
+                <dl
+                  className="arbeitsplatz__info-card-metrics"
+                  data-testid="arbeitsplatz-info-card-erfassung-metrics"
+                >
+                  <div className="arbeitsplatz__info-card-metric">
+                    <dt>Zur Prüfung</dt>
+                    <dd>{erfassungCounts.pending_review}</dd>
+                  </div>
+                  <div className="arbeitsplatz__info-card-metric">
+                    <dt>Auto-Treffer</dt>
+                    <dd>{erfassungCounts.auto_matched}</dd>
+                  </div>
+                  <div className="arbeitsplatz__info-card-metric">
+                    <dt>Manuell zugeordnet</dt>
+                    <dd>{erfassungCounts.matched}</dd>
+                  </div>
+                  <div className="arbeitsplatz__info-card-metric">
+                    <dt>Ignoriert</dt>
+                    <dd>{erfassungCounts.ignored}</dd>
+                  </div>
+                </dl>
+                <p className="arbeitsplatz__info-card-foot">
+                  Bankabstimmungs-Treffer für diesen Mandanten
+                </p>
+              </>
+            )}
           </article>
           <article
             className="arbeitsplatz__info-card arbeitsplatz__info-card--planned"

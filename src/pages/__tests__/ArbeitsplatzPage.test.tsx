@@ -34,12 +34,19 @@ import { RequireAuth } from "../../components/RequireAuth";
 import { UserProvider } from "../../contexts/UserContext";
 import { MandantProvider } from "../../contexts/MandantContext";
 import ArbeitsplatzPage from "../ArbeitsplatzPage";
-import type { Account, Client, JournalEntry } from "../../types/db";
+import type {
+  Account,
+  BankReconciliationMatch,
+  BankReconMatchStatus,
+  Client,
+  JournalEntry,
+} from "../../types/db";
 
 const CLIENTS_KEY = "harouda:clients";
 const SELECTED_MANDANT_KEY = "harouda:selectedMandantId";
 const ACCOUNTS_KEY = "harouda:accounts";
 const ENTRIES_KEY = "harouda:entries";
+const BANK_RECON_KEY = "harouda:bankReconMatches";
 
 // --- OPOS-Fixtures (für Liquiditäts-Radar-Tests) -------------------------
 
@@ -124,6 +131,36 @@ function daysAgoIso(days: number): string {
   const d = new Date();
   d.setDate(d.getDate() - days);
   return d.toISOString().slice(0, 10);
+}
+
+// --- Bank-Reconciliation-Fixtures (für Erfassungsstatus-Tests) ----------
+
+function seedBankReconMatches(matches: BankReconciliationMatch[]) {
+  localStorage.setItem(BANK_RECON_KEY, JSON.stringify(matches));
+}
+
+let bankReconIdCounter = 0;
+function makeBankReconMatch(opts: {
+  client_id: string;
+  match_status: BankReconMatchStatus;
+}): BankReconciliationMatch {
+  bankReconIdCounter++;
+  const now = new Date().toISOString();
+  return {
+    id: `brm-${bankReconIdCounter}`,
+    company_id: null,
+    client_id: opts.client_id,
+    bank_transaction_id: `tx-${bankReconIdCounter}`,
+    bank_transaction_fingerprint: `fp-${bankReconIdCounter}`,
+    journal_entry_id: null,
+    match_status: opts.match_status,
+    match_confidence: null,
+    matched_at: now,
+    matched_by_user_id: null,
+    notiz: null,
+    created_at: now,
+    updated_at: now,
+  };
 }
 
 const DEMO_CLIENTS: Client[] = [
@@ -1313,32 +1350,32 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     unmount();
   });
 
-  it("UX v0 · Klienten-Schnellinfo: Liquiditäts-Radar live, andere Karten weiterhin Placeholder", async () => {
+  it("UX v0 · Klienten-Schnellinfo: Liquiditäts-Radar + Erfassungsstatus live, Abschluss-Tracker bleibt Placeholder", async () => {
     const { container, unmount } = await renderAtWithClients(
       "/arbeitsplatz?mandantId=c-1"
     );
 
-    // Liquiditäts-Radar ist seit OPOS-Live-Anbindung nicht mehr disabled
-    // und trägt nicht mehr das Placeholder-Status-Label.
-    const liquiditaet = container.querySelector<HTMLElement>(
-      '[data-testid="arbeitsplatz-info-card-liquiditaet"]'
-    );
-    expect(liquiditaet, "Liquiditäts-Radar-Karte fehlt").not.toBeNull();
-    expect(liquiditaet?.getAttribute("aria-disabled")).toBeNull();
-    expect(liquiditaet?.textContent).not.toContain("Geplante Auswertung");
-
-    // Erfassungsstatus und Abschluss-Tracker bleiben Placeholder.
+    // Liquiditäts-Radar und Erfassungsstatus sind beide live: kein
+    // aria-disabled, kein Placeholder-Status-Label.
     for (const id of [
+      "arbeitsplatz-info-card-liquiditaet",
       "arbeitsplatz-info-card-erfassung",
-      "arbeitsplatz-info-card-abschluss",
     ]) {
       const card = container.querySelector<HTMLElement>(
         `[data-testid="${id}"]`
       );
-      expect(card, `Placeholder-Karte ${id} fehlt`).not.toBeNull();
-      expect(card?.getAttribute("aria-disabled")).toBe("true");
-      expect(card?.textContent).toContain("Geplante Auswertung");
+      expect(card, `Live-Karte ${id} fehlt`).not.toBeNull();
+      expect(card?.getAttribute("aria-disabled")).toBeNull();
+      expect(card?.textContent).not.toContain("Geplante Auswertung");
     }
+
+    // Abschluss-Tracker bleibt Placeholder.
+    const abschluss = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-abschluss"]'
+    );
+    expect(abschluss, "Placeholder-Karte abschluss fehlt").not.toBeNull();
+    expect(abschluss?.getAttribute("aria-disabled")).toBe("true");
+    expect(abschluss?.textContent).toContain("Geplante Auswertung");
 
     unmount();
   });
@@ -1378,12 +1415,16 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
       "Z2VwcsO8ZnQ=",
       "dmVyYXJiZWl0ZXQ=",
       "ZnJlaWdlZ2ViZW4=",
+      "YWJnZXNjaGxvc3Nlbg==",
       "RnJpc3Rlbi1BbXBlbA==",
       "Q291bnRkb3du",
       "RWNodHplaXQ=",
       "U2NvcmU=",
       "QW1wZWw=",
       "ZmVydGln",
+      "YmVzdMOkdGlndA==",
+      "dmVyaWZpemllcnQ=",
+      "YWxsZXMgb2s=",
       "w7xiZXJtaXR0ZWx0",
     ];
 
@@ -1429,12 +1470,13 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     );
     expect(card?.getAttribute("aria-disabled")).toBeNull();
     expect(card?.textContent).toContain("Keine offenen Posten");
-    // Andere Karten bleiben unverändert disabled.
+    // Erfassungsstatus ist seit Bank-Reconciliation-Anbindung ebenfalls
+    // live (kein aria-disabled). Nur Abschluss-Tracker bleibt Placeholder.
     expect(
       container
         .querySelector('[data-testid="arbeitsplatz-info-card-erfassung"]')
         ?.getAttribute("aria-disabled")
-    ).toBe("true");
+    ).toBeNull();
     expect(
       container
         .querySelector('[data-testid="arbeitsplatz-info-card-abschluss"]')
@@ -1564,6 +1606,153 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     // Wert von Mandant B (9999) erscheint NICHT.
     expect(text).not.toContain("9.999");
     expect(text).not.toContain("9,999");
+
+    unmount();
+  });
+
+  // --- Erfassungsstatus (Bank-Reconciliation-Live-Karte) -----------------
+
+  it("Erfassungsstatus · Empty-State: keine Bank-Reconciliation-Matches → Hinweis", async () => {
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const empty = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-erfassung-empty"]'
+        );
+        if (!empty) throw new Error("Empty-State noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-erfassung"]'
+    );
+    expect(card?.getAttribute("aria-disabled")).toBeNull();
+    expect(card?.textContent).toContain("Noch keine Bankabstimmung");
+
+    // Abschluss-Tracker bleibt Placeholder.
+    expect(
+      container
+        .querySelector('[data-testid="arbeitsplatz-info-card-abschluss"]')
+        ?.getAttribute("aria-disabled")
+    ).toBe("true");
+    // Liquiditäts-Radar bleibt live.
+    expect(
+      container
+        .querySelector('[data-testid="arbeitsplatz-info-card-liquiditaet"]')
+        ?.getAttribute("aria-disabled")
+    ).toBeNull();
+
+    unmount();
+  });
+
+  it("Erfassungsstatus · ein pending_review-Match wird als Zur Prüfung gezählt", async () => {
+    seedBankReconMatches([
+      makeBankReconMatch({
+        client_id: "c-1",
+        match_status: "pending_review",
+      }),
+    ]);
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const m = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-erfassung-metrics"]'
+        );
+        if (!m) throw new Error("Metrics-Block noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-erfassung"]'
+    );
+    const text = card?.textContent ?? "";
+    expect(text).toContain("Zur Prüfung");
+    expect(text).toMatch(/Zur Prüfung[^0-9]*1(?:[^0-9]|$)/);
+    // Footer als ehrliche Quelle.
+    expect(text).toContain("Bankabstimmungs-Treffer für diesen Mandanten");
+
+    unmount();
+  });
+
+  it("Erfassungsstatus · zeigt alle vier Status-Counts korrekt", async () => {
+    seedBankReconMatches([
+      makeBankReconMatch({ client_id: "c-1", match_status: "matched" }),
+      makeBankReconMatch({ client_id: "c-1", match_status: "auto_matched" }),
+      makeBankReconMatch({ client_id: "c-1", match_status: "pending_review" }),
+      makeBankReconMatch({ client_id: "c-1", match_status: "ignored" }),
+    ]);
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const m = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-erfassung-metrics"]'
+        );
+        if (!m) throw new Error("Metrics-Block noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-erfassung"]'
+    );
+    const text = card?.textContent ?? "";
+    expect(text).toContain("Zur Prüfung");
+    expect(text).toContain("Auto-Treffer");
+    expect(text).toContain("Manuell zugeordnet");
+    expect(text).toContain("Ignoriert");
+    // Jeder Status hat genau einen Treffer.
+    expect(text).toMatch(/Zur Prüfung[^0-9]*1(?:[^0-9]|$)/);
+    expect(text).toMatch(/Auto-Treffer[^0-9]*1(?:[^0-9]|$)/);
+    expect(text).toMatch(/Manuell zugeordnet[^0-9]*1(?:[^0-9]|$)/);
+    expect(text).toMatch(/Ignoriert[^0-9]*1(?:[^0-9]|$)/);
+
+    unmount();
+  });
+
+  it("Erfassungsstatus · Mandant-Scope: Treffer anderer Mandanten erscheinen nicht", async () => {
+    seedBankReconMatches([
+      // Mandant A: 1 pending_review.
+      makeBankReconMatch({
+        client_id: "c-1",
+        match_status: "pending_review",
+      }),
+      // Mandant B: 5 auto_matched. Diese dürfen NICHT für A gezählt werden.
+      makeBankReconMatch({ client_id: "c-2", match_status: "auto_matched" }),
+      makeBankReconMatch({ client_id: "c-2", match_status: "auto_matched" }),
+      makeBankReconMatch({ client_id: "c-2", match_status: "auto_matched" }),
+      makeBankReconMatch({ client_id: "c-2", match_status: "auto_matched" }),
+      makeBankReconMatch({ client_id: "c-2", match_status: "auto_matched" }),
+    ]);
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const m = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-erfassung-metrics"]'
+        );
+        if (!m) throw new Error("Metrics-Block noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-erfassung"]'
+    );
+    const text = card?.textContent ?? "";
+    // Mandant A: 1 zur Prüfung, 0 auto.
+    expect(text).toMatch(/Zur Prüfung[^0-9]*1(?:[^0-9]|$)/);
+    expect(text).toMatch(/Auto-Treffer[^0-9]*0(?:[^0-9]|$)/);
+    // Mandant B's Wert „5" darf NICHT im Auto-Treffer-Feld erscheinen.
+    expect(text).not.toMatch(/Auto-Treffer[^0-9]*5(?:[^0-9]|$)/);
 
     unmount();
   });

@@ -118,6 +118,26 @@
   flex-shrink: 0;
 }
 
+/* --- Column-Title (Spalten-Rahmen-Label, z. B. „Kanzlei-Tagessteuerung") */
+
+.arbeitsplatz__col-title {
+  font-family: var(--font-heading, inherit);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink, #1e293b);
+  margin: 0 0 12px 0;
+}
+
+/* --- Subline unter dem Spalten-Header (kurzer Kontext-Hinweis) ------- */
+
+.arbeitsplatz__col-subline {
+  margin: -6px 0 14px 0;
+  color: var(--ink-soft, #334155);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
 /* --- Section-Header (linke Spalte: Gruppen-Trenner) ------------------ */
 
 .arbeitsplatz__section-header {
@@ -296,6 +316,21 @@
   max-width: 22ch;
 }
 
+.arbeitsplatz__launcher-empty-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink, #1e293b);
+  letter-spacing: 0.01em;
+  max-width: 28ch;
+}
+
+.arbeitsplatz__launcher-empty-hint {
+  font-size: 0.82rem !important;
+  line-height: 1.45;
+  max-width: 30ch !important;
+}
+
 .arbeitsplatz__launcher {
   display: flex;
   flex-direction: column;
@@ -444,6 +479,74 @@
   outline-offset: 2px;
   background: var(--ivory-100, #f1f5f9);
   color: var(--ink, #1e293b);
+}
+
+/* --- Panel-Group (rechte Spalte: gruppierte Bereiche --------------------
+   Schnellzugriff / Klienten-Schnellinfo / Geplante Erweiterungen). */
+
+.arbeitsplatz__panel-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.arbeitsplatz__panel-group-title {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted, #64748b);
+  padding: 0 0 6px 0;
+  border-bottom: 1px solid var(--border, #e2e8f0);
+}
+
+/* --- Info-Cards (statische Hinweis-/Status-Karten ohne Live-Daten) --- */
+
+.arbeitsplatz__info-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.arbeitsplatz__info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--surface-muted, #f1f5f9);
+}
+
+/* Klare visuelle Markierung „kein Live-Inhalt": gestrichelter Border,
+   leicht reduzierte Deckkraft. */
+.arbeitsplatz__info-card--planned {
+  opacity: 0.92;
+  border-style: dashed;
+}
+
+.arbeitsplatz__info-card-title {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink, #1e293b);
+}
+
+.arbeitsplatz__info-card-status {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted, #64748b);
+  font-weight: 600;
+}
+
+.arbeitsplatz__info-card-hint {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--ink-soft, #334155);
 }
 
 /*

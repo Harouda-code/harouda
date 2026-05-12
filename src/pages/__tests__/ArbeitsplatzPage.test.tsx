@@ -261,15 +261,15 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     expect(center).not.toBeNull();
     expect(right).not.toBeNull();
 
-    // Patch 3 Left-Column-Refactor: "Kanzleiorganisation"-h2 wurde durch
-    // zwei section-header-divs ersetzt ("Mein Tag" + "Kanzlei"). Wir
-    // prüfen beide Gruppen-Header via stabile testIds statt fragiler
+    // UX v0: linke Spalte rahmt nun „Kanzlei-Tagessteuerung" mit zwei
+    // Gruppen darunter („Mein Arbeitstag" + „Kanzlei"). Wir prüfen
+    // beide Gruppen-Header via stabile testIds statt fragiler
     // h2-Selektoren, damit HTML-Änderungen den Test nicht brechen.
     expect(
       left?.querySelector<HTMLElement>(
         '[data-testid="arbeitsplatz-section-meintag"]'
       )?.textContent
-    ).toBe("Mein Tag");
+    ).toBe("Mein Arbeitstag");
     expect(
       left?.querySelector<HTMLElement>(
         '[data-testid="arbeitsplatz-section-kanzlei"]'
@@ -277,7 +277,7 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     ).toBe("Kanzlei");
     // Linke Spalte hat keinen <h2> mehr (section-headers sind <div>).
     expect(left?.querySelector("h2")).toBeNull();
-    expect(center?.querySelector("h2")?.textContent).toBe("Mandantenübersicht");
+    expect(center?.querySelector("h2")?.textContent).toBe("Mandantenportfolio");
     // Rechte Spalte zeigt ohne ?mandantId= den Empty-State — keine h2 dort.
     expect(right?.querySelector("h2")).toBeNull();
 
@@ -1135,6 +1135,177 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     row!.focus();
     expect(document.activeElement).toBe(row);
 
+    unmount();
+  });
+
+  // --- UX v0: Linke Spalte, Center-Subline, Empty-State, Panel-Gruppen --
+
+  it("UX v0 · linke Spalte trägt den Rahmen-Titel Kanzlei-Tagessteuerung", () => {
+    const { container, unmount } = renderAt("/arbeitsplatz");
+    const title = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-frame-title-left"]'
+    );
+    expect(title).not.toBeNull();
+    expect(title?.textContent).toContain("Kanzlei-Tagessteuerung");
+    unmount();
+  });
+
+  it("UX v0 · mittlere Spalte zeigt Subline mit Mandanten-Aufforderung", () => {
+    const { container, unmount } = renderAt("/arbeitsplatz");
+    const subline = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-frame-subline-center"]'
+    );
+    expect(subline).not.toBeNull();
+    expect(subline?.textContent).toContain("Mandant auswählen");
+    expect(subline?.textContent).toContain("Mandantenkontext");
+    unmount();
+  });
+
+  it("UX v0 · Empty-State zeigt professionellen Titel + Hinweis (keine fake Live-Daten)", async () => {
+    const { container, unmount } = await renderAtWithClients("/arbeitsplatz");
+    const empty = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-launcher-empty"]'
+    );
+    expect(empty).not.toBeNull();
+    const emptyTitle = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-launcher-empty-title"]'
+    );
+    expect(emptyTitle).not.toBeNull();
+    expect(emptyTitle?.textContent).toContain("Mandant wählen");
+    const emptyHint = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-launcher-empty-hint"]'
+    );
+    expect(emptyHint).not.toBeNull();
+    expect(emptyHint?.textContent).toContain("Schnellzugriff");
+    expect(emptyHint?.textContent).toContain("Klienten-Schnellinfo");
+    expect(emptyHint?.textContent).toContain("geplante Erweiterungen");
+    unmount();
+  });
+
+  it("UX v0 · rechte Spalte mit Mandant rendert drei Panel-Gruppen mit Titeln", async () => {
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+
+    const schnellzugriff = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-panel-schnellzugriff"]'
+    );
+    const klienten = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-panel-klienten-schnellinfo"]'
+    );
+    const geplant = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-panel-geplant"]'
+    );
+
+    expect(schnellzugriff).not.toBeNull();
+    expect(klienten).not.toBeNull();
+    expect(geplant).not.toBeNull();
+
+    expect(
+      container.querySelector<HTMLElement>(
+        '[data-testid="arbeitsplatz-panel-schnellzugriff-title"]'
+      )?.textContent
+    ).toBe("Schnellzugriff");
+    expect(
+      container.querySelector<HTMLElement>(
+        '[data-testid="arbeitsplatz-panel-klienten-schnellinfo-title"]'
+      )?.textContent
+    ).toBe("Klienten-Schnellinfo");
+    expect(
+      container.querySelector<HTMLElement>(
+        '[data-testid="arbeitsplatz-panel-geplant-title"]'
+      )?.textContent
+    ).toBe("Geplante Erweiterungen");
+
+    // Der bestehende Programme-Baum lebt innerhalb der Schnellzugriff-
+    // Panel-Gruppe — Tree-Selector muss weiterhin auffindbar sein.
+    expect(
+      schnellzugriff?.querySelector('[data-testid="arbeitsplatz-tree"]')
+    ).not.toBeNull();
+
+    unmount();
+  });
+
+  it("UX v0 · Klienten-Schnellinfo zeigt drei Karten mit Status Geplante Auswertung", async () => {
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+
+    const cardIds = [
+      "arbeitsplatz-info-card-liquiditaet",
+      "arbeitsplatz-info-card-erfassung",
+      "arbeitsplatz-info-card-abschluss",
+    ];
+    for (const id of cardIds) {
+      const card = container.querySelector<HTMLElement>(
+        `[data-testid="${id}"]`
+      );
+      expect(card, `Klienten-Schnellinfo-Karte ${id} fehlt`).not.toBeNull();
+      // Karten sind als „kein Live-Inhalt" markiert.
+      expect(card?.getAttribute("aria-disabled")).toBe("true");
+      // Status-Label „Geplante Auswertung" muss in der Karte stehen —
+      // keine Live-Zahl, kein Status-Claim ohne Daten.
+      expect(card?.textContent).toContain("Geplante Auswertung");
+    }
+
+    unmount();
+  });
+
+  it("UX v0 · Geplante Erweiterungen sind klar als In Vorbereitung markiert", async () => {
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+
+    const cardIds = [
+      "arbeitsplatz-info-card-akten-todos",
+      "arbeitsplatz-info-card-steuer-deklaration",
+      "arbeitsplatz-info-card-beleg-pruefstand",
+    ];
+    for (const id of cardIds) {
+      const card = container.querySelector<HTMLElement>(
+        `[data-testid="${id}"]`
+      );
+      expect(card, `Geplante-Erweiterung-Karte ${id} fehlt`).not.toBeNull();
+      expect(card?.getAttribute("aria-disabled")).toBe("true");
+      expect(card?.textContent).toContain("In Vorbereitung");
+    }
+
+    unmount();
+  });
+
+  it("UX v0 · rechte Spalte zeigt keine verbotenen Live-Claims (Anti-Pattern-Tokens)", async () => {
+    // Anti-Pattern-Tokens werden base64-kodiert geführt, damit dieser
+    // Test-Source selbst keine Plain-Text-Vorkommen der verbotenen
+    // Wörter enthält (gleiches Muster wie scripts/__tests__/
+    // check-forbidden-references.test.mjs).
+    function decode(b64: string): string {
+      return Buffer.from(b64, "base64").toString("utf8");
+    }
+    const FORBIDDEN_ENCODED = [
+      "WmFobGxhc3Q=",
+      "Z2VwcsO8ZnQ=",
+      "dmVyYXJiZWl0ZXQ=",
+      "RnJpc3Rlbi1BbXBlbA==",
+      "Q291bnRkb3du",
+      "ZmVydGln",
+      "w7xiZXJtaXR0ZWx0",
+    ];
+
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    const rightCol = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-col-right"]'
+    );
+    expect(rightCol).not.toBeNull();
+    const rightText = rightCol?.textContent ?? "";
+    for (const enc of FORBIDDEN_ENCODED) {
+      const phrase = decode(enc);
+      expect(
+        rightText.includes(phrase),
+        `Verbotener Live-Claim darf nicht in der rechten Spalte stehen`
+      ).toBe(false);
+    }
     unmount();
   });
 });

@@ -395,15 +395,21 @@ export default function ArbeitsplatzPage() {
         <section
           className="arbeitsplatz__col arbeitsplatz__col--left"
           data-testid="arbeitsplatz-col-left"
-          aria-label="Mein Arbeitsplatz"
+          aria-label="Kanzlei-Tagessteuerung"
         >
+          <div
+            className="arbeitsplatz__col-title"
+            data-testid="arbeitsplatz-frame-title-left"
+          >
+            Kanzlei-Tagessteuerung
+          </div>
           <div
             className="arbeitsplatz__section-header"
             data-testid="arbeitsplatz-section-meintag"
           >
-            Mein Tag
+            Mein Arbeitstag
           </div>
-          <nav aria-label="Mein-Tag-Navigation">
+          <nav aria-label="Mein-Arbeitstag-Navigation">
             <ul className="arbeitsplatz__nav">
               {MEIN_TAG.map((item) => {
                 const Icon = item.icon;
@@ -414,7 +420,7 @@ export default function ArbeitsplatzPage() {
                         className="arbeitsplatz__nav-link arbeitsplatz__nav-link--disabled"
                         data-testid={item.testId}
                         aria-disabled="true"
-                        title="Bald verfügbar"
+                        title="Geplantes Modul"
                       >
                         <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
                         <span>{item.label}</span>
@@ -485,10 +491,10 @@ export default function ArbeitsplatzPage() {
         <section
           className="arbeitsplatz__col arbeitsplatz__col--center"
           data-testid="arbeitsplatz-col-center"
-          aria-label="Mandantenübersicht"
+          aria-label="Mandantenportfolio"
         >
           <div className="arbeitsplatz__col-header">
-            <h2>Mandantenübersicht</h2>
+            <h2>Mandantenportfolio</h2>
             <button
               type="button"
               className="arbeitsplatz__add-btn"
@@ -500,6 +506,12 @@ export default function ArbeitsplatzPage() {
               <Plus size={16} strokeWidth={2} aria-hidden="true" />
             </button>
           </div>
+          <p
+            className="arbeitsplatz__col-subline"
+            data-testid="arbeitsplatz-frame-subline-center"
+          >
+            Mandant auswählen, Arbeitsbereich öffnen, Programme im Mandantenkontext starten.
+          </p>
 
           <label
             className="arbeitsplatz__search"
@@ -609,7 +621,20 @@ function LauncherEmpty() {
       data-testid="arbeitsplatz-launcher-empty"
     >
       <MousePointer2 size={28} strokeWidth={1.5} aria-hidden="true" />
+      <h3
+        className="arbeitsplatz__launcher-empty-title"
+        data-testid="arbeitsplatz-launcher-empty-title"
+      >
+        Mandant wählen, um Arbeitsbereich zu öffnen
+      </h3>
       <p>Bitte einen Mandanten aus der Liste auswählen</p>
+      <p
+        className="arbeitsplatz__launcher-empty-hint"
+        data-testid="arbeitsplatz-launcher-empty-hint"
+      >
+        Nach der Auswahl stehen Schnellzugriff, Klienten-Schnellinfo und
+        geplante Erweiterungen im Mandantenkontext zur Verfügung.
+      </p>
     </div>
   );
 }
@@ -659,12 +684,24 @@ function LauncherActive({
         <div className="arbeitsplatz__mandant-card-name">{client.name}</div>
       </div>
 
-      <nav
-        className="arbeitsplatz__tree"
-        aria-label="Programme und Akte"
-        data-testid="arbeitsplatz-tree"
+      <section
+        className="arbeitsplatz__panel-group"
+        data-testid="arbeitsplatz-panel-schnellzugriff"
+        aria-labelledby="arbeitsplatz-panel-schnellzugriff-title"
       >
-        {TREE_MODULES.map((module) => {
+        <h3
+          id="arbeitsplatz-panel-schnellzugriff-title"
+          className="arbeitsplatz__panel-group-title"
+          data-testid="arbeitsplatz-panel-schnellzugriff-title"
+        >
+          Schnellzugriff
+        </h3>
+        <nav
+          className="arbeitsplatz__tree"
+          aria-label="Programme und Akte"
+          data-testid="arbeitsplatz-tree"
+        >
+          {TREE_MODULES.map((module) => {
           const isOpen = expanded[module.id] ?? true;
           const ModuleIcon = module.icon;
           return (
@@ -739,7 +776,125 @@ function LauncherActive({
             </section>
           );
         })}
-      </nav>
+        </nav>
+      </section>
+
+      {/* Klienten-Schnellinfo — bewusst statische Hinweis-Karten ohne
+          Live-Daten. Datenmodelle für diese Auswertungen existieren im
+          Repo (OPOS, Belege/Inventur, Jahresabschluss-Wizard), werden
+          aber erst in einem separaten Sprint mandantbezogen angebunden. */}
+      <section
+        className="arbeitsplatz__panel-group"
+        data-testid="arbeitsplatz-panel-klienten-schnellinfo"
+        aria-labelledby="arbeitsplatz-panel-klienten-schnellinfo-title"
+      >
+        <h3
+          id="arbeitsplatz-panel-klienten-schnellinfo-title"
+          className="arbeitsplatz__panel-group-title"
+          data-testid="arbeitsplatz-panel-klienten-schnellinfo-title"
+        >
+          Klienten-Schnellinfo
+        </h3>
+        <div
+          className="arbeitsplatz__info-cards"
+          data-testid="arbeitsplatz-info-cards-klienten"
+        >
+          <article
+            className="arbeitsplatz__info-card arbeitsplatz__info-card--planned"
+            data-testid="arbeitsplatz-info-card-liquiditaet"
+            aria-disabled="true"
+          >
+            <h4 className="arbeitsplatz__info-card-title">Liquiditäts-Radar</h4>
+            <p className="arbeitsplatz__info-card-status">Geplante Auswertung</p>
+            <p className="arbeitsplatz__info-card-hint">
+              Aus offenen Posten ableitbar — Anbindung folgt in einem
+              separaten Sprint.
+            </p>
+          </article>
+          <article
+            className="arbeitsplatz__info-card arbeitsplatz__info-card--planned"
+            data-testid="arbeitsplatz-info-card-erfassung"
+            aria-disabled="true"
+          >
+            <h4 className="arbeitsplatz__info-card-title">Erfassungsstatus</h4>
+            <p className="arbeitsplatz__info-card-status">Geplante Auswertung</p>
+            <p className="arbeitsplatz__info-card-hint">
+              Belege, Bankabstimmung und Inventur lassen sich später
+              mandantbezogen integrieren.
+            </p>
+          </article>
+          <article
+            className="arbeitsplatz__info-card arbeitsplatz__info-card--planned"
+            data-testid="arbeitsplatz-info-card-abschluss"
+            aria-disabled="true"
+          >
+            <h4 className="arbeitsplatz__info-card-title">Abschluss-Tracker</h4>
+            <p className="arbeitsplatz__info-card-status">Geplante Auswertung</p>
+            <p className="arbeitsplatz__info-card-hint">
+              Wizard-Schritt-Status pro Mandant und Jahr lässt sich
+              später anbinden.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      {/* Geplante Erweiterungen — Bereiche, die ohne Datenmodell-Erweiterung
+          nicht ehrlich live darstellbar sind. Bewusst „In Vorbereitung". */}
+      <section
+        className="arbeitsplatz__panel-group"
+        data-testid="arbeitsplatz-panel-geplant"
+        aria-labelledby="arbeitsplatz-panel-geplant-title"
+      >
+        <h3
+          id="arbeitsplatz-panel-geplant-title"
+          className="arbeitsplatz__panel-group-title"
+          data-testid="arbeitsplatz-panel-geplant-title"
+        >
+          Geplante Erweiterungen
+        </h3>
+        <div
+          className="arbeitsplatz__info-cards"
+          data-testid="arbeitsplatz-info-cards-geplant"
+        >
+          <article
+            className="arbeitsplatz__info-card arbeitsplatz__info-card--planned"
+            data-testid="arbeitsplatz-info-card-akten-todos"
+            aria-disabled="true"
+          >
+            <h4 className="arbeitsplatz__info-card-title">Akten-To-Dos</h4>
+            <p className="arbeitsplatz__info-card-status">In Vorbereitung</p>
+            <p className="arbeitsplatz__info-card-hint">
+              Eigenes Aufgaben-Datenmodell wird vorbereitet.
+            </p>
+          </article>
+          <article
+            className="arbeitsplatz__info-card arbeitsplatz__info-card--planned"
+            data-testid="arbeitsplatz-info-card-steuer-deklaration"
+            aria-disabled="true"
+          >
+            <h4 className="arbeitsplatz__info-card-title">
+              Steuer-Deklarationsstatus
+            </h4>
+            <p className="arbeitsplatz__info-card-status">In Vorbereitung</p>
+            <p className="arbeitsplatz__info-card-hint">
+              Mandantbezogene Sicht auf laufende Deklarationen folgt nach
+              Datenmodell-Klärung.
+            </p>
+          </article>
+          <article
+            className="arbeitsplatz__info-card arbeitsplatz__info-card--planned"
+            data-testid="arbeitsplatz-info-card-beleg-pruefstand"
+            aria-disabled="true"
+          >
+            <h4 className="arbeitsplatz__info-card-title">Beleg-Prüfstand</h4>
+            <p className="arbeitsplatz__info-card-status">In Vorbereitung</p>
+            <p className="arbeitsplatz__info-card-hint">
+              Workflow-Statusmodell für Belege fehlt noch — wird separat
+              ergänzt.
+            </p>
+          </article>
+        </div>
+      </section>
     </div>
   );
 }

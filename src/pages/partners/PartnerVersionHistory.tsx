@@ -128,8 +128,10 @@ export default function PartnerVersionHistory() {
                 <li key={v.version_id}>
                   <button
                     type="button"
-                    className={`shell__nav-item${
-                      selected === v.version_id ? " is-active" : ""
+                    className={`partner-version-history__nav-item${
+                      selected === v.version_id
+                        ? " partner-version-history__nav-item--active"
+                        : ""
                     }`}
                     style={{
                       display: "block",

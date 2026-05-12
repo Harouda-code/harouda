@@ -156,6 +156,14 @@ describe("F42-Smoke · Arbeitsplatz → Launcher → Ziel-Page liest korrekten M
       const { autoSeedDemoIfNeeded } = await import("../api/demoSeed");
       await autoSeedDemoIfNeeded();
 
+      // autoSeed setzt `harouda:selectedMandantId` als Default-Auswahl
+      // (demoSeed.ts:508–512). Da ArbeitsplatzPage seit dem MandantContext-
+      // Refactor diesen Storage-Fallback respektiert, müsste der Kühn-
+      // Klick sonst eine no-op-Transition werden. Für diesen F42-Smoke-
+      // Test soll explizit der URL-Write-Pfad nach Klick beobachtet
+      // werden, daher Storage-Default vor dem Render entfernen.
+      localStorage.removeItem("harouda:selectedMandantId");
+
       const { container, unmount } = renderAppAt("/arbeitsplatz");
 
       // 1. Arbeitsplatz ist geladen + 4 Mandantenzeilen.

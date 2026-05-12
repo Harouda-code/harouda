@@ -32,10 +32,12 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RequireAuth } from "../../components/RequireAuth";
 import { UserProvider } from "../../contexts/UserContext";
+import { MandantProvider } from "../../contexts/MandantContext";
 import ArbeitsplatzPage from "../ArbeitsplatzPage";
 import type { Client } from "../../types/db";
 
 const CLIENTS_KEY = "harouda:clients";
+const SELECTED_MANDANT_KEY = "harouda:selectedMandantId";
 
 const DEMO_CLIENTS: Client[] = [
   {
@@ -118,25 +120,27 @@ function renderAt(path: string): RenderResult {
       <QueryClientProvider client={queryClient}>
         <UserProvider>
           <MemoryRouter initialEntries={[path]}>
-            <UrlProbe />
-            <Routes>
-              <Route
-                path="/login"
-                element={<div data-testid="login">Login</div>}
-              />
-              <Route
-                path="/arbeitsplatz"
-                element={
-                  <RequireAuth>
-                    <ArbeitsplatzPage />
-                  </RequireAuth>
-                }
-              />
-              <Route
-                path="/dashboard"
-                element={<Navigate to="/arbeitsplatz" replace />}
-              />
-            </Routes>
+            <MandantProvider>
+              <UrlProbe />
+              <Routes>
+                <Route
+                  path="/login"
+                  element={<div data-testid="login">Login</div>}
+                />
+                <Route
+                  path="/arbeitsplatz"
+                  element={
+                    <RequireAuth>
+                      <ArbeitsplatzPage />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="/dashboard"
+                  element={<Navigate to="/arbeitsplatz" replace />}
+                />
+              </Routes>
+            </MandantProvider>
           </MemoryRouter>
         </UserProvider>
       </QueryClientProvider>
@@ -496,11 +500,12 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     unmount();
   });
 
-  it("Klick auf eine Zeile setzt ?mandantId=<id> via useSearchParams (replace)", async () => {
+  it("Klick auf eine Zeile setzt ?mandantId=<id> über useMandant (URL + localStorage, replace)", async () => {
     const { container, unmount } = await renderAtWithClients("/arbeitsplatz");
 
-    // Vor dem Klick: keine mandantId in der URL.
+    // Vor dem Klick: keine mandantId in der URL und keine im localStorage.
     expect(getSearch(container)).toBe("");
+    expect(localStorage.getItem(SELECTED_MANDANT_KEY)).toBeNull();
 
     const row = container.querySelector<HTMLTableRowElement>(
       '[data-testid="arbeitsplatz-mandant-row-c-2"]'
@@ -511,9 +516,12 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
       row!.click();
     });
 
-    // URL-Query enthält jetzt mandantId=c-2.
+    // URL-Query enthält jetzt mandantId=c-2 (via MandantContext setSearchParams replace).
     const search = getSearch(container);
     expect(search).toContain("mandantId=c-2");
+
+    // Und localStorage wurde von MandantContext mitgeschrieben.
+    expect(localStorage.getItem(SELECTED_MANDANT_KEY)).toBe("c-2");
 
     // Identischer Klick ist ein no-op (URL bleibt unverändert).
     const searchBefore = getSearch(container);
@@ -521,6 +529,41 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
       row!.click();
     });
     expect(getSearch(container)).toBe(searchBefore);
+
+    unmount();
+  });
+
+  it("Ohne URL-mandantId, aber mit gültigem localStorage-Wert, ist der Mandant aktiv und der Launcher gerendert", async () => {
+    // Fachlicher Nachweis der MandantContext-Integration: der Storage-
+    // Fallback aus `MandantContext` (URL leer → harouda:selectedMandantId)
+    // muss in der ArbeitsplatzPage genauso wirken wie in BaseShell.
+    localStorage.setItem(SELECTED_MANDANT_KEY, "c-1");
+
+    const { container, unmount } = await renderAtWithClients("/arbeitsplatz");
+
+    // URL trägt KEINE mandantId.
+    expect(getSearch(container)).toBe("");
+
+    // Aktive Zeile ist gerendert (über Storage-Fallback).
+    const activeRow = container.querySelector<HTMLTableRowElement>(
+      '[data-testid="arbeitsplatz-mandant-row-c-1"]'
+    );
+    expect(activeRow).not.toBeNull();
+    expect(
+      activeRow?.classList.contains("arbeitsplatz__table-row--active")
+    ).toBe(true);
+    expect(activeRow?.getAttribute("aria-selected")).toBe("true");
+
+    // Rechte Spalte zeigt den Launcher-Active-State (Mandant-Card).
+    const rightCol = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-col-right"]'
+    );
+    expect(
+      rightCol?.querySelector('[data-testid="arbeitsplatz-launcher-active"]')
+    ).not.toBeNull();
+    expect(
+      rightCol?.querySelector('[data-testid="arbeitsplatz-mandant-card"]')
+    ).not.toBeNull();
 
     unmount();
   });

@@ -2,10 +2,10 @@
 //
 // Schritt 4 des 7-stufigen Arbeitsplatz-Sprints: mittlere Spalte trägt
 // jetzt Header (h2 + Plus-Icon-Button), Such-Leiste und eine
-// eigenständig scrollbare Mandanten-Tabelle. Die URL-Query `?mandantId=`
-// ist die einzige Wahrheit für den aktiven Mandanten innerhalb dieser
-// Seite — MandantContext bleibt in diesem Schritt bewusst unberührt
-// (separater späterer Sprint).
+// eigenständig scrollbare Mandanten-Tabelle. Quelle für den aktiven
+// Mandanten ist `useMandant()` (URL-primary mit localStorage-Fallback);
+// die Seite ergänzt nur eine zusätzliche Validierung gegen die
+// geladene Mandantenliste.
 
 import {
   useEffect,
@@ -13,8 +13,9 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
-import { Link, NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useMandant } from "../contexts/MandantContext";
 import {
   AlertCircle,
   BookOpen,
@@ -344,7 +345,7 @@ function filterClients(clients: Client[], query: string): Client[] {
 }
 
 export default function ArbeitsplatzPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { selectedMandantId, setSelectedMandantId } = useMandant();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
@@ -354,23 +355,22 @@ export default function ArbeitsplatzPage() {
   });
 
   const clients = clientsQ.data ?? [];
-  const rawActiveId = searchParams.get("mandantId");
-  // Nur eine real existierende ID gilt als aktiv. Unbekannte ?mandantId=…
+  // Nur eine real existierende ID gilt als aktiv. Unbekannte mandantId-Werte
   // werden stillschweigend ignoriert (siehe useEffect unten für console.warn).
   const activeId =
-    rawActiveId && clients.some((c) => c.id === rawActiveId)
-      ? rawActiveId
+    selectedMandantId && clients.some((c) => c.id === selectedMandantId)
+      ? selectedMandantId
       : null;
 
   useEffect(() => {
-    if (!rawActiveId) return;
+    if (!selectedMandantId) return;
     if (clientsQ.isLoading) return;
     if (clients.length === 0) return;
-    if (clients.some((c) => c.id === rawActiveId)) return;
+    if (clients.some((c) => c.id === selectedMandantId)) return;
     console.warn(
-      `Arbeitsplatz: ?mandantId=${rawActiveId} verweist auf keinen bekannten Mandanten — Query wird ignoriert.`
+      `Arbeitsplatz: mandantId=${selectedMandantId} verweist auf keinen bekannten Mandanten — Auswahl wird ignoriert.`
     );
-  }, [rawActiveId, clients, clientsQ.isLoading]);
+  }, [selectedMandantId, clients, clientsQ.isLoading]);
 
   const filtered = useMemo(
     () => filterClients(clients, query),
@@ -379,14 +379,7 @@ export default function ArbeitsplatzPage() {
 
   function selectMandant(id: string) {
     if (activeId === id) return; // no-op: identische Auswahl
-    setSearchParams(
-      (prev) => {
-        const next = new URLSearchParams(prev);
-        next.set("mandantId", id);
-        return next;
-      },
-      { replace: true }
-    );
+    setSelectedMandantId(id);
   }
 
   function onRowKeyDown(e: ReactKeyboardEvent<HTMLTableRowElement>, id: string) {

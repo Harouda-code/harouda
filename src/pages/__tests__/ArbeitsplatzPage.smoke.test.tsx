@@ -22,6 +22,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { vi } from "vitest";
 import { RequireAuth } from "../../components/RequireAuth";
 import { UserProvider } from "../../contexts/UserContext";
+import { MandantProvider } from "../../contexts/MandantContext";
 import ArbeitsplatzPage from "../ArbeitsplatzPage";
 
 // React 19 flusht State-Updates + Effects unter `act()` nur mit dieser
@@ -62,21 +63,23 @@ function renderAt(path: string): {
       <QueryClientProvider client={queryClient}>
         <UserProvider>
           <MemoryRouter initialEntries={[path]}>
-            <UrlProbe />
-            <Routes>
-              <Route
-                path="/arbeitsplatz"
-                element={
-                  <RequireAuth>
-                    <ArbeitsplatzPage />
-                  </RequireAuth>
-                }
-              />
-              <Route
-                path="/dashboard"
-                element={<Navigate to="/arbeitsplatz" replace />}
-              />
-            </Routes>
+            <MandantProvider>
+              <UrlProbe />
+              <Routes>
+                <Route
+                  path="/arbeitsplatz"
+                  element={
+                    <RequireAuth>
+                      <ArbeitsplatzPage />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="/dashboard"
+                  element={<Navigate to="/arbeitsplatz" replace />}
+                />
+              </Routes>
+            </MandantProvider>
           </MemoryRouter>
         </UserProvider>
       </QueryClientProvider>
@@ -110,6 +113,15 @@ describe("Arbeitsplatz · Musterfirma-Smoke (End-to-End)", () => {
       // (siehe src/api/__tests__/demoSeed.test.ts).
       const { autoSeedDemoIfNeeded } = await import("../../api/demoSeed");
       await autoSeedDemoIfNeeded();
+
+      // autoSeed setzt zusätzlich `harouda:selectedMandantId` als
+      // Default-Auswahl (demoSeed.ts:508–512). Für diesen Smoke-Test
+      // soll der URL-Write-Pfad nach Klick auf eine Zeile beobachtet
+      // werden — der Storage-Fallback würde Kühn bereits als aktiv
+      // markieren und den Klick zur no-op machen. Vor dem Render
+      // den Default-Key entfernen, damit der Klick wirklich eine
+      // Transition auslöst.
+      localStorage.removeItem("harouda:selectedMandantId");
 
       const { container, unmount } = renderAt("/arbeitsplatz");
 

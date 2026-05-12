@@ -52,7 +52,6 @@ const GROUPS: NavGroup[] = [
     icon: LayoutDashboard,
     items: [
       { label: "Arbeitsplatz", to: "/arbeitsplatz" },
-      { label: "Berater (alle Firmen)", to: "/berater/dashboard" },
     ],
   },
 ];

@@ -206,6 +206,17 @@ export default function App() {
         />
 
         <Route
+          path="/berater/dashboard"
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="AdvisorDashboard">
+                <AdvisorDashboardPage />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        />
+
+        <Route
           path="/dashboard"
           element={<Navigate to="/arbeitsplatz" replace />}
         />
@@ -457,7 +468,6 @@ export default function App() {
             </RequireAuth>
           }
         >
-          <Route path="/berater/dashboard" element={<AdvisorDashboardPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

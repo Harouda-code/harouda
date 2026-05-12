@@ -195,6 +195,17 @@ export default function App() {
         />
 
         <Route
+          path="/inventur"
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="Inventur">
+                <InventurPage />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        />
+
+        <Route
           path="/dashboard"
           element={<Navigate to="/arbeitsplatz" replace />}
         />
@@ -446,7 +457,6 @@ export default function App() {
             </RequireAuth>
           }
         >
-          <Route path="/inventur" element={<InventurPage />} />
           <Route path="/berater/dashboard" element={<AdvisorDashboardPage />} />
         </Route>
 

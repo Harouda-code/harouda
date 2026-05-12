@@ -34,10 +34,97 @@ import { RequireAuth } from "../../components/RequireAuth";
 import { UserProvider } from "../../contexts/UserContext";
 import { MandantProvider } from "../../contexts/MandantContext";
 import ArbeitsplatzPage from "../ArbeitsplatzPage";
-import type { Client } from "../../types/db";
+import type { Account, Client, JournalEntry } from "../../types/db";
 
 const CLIENTS_KEY = "harouda:clients";
 const SELECTED_MANDANT_KEY = "harouda:selectedMandantId";
+const ACCOUNTS_KEY = "harouda:accounts";
+const ENTRIES_KEY = "harouda:entries";
+
+// --- OPOS-Fixtures (für Liquiditäts-Radar-Tests) -------------------------
+
+const OPOS_ACCOUNTS: Account[] = [
+  {
+    id: "a-1400",
+    konto_nr: "1400",
+    bezeichnung: "Forderungen aus L+L",
+    kategorie: "aktiva",
+    ust_satz: null,
+    skr: "SKR03",
+    is_active: true,
+  },
+  {
+    id: "a-1600",
+    konto_nr: "1600",
+    bezeichnung: "Verbindlichkeiten aus L+L",
+    kategorie: "passiva",
+    ust_satz: null,
+    skr: "SKR03",
+    is_active: true,
+  },
+  {
+    id: "a-8400",
+    konto_nr: "8400",
+    bezeichnung: "Erlöse",
+    kategorie: "ertrag",
+    ust_satz: null,
+    skr: "SKR03",
+    is_active: true,
+  },
+  {
+    id: "a-3400",
+    konto_nr: "3400",
+    bezeichnung: "Wareneingang",
+    kategorie: "aufwand",
+    ust_satz: null,
+    skr: "SKR03",
+    is_active: true,
+  },
+];
+
+function seedAccounts(accounts: Account[]) {
+  localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
+}
+
+function seedEntries(entries: JournalEntry[]) {
+  localStorage.setItem(ENTRIES_KEY, JSON.stringify(entries));
+}
+
+let oposIdCounter = 0;
+function makeOposEntry(opts: {
+  datum: string;
+  soll: string;
+  haben: string;
+  betrag: number;
+  beleg: string;
+  client_id: string;
+  faelligkeit?: string | null;
+}): JournalEntry {
+  oposIdCounter++;
+  return {
+    id: `oj-${oposIdCounter}`,
+    datum: opts.datum,
+    beleg_nr: opts.beleg,
+    beschreibung: "Test",
+    soll_konto: opts.soll,
+    haben_konto: opts.haben,
+    betrag: opts.betrag,
+    ust_satz: null,
+    status: "gebucht",
+    client_id: opts.client_id,
+    skonto_pct: null,
+    skonto_tage: null,
+    gegenseite: null,
+    faelligkeit: opts.faelligkeit ?? null,
+    version: 1,
+  };
+}
+
+function daysAgoIso(days: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() - days);
+  return d.toISOString().slice(0, 10);
+}
 
 const DEMO_CLIENTS: Client[] = [
   {
@@ -1226,25 +1313,30 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     unmount();
   });
 
-  it("UX v0 · Klienten-Schnellinfo zeigt drei Karten mit Status Geplante Auswertung", async () => {
+  it("UX v0 · Klienten-Schnellinfo: Liquiditäts-Radar live, andere Karten weiterhin Placeholder", async () => {
     const { container, unmount } = await renderAtWithClients(
       "/arbeitsplatz?mandantId=c-1"
     );
 
-    const cardIds = [
-      "arbeitsplatz-info-card-liquiditaet",
+    // Liquiditäts-Radar ist seit OPOS-Live-Anbindung nicht mehr disabled
+    // und trägt nicht mehr das Placeholder-Status-Label.
+    const liquiditaet = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-liquiditaet"]'
+    );
+    expect(liquiditaet, "Liquiditäts-Radar-Karte fehlt").not.toBeNull();
+    expect(liquiditaet?.getAttribute("aria-disabled")).toBeNull();
+    expect(liquiditaet?.textContent).not.toContain("Geplante Auswertung");
+
+    // Erfassungsstatus und Abschluss-Tracker bleiben Placeholder.
+    for (const id of [
       "arbeitsplatz-info-card-erfassung",
       "arbeitsplatz-info-card-abschluss",
-    ];
-    for (const id of cardIds) {
+    ]) {
       const card = container.querySelector<HTMLElement>(
         `[data-testid="${id}"]`
       );
-      expect(card, `Klienten-Schnellinfo-Karte ${id} fehlt`).not.toBeNull();
-      // Karten sind als „kein Live-Inhalt" markiert.
+      expect(card, `Placeholder-Karte ${id} fehlt`).not.toBeNull();
       expect(card?.getAttribute("aria-disabled")).toBe("true");
-      // Status-Label „Geplante Auswertung" muss in der Karte stehen —
-      // keine Live-Zahl, kein Status-Claim ohne Daten.
       expect(card?.textContent).toContain("Geplante Auswertung");
     }
 
@@ -1285,8 +1377,12 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
       "WmFobGxhc3Q=",
       "Z2VwcsO8ZnQ=",
       "dmVyYXJiZWl0ZXQ=",
+      "ZnJlaWdlZ2ViZW4=",
       "RnJpc3Rlbi1BbXBlbA==",
       "Q291bnRkb3du",
+      "RWNodHplaXQ=",
+      "U2NvcmU=",
+      "QW1wZWw=",
       "ZmVydGln",
       "w7xiZXJtaXR0ZWx0",
     ];
@@ -1306,6 +1402,169 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
         `Verbotener Live-Claim darf nicht in der rechten Spalte stehen`
       ).toBe(false);
     }
+    unmount();
+  });
+
+  // --- Liquiditäts-Radar (OPOS-Live-Karte) -------------------------------
+
+  it("Liquiditäts-Radar · Empty-State: keine OPOS-Buchungen → Hinweis statt Zahlen", async () => {
+    // Aktiver Mandant ist gewählt, aber keine OPOS-relevanten Buchungen
+    // im Store. Karte zeigt den Empty-Hinweis, andere Karten bleiben
+    // Placeholder.
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const empty = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-liquiditaet-empty"]'
+        );
+        if (!empty) throw new Error("Empty-State noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-liquiditaet"]'
+    );
+    expect(card?.getAttribute("aria-disabled")).toBeNull();
+    expect(card?.textContent).toContain("Keine offenen Posten");
+    // Andere Karten bleiben unverändert disabled.
+    expect(
+      container
+        .querySelector('[data-testid="arbeitsplatz-info-card-erfassung"]')
+        ?.getAttribute("aria-disabled")
+    ).toBe("true");
+    expect(
+      container
+        .querySelector('[data-testid="arbeitsplatz-info-card-abschluss"]')
+        ?.getAttribute("aria-disabled")
+    ).toBe("true");
+
+    unmount();
+  });
+
+  it("Liquiditäts-Radar · offene Forderung des aktiven Mandanten wird gezählt", async () => {
+    seedAccounts(OPOS_ACCOUNTS);
+    seedEntries([
+      makeOposEntry({
+        datum: daysAgoIso(10),
+        soll: "1400",
+        haben: "8400",
+        betrag: 1190,
+        beleg: "AR-101",
+        client_id: "c-1",
+      }),
+    ]);
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const m = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-liquiditaet-metrics"]'
+        );
+        if (!m) throw new Error("Metrics-Block noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-liquiditaet"]'
+    );
+    const text = card?.textContent ?? "";
+    expect(text).toContain("Offene Forderungen");
+    // Anzahl 1 sowie Brutto-Summe 1.190 in deutschem Format.
+    expect(text).toMatch(/Offene Forderungen[^0-9]*1\b/);
+    expect(text).toMatch(/1[.,]190/);
+    // „Für diesen Mandanten zuordenbar"-Footer als ehrliche Quelle.
+    expect(text).toContain("Für diesen Mandanten zuordenbar");
+
+    unmount();
+  });
+
+  it("Liquiditäts-Radar · überfällige Forderung wird separat gezählt", async () => {
+    seedAccounts(OPOS_ACCOUNTS);
+    // Fälligkeit liegt 30 Tage in der Vergangenheit → ueberfaellig_tage > 0.
+    seedEntries([
+      makeOposEntry({
+        datum: daysAgoIso(60),
+        soll: "1400",
+        haben: "8400",
+        betrag: 500,
+        beleg: "AR-102",
+        client_id: "c-1",
+        faelligkeit: daysAgoIso(30),
+      }),
+    ]);
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const m = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-liquiditaet-metrics"]'
+        );
+        if (!m) throw new Error("Metrics-Block noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-liquiditaet"]'
+    );
+    const text = card?.textContent ?? "";
+    expect(text).toContain("davon überfällig");
+    // Zähler „1" steht direkt hinter dem Label (dt/dd-Paar im DOM); im
+    // textContent folgt danach das nächste Label-Wort.
+    expect(text).toMatch(/davon überfällig[^0-9]*1(?:[^0-9]|$)/);
+
+    unmount();
+  });
+
+  it("Liquiditäts-Radar · Mandant-Scope: Posten anderer Mandanten erscheinen nicht", async () => {
+    seedAccounts(OPOS_ACCOUNTS);
+    seedEntries([
+      makeOposEntry({
+        datum: daysAgoIso(10),
+        soll: "1400",
+        haben: "8400",
+        betrag: 100,
+        beleg: "AR-A",
+        client_id: "c-1",
+      }),
+      makeOposEntry({
+        datum: daysAgoIso(10),
+        soll: "1400",
+        haben: "8400",
+        betrag: 9999,
+        beleg: "AR-B",
+        client_id: "c-2",
+      }),
+    ]);
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const m = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-liquiditaet-metrics"]'
+        );
+        if (!m) throw new Error("Metrics-Block noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-liquiditaet"]'
+    );
+    const text = card?.textContent ?? "";
+    // Nur 1 Forderung (Mandant A).
+    expect(text).toMatch(/Offene Forderungen[^0-9]*1\b/);
+    // Wert von Mandant B (9999) erscheint NICHT.
+    expect(text).not.toContain("9.999");
+    expect(text).not.toContain("9,999");
+
     unmount();
   });
 });

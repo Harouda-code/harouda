@@ -34,8 +34,16 @@ import {
   Users,
 } from "lucide-react";
 import { fetchClients } from "../api/clients";
+import { fetchAccounts } from "../api/accounts";
+import { fetchAllEntries } from "../api/dashboard";
+import { summarizeOpenItems } from "../api/opos";
 import type { Client } from "../types/db";
 import "./ArbeitsplatzPage.css";
+
+const EUR_FMT = new Intl.NumberFormat("de-DE", {
+  style: "currency",
+  currency: "EUR",
+});
 
 type KanzleiNavItem = {
   label: string;
@@ -669,6 +677,49 @@ function LauncherActive({
     setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
   }
 
+  // --- Liquiditäts-Radar (OPOS-Live-Anbindung) --------------------------
+  //
+  // Cache-Keys identisch zu OposPage/MahnwesenPage/JournalPage/
+  // DocumentsPage/BankReconciliationPage, damit Arbeitsplatz und diese
+  // Pages denselben Tanstack-Query-Cache nutzen (kein zusätzlicher Fetch).
+  // Aggregation ist rein client-side (summarizeOpenItems). Der Mandant-
+  // Filter greift nach der Aggregation und schließt Posten mit gemischten
+  // oder fehlenden client_ids aus (siehe api/opos.ts:118, 185).
+  const entriesQ = useQuery({
+    queryKey: ["journal_entries", "all", mandantId],
+    queryFn: fetchAllEntries,
+  });
+  const accountsQ = useQuery({
+    queryKey: ["accounts", "all-with-inactive"],
+    queryFn: fetchAccounts,
+  });
+
+  const liquiditaet = useMemo(() => {
+    if (!entriesQ.data || !accountsQ.data) return null;
+    const summary = summarizeOpenItems(entriesQ.data, accountsQ.data);
+    const receivables = summary.receivables.filter(
+      (i) => i.client_id === mandantId
+    );
+    const payables = summary.payables.filter(
+      (i) => i.client_id === mandantId
+    );
+    const overdue = receivables.filter((i) => i.ueberfaellig_tage > 0);
+    return {
+      receivablesCount: receivables.length,
+      receivablesSum: receivables.reduce((s, i) => s + i.offen, 0),
+      overdueCount: overdue.length,
+      payablesCount: payables.length,
+      payablesSum: payables.reduce((s, i) => s + i.offen, 0),
+    };
+  }, [entriesQ.data, accountsQ.data, mandantId]);
+
+  const liquiditaetIsLoading = entriesQ.isLoading || accountsQ.isLoading;
+  const liquiditaetIsError = entriesQ.isError || accountsQ.isError;
+  const liquiditaetIsEmpty =
+    !!liquiditaet &&
+    liquiditaet.receivablesCount === 0 &&
+    liquiditaet.payablesCount === 0;
+
   return (
     <div
       className="arbeitsplatz__launcher"
@@ -800,16 +851,69 @@ function LauncherActive({
           data-testid="arbeitsplatz-info-cards-klienten"
         >
           <article
-            className="arbeitsplatz__info-card arbeitsplatz__info-card--planned"
+            className="arbeitsplatz__info-card arbeitsplatz__info-card--live"
             data-testid="arbeitsplatz-info-card-liquiditaet"
-            aria-disabled="true"
           >
             <h4 className="arbeitsplatz__info-card-title">Liquiditäts-Radar</h4>
-            <p className="arbeitsplatz__info-card-status">Geplante Auswertung</p>
-            <p className="arbeitsplatz__info-card-hint">
-              Aus offenen Posten ableitbar — Anbindung folgt in einem
-              separaten Sprint.
-            </p>
+            <p className="arbeitsplatz__info-card-status">Aus offenen Posten</p>
+            {liquiditaetIsLoading ? (
+              <p
+                className="arbeitsplatz__info-card-hint"
+                data-testid="arbeitsplatz-info-card-liquiditaet-loading"
+              >
+                wird geladen…
+              </p>
+            ) : liquiditaetIsError ? (
+              <p
+                className="arbeitsplatz__info-card-hint arbeitsplatz__info-card-hint--error"
+                role="alert"
+                data-testid="arbeitsplatz-info-card-liquiditaet-error"
+              >
+                Offene Posten aktuell nicht abrufbar.
+              </p>
+            ) : !liquiditaet || liquiditaetIsEmpty ? (
+              <p
+                className="arbeitsplatz__info-card-hint"
+                data-testid="arbeitsplatz-info-card-liquiditaet-empty"
+              >
+                Keine offenen Posten für diesen Mandanten.
+              </p>
+            ) : (
+              <>
+                <dl
+                  className="arbeitsplatz__info-card-metrics"
+                  data-testid="arbeitsplatz-info-card-liquiditaet-metrics"
+                >
+                  <div className="arbeitsplatz__info-card-metric">
+                    <dt>Offene Forderungen</dt>
+                    <dd>
+                      {liquiditaet.receivablesCount}
+                      {liquiditaet.receivablesCount > 0
+                        ? ` · ${EUR_FMT.format(liquiditaet.receivablesSum)}`
+                        : ""}
+                    </dd>
+                  </div>
+                  {liquiditaet.overdueCount > 0 ? (
+                    <div className="arbeitsplatz__info-card-metric">
+                      <dt>davon überfällig</dt>
+                      <dd>{liquiditaet.overdueCount}</dd>
+                    </div>
+                  ) : null}
+                  <div className="arbeitsplatz__info-card-metric">
+                    <dt>Offene Verbindlichkeiten</dt>
+                    <dd>
+                      {liquiditaet.payablesCount}
+                      {liquiditaet.payablesCount > 0
+                        ? ` · ${EUR_FMT.format(liquiditaet.payablesSum)}`
+                        : ""}
+                    </dd>
+                  </div>
+                </dl>
+                <p className="arbeitsplatz__info-card-foot">
+                  Für diesen Mandanten zuordenbar
+                </p>
+              </>
+            )}
           </article>
           <article
             className="arbeitsplatz__info-card arbeitsplatz__info-card--planned"

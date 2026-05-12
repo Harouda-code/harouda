@@ -526,6 +526,55 @@
   border-style: dashed;
 }
 
+/* Live-Variante mit echten Daten: durchgezogener Border, volle Deckkraft.
+   Keine Erfolgs-/Bewertungs-Semantik (keine grüne Markierung). */
+.arbeitsplatz__info-card--live {
+  opacity: 1;
+  border-style: solid;
+}
+
+.arbeitsplatz__info-card-metrics {
+  margin: 4px 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.arbeitsplatz__info-card-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+}
+
+.arbeitsplatz__info-card-metric dt {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft, #334155);
+}
+
+.arbeitsplatz__info-card-metric dd {
+  margin: 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink, #1e293b);
+  font-variant-numeric: tabular-nums;
+}
+
+.arbeitsplatz__info-card-foot {
+  margin: 4px 0 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--muted, #64748b);
+  font-style: italic;
+}
+
+.arbeitsplatz__info-card-hint--error {
+  color: var(--danger, #dc2626);
+}
+
 .arbeitsplatz__info-card-title {
   margin: 0;
   font-size: 0.88rem;

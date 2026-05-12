@@ -6,7 +6,6 @@ import {
   Routes,
 } from "react-router-dom";
 import { DEMO_MODE } from "./api/supabase";
-import AppShell from "./components/AppShell";
 import BaseShell from "./components/shell/BaseShell";
 import BuchhaltungShell from "./components/shell/BuchhaltungShell";
 import SteuernShell from "./components/shell/SteuernShell";
@@ -457,17 +456,6 @@ export default function App() {
               element={<IntegrityDashboardPage />}
             />
           </Route>
-        </Route>
-
-        <Route
-          element={
-            <RequireAuth>
-              <ErrorBoundary level="page" context="AppShell">
-                <AppShell />
-              </ErrorBoundary>
-            </RequireAuth>
-          }
-        >
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

@@ -8,10 +8,8 @@ import {
 } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
-  BadgeCheck,
   ChevronDown,
   ChevronRight,
-  FileText,
   Landmark,
   LayoutDashboard,
 } from "lucide-react";
@@ -68,19 +66,6 @@ const GROUPS: NavGroup[] = [
       { label: "Z3-Datenexport (§ 147 AO)", to: "/admin/z3-export" },
       { label: "Datenexport (DSGVO Art. 20)", to: "/admin/datenexport" },
       { label: "DATEV-Export", to: "/export/datev" },
-    ],
-  },
-  {
-    id: "dokumente",
-    title: "Dokumente",
-    icon: FileText,
-    items: [
-      { label: "Belege", to: "/belege", icon: FileText },
-      { label: "E-Rechnung (§ 14 UStG)", to: "/buchungen/e-rechnung", icon: BadgeCheck },
-      { label: "E-Rechnung (ZUGFeRD)", to: "/zugferd", icon: BadgeCheck },
-      { label: "E-Rechnung-Archiv", to: "/e-rechnung/archiv", icon: BadgeCheck },
-      { label: "Dokument-Scanner (OCR)", to: "/ai/scanner", icon: FileText },
-      { label: "PDF-Werkzeuge", to: "/werkzeuge/pdf", icon: FileText },
     ],
   },
 ];

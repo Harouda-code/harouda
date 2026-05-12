@@ -13,6 +13,7 @@ import SteuernShell from "./components/shell/SteuernShell";
 import UmsatzsteuerShell from "./components/shell/UmsatzsteuerShell";
 import JahresabschlussShell from "./components/shell/JahresabschlussShell";
 import BerichteShell from "./components/shell/BerichteShell";
+import DokumenteShell from "./components/shell/DokumenteShell";
 import EinkommensteuerShell from "./components/shell/EinkommensteuerShell";
 import EinstellungenShell from "./components/shell/EinstellungenShell";
 import LohnShell from "./components/shell/LohnShell";
@@ -391,6 +392,27 @@ export default function App() {
           </Route>
         </Route>
 
+        {/* Module-Shell DokumenteShell. */}
+        <Route
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="DokumenteShell">
+                <BaseShell />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        >
+          <Route element={<DokumenteShell />}>
+            <Route path="/belege" element={<DocumentsPage />} />
+            <Route path="/zugferd" element={<ZugferdPage />} />
+            <Route path="/e-rechnung/erstellen" element={<XRechnungErstellenPage />} />
+            <Route path="/e-rechnung/archiv" element={<InvoiceArchivePage />} />
+            <Route path="/buchungen/e-rechnung" element={<ERechnungPage />} />
+            <Route path="/ai/scanner" element={<DocumentScannerPage />} />
+            <Route path="/werkzeuge/pdf" element={<PdfToolsPage />} />
+          </Route>
+        </Route>
+
         <Route
           element={
             <RequireAuth>
@@ -408,16 +430,9 @@ export default function App() {
             element={<IntegrityDashboardPage />}
           />
           <Route path="/kanzlei-dashboard" element={<KanzleiDashboardPage />} />
-          <Route path="/belege" element={<DocumentsPage />} />
-          <Route path="/zugferd" element={<ZugferdPage />} />
-          <Route path="/e-rechnung/erstellen" element={<XRechnungErstellenPage />} />
-          <Route path="/e-rechnung/archiv" element={<InvoiceArchivePage />} />
-          <Route path="/buchungen/e-rechnung" element={<ERechnungPage />} />
           <Route path="/export/datev" element={<DatevExportPage />} />
-          <Route path="/ai/scanner" element={<DocumentScannerPage />} />
           <Route path="/inventur" element={<InventurPage />} />
           <Route path="/berater/dashboard" element={<AdvisorDashboardPage />} />
-          <Route path="/werkzeuge/pdf" element={<PdfToolsPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

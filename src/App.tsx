@@ -13,6 +13,7 @@ import SteuernShell from "./components/shell/SteuernShell";
 import UmsatzsteuerShell from "./components/shell/UmsatzsteuerShell";
 import JahresabschlussShell from "./components/shell/JahresabschlussShell";
 import BerichteShell from "./components/shell/BerichteShell";
+import ComplianceShell from "./components/shell/ComplianceShell";
 import DokumenteShell from "./components/shell/DokumenteShell";
 import EinkommensteuerShell from "./components/shell/EinkommensteuerShell";
 import EinstellungenShell from "./components/shell/EinstellungenShell";
@@ -413,6 +414,29 @@ export default function App() {
           </Route>
         </Route>
 
+        {/* Module-Shell ComplianceShell. */}
+        <Route
+          element={
+            <RequireAuth>
+              <ErrorBoundary level="page" context="ComplianceShell">
+                <BaseShell />
+              </ErrorBoundary>
+            </RequireAuth>
+          }
+        >
+          <Route element={<ComplianceShell />}>
+            <Route path="/kanzlei-dashboard" element={<KanzleiDashboardPage />} />
+            <Route path="/admin/audit" element={<AuditTrailPage />} />
+            <Route path="/admin/z3-export" element={<Z3ExportPage />} />
+            <Route path="/admin/datenexport" element={<DatenExportPage />} />
+            <Route path="/export/datev" element={<DatevExportPage />} />
+            <Route
+              path="/admin/integrity"
+              element={<IntegrityDashboardPage />}
+            />
+          </Route>
+        </Route>
+
         <Route
           element={
             <RequireAuth>
@@ -422,15 +446,6 @@ export default function App() {
             </RequireAuth>
           }
         >
-          <Route path="/admin/z3-export" element={<Z3ExportPage />} />
-          <Route path="/admin/datenexport" element={<DatenExportPage />} />
-          <Route path="/admin/audit" element={<AuditTrailPage />} />
-          <Route
-            path="/admin/integrity"
-            element={<IntegrityDashboardPage />}
-          />
-          <Route path="/kanzlei-dashboard" element={<KanzleiDashboardPage />} />
-          <Route path="/export/datev" element={<DatevExportPage />} />
           <Route path="/inventur" element={<InventurPage />} />
           <Route path="/berater/dashboard" element={<AdvisorDashboardPage />} />
         </Route>

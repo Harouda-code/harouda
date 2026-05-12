@@ -10,7 +10,6 @@ import { useQuery } from "@tanstack/react-query";
 import {
   ChevronDown,
   ChevronRight,
-  Landmark,
   LayoutDashboard,
 } from "lucide-react";
 import { useUser } from "../contexts/UserContext";
@@ -54,18 +53,6 @@ const GROUPS: NavGroup[] = [
     items: [
       { label: "Arbeitsplatz", to: "/arbeitsplatz" },
       { label: "Berater (alle Firmen)", to: "/berater/dashboard" },
-    ],
-  },
-  {
-    id: "compliance",
-    title: "Compliance & Export",
-    icon: Landmark,
-    items: [
-      { label: "Kanzlei-Dashboard", to: "/kanzlei-dashboard" },
-      { label: "Audit-Trail (GoBD)", to: "/admin/audit" },
-      { label: "Z3-Datenexport (§ 147 AO)", to: "/admin/z3-export" },
-      { label: "Datenexport (DSGVO Art. 20)", to: "/admin/datenexport" },
-      { label: "DATEV-Export", to: "/export/datev" },
     ],
   },
 ];

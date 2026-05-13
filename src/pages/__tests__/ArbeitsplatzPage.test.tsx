@@ -2070,4 +2070,105 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     expect(row?.textContent).toContain("—");
     unmount();
   });
+
+  // --- Tooltip-Hardening: title-Attribute auf Name- und Rechtsform-Zelle --
+
+  it("Tooltip · Name-Zelle trägt title mit dem vollständigen Mandantennamen", async () => {
+    const longName =
+      "Steuerberatungsgesellschaft Müller & Sohn mbH";
+    const clients: Client[] = [
+      {
+        id: "c-tt-name",
+        mandant_nr: "30100",
+        name: longName,
+        steuernummer: null,
+        ust_id: null,
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        rechtsform: "GmbH",
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz",
+      clients
+    );
+    const row = container.querySelector<HTMLTableRowElement>(
+      '[data-testid="arbeitsplatz-mandant-row-c-tt-name"]'
+    );
+    expect(row).not.toBeNull();
+    const cells = row!.querySelectorAll<HTMLTableCellElement>("td");
+    expect(cells.length).toBe(3);
+    const nameCell = cells[1];
+    // Sichtbarer Text ist der volle Name (vor CSS-Truncation), und der
+    // native Hover-Tooltip macht ihn auch bei Ellipsis-Cut wiederherstellbar.
+    expect(nameCell.textContent).toBe(longName);
+    expect(nameCell.getAttribute("title")).toBe(longName);
+    unmount();
+  });
+
+  it("Tooltip · Rechtsform-Zelle bei SonstigerRechtsform trägt Klartext-title, kein Tech-Key", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-tt-rf-sonst",
+        mandant_nr: "30200",
+        name: "Tooltip-Rechtsform-Test",
+        steuernummer: null,
+        ust_id: null,
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        rechtsform: "SonstigerRechtsform",
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz",
+      clients
+    );
+    const row = container.querySelector<HTMLTableRowElement>(
+      '[data-testid="arbeitsplatz-mandant-row-c-tt-rf-sonst"]'
+    );
+    expect(row).not.toBeNull();
+    const cells = row!.querySelectorAll<HTMLTableCellElement>("td");
+    const rechtsformCell = cells[2];
+    expect(rechtsformCell.getAttribute("title")).toBe("Sonstige Rechtsform");
+    // Tech-Key darf weder im sichtbaren Text noch im title erscheinen.
+    expect(rechtsformCell.getAttribute("title")).not.toBe(
+      "SonstigerRechtsform"
+    );
+    expect(rechtsformCell.textContent).not.toContain("SonstigerRechtsform");
+  unmount();
+  });
+
+  it("Tooltip · Mand.-Nr.-Zelle trägt bewusst kein title (kurze Werte, kein Truncation-Risiko)", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-tt-mnr",
+        mandant_nr: "30300",
+        name: "Tooltip-MandNr-Test",
+        steuernummer: null,
+        ust_id: null,
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        rechtsform: null,
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz",
+      clients
+    );
+    const row = container.querySelector<HTMLTableRowElement>(
+      '[data-testid="arbeitsplatz-mandant-row-c-tt-mnr"]'
+    );
+    expect(row).not.toBeNull();
+    const cells = row!.querySelectorAll<HTMLTableCellElement>("td");
+    const mandantNrCell = cells[0];
+    expect(mandantNrCell.textContent).toBe("30300");
+    expect(mandantNrCell.getAttribute("title")).toBeNull();
+    unmount();
+  });
 });

@@ -600,8 +600,10 @@ export default function ArbeitsplatzPage() {
                       onKeyDown={(e) => onRowKeyDown(e, c.id)}
                     >
                       <td>{c.mandant_nr}</td>
-                      <td>{c.name}</td>
-                      <td>{displayRechtsform(c.rechtsform)}</td>
+                      <td title={c.name}>{c.name}</td>
+                      <td title={displayRechtsform(c.rechtsform)}>
+                        {displayRechtsform(c.rechtsform)}
+                      </td>
                     </tr>
                   );
                 })}

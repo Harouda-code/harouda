@@ -245,4 +245,154 @@ describe("Arbeitsplatz · Musterfirma-Smoke (End-to-End)", () => {
     },
     15_000
   );
+
+  it(
+    "Mandantenwechsel-Smoke · Kühn → Schulz aktualisiert Mandant-Card, URL und Programme-Baum-href",
+    async () => {
+      // Foundation-Schutz für den Mandanten-Lifecycle: nach einer ersten
+      // Auswahl (Kühn 10100) muss ein zweiter Klick auf eine andere Zeile
+      // (Schulz 10001) den aktiven Mandant-Kopf, die URL-Query und die
+      // Programme-Baum-hrefs auf den neuen Mandanten umstellen — ohne dass
+      // Reste der vorherigen Auswahl im DOM zurückbleiben.
+      const { autoSeedDemoIfNeeded } = await import("../../api/demoSeed");
+      await autoSeedDemoIfNeeded();
+
+      // autoSeed setzt `harouda:selectedMandantId` als Default. Für diesen
+      // Test wollen wir den URL-Write-Pfad beider Klicks beobachten.
+      localStorage.removeItem("harouda:selectedMandantId");
+
+      const { container, unmount } = renderAt("/arbeitsplatz");
+
+      // Vier Mandantenzeilen aus Auto-Seed.
+      await vi.waitFor(
+        () => {
+          const rows = container.querySelectorAll(
+            '[data-testid^="arbeitsplatz-mandant-row-"]'
+          );
+          if (rows.length !== 4) {
+            throw new Error(
+              `erwartet 4 Mandantenzeilen, gefunden ${rows.length}`
+            );
+          }
+        },
+        { timeout: 3000, interval: 15 }
+      );
+
+      function findRowByMandantNr(
+        nr: string
+      ): HTMLTableRowElement | undefined {
+        const rows = Array.from(
+          container.querySelectorAll<HTMLTableRowElement>(
+            '[data-testid^="arbeitsplatz-mandant-row-"]'
+          )
+        );
+        return rows.find((r) => r.textContent?.includes(nr));
+      }
+      function getSearch(): string {
+        return (
+          container
+            .querySelector('[data-testid="url-probe"]')!
+            .getAttribute("data-search") ?? ""
+        );
+      }
+      function extractMandantId(search: string): string | null {
+        const m = /mandantId=([^&]+)/.exec(search);
+        return m ? decodeURIComponent(m[1]) : null;
+      }
+
+      // --- Erste Auswahl: Kühn (Mand.-Nr. 10100) ----------------------
+      const kuehnRow = findRowByMandantNr("10100");
+      expect(kuehnRow, "Kühn-Zeile (10100) nicht gefunden").toBeTruthy();
+
+      act(() => {
+        kuehnRow!.click();
+      });
+
+      await vi.waitFor(
+        () => {
+          const card = container.querySelector(
+            '[data-testid="arbeitsplatz-mandant-card"]'
+          );
+          if (!card?.textContent?.includes("10100")) {
+            throw new Error("Mandant-Card noch nicht auf Kühn aktualisiert");
+          }
+        },
+        { timeout: 2000, interval: 10 }
+      );
+
+      const cardAfterKuehn = container.querySelector<HTMLElement>(
+        '[data-testid="arbeitsplatz-mandant-card"]'
+      );
+      expect(cardAfterKuehn?.textContent).toContain("10100");
+      expect(cardAfterKuehn?.textContent).toContain("Kühn Musterfirma GmbH");
+
+      const kuehnId = extractMandantId(getSearch());
+      expect(kuehnId, "Kühn-ID nicht in URL").not.toBeNull();
+      expect(kuehnId!.length).toBeGreaterThan(0);
+
+      // --- Zweite Auswahl: Schulz (Mand.-Nr. 10001) -------------------
+      const schulzRow = findRowByMandantNr("10001");
+      expect(schulzRow, "Schulz-Zeile (10001) nicht gefunden").toBeTruthy();
+
+      act(() => {
+        schulzRow!.click();
+      });
+
+      // Warten, bis die Mandant-Card auf Schulz umgeschaltet hat.
+      await vi.waitFor(
+        () => {
+          const card = container.querySelector(
+            '[data-testid="arbeitsplatz-mandant-card"]'
+          );
+          if (!card?.textContent?.includes("10001")) {
+            throw new Error("Mandant-Card noch nicht auf Schulz aktualisiert");
+          }
+        },
+        { timeout: 2000, interval: 10 }
+      );
+
+      const cardAfterSchulz = container.querySelector<HTMLElement>(
+        '[data-testid="arbeitsplatz-mandant-card"]'
+      );
+      expect(cardAfterSchulz?.textContent).toContain("10001");
+      expect(cardAfterSchulz?.textContent).toContain(
+        "Schulz Bauunternehmung GmbH"
+      );
+      // Kein Datenrest von Kühn im aktiven Mandant-Kopf.
+      expect(cardAfterSchulz?.textContent).not.toContain("10100");
+      expect(cardAfterSchulz?.textContent).not.toContain("Kühn Musterfirma");
+
+      // URL trägt jetzt die Schulz-ID, nicht mehr die Kühn-ID.
+      const schulzId = extractMandantId(getSearch());
+      expect(schulzId, "Schulz-ID nicht in URL").not.toBeNull();
+      expect(schulzId!.length).toBeGreaterThan(0);
+      expect(schulzId).not.toBe(kuehnId);
+
+      // --- Programme-Baum bleibt bedienbar mit neuer Mandant-ID. -----
+      const reweLink = container.querySelector<HTMLAnchorElement>(
+        '[data-testid="arbeitsplatz-launcher-rewe"]'
+      );
+      expect(reweLink).not.toBeNull();
+      const reweHref = reweLink!.getAttribute("href") ?? "";
+      expect(reweHref).toContain(
+        `mandantId=${encodeURIComponent(schulzId!)}`
+      );
+      expect(reweHref).not.toContain(
+        `mandantId=${encodeURIComponent(kuehnId!)}`
+      );
+
+      // Ein Sub-Link (Stichprobe Journal) trägt ebenfalls die neue ID.
+      const journalSub = container.querySelector<HTMLAnchorElement>(
+        '[data-testid="arbeitsplatz-tree-rewe-journal"]'
+      );
+      expect(journalSub).not.toBeNull();
+      const journalHref = journalSub!.getAttribute("href") ?? "";
+      expect(journalHref).toBe(
+        `/buchhaltung/journal?mandantId=${encodeURIComponent(schulzId!)}`
+      );
+
+      unmount();
+    },
+    15_000
+  );
 });

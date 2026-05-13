@@ -2087,6 +2087,99 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     unmount();
   });
 
+  it("Loading-Race · Liquiditäts-Radar und Erfassungsstatus können gleichzeitig pending sein", async () => {
+    // Beide Live-Karten parallel im pending-State halten: `fetchAllEntries`
+    // (Liquidität) + `countMatchesByStatus` (Erfassung) werden auf nie
+    // auflösende Promises gemockt. Der Test-QueryClient nutzt `gcTime: 0`
+    // und `retry: false` (siehe `makeQueryClient`), sodass beim Unmount die
+    // Observer detachen und die orphaned Promises vom GC entsorgt werden —
+    // kein Cleanup-Risiko, keine act()-Warnungen.
+    const dashboardModule = await import("../../api/dashboard");
+    const bankReconModule = await import(
+      "../../api/bankReconciliationMatches"
+    );
+    vi.spyOn(dashboardModule, "fetchAllEntries").mockReturnValue(
+      new Promise(() => {
+        /* nie auflösen */
+      })
+    );
+    vi.spyOn(bankReconModule, "countMatchesByStatus").mockReturnValue(
+      new Promise(() => {
+        /* nie auflösen */
+      })
+    );
+
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+
+    // Beide Live-Karten-Artikel im DOM, sobald LauncherActive gemountet ist.
+    await vi.waitFor(
+      () => {
+        const liq = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-liquiditaet"]'
+        );
+        const erf = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-erfassung"]'
+        );
+        if (!liq || !erf)
+          throw new Error("Live-Karten noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const liq = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-liquiditaet"]'
+    );
+    const erf = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-erfassung"]'
+    );
+
+    // Beide Karten zeitgleich pending: aria-busy="true".
+    expect(liq?.getAttribute("aria-busy")).toBe("true");
+    expect(erf?.getAttribute("aria-busy")).toBe("true");
+    // aria-live bleibt unter allen States gesetzt.
+    expect(liq?.getAttribute("aria-live")).toBe("polite");
+    expect(erf?.getAttribute("aria-live")).toBe("polite");
+
+    // Positive Evidence der pending-Renderung: Loading-Hint in beiden Karten.
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-info-card-liquiditaet-loading"]'
+      )
+    ).not.toBeNull();
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-info-card-erfassung-loading"]'
+      )
+    ).not.toBeNull();
+
+    // Während pending dürfen weder Empty- noch Error-Pfade rendern —
+    // sonst würden im Race-Fenster falsche Aussagen entstehen.
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-info-card-liquiditaet-empty"]'
+      )
+    ).toBeNull();
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-info-card-liquiditaet-error"]'
+      )
+    ).toBeNull();
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-info-card-erfassung-empty"]'
+      )
+    ).toBeNull();
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-info-card-erfassung-error"]'
+      )
+    ).toBeNull();
+
+    unmount();
+  });
+
   // --- Rechtsform-Spalte im Mandantenportfolio ---------------------------
 
   it("Rechtsform · Mandant mit rechtsform=GmbH zeigt 'GmbH' in der Tabellenzeile", async () => {

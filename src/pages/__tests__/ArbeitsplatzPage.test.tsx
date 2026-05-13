@@ -658,6 +658,75 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     unmount();
   });
 
+  // --- A11y-Hardening: native Row-Semantik + Tastatur-Auswahl -----------
+
+  it("A11y · Mandantenzeile trägt kein role=\"button\" (native Row-Semantik bleibt erhalten)", async () => {
+    const { container, unmount } = await renderAtWithClients("/arbeitsplatz");
+
+    const rows = container.querySelectorAll<HTMLTableRowElement>(
+      '[data-testid^="arbeitsplatz-mandant-row-"]'
+    );
+    expect(rows.length).toBeGreaterThan(0);
+    for (const row of Array.from(rows)) {
+      // role="button" würde die implizite <tr>-Row-Semantik überschreiben
+      // und die Cell→Column-Header-Zuordnung für Screenreader verlieren.
+      // Die Zeile bleibt trotzdem interaktiv: tabIndex=0, onClick, onKeyDown
+      // und aria-selected werden separat schon abgedeckt.
+      expect(row.getAttribute("role")).toBeNull();
+      expect(row.getAttribute("tabindex")).toBe("0");
+    }
+
+    unmount();
+  });
+
+  it("A11y · Enter auf fokussierter Mandantenzeile setzt ?mandantId=<id> + localStorage", async () => {
+    const { container, unmount } = await renderAtWithClients("/arbeitsplatz");
+
+    expect(getSearch(container)).toBe("");
+    expect(localStorage.getItem(SELECTED_MANDANT_KEY)).toBeNull();
+
+    const row = container.querySelector<HTMLTableRowElement>(
+      '[data-testid="arbeitsplatz-mandant-row-c-2"]'
+    );
+    expect(row).not.toBeNull();
+
+    act(() => {
+      row!.focus();
+      row!.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Enter", bubbles: true })
+      );
+    });
+
+    expect(getSearch(container)).toContain("mandantId=c-2");
+    expect(localStorage.getItem(SELECTED_MANDANT_KEY)).toBe("c-2");
+
+    unmount();
+  });
+
+  it("A11y · Space auf fokussierter Mandantenzeile setzt ?mandantId=<id> + localStorage", async () => {
+    const { container, unmount } = await renderAtWithClients("/arbeitsplatz");
+
+    expect(getSearch(container)).toBe("");
+    expect(localStorage.getItem(SELECTED_MANDANT_KEY)).toBeNull();
+
+    const row = container.querySelector<HTMLTableRowElement>(
+      '[data-testid="arbeitsplatz-mandant-row-c-3"]'
+    );
+    expect(row).not.toBeNull();
+
+    act(() => {
+      row!.focus();
+      row!.dispatchEvent(
+        new KeyboardEvent("keydown", { key: " ", bubbles: true })
+      );
+    });
+
+    expect(getSearch(container)).toContain("mandantId=c-3");
+    expect(localStorage.getItem(SELECTED_MANDANT_KEY)).toBe("c-3");
+
+    unmount();
+  });
+
   it("Ohne URL-mandantId, aber mit gültigem localStorage-Wert, ist der Mandant aktiv und der Launcher gerendert", async () => {
     // Fachlicher Nachweis der MandantContext-Integration: der Storage-
     // Fallback aus `MandantContext` (URL leer → harouda:selectedMandantId)

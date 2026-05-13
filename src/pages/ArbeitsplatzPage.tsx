@@ -593,7 +593,6 @@ export default function ArbeitsplatzPage() {
                       className={`arbeitsplatz__table-row${
                         isActive ? " arbeitsplatz__table-row--active" : ""
                       }`}
-                      role="button"
                       tabIndex={0}
                       aria-selected={isActive}
                       data-testid={`arbeitsplatz-mandant-row-${c.id}`}

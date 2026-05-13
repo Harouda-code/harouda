@@ -887,6 +887,8 @@ function LauncherActive({
           <article
             className="arbeitsplatz__info-card arbeitsplatz__info-card--live"
             data-testid="arbeitsplatz-info-card-liquiditaet"
+            aria-busy={liquiditaetIsLoading}
+            aria-live="polite"
           >
             <h4 className="arbeitsplatz__info-card-title">Liquiditäts-Radar</h4>
             <p className="arbeitsplatz__info-card-status">Aus offenen Posten</p>
@@ -952,6 +954,8 @@ function LauncherActive({
           <article
             className="arbeitsplatz__info-card arbeitsplatz__info-card--live"
             data-testid="arbeitsplatz-info-card-erfassung"
+            aria-busy={erfassungIsLoading}
+            aria-live="polite"
           >
             <h4 className="arbeitsplatz__info-card-title">Erfassungsstatus</h4>
             <p className="arbeitsplatz__info-card-status">Aus Bankabstimmung</p>

@@ -1957,6 +1957,136 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     unmount();
   });
 
+  // --- A11y-Hardening Live-Karten: aria-busy + aria-live + Error-State ---
+
+  it("A11y · Liquiditäts-Radar trägt aria-live=\"polite\" und aria-busy=\"false\" im geladenen Zustand", async () => {
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const empty = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-liquiditaet-empty"]'
+        );
+        if (!empty) throw new Error("Empty-State noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-liquiditaet"]'
+    );
+    expect(card).not.toBeNull();
+    expect(card?.getAttribute("aria-live")).toBe("polite");
+    // Daten sind aufgelöst → aria-busy="false". (`aria-busy="true"` wird
+    // im Loading-Pfad gesetzt; der Loading-Pfad ist separat über den
+    // Error-Test und die statische `aria-busy`-Bindung im JSX abgesichert.)
+    expect(card?.getAttribute("aria-busy")).toBe("false");
+
+    unmount();
+  });
+
+  it("A11y · Erfassungsstatus trägt aria-live=\"polite\" und aria-busy=\"false\" im geladenen Zustand", async () => {
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const empty = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-erfassung-empty"]'
+        );
+        if (!empty) throw new Error("Empty-State noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-erfassung"]'
+    );
+    expect(card).not.toBeNull();
+    expect(card?.getAttribute("aria-live")).toBe("polite");
+    expect(card?.getAttribute("aria-busy")).toBe("false");
+
+    unmount();
+  });
+
+  it("A11y · Liquiditäts-Radar Error-State: role=\"alert\" + Hint + aria-busy=\"false\"", async () => {
+    // Query-Error mocken: `fetchAllEntries` wirft → entriesQ.isError=true
+    // → liquiditaetIsError=true → Error-Pfad mit role="alert" rendert.
+    const dashboardModule = await import("../../api/dashboard");
+    vi.spyOn(dashboardModule, "fetchAllEntries").mockRejectedValue(
+      new Error("Simulierter Fetch-Fehler für Liquiditäts-Radar")
+    );
+
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const err = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-liquiditaet-error"]'
+        );
+        if (!err) throw new Error("Error-State noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const errEl = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-liquiditaet-error"]'
+    );
+    expect(errEl).not.toBeNull();
+    expect(errEl?.getAttribute("role")).toBe("alert");
+    expect(errEl?.textContent).toContain("Offene Posten aktuell nicht abrufbar");
+
+    // Container-Article ist nach Auflösung des Fehlers nicht mehr busy.
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-liquiditaet"]'
+    );
+    expect(card?.getAttribute("aria-busy")).toBe("false");
+    expect(card?.getAttribute("aria-live")).toBe("polite");
+
+    unmount();
+  });
+
+  it("A11y · Erfassungsstatus Error-State: role=\"alert\" + Hint + aria-busy=\"false\"", async () => {
+    // Query-Error mocken: `countMatchesByStatus` rejected → bankReconQ.isError
+    // → erfassungIsError → Error-Pfad mit role="alert".
+    const bankReconModule = await import(
+      "../../api/bankReconciliationMatches"
+    );
+    vi.spyOn(bankReconModule, "countMatchesByStatus").mockRejectedValue(
+      new Error("Simulierter Fetch-Fehler für Bankabstimmung")
+    );
+
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+    await vi.waitFor(
+      () => {
+        const err = container.querySelector(
+          '[data-testid="arbeitsplatz-info-card-erfassung-error"]'
+        );
+        if (!err) throw new Error("Error-State noch nicht gerendert");
+      },
+      { timeout: 2000, interval: 10 }
+    );
+
+    const errEl = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-erfassung-error"]'
+    );
+    expect(errEl).not.toBeNull();
+    expect(errEl?.getAttribute("role")).toBe("alert");
+    expect(errEl?.textContent).toContain("Bankabstimmung aktuell nicht abrufbar");
+
+    const card = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-info-card-erfassung"]'
+    );
+    expect(card?.getAttribute("aria-busy")).toBe("false");
+    expect(card?.getAttribute("aria-live")).toBe("polite");
+
+    unmount();
+  });
+
   // --- Rechtsform-Spalte im Mandantenportfolio ---------------------------
 
   it("Rechtsform · Mandant mit rechtsform=GmbH zeigt 'GmbH' in der Tabellenzeile", async () => {

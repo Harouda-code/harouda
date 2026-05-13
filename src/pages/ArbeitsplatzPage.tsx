@@ -651,7 +651,7 @@ function LauncherEmpty() {
         className="arbeitsplatz__launcher-empty-hint"
         data-testid="arbeitsplatz-launcher-empty-hint"
       >
-        Nach der Auswahl stehen Schnellzugriff, Klienten-Schnellinfo und
+        Nach der Auswahl stehen Schnellzugriff, Mandanten-Schnellinfo und
         geplante Erweiterungen im Mandantenkontext zur Verfügung.
       </p>
     </div>
@@ -863,7 +863,7 @@ function LauncherActive({
         </nav>
       </section>
 
-      {/* Klienten-Schnellinfo — bewusst statische Hinweis-Karten ohne
+      {/* Mandanten-Schnellinfo — bewusst statische Hinweis-Karten ohne
           Live-Daten. Datenmodelle für diese Auswertungen existieren im
           Repo (OPOS, Belege/Inventur, Jahresabschluss-Wizard), werden
           aber erst in einem separaten Sprint mandantbezogen angebunden. */}
@@ -877,7 +877,7 @@ function LauncherActive({
           className="arbeitsplatz__panel-group-title"
           data-testid="arbeitsplatz-panel-klienten-schnellinfo-title"
         >
-          Klienten-Schnellinfo
+          Mandanten-Schnellinfo
         </h3>
         <div
           className="arbeitsplatz__info-cards"

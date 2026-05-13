@@ -1302,7 +1302,7 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     );
     expect(emptyHint).not.toBeNull();
     expect(emptyHint?.textContent).toContain("Schnellzugriff");
-    expect(emptyHint?.textContent).toContain("Klienten-Schnellinfo");
+    expect(emptyHint?.textContent).toContain("Mandanten-Schnellinfo");
     expect(emptyHint?.textContent).toContain("geplante Erweiterungen");
     unmount();
   });
@@ -1335,7 +1335,7 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
       container.querySelector<HTMLElement>(
         '[data-testid="arbeitsplatz-panel-klienten-schnellinfo-title"]'
       )?.textContent
-    ).toBe("Klienten-Schnellinfo");
+    ).toBe("Mandanten-Schnellinfo");
     expect(
       container.querySelector<HTMLElement>(
         '[data-testid="arbeitsplatz-panel-geplant-title"]'
@@ -1356,7 +1356,7 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     // („Programme und Akte") wie der verschachtelte <nav> im Programme-
     // Baum. Zwei nested Landmarks mit identischem Accessible Name machen
     // AT-Region-Navigation mehrdeutig und untertreiben den heutigen
-    // Scope der Spalte (Mandant-Card, Schnellzugriff, Klienten-
+    // Scope der Spalte (Mandant-Card, Schnellzugriff, Mandanten-
     // Schnellinfo, Geplante Erweiterungen). Der Patch trennt beide
     // Namen: Column → „Mandanten-Arbeitsbereich", Tree-Nav bleibt
     // „Programme und Akte".
@@ -1390,7 +1390,7 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     unmount();
   });
 
-  it("UX v0 · Klienten-Schnellinfo: alle drei Karten sind aktiv (kein aria-disabled, keine Placeholder-Label)", async () => {
+  it("UX v0 · Mandanten-Schnellinfo: alle drei Karten sind aktiv (kein aria-disabled, keine Placeholder-Label)", async () => {
     const { container, unmount } = await renderAtWithClients(
       "/arbeitsplatz?mandantId=c-1"
     );

@@ -1351,6 +1351,45 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     unmount();
   });
 
+  it("A11y · rechte Spalte trägt eindeutiges Accessible-Name-Paar (Column ≠ Tree-Nav)", async () => {
+    // Vor dem Hardening trug die rechte <section> dasselbe aria-label
+    // („Programme und Akte") wie der verschachtelte <nav> im Programme-
+    // Baum. Zwei nested Landmarks mit identischem Accessible Name machen
+    // AT-Region-Navigation mehrdeutig und untertreiben den heutigen
+    // Scope der Spalte (Mandant-Card, Schnellzugriff, Klienten-
+    // Schnellinfo, Geplante Erweiterungen). Der Patch trennt beide
+    // Namen: Column → „Mandanten-Arbeitsbereich", Tree-Nav bleibt
+    // „Programme und Akte".
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-1"
+    );
+
+    const rightCol = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-col-right"]'
+    );
+    expect(rightCol).not.toBeNull();
+    expect(rightCol?.tagName).toBe("SECTION");
+    expect(rightCol?.getAttribute("aria-label")).toBe(
+      "Mandanten-Arbeitsbereich"
+    );
+
+    const programmeNav = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-tree"]'
+    );
+    expect(programmeNav).not.toBeNull();
+    expect(programmeNav?.tagName).toBe("NAV");
+    expect(programmeNav?.getAttribute("aria-label")).toBe("Programme und Akte");
+
+    // Programme-Nav liegt innerhalb der rechten Spalte (nested Landmark),
+    // trägt aber explizit ein anderes Accessible Name.
+    expect(rightCol?.contains(programmeNav!)).toBe(true);
+    expect(rightCol?.getAttribute("aria-label")).not.toBe(
+      programmeNav?.getAttribute("aria-label")
+    );
+
+    unmount();
+  });
+
   it("UX v0 · Klienten-Schnellinfo: alle drei Karten sind aktiv (kein aria-disabled, keine Placeholder-Label)", async () => {
     const { container, unmount } = await renderAtWithClients(
       "/arbeitsplatz?mandantId=c-1"

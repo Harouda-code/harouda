@@ -614,7 +614,7 @@ export default function ArbeitsplatzPage() {
         <section
           className="arbeitsplatz__col arbeitsplatz__col--right"
           data-testid="arbeitsplatz-col-right"
-          aria-label="Programme und Akte"
+          aria-label="Mandanten-Arbeitsbereich"
         >
           {activeId ? (
             <LauncherActive

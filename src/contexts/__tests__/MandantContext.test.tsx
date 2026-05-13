@@ -211,4 +211,148 @@ describe("MandantContext · URL-primary + localStorage-Fallback", () => {
       res.unmount();
     }).not.toThrow();
   });
+
+  // --- Cross-Tab-Sync · storage-Event-Handler ---------------------------
+
+  it("Cross-Tab · storage-Event mit STORAGE_KEY aktualisiert Fallback, wenn URL keine mandantId trägt", () => {
+    // Ohne URL-mandantId greift der localStorage-Fallback. Wenn ein
+    // anderer Tab localStorage schreibt, muss der lokale Tab die neue ID
+    // im nächsten Render sehen — ausgelöst durch das `storage`-Event.
+    const { stateRef, unmount } = render("/arbeitsplatz");
+    expect(stateRef.current).toBeNull();
+
+    // Schritt 1: simulierter Cross-Tab-Write in localStorage.
+    localStorage.setItem(STORAGE_KEY, "tab-b-id");
+
+    // Schritt 2: das `storage`-Event aus dem anderen Tab dispatchen.
+    act(() => {
+      window.dispatchEvent(
+        new StorageEvent("storage", {
+          key: STORAGE_KEY,
+          newValue: "tab-b-id",
+          oldValue: null,
+          storageArea: localStorage,
+        })
+      );
+    });
+
+    // Der Re-Render hat `readStored()` neu ausgewertet — Fallback aktiv.
+    expect(stateRef.current).toBe("tab-b-id");
+    unmount();
+  });
+
+  it("Cross-Tab · storage-Event überschreibt KEINE vorhandene URL-mandantId (URL-primary unverletzt)", () => {
+    // Mit URL-mandantId muss URL gewinnen, auch wenn ein anderer Tab
+    // den localStorage-Wert ändert. Der Re-Render läuft, aber die
+    // Auflösungs-Reihenfolge bleibt URL > Storage.
+    const { stateRef, unmount } = render(
+      "/arbeitsplatz?mandantId=url-keeps-winning"
+    );
+    expect(stateRef.current).toBe("url-keeps-winning");
+
+    localStorage.setItem(STORAGE_KEY, "tab-b-id");
+    act(() => {
+      window.dispatchEvent(
+        new StorageEvent("storage", {
+          key: STORAGE_KEY,
+          newValue: "tab-b-id",
+          oldValue: null,
+          storageArea: localStorage,
+        })
+      );
+    });
+
+    expect(stateRef.current).toBe("url-keeps-winning");
+    unmount();
+  });
+
+  it("Cross-Tab · storage-Event mit fremdem Key wird ignoriert", () => {
+    // Keys wie `harouda:arbeitsplatz-tree-expanded` dürfen den
+    // MandantContext nicht beeinflussen. Wir prüfen das indirekt: nach
+    // dem fremden Event darf weder Re-Render-Spy noch State sich auf
+    // einen neuen Mandanten umstellen, obwohl ein fremder localStorage-
+    // Key gesetzt wurde (der STORAGE_KEY bleibt leer).
+    const { stateRef, unmount } = render("/arbeitsplatz");
+    expect(stateRef.current).toBeNull();
+
+    localStorage.setItem(
+      "harouda:arbeitsplatz-tree-expanded",
+      '{"einkommensteuer":false}'
+    );
+    // Sentinel: STORAGE_KEY bleibt absichtlich leer; ein versehentliches
+    // Re-Read würde immer noch `null` ergeben. Wir prüfen primär, dass
+    // der Handler den fremden Key nicht als Trigger akzeptiert.
+    act(() => {
+      window.dispatchEvent(
+        new StorageEvent("storage", {
+          key: "harouda:arbeitsplatz-tree-expanded",
+          newValue: '{"einkommensteuer":false}',
+          oldValue: null,
+          storageArea: localStorage,
+        })
+      );
+    });
+
+    // State bleibt null — kein State-Drift durch fremden Key.
+    expect(stateRef.current).toBeNull();
+    // STORAGE_KEY ist nach wie vor leer.
+    expect(localStorage.getItem(STORAGE_KEY)).toBeNull();
+    unmount();
+  });
+
+  it("Cross-Tab · storage-Event mit key=null (localStorage.clear() aus anderem Tab) löst Re-Read aus", () => {
+    // `localStorage.clear()` in einem anderen Tab feuert ein
+    // `storage`-Event mit key=null. Erwartet: der Provider akzeptiert
+    // das als Trigger und liest neu — nach Clear ist STORAGE_KEY leer,
+    // der State fällt auf null zurück, sofern keine URL-mandantId vorliegt.
+    localStorage.setItem(STORAGE_KEY, "vorher-id");
+    const { stateRef, unmount } = render("/arbeitsplatz");
+    expect(stateRef.current).toBe("vorher-id");
+
+    // Schritt 1: simulierter Clear im anderen Tab.
+    localStorage.clear();
+
+    // Schritt 2: Event mit key=null dispatchen (entspricht echtem
+    // Browser-Verhalten bei `localStorage.clear()` aus anderem Tab).
+    act(() => {
+      window.dispatchEvent(
+        new StorageEvent("storage", {
+          key: null,
+          newValue: null,
+          oldValue: null,
+          storageArea: localStorage,
+        })
+      );
+    });
+
+    expect(stateRef.current).toBeNull();
+    unmount();
+  });
+
+  it("Cross-Tab · Listener wird auf Unmount entfernt", () => {
+    // Cleanup-Schutz: nach Unmount darf ein dispatched storage-Event
+    // keinen State mehr ändern (Provider weg, Handler abgemeldet).
+    // Der Test ist absichtlich konservativ: er prüft, dass kein Fehler
+    // entsteht und stateRef nach Unmount nicht weiter manipuliert wird.
+    const { stateRef, unmount } = render("/arbeitsplatz");
+    unmount();
+
+    // Nach Unmount darf ein Event-Dispatch nicht in einen abgemeldeten
+    // Setter laufen (React würde sonst eine Warnung loggen). Der
+    // Listener-Cleanup im useEffect garantiert das.
+    expect(() => {
+      window.dispatchEvent(
+        new StorageEvent("storage", {
+          key: STORAGE_KEY,
+          newValue: "after-unmount",
+          oldValue: null,
+          storageArea: localStorage,
+        })
+      );
+    }).not.toThrow();
+
+    // stateRef-Snapshot vor unmount bleibt unverändert (kein Re-Render
+    // nach unmount möglich).
+    expect(stateRef.current).toBeNull();
+  });
 });

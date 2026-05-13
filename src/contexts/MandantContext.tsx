@@ -23,7 +23,9 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useState,
   type ReactNode,
 } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -56,12 +58,40 @@ export function MandantProvider({ children }: { children: ReactNode }) {
   // montiert (nicht mehr in `main.tsx`).
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // Cross-Tab-Sync: ein `storage`-Event aus einem anderen Tab triggert
+  // einen Re-Render dieses Providers, sodass `readStored()` unten den
+  // neuen Wert sieht. Der Counter selbst hat keine semantische Bedeutung
+  // — er dient ausschließlich als Re-Render-Auslöser. URL-primary bleibt
+  // unverletzt: die Auflösungs-Reihenfolge unten liest weiter zuerst die
+  // URL und fällt erst dann auf den Storage-Wert zurück. Der Handler
+  // schreibt weder URL noch localStorage; unbekannte IDs werden hier
+  // nicht validiert (das übernimmt nachgelagert die Page-Whitelist).
+  const [, setStorageVersion] = useState(0);
+  useEffect(() => {
+    function onStorage(e: StorageEvent) {
+      // STORAGE_KEY-Treffer ODER `null`-Key (=`localStorage.clear()` aus
+      // anderem Tab) lösen einen Re-Render aus. Fremde Keys werden
+      // ignoriert, damit andere Bereiche (z. B. `harouda:arbeitsplatz-
+      // tree-expanded`) keinen unnötigen Re-Render erzwingen.
+      if (e.key === STORAGE_KEY || e.key === null) {
+        setStorageVersion((v) => v + 1);
+      }
+    }
+    window.addEventListener("storage", onStorage);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+    };
+  }, []);
+
   const urlId = searchParams.get(QUERY_KEY);
   // localStorage wird pro Render frisch gelesen. Das ist bewusst: die
   // Fallback-Quelle ist eine "last-known"-Krücke, keine reaktive Source.
   // Zwischen-Renders während derselben Benutzer-Session ändert sich der
   // Wert nur durch setSelectedMandantId hier oder durch den Demo-Seed
   // einmalig beim App-Start — beides vor dem Mount der Konsumenten.
+  // Seit dem Cross-Tab-Sync-Patch wird `readStored()` außerdem nach
+  // jedem qualifizierten `storage`-Event neu ausgewertet (s. useEffect
+  // oben).
   const storedId = readStored();
 
   const selectedMandantId: string | null =

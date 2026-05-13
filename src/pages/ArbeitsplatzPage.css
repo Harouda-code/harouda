@@ -362,6 +362,30 @@
   line-height: 1.3;
 }
 
+/* Stammdaten-Chips unter der Mandant-Card. Reine Wert-Wiedergabe,
+   kein Status, keine Statusfarben, keine Icons, nicht interaktiv.
+   Konsistent zur Mandant-Card-Palette (neutral surface + ink-soft). */
+.arbeitsplatz__mandant-card-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin-top: 8px;
+}
+
+.arbeitsplatz__mandant-card-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--surface, #ffffff);
+  color: var(--ink-soft, #334155);
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
 /* --- Programme-Baum (rechte Spalte, Active-State) --------------------- */
 
 .arbeitsplatz__tree {

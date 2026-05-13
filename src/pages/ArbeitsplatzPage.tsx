@@ -363,6 +363,62 @@ function displayRechtsform(r: Client["rechtsform"]): string {
   return r;
 }
 
+// Mandant-Card Stammdaten-Chips: reine Wert-/Klassifikations-Wiedergabe.
+// Keine Status-Aussage, keine Validierungs-/Compliance-Suggestion. Felder
+// mit null/undefined/leerem Wert oder unbekannter Enum-Variante erzeugen
+// keinen Chip — das verhindert eine implizite „leere"-Aussage. Mapping-
+// Werte stammen aus `Client` (Migration 0030/0033/0041); kein neuer
+// Datenfluss, keine zusätzliche fachliche Prüfung.
+type MandantCardChip = {
+  testId: string;
+  label: string;
+};
+
+function buildMandantCardChips(client: Client): MandantCardChip[] {
+  const chips: MandantCardChip[] = [];
+  if (client.ust_id && client.ust_id.length > 0) {
+    chips.push({
+      testId: "arbeitsplatz-mandant-card-chip-ust-id",
+      label: `USt-IdNr. ${client.ust_id}`,
+    });
+  }
+  if (client.steuernummer && client.steuernummer.length > 0) {
+    chips.push({
+      testId: "arbeitsplatz-mandant-card-chip-steuernummer",
+      label: `Steuernummer ${client.steuernummer}`,
+    });
+  }
+  if (client.kontenrahmen === "SKR03" || client.kontenrahmen === "SKR04") {
+    chips.push({
+      testId: "arbeitsplatz-mandant-card-chip-kontenrahmen",
+      label: client.kontenrahmen,
+    });
+  }
+  if (client.gewinnermittlungsart === "bilanz") {
+    chips.push({
+      testId: "arbeitsplatz-mandant-card-chip-gewinnermittlung",
+      label: "Bilanzierung",
+    });
+  } else if (client.gewinnermittlungsart === "euer") {
+    chips.push({
+      testId: "arbeitsplatz-mandant-card-chip-gewinnermittlung",
+      label: "EÜR",
+    });
+  }
+  if (client.versteuerungsart === "soll") {
+    chips.push({
+      testId: "arbeitsplatz-mandant-card-chip-versteuerung",
+      label: "Soll-Versteuerung",
+    });
+  } else if (client.versteuerungsart === "ist") {
+    chips.push({
+      testId: "arbeitsplatz-mandant-card-chip-versteuerung",
+      label: "Ist-Versteuerung",
+    });
+  }
+  return chips;
+}
+
 export default function ArbeitsplatzPage() {
   const { selectedMandantId, setSelectedMandantId } = useMandant();
   const navigate = useNavigate();
@@ -767,6 +823,27 @@ function LauncherActive({
           {client.mandant_nr}
         </div>
         <div className="arbeitsplatz__mandant-card-name">{client.name}</div>
+        {(() => {
+          const chips = buildMandantCardChips(client);
+          if (chips.length === 0) return null;
+          return (
+            <div
+              className="arbeitsplatz__mandant-card-chips"
+              data-testid="arbeitsplatz-mandant-card-chips"
+            >
+              {chips.map((chip) => (
+                <span
+                  key={chip.testId}
+                  className="arbeitsplatz__mandant-card-chip"
+                  data-testid={chip.testId}
+                  title={chip.label}
+                >
+                  {chip.label}
+                </span>
+              ))}
+            </div>
+          );
+        })()}
       </div>
 
       <section

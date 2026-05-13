@@ -2394,4 +2394,294 @@ describe("Arbeitsplatz-Route (Schritt 1-7 + Right-Column-Tree)", () => {
     expect(mandantNrCell.getAttribute("title")).toBeNull();
     unmount();
   });
+
+  // --- Mandant-Card Stammdaten-Chips -------------------------------------
+
+  it("Mandant-Card Chips · alle fünf Stammdaten-Felder gesetzt → fünf Chips mit textContent==title", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-chips-all",
+        mandant_nr: "40100",
+        name: "Mandant mit allen Stammdaten",
+        steuernummer: "03/456/12345",
+        ust_id: "DE123456789",
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        kontenrahmen: "SKR03",
+        gewinnermittlungsart: "bilanz",
+        versteuerungsart: "soll",
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-chips-all",
+      clients
+    );
+
+    const chipContainer = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-mandant-card-chips"]'
+    );
+    expect(chipContainer).not.toBeNull();
+
+    const expected: Array<[string, string]> = [
+      ["arbeitsplatz-mandant-card-chip-ust-id", "USt-IdNr. DE123456789"],
+      [
+        "arbeitsplatz-mandant-card-chip-steuernummer",
+        "Steuernummer 03/456/12345",
+      ],
+      ["arbeitsplatz-mandant-card-chip-kontenrahmen", "SKR03"],
+      ["arbeitsplatz-mandant-card-chip-gewinnermittlung", "Bilanzierung"],
+      ["arbeitsplatz-mandant-card-chip-versteuerung", "Soll-Versteuerung"],
+    ];
+
+    for (const [testId, expectedText] of expected) {
+      const chip = chipContainer!.querySelector<HTMLElement>(
+        `[data-testid="${testId}"]`
+      );
+      expect(chip, `Chip ${testId} fehlt`).not.toBeNull();
+      expect(chip!.tagName).toBe("SPAN");
+      expect(chip!.textContent).toBe(expectedText);
+      // title spiegelt sichtbaren Text 1:1 — keine zusätzliche Aussage.
+      expect(chip!.getAttribute("title")).toBe(expectedText);
+    }
+
+    unmount();
+  });
+
+  it("Mandant-Card Chips · Mapping EÜR / Ist-Versteuerung / SKR04 wird korrekt aufgelöst", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-chips-alt",
+        mandant_nr: "40110",
+        name: "Mandant mit anderen Stammdaten-Werten",
+        steuernummer: null,
+        ust_id: null,
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        kontenrahmen: "SKR04",
+        gewinnermittlungsart: "euer",
+        versteuerungsart: "ist",
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-chips-alt",
+      clients
+    );
+
+    const chipContainer = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-mandant-card-chips"]'
+    );
+    expect(chipContainer).not.toBeNull();
+
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-mandant-card-chip-kontenrahmen"]'
+      )?.textContent
+    ).toBe("SKR04");
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-mandant-card-chip-gewinnermittlung"]'
+      )?.textContent
+    ).toBe("EÜR");
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-mandant-card-chip-versteuerung"]'
+      )?.textContent
+    ).toBe("Ist-Versteuerung");
+
+    // Kein USt-IdNr-/Steuernummer-Chip ohne Werte.
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-mandant-card-chip-ust-id"]'
+      )
+    ).toBeNull();
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-mandant-card-chip-steuernummer"]'
+      )
+    ).toBeNull();
+
+    unmount();
+  });
+
+  it("Mandant-Card Chips · alle Stammdaten-Felder null/undefined → kein Chip-Container", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-chips-none",
+        mandant_nr: "40200",
+        name: "Mandant ohne Stammdaten-Chips",
+        steuernummer: null,
+        ust_id: null,
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        // kontenrahmen / gewinnermittlungsart / versteuerungsart absichtlich
+        // nicht gesetzt → keine Chip-Mapping-Treffer.
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-chips-none",
+      clients
+    );
+
+    // Mandant-Card existiert.
+    expect(
+      container.querySelector('[data-testid="arbeitsplatz-mandant-card"]')
+    ).not.toBeNull();
+
+    // Aber kein Chip-Container und kein einzelner Chip.
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-mandant-card-chips"]'
+      )
+    ).toBeNull();
+    expect(
+      container.querySelector(
+        '[data-testid^="arbeitsplatz-mandant-card-chip-"]'
+      )
+    ).toBeNull();
+
+    unmount();
+  });
+
+  it("Mandant-Card Chips · leere Strings für ust_id und steuernummer + null-Mapping-Werte → kein Chip", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-chips-edge",
+        mandant_nr: "40300",
+        name: "Mandant mit Edge-Stammdaten",
+        steuernummer: "",
+        ust_id: "",
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        kontenrahmen: undefined,
+        gewinnermittlungsart: null,
+        versteuerungsart: null,
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-chips-edge",
+      clients
+    );
+
+    expect(
+      container.querySelector(
+        '[data-testid="arbeitsplatz-mandant-card-chips"]'
+      )
+    ).toBeNull();
+
+    unmount();
+  });
+
+  it("Mandant-Card Chips · sind nicht interaktiv (SPAN, kein role/tabindex/href, kein onclick)", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-chips-a11y",
+        mandant_nr: "40400",
+        name: "Mandant für A11y-Check",
+        steuernummer: "03/456/99999",
+        ust_id: "DE999999999",
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        kontenrahmen: "SKR04",
+        gewinnermittlungsart: "euer",
+        versteuerungsart: "ist",
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-chips-a11y",
+      clients
+    );
+
+    const chipContainer = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-mandant-card-chips"]'
+    );
+    expect(chipContainer).not.toBeNull();
+
+    const chips = chipContainer!.querySelectorAll<HTMLElement>(
+      '[data-testid^="arbeitsplatz-mandant-card-chip-"]'
+    );
+    expect(chips.length).toBe(5);
+
+    for (const chip of Array.from(chips)) {
+      expect(chip.tagName).toBe("SPAN");
+      expect(chip.getAttribute("role")).toBeNull();
+      expect(chip.getAttribute("tabindex")).toBeNull();
+      expect(chip.getAttribute("href")).toBeNull();
+      expect(chip.getAttribute("onclick")).toBeNull();
+    }
+
+    unmount();
+  });
+
+  it("Mandant-Card Chips · Negativ-Sweep: keine verbotenen Status-/Claim-Begriffe im Chip-Container", async () => {
+    const clients: Client[] = [
+      {
+        id: "c-chips-sweep",
+        mandant_nr: "40500",
+        name: "Mandant für Forbidden-Sweep",
+        steuernummer: "03/456/77777",
+        ust_id: "DE777777777",
+        iban: null,
+        ust_id_status: "unchecked",
+        ust_id_checked_at: null,
+        last_daten_holen_at: null,
+        kontenrahmen: "SKR03",
+        gewinnermittlungsart: "bilanz",
+        versteuerungsart: "soll",
+      },
+    ];
+    const { container, unmount } = await renderAtWithClients(
+      "/arbeitsplatz?mandantId=c-chips-sweep",
+      clients
+    );
+
+    const chipContainer = container.querySelector<HTMLElement>(
+      '[data-testid="arbeitsplatz-mandant-card-chips"]'
+    );
+    expect(chipContainer).not.toBeNull();
+    const containerText = (chipContainer?.textContent ?? "").toLowerCase();
+
+    // Anti-Pattern-Tokens base64-kodiert, damit dieser Source selbst keine
+    // Plain-Text-Vorkommen der verbotenen Wörter enthält (gleiches Muster
+    // wie der bestehende Right-Column-Sweep weiter oben).
+    function decode(b64: string): string {
+      return Buffer.from(b64, "base64").toString("utf8");
+    }
+    const FORBIDDEN_ENCODED = [
+      "Z2VwcsO8ZnQ=",          // geprüft
+      "ZnJlaWdlZ2ViZW4=",      // freigegeben
+      "YWJnZXNjaGxvc3Nlbg==",  // abgeschlossen
+      "w7xiZXJtaXR0ZWx0",      // übermittelt
+      "YmVzY2hlaW5pZ3Q=",      // bescheinigt
+      "emVydGlmaXppZXJ0",      // zertifiziert
+      "RWNodHplaXQ=",          // Echtzeit
+      "U2NvcmU=",              // Score
+      "QW1wZWw=",              // Ampel
+      "Z8O8bHRpZw==",          // gültig
+      "dmFsaWRpZXJ0",          // validiert
+      "YmVzdMOkdGlndA==",      // bestätigt
+      "YWt0dWVsbA==",          // aktuell
+      "c3luY2hyb24=",          // synchron
+      "a29ycmVrdA==",          // korrekt
+    ];
+
+    for (const enc of FORBIDDEN_ENCODED) {
+      const phrase = decode(enc).toLowerCase();
+      expect(
+        containerText.includes(phrase),
+        `Verbotener Status-Begriff "${phrase}" darf nicht im Chip-Container stehen`
+      ).toBe(false);
+    }
+
+    unmount();
+  });
 });

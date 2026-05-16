@@ -14,6 +14,7 @@ export default defineConfig({
       "src/**/*.test.ts",
       "src/**/*.test.tsx",
       "scripts/**/__tests__/**/*.test.mjs",
+      "tests/migrations/**/*.test.ts",
     ],
     exclude: ["node_modules", "dist", ".git"],
     coverage: {

@@ -52,6 +52,7 @@ Bei jeder Abweichung zwischen diesem Register und den jeweiligen V1.0-Artefakten
 | F3-D3 Migrations-Spezifikation V1.0 | Authoritatives Migrations-Anforderungsmodell |
 | F3-Closing — Summary der F3-Artefaktgruppe innerhalb Phase 4 V1.0 | Konsolidierungs- und Boundary-Referenz |
 | F4-D1 Wissensbasis-Kern V1.0 | Authoritative Wissensbasis-Architektur |
+| D1.4.0 IBAN Architektur-Lock V1.0 | Authoritative IBAN-Validierungs-Architektur |
 | HAROUDA_APPROVED_DECISIONS_GESAMT_HANDOFF | Konsolidierter Handoff-Bericht |
 
 ### 1.7 Scope
@@ -92,6 +93,7 @@ Bei jeder Abweichung zwischen diesem Register und den jeweiligen V1.0-Artefakten
 | Phase 4 / F3-D3 | Migrations-Spezifikation | V1.0 — locked | Migrations-Anforderungsmodell | Authoritativ (keine USt-Wertquelle, keine native Re-Festschreibung) |
 | Phase 4 / F3-Closing | Summary der F3-Artefaktgruppe innerhalb Phase 4 | V1.0 — locked | F3-Konsolidierung und Boundary-Referenz | Konsolidierend |
 | Phase 4 / F4-D1 | Wissensbasis-Kern | V1.0 — locked | Wissensbasis-Architektur-Fachmodell | Authoritativ |
+| Phase 4 / D1.4.0 | IBAN Architektur-Lock | V1.0 — locked | IBAN-Validierungs-Architektur-Fachmodell (Banking-Anschluss) | Authoritativ |
 | Phase 4 / Anschlussartefakte | siehe Abschnitt 6 | offen | nicht entschieden | Folgeartefakt-offen / nicht-bindend |
 
 **Hinweis:** F3-Closing schließt ausschließlich die F3-Artefaktgruppe innerhalb Phase 4 ab. Phase 4 als Ganzes ist nicht abgeschlossen. Weitere Phase-4-Anschlussartefakte sind nicht-bindend in Abschnitt 6 dokumentiert.
@@ -284,6 +286,21 @@ Bei jeder Abweichung zwischen diesem Register und den jeweiligen V1.0-Artefakten
 
 ---
 
+### 3.15 D1.4.0 IBAN Architektur-Lock
+
+| Feld | Inhalt |
+|---|---|
+| Status | V1.0 — locked |
+| Lock-Basis | `docs/architecture/d1.4.0-iban-lock-v1.0.md` (Repo-Persistierung in Stufe C; Chat-Ratifizierung S13, 2026-05-17) |
+| Kernaussagen | Canonical Contract für IBAN-Validierung gemäß ISO 13616-1 Strukturformat `2!a2!n30c`; Längen-Invariante mit Obergrenze 34 (ISO-anchored hard ceiling) und Untergrenze 15 (registry-anchored pragmatic floor); Anwendungsschicht als verbindlicher Validierungs-Anker; ein einziger canonical Validierungs-Aufrufpunkt für alle Konsumenten; länderspezifische Validierung als Pflichtschicht zusätzlich zur generischen Pre-Validierung. |
+| Boundaries | Keine konkrete Implementierungs-Entscheidung (Modul, Funktions-Signatur, Bibliothek) — Sache von D1.4.A. Keine DB-CHECK-Constraint-Entscheidung — Sache von FL-3. Keine BIC-Validierungs-Strategie. Keine SEPA-Mandat-, EBICS-, FinTS-Entscheidungen. Keine Terminologie-Vereinheitlichung IBAN/BIC/SEPA. Kein vollständiges Bankverbindungs-Inventar — Vor-Akt zu D1.4.A. |
+| Bindend für | D1.4.A und alle Folgesprints, die IBAN-Werte als Input, Speicherung, Verarbeitung oder Ausgabe behandeln; alle vier identifizierten UI-Konsumenten (Mahnwesen, Lohnabrechnung, Settings, XRechnung). |
+| Nicht bindend für | FL-1 (Regex-Fehler Lohn-Output), FL-2 (Drift-Pfade aus V0.3a), FL-3 (DB-Validierungs-Strategie), FL-4 (Bankverbindungs-Audit-Spur), FL-5 (`bank_accounts`-Aggregat), FL-6 (SEPA-Mandate / PAIN.008), FL-7 (EBICS/FinTS), FL-8 (Terminologie-Batch). |
+| Schema-frei / UI-frei / implementierungsfrei | ja / ja / ja |
+| STOP-Stand | 5 Architektur-Sperren referenziert (Section 5.2) |
+
+---
+
 ## 4. Locked Invarianten
 
 Diese Invarianten sind bereits in den jeweiligen V1.0-Artefakten gelockt. Dieses Register zitiert sie referenziell und erzeugt sie nicht neu.
@@ -385,6 +402,7 @@ Dieses Register erzeugt keine neue rechtliche Auslegung. Konkrete Einzelfragen s
 | F3-D3 | 71 STOP-Kandidaten vor Deduplikation | F3-D3 V1.0 |
 | F3-Closing | Keine eigene STOP-Gesamtsumme; referenziert ausschließlich F3-D1- / F3-D2- / F3-D3-STOP-Listen | F3-Closing V1.0 |
 | F4-D1 | 8 STOP-Hinweise referenziert | F4-D1 V1.0 |
+| D1.4.0 | 5 Architektur-Sperren referenziert | D1.4.0 V1.0 |
 
 **Methodik-Hinweis:**
 
@@ -481,6 +499,7 @@ Für die Aufnahme in das Repository gelten die folgenden Regeln:
 | Audit-Spur-Pflicht referenziell aufgeführt | ✅ |
 | Keine Implementierungsfreigabe, keine Pilot-/Produktionsfreigabe | ✅ |
 | F4-D1 Wissensbasis-Kern V1.0 als authoritatives Architekturartefakt konsolidiert | ✅ |
+| D1.4.0 IBAN Architektur-Lock V1.0 als authoritatives Architekturartefakt konsolidiert | ✅ |
 
 ---
 

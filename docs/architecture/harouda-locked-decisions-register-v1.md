@@ -51,6 +51,7 @@ Bei jeder Abweichung zwischen diesem Register und den jeweiligen V1.0-Artefakten
 | F3-D2 Disaster-Recovery V1.0 | Authoritatives DR-Anforderungsmodell |
 | F3-D3 Migrations-Spezifikation V1.0 | Authoritatives Migrations-Anforderungsmodell |
 | F3-Closing — Summary der F3-Artefaktgruppe innerhalb Phase 4 V1.0 | Konsolidierungs- und Boundary-Referenz |
+| F4-D1 Wissensbasis-Kern V1.0 | Authoritative Wissensbasis-Architektur |
 | HAROUDA_APPROVED_DECISIONS_GESAMT_HANDOFF | Konsolidierter Handoff-Bericht |
 
 ### 1.7 Scope
@@ -90,6 +91,7 @@ Bei jeder Abweichung zwischen diesem Register und den jeweiligen V1.0-Artefakten
 | Phase 4 / F3-D2 | Disaster-Recovery | V1.0 — locked | DR-Anforderungsmodell | Authoritativ |
 | Phase 4 / F3-D3 | Migrations-Spezifikation | V1.0 — locked | Migrations-Anforderungsmodell | Authoritativ (keine USt-Wertquelle, keine native Re-Festschreibung) |
 | Phase 4 / F3-Closing | Summary der F3-Artefaktgruppe innerhalb Phase 4 | V1.0 — locked | F3-Konsolidierung und Boundary-Referenz | Konsolidierend |
+| Phase 4 / F4-D1 | Wissensbasis-Kern | V1.0 — locked | Wissensbasis-Architektur-Fachmodell | Authoritativ |
 | Phase 4 / Anschlussartefakte | siehe Abschnitt 6 | offen | nicht entschieden | Folgeartefakt-offen / nicht-bindend |
 
 **Hinweis:** F3-Closing schließt ausschließlich die F3-Artefaktgruppe innerhalb Phase 4 ab. Phase 4 als Ganzes ist nicht abgeschlossen. Weitere Phase-4-Anschlussartefakte sind nicht-bindend in Abschnitt 6 dokumentiert.
@@ -267,6 +269,19 @@ Bei jeder Abweichung zwischen diesem Register und den jeweiligen V1.0-Artefakten
 | Schema-frei / UI-frei / implementierungsfrei | ja / ja / ja |
 | STOP-Stand | Keine eigene STOP-Gesamtsumme; referenziert ausschließlich F3-D1- / F3-D2- / F3-D3-STOP-Listen. |
 
+### 3.14 F4-D1 Wissensbasis-Kern
+
+| Feld | Inhalt |
+|---|---|
+| Status | V1.0 — locked |
+| Lock-Basis | siehe F4-D1 Wissensbasis-Kern V1.0 (`docs/architecture/f4-d1-wissensbasis-kern-v1.md`); Substanz-Quelle: Lock-Buffer Commit `44a569c` |
+| Kernaussagen | Wissensbasis ist Haroudas interne, versionierte, quellengebundene Referenzschicht fuer fachliche Regeln. Keine ausfuehrende Rule-Engine. Rule-IDs nach Schema `RULE-<DOMAIN>-<TOPIC>-<NNN>` mit immutablen Versionen derselben Rule-ID. Quellenmodell mehrachsig (`source_axis`, `source_kind`, `authority_level`, `binding_scope`, `relevance_role`), kein numerischer Rang. Konfliktmodell mit Typen K1.a/K1.b, K2, K3, K4 und Strukturfehler R3; Frage 4.B in der Fassung v0.2.1 Re-Lock nach Recovery. Zwei unabhaengige Zeitachsen pro Rule-Version (fachliche Geltungsperiode, systemische Geltungsperiode). Sechs Lifecycle-Status (`draft`, `pending_review`, `structural_invalid`, `active`, `superseded`, `revoked`); operativ nutzbar nur `active`. Zwei-Stufen-Approval mit erhoehter Begruendungspflicht. UI-Scope Phase 1 mit Anzeige- und Vermeidungspflichten, Hinweis-Hierarchie. Initial Structural Scope mit Bausteinen B1–B9 (voll), B10–B11 (Platzhalter), B12 herausgenommen. Wissensbasis mandantenuebergreifend innerhalb Tenant-Grenze; F0-D6-Mandantentrennung unberuehrt. |
+| Boundaries | Keine ausfuehrende Rule-Engine, keine Domain-Service-Ausfuehrung, keine automatische Konflikt- oder Quellen-Vorrangentscheidung, keine konkrete SQL-/Schema-/Migrations-/UI-Aussage, keine konkreten Domain- oder Topic-Code-Wertemengen, keine externen Compliance-Zusicherungen. |
+| Bindend fuer | Spaetere Implementation-, Schema-, Migrations- und UI-Sitzungen zur Wissensbasis; konsumierende Domain-Services hinsichtlich der Domain-Service-Grenzen aus Frage 4.B-4. |
+| Nicht bindend fuer | Rule-Matching-Semantik bei Mehrdaten-Sachverhalten (R5-2 unveraendert offen); Nachfolger-Beziehung zwischen Rule-Versionen (B12 herausgenommen); Ausnahme-/Korrekturmechanismen zu `superseded` und `revoked`; Mandanten- oder kanzleispezifische `internal`-Erweiterung. |
+| Schema-frei / UI-frei / implementierungsfrei | ja / ja / ja |
+| STOP-Stand | 8 STOP-Hinweise referenziert |
+
 ---
 
 ## 4. Locked Invarianten
@@ -369,6 +384,7 @@ Dieses Register erzeugt keine neue rechtliche Auslegung. Konkrete Einzelfragen s
 | F3-D2 | 29 STOP-Bedingungen | F3-D2 V1.0 |
 | F3-D3 | 71 STOP-Kandidaten vor Deduplikation | F3-D3 V1.0 |
 | F3-Closing | Keine eigene STOP-Gesamtsumme; referenziert ausschließlich F3-D1- / F3-D2- / F3-D3-STOP-Listen | F3-Closing V1.0 |
+| F4-D1 | 8 STOP-Hinweise referenziert | F4-D1 V1.0 |
 
 **Methodik-Hinweis:**
 
@@ -464,6 +480,7 @@ Für die Aufnahme in das Repository gelten die folgenden Regeln:
 | Plattform-Admin-Grenze F0-D7 unverändert | ✅ |
 | Audit-Spur-Pflicht referenziell aufgeführt | ✅ |
 | Keine Implementierungsfreigabe, keine Pilot-/Produktionsfreigabe | ✅ |
+| F4-D1 Wissensbasis-Kern V1.0 als authoritatives Architekturartefakt konsolidiert | ✅ |
 
 ---
 
